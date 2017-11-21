@@ -1,6 +1,7 @@
 <template lang="pug">
 .sidebar(:class="getClass")
   .sidebar-toggle(@click="toggle")
+    i.fa.fa-bars(aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
       :to='{ name: "hellword" }',
@@ -45,13 +46,14 @@ export default {
   &-toggle
     width 30px
     height 30px
+    line-height 30px
+    text-align center
+    color #333
     position absolute
     top 0
     left 100%
-    background-color #ccc
-    border 1px solid #eee
+    background-color #eee
     border-radius 50%
-    box-shadow 0 0 15px #fff inset
   &-nav
     margin 0
     padding 0

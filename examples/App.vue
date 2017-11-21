@@ -15,7 +15,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import("~normalize.css")
+@import "~normalize.css"
+@import "~font-awesome/css/font-awesome.css"
 *
   box-sizing border-box
 #app
