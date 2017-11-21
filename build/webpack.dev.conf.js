@@ -9,7 +9,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: ['./build/dev-client', './examples/index.js']
+    app: ['./build/dev-client.js', './examples/index.js']
+  },
+  output: {
+    filename: '[name].js'
   },
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })

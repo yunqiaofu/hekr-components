@@ -7,7 +7,6 @@ if (!process.env.NODE_ENV) {
 }
 
 const opn = require('opn')
-const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
@@ -62,9 +61,7 @@ app.use(require('connect-history-api-fallback')())
 // serve webpack bundle output
 app.use(devMiddleware)
 
-// serve pure static assets
-const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
+app.use(express.static('./static'))
 
 var _resolve
 var _reject
