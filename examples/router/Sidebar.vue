@@ -7,6 +7,10 @@
       :to='{ name: "hellword" }',
       tag="li"
     ) 概览
+    router-link.sidebar-nav-item(
+      :to='{ name: "hell" }',
+      tag="li"
+    ) 概览
 </template>
 
 <script>

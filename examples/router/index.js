@@ -9,6 +9,11 @@ export default new Router({
       path: '/hellword',
       name: 'hellword',
       component: () => import('../views/HelloWorld')
+    },
+    {
+      path: '/hell',
+      name: 'hell',
+      component: () => import('../views/Hello')
     }
   ]
 })

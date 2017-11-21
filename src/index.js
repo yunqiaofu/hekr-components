@@ -1,5 +1,6 @@
 import * as components from './components'
 import * as packages from './packages'
+import './stylus/hekr-components.styl'
 
 const install = Vue => {
   if (install.installed) {

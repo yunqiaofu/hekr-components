@@ -12,7 +12,7 @@ module.exports = merge(baseWebpackConfig, {
     app: ['./build/dev-client.js', './examples/index.js']
   },
   output: {
-    filename: '[name].js'
+    filename: 'js/[name].js'
   },
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })

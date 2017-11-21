@@ -1,10 +1,10 @@
 <template lang="pug">
-hk-hello-world
+hk-hello
 </template>
 
 <script>
 export default {
-  name: 'hello-world-demo'
+  name: 'hello-demo'
 }
 </script>
 

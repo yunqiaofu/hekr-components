@@ -1,14 +1,14 @@
 <template lang="pug">
-.hello-world asdasd
+.hello-text asdasdhellohellohellohello
 </template>
 
 <script>
 export default {
-  name: 'hk-hello-world'
+  name: 'hk-hello'
 }
 </script>
 
 <style lang="stylus">
-.hello-world
-  font-size 80px
+.hello-text
+  font-size 120px
 </style>

@@ -1,4 +1,4 @@
-# hk-ui
+# hekr-components
 
 > A Vue.js UI Toolkit for Hekr
 

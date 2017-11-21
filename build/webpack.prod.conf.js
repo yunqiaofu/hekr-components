@@ -1,5 +1,6 @@
 'use strict'
 const fs = require('fs')
+const _ = require('lodash')
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
@@ -13,7 +14,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const env = config.build.env
 
-const entry = { hkui: './src/index.js' }
+const entry = { 'hekr-components': './src/index.js' }
 const folders = ['src/components', 'src/packages']
 folders.forEach(folder => {
   fs.readdirSync(folder)
@@ -37,7 +38,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.distDir,
     filename: '[name].js',
-    library: pkg.name,
+    library: _.camelCase(pkg.name),
     libraryTarget: 'umd'
   },
   plugins: [
