@@ -3,12 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import HekrComponents from '../dist/hekr-components'
-// import '../dist/hekr-components.css'
+import hekrComponents from '../src'
 
 Vue.config.productionTip = false
-console.log(window.hekrComponents)
-Vue.use(window.hekrComponents)
+Vue.use(hekrComponents)
 
 /* eslint-disable no-new */
 new Vue({

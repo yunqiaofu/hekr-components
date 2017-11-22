@@ -39,6 +39,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: config.build.distDir,
     filename: '[name].js',
     library: _.camelCase(pkg.name),
+    libraryExport: 'default',
     libraryTarget: 'umd'
   },
   plugins: [
