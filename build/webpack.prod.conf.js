@@ -37,7 +37,6 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.distDir,
-    publicPath: '',
     filename: '[name].js',
     library: _.camelCase(pkg.name),
     libraryExport: 'default',
