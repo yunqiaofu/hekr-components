@@ -37,6 +37,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.distDir,
+    publicPath: '',
     filename: '[name].js',
     library: _.camelCase(pkg.name),
     libraryExport: 'default',
@@ -69,6 +70,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../package.json'),
+        to: config.build.distDir
+      },
+      {
+        from: path.resolve(__dirname, '../README.md'),
         to: config.build.distDir
       }
     ])
