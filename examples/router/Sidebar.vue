@@ -1,5 +1,5 @@
 <template lang="pug">
-.sidebar(:class="getClass")
+.sidebar(:class="getClass", v-click-out="hide")
   .sidebar-toggle(@click="toggle")
     i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
@@ -7,6 +7,7 @@
       :to='{ name: "button" }',
       tag="li"
     ) Button
+    li.sidebar-nav-item asfsd
 </template>
 
 <script>
@@ -28,6 +29,9 @@ export default {
   methods: {
     toggle () {
       this.isToggle = !this.isToggle
+    },
+    hide () {
+      this.isToggle = false
     }
   }
 }
@@ -40,6 +44,7 @@ export default {
   top 0
   bottom 0
   left 0
+  z-index 3000
   background-color #fff
   border-right 1px solid #eee
   transform translateX(-100%)
@@ -67,10 +72,14 @@ export default {
     left 0
     overflow auto
     &-item
-      height 42px
-      line-height 42px
+      padding 6px 12px 6px 20px
+      border-bottom 1px solid #cccccc
+      &:last-child
+        border-bottom none
       &-active
-        color #108ee9
-        background-color #ecf6fd
-        border-right 3px solid #108ee9
+        color #333
+        background-color #f8f8f8
+        border-left 6px solid #08f
+        padding-left 14px
+        border-radius 4px 0 0 4px
 </style>

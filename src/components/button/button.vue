@@ -14,13 +14,13 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'primary'
+      default: 'default'
     },
-    active: {
+    disabled: {
       type: Boolean,
       default: false
     },
-    disabled: {
+    block: {
       type: Boolean,
       default: false
     }
@@ -29,7 +29,11 @@ export default {
     getClass () {
       return {
         'hk-button-disabled': this.disabled,
-        'hk-button-active': this.active
+        'hk-button-block': this.block,
+        'hk-button-default': this.type === 'default',
+        'hk-button-primary': this.type === 'primary',
+        'hk-button-warning': this.type === 'warning',
+        'hk-button-info': this.type === 'info'
       }
     }
   },
@@ -46,11 +50,41 @@ export default {
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
+
+type(name)
+  &-{name}
+    color $color-white
+    background-color lookup('$color-' + name)
+    border-color lookup('$color-' + name)
+    &:hover
+    &:active
+      background-color darken(lookup('$color-' + name), 8%)
+      border-color darken(lookup('$color-' + name), 8%)
+
 .hk-button
-  height 40px
-  border none
-  background-color $color-primary
-  color $color-white
+  display inline-block
+  padding 6px 12px
+  background-color $color-white
   font-size $font-size-3
   border-radius $border-radius
+  border 1px solid transparent
+  cursor pointer
+  &-disabled
+    opacity 0.65
+    cursor not-allowed
+  &-block
+    display block
+    width 100%
+
+  &-default
+    color $color-black
+    border-color $color-gray
+    &:hover
+    &:active
+      background-color darken($color-white, 8%)
+      border-color darken($color-gray, 8%)
+
+  type(primary)
+  type(warning)
+  type(info)
 </style>
