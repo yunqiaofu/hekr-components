@@ -1,10 +1,10 @@
 <template lang="pug">
-hk-hello-world
+hk-button sdfsd
 </template>
 
 <script>
 export default {
-  name: 'hello-world-demo'
+  name: 'hk-button-demo'
 }
 </script>
 

@@ -27,7 +27,7 @@ npm run build --report
 2. 所有组件的css预处理语言使用stylus，在项目中不得使用其他css处理器
 3. template模板统一使用pug，使用pug的目的是规范template的格式，使整个项目更整洁代码风格一致
 4. 每个组件都必须放在一个文件夹下面，在文件夹下必须编写组件的README.md文件
-5. 每个组件文件夹下必须有一个index.js文件，该文件主要是负责导出组件的install函数，可参考[src/components/header](./src/components/header)
+5. 每个组件文件夹下必须有一个index.js文件，该文件主要是负责导出组件的install函数，可参考[src/components/button](./src/components/button)
 6. 编写组件必须在examples文件夹下编写对应的demo，开发的时候的入口文件就是examples/index.js
 
 ### 命名规则
@@ -57,3 +57,40 @@ props: {
 ```
 2. template中属性的最外层引号请使用双引号("")
 3. template指令都采用缩写的方式，如v-bind => :
+
+## 注意事项
+1. 开发一个组件(component)或者一个包(package)之后，必须手动在components或packages文件夹下index.js中添加导出模块的代码
+2. 编写的组件必须同时支持鼠标事件和触摸事件，且不能狗冲突或者同时发生
+3. 目录结构说明
+```
+examples
+│  App.vue
+│  index.js // 开发环境入口文件
+│
+├─router // vue 路由和导航相关
+│      index.js // 定义路由
+│      Sidebar.vue // 侧边导航
+│
+└─views // 路由视图
+    └─button // 路由页面文件夹
+            index.vue // 编写对应名字组件的demo
+```
+```
+src
+│  index.js // 导出所有组件
+│
+├─components // 基础组件
+│  │  index.js // 导出所有components
+│  │
+│  └─button // button组件
+│          button.vue
+│          index.js // 编写install函数并导出
+│          README.md // 组件README文件
+│
+├─packages // 复合组件 开发时和components保持下相似目录结构
+│      index.js
+│
+└─stylus // 样式文件
+        hekr-components.styl
+        variables.styl // 样式变量
+```

@@ -1,16 +1,12 @@
 <template lang="pug">
 .sidebar(:class="getClass")
   .sidebar-toggle(@click="toggle")
-    i.fa.fa-bars(aria-hidden="true")
+    i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
-      :to='{ name: "hellword" }',
+      :to='{ name: "button" }',
       tag="li"
-    ) 概览
-    router-link.sidebar-nav-item(
-      :to='{ name: "hell" }',
-      tag="li"
-    ) 概览
+    ) Button
 </template>
 
 <script>
@@ -24,6 +20,9 @@ export default {
   computed: {
     getClass () {
       return this.isToggle && 'sidebar-active'
+    },
+    getIcon () {
+      return this.isToggle ? 'fa-times' : 'fa-bars'
     }
   },
   methods: {
@@ -50,14 +49,13 @@ export default {
   &-toggle
     width 30px
     height 30px
-    line-height 30px
+    line-height 29px
     text-align center
-    color #333
+    color #fff
     position absolute
-    top 0
+    top  20px
     left 100%
-    background-color #eee
-    border-radius 50%
+    background-color #08f
   &-nav
     margin 0
     padding 0
@@ -71,7 +69,6 @@ export default {
     &-item
       height 42px
       line-height 42px
-      transtion all .3s ease
       &-active
         color #108ee9
         background-color #ecf6fd

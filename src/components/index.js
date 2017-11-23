@@ -1,2 +1,1 @@
-export HelloWord from './hello-word'
-export Hello from './hello'
+export Button from './button'
