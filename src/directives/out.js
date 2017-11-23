@@ -30,6 +30,7 @@ const directive = {
   },
   unbind ($el, binding, vnode, oldVnode) {
     delete listener[$el.__OUTKEY__]
+    delete $el.__OUTKEY__
   }
 }
 /**
