@@ -1,7 +1,6 @@
 <template lang="pug">
 button.hk-button(
   :class="getClass",
-  :disabled="disabled",
   @touchend.prevent="click($event)",
   @click="click($event)"
 )
@@ -16,6 +15,10 @@ export default {
       type: String,
       default: 'default'
     },
+    active: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -29,6 +32,7 @@ export default {
     getClass () {
       return {
         'hk-button-disabled': this.disabled,
+        'hk-button-active': this.active,
         'hk-button-block': this.block,
         'hk-button-default': this.type === 'default',
         'hk-button-primary': this.type === 'primary',
@@ -39,7 +43,6 @@ export default {
   },
   methods: {
     click (e) {
-      console.log(e)
       if (!this.disabled) {
         this.$emit('click', e)
       }
@@ -56,10 +59,10 @@ type(name)
     color $color-white
     background-color lookup('$color-' + name)
     border-color lookup('$color-' + name)
-    &:hover
-    &:active
-      background-color darken(lookup('$color-' + name), 8%)
-      border-color darken(lookup('$color-' + name), 8%)
+    &^[-1]-active
+    &:active:not(^[-1]-disabled)
+      background-color darken(lookup('$color-' + name), 20%)
+      border-color darken(lookup('$color-' + name), 20%)
 
 .hk-button
   display inline-block
@@ -69,6 +72,10 @@ type(name)
   border-radius $border-radius
   border 1px solid transparent
   cursor pointer
+  &-active
+  &:active:not(&-disabled)
+    box-shadow inset 0 3px 5px rgba(0, 0, 0, 0.125)
+
   &-disabled
     opacity 0.65
     cursor not-allowed
@@ -79,10 +86,10 @@ type(name)
   &-default
     color $color-black
     border-color $color-gray
-    &:hover
-    &:active
-      background-color darken($color-white, 8%)
-      border-color darken($color-gray, 8%)
+    ^[-1]-active
+    &:active:not(^[-1]-disabled)
+      background-color darken($color-white, 20%)
+      border-color darken($color-gray, 20%)
 
   type(primary)
   type(warning)
