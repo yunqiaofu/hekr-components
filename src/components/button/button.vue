@@ -1,7 +1,7 @@
 <template lang="pug">
 button.hk-button(
   :class="getClass",
-  @touchend.prevent="click($event)",
+  @touchend.prevent="click",
   @click="click($event)"
 )
   slot
@@ -42,9 +42,9 @@ export default {
     }
   },
   methods: {
-    click (e) {
+    click () {
       if (!this.disabled) {
-        this.$emit('click', e)
+        this.$emit('click')
       }
     }
   }

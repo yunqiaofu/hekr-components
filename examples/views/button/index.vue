@@ -66,7 +66,8 @@ export default {
   margin-top 60px
   text-align center
   .hk-button
-    margin 7px
+    display block
+    margin 7px auto
   &-title
     margin 10px auto
   &-contenter

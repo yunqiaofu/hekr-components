@@ -4,10 +4,13 @@
     i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
+      :to='{ name: "header" }',
+      tag="li"
+    ) Header
+    router-link.sidebar-nav-item(
       :to='{ name: "button" }',
       tag="li"
     ) Button
-    li.sidebar-nav-item asfsd
 </template>
 
 <script>
