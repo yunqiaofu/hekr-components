@@ -63,7 +63,7 @@ type(name)
 
 .hk-button
   display inline-block
-  padding 6px 12px
+  padding 10px 12px
   background-color $color-white
   font-size $font-size-3
   border-radius $border-radius
