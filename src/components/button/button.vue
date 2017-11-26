@@ -4,6 +4,8 @@ button.hk-button(
   @touchend.prevent="click",
   @click="click($event)"
 )
+  .hk-button-loading(v-if="loading")
+    .hk-button-loading-bar
   slot
 </template>
 
@@ -24,6 +26,10 @@ export default {
       default: false
     },
     block: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
       type: Boolean,
       default: false
     }
@@ -72,6 +78,7 @@ type(name)
   border-radius $border-radius
   border 1px solid transparent
   cursor pointer
+  position relative
   &-active
   &:active:not(&-disabled)
     box-shadow inset 0 3px 5px rgba(0, 0, 0, 0.125)
@@ -82,7 +89,19 @@ type(name)
   &-block
     display block
     width 100%
-
+  &-loading
+    position absolute
+    bottom 0
+    left 0
+    right 0
+    height 1px
+    overflow hidden
+    background-color alpha($color-black, 70%)
+    &-bar
+      height 1px
+      background-color $color-white
+      animation button-loading 0.6s ease-in-out infinite
+    
   &-default
     color $color-black
     border-color $color-gray
@@ -94,4 +113,13 @@ type(name)
   type(primary)
   type(warning)
   type(info)
+
+@keyframes button-loading
+  from
+    width 0
+    transform translate3d(-150%, 0, 0)
+  to
+    width 100%
+    transform translate3d(250%, 0, 0)
+
 </style>

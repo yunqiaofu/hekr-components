@@ -13,7 +13,8 @@
   hk-button(disabled) 默认
   hk-button(
     type="primary",
-    disabled
+    disabled,
+    loading
   ) primary
   hk-button(
     type="primary",
@@ -30,10 +31,11 @@
   ) info
   .hk-button-demo-title 块级样式
   .hk-button-demo-contenter
-    hk-button(block) 默认
+    hk-button(block, loading) 默认
     hk-button(
       type="primary",
-      block
+      block,
+      loading
     ) primary
     hk-button(
       type="warning",
@@ -43,6 +45,20 @@
       type="info",
       block
     ) info
+  .hk-button-demo-title 加载中
+  hk-button(loading) 默认
+  hk-button(
+    type="primary",
+    loading
+  ) primary
+  hk-button(
+    type="warning",
+    loading
+  ) warning
+  hk-button(
+    type="info",
+    loading
+  ) info
 </template>
 
 <script>
