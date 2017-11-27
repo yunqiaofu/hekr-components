@@ -1,4 +1,4 @@
-# hk-header
+# hk-slider
 
 ## Props
 
