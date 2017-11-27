@@ -79,9 +79,10 @@ type(name)
   border 1px solid transparent
   cursor pointer
   position relative
-  &-active
-  &:active:not(&-disabled)
-    box-shadow inset 0 3px 5px rgba(0, 0, 0, 0.125)
+  // 暂时注释掉阴影效果，目前不需要
+  // &-active
+  // &:active:not(&-disabled)
+  //   box-shadow inset 0 3px 5px rgba(0, 0, 0, 0.125)
 
   &-disabled
     opacity 0.65
@@ -101,7 +102,7 @@ type(name)
       height 1px
       background-color $color-white
       animation button-loading 0.6s ease-in-out infinite
-    
+
   &-default
     color $color-black
     border-color $color-gray

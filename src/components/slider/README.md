@@ -4,25 +4,21 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
+| value | 绑定值 | number | - | 0 |
+| min | 最小值 | number | - | 0 |
+| max | 最大值 | number | - | 0 |
+| step | 步长 | number | - | 0 |
+| minText | 最小值文字 | string | - | - |
+| maxText | 最大值文字 | string | - | - |
+| disabled | 是否禁用 | boolean | - | false |
+| loading | 是否加载中 | boolean | - | false |
 | title | 标题 | string | - | - |
-| leftIcon | 左边按钮图标 | string | - | - |
-| leftText | 左边按钮文字 | stirng | - | - |
-| rightIcon | 右边按钮图标 | stirng | - | - |
-| rightText | 右边按钮文字 | stirng | - | - |
-
-## Slot
-| name | 说明|
-| --- | --- |
-| - | 标题 |
-| left | 左边按钮(包含图标和文字) |
-| leftIcon | 左边图标 |
-| leftText | 左边文字 |
-| right | 右边按钮(包含图标和文字) |
-| rightIcon | 右边图标 |
-| rightText | 右边文字 | 
+| unit | 数值单位 | string | - | - |
 
 ## Events
 | 事件名称 | 说明 |	回调参数 |
 |--- | --- | --- |
-| click-left | 左边按钮点击事件 | - |
-| click-right | 右边按钮点击事件 | - |
+| select | 鼠标点选事件 | 改变后的值 |
+| dragstart | 拖动开始事件 | 当前的值 |
+| dragging | 拖动移动事件 | 当前的值 |
+| dragend | 拖动结束事件 | 改变后的值 |
