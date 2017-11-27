@@ -9,6 +9,11 @@ export default new Router({
       path: '/button',
       name: 'button',
       component: () => import('../views/button')
+    },
+    {
+      path: '/week',
+      name: 'week',
+      component: () => import('../views/week')
     }
   ]
 })
