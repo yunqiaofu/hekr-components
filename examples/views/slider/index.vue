@@ -1,15 +1,58 @@
 <template lang="pug">
 .hk-slider-demo
   .hk-slider-demo-title 基本样式
-  hk-slider(
-    :title="title",
-    left-icon="fa fa-angle-left",
-    :left-text="leftText",
-    :right-icon="rightIcon",
-    right-text="更多",
-    @click-left="clickLeft",
-    @click-right="clickRight"
-  )
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="value",
+      :min="0",
+      :max="100",
+      title="标题",
+      unit="%"
+    )
+  .hk-slider-demo-title 禁用
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="value",
+      :min="-10",
+      :max="120",
+      minText="0$",
+      maxText="100$",
+      title="标题",
+      :disabled="disabled"
+    )
+    hk-button(@click="toggleDisabled") 切换禁用
+
+  .hk-slider-demo-title 加载中效果
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="value",
+      :min="0",
+      :max="100",
+      title="标题",
+      :loading="loading"
+    )
+    hk-button(@click="toggleLoading") 切换加载
+  .hk-slider-demo-title 自定义最大最小值文字
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="value",
+      :min="0",
+      :max="100",
+      minText="0%",
+      maxText="100%",
+      title="标题"
+    )
+  .hk-slider-demo-title 定义step 10
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="value",
+      :min="0",
+      :max="100",
+      minText="0%",
+      maxText="100%",
+      :step="10",
+      title="Step"
+    )
 </template>
 
 <script>
@@ -17,23 +60,17 @@ export default {
   name: 'hk-slider-demo',
   data () {
     return {
-      title: '标题',
-      leftText: '',
-      rightIcon: 'fa fa-angle-right'
+      value: 30,
+      disabled: true,
+      loading: true
     }
   },
   methods: {
-    toggleLeftText () {
-      this.leftText = this.leftText ? '' : '返回'
+    toggleDisabled () {
+      this.disabled = !this.disabled
     },
-    toggleRightIcon () {
-      this.rightIcon = this.rightIcon ? '' : 'fa fa-angle-right'
-    },
-    clickLeft () {
-      console.log('点击了左边')
-    },
-    clickRight () {
-      console.log('点击了右边')
+    toggleLoading () {
+      this.loading = !this.loading
     }
   }
 }
@@ -44,5 +81,9 @@ export default {
   margin-top 60px
   text-align center
   &-title
+    margin 10px auto
+  &-container
+    margin 10px 15px
+  .hk-button
     margin 10px auto
 </style>
