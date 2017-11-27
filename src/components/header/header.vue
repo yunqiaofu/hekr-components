@@ -20,16 +20,14 @@
   //- 右边
   .hk-header-right(@click="clickRight")
     slot(name="right")
-      template(v-if="rightIcon")
-        .hk-header-right-text
-          slot(name="right-text") {{ rightText }}
-        .hk-header-right-icon(v-if="rightIcon")
-          slot(name="right-icon")
-            i(
-              :class="rightIcon",
-              aria-hidden="true"
-            )
-      template(v-else) {{ rightText }}
+      .hk-header-right-text
+        slot(name="right-text") {{ rightText }}
+      .hk-header-right-icon
+        slot(name="right-icon")
+          i(
+            :class="rightIcon",
+            aria-hidden="true"
+          )
 </template>
 
 <script>
@@ -74,7 +72,8 @@ $height-2 = 30px
   height $height
   line-height $height * 0.8
   padding 3px 0
-  background-color #ccc
+  background-color $color-white
+  border-bottom 1px solid darken($color-white, 10%)
   &-title
     height $height
     line-height $height * 0.9
@@ -91,39 +90,36 @@ $height-2 = 30px
     height $height-2
     line-height $height-2 * 0.9
     position absolute
-    top 13px
+    top 8px
     display block
     font-size $font-size-4
     color $color-black
     white-space nowrap
   &-left
     left 12px
+    text-align left
     &-icon
-      position absolute
-      width $height-2
-      height $height-2
-      line-height $height-2 * 0.9
-      top -5px
-      left 0
-      text-align left
-      i[aria-hidden="true"]
-        font-size $font-size-1
+      float left
+      line-height $height-2 * 0.7
+      font-size $font-size-1
+      margin-right 6px
     &-text
-      padding-left 16px
+      float right
+      height $height-2
+      line-height $height-2 * 1.1
 
   &-right
     right 12px
+    text-align right
     &-icon
-      position absolute
-      width $height-2
+      float right
       height $height-2
-      line-height $height-2 * 0.9
-      top -5px
-      right 0
-      text-align right
-      i[aria-hidden="true"]
-        font-size $font-size-1
+      line-height $height-2 * 0.7
+      font-size $font-size-1
+      margin-left 6px
     &-text
-      padding-right 16px
+      float left
+      height $height-2
+      line-height $height-2 * 1.1
 
 </style>
