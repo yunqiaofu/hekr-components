@@ -6,7 +6,7 @@
 |--- | --- | --- | --- | --- |
 | type | 按钮情景类型 | string | default / primary / warning / info | default |
 | active | 按钮是否处于激活状态 | boolean | - | false |
-| disabled | 是否禁用状态 | boolean |	— | false |
+| disabled | 是否禁用状态 | boolean |	- | false |
 | block | 是否为块级样式 | boolean | - | false |
 | loading | 是否显示加载动画 | boolean | - | false |
 

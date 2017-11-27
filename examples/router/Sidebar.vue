@@ -11,6 +11,10 @@
       :to='{ name: "button" }',
       tag="li"
     ) Button
+    router-link.sidebar-nav-item(
+      :to='{ name: "slider" }',
+      tag="li"
+    ) Slider
 </template>
 
 <script>
