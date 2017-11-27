@@ -17,4 +17,7 @@ export default {
 <style lang="stylus">
 @import "~normalize.css"
 @import "~font-awesome/css/font-awesome.css"
+body
+  overflow-x hidden
+  overflow-y auto
 </style>

@@ -1,5 +1,6 @@
 <template lang="pug">
-  hk-week
+  .hk-week-demo
+    hk-week
 </template>
 
 <script>
@@ -7,4 +8,11 @@
     name: 'hk-week-demo'
   }
 </script>
+
+<style lang="stylus">
+  .hk-week-demo
+    margin-top 60px
+    text-align center
+</style>
+
 
