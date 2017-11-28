@@ -2,12 +2,13 @@
   .hk-week-demo
     .hk-week-demo-block 基本样式
     hk-week(
-      @weekChange="change"
+      @weekChange="change1",
+      v-model="weeksList1"
     )
     .hk-week-demo-block 自定义头和初始化选中状态
     hk-week(
-      @weekChange="change",
-      :weeksList="weeksList",
+      @weekChange="change2",
+      v-model="weeksList2",
       :header="'星期选择'"
     )
 </template>
@@ -17,7 +18,8 @@
     name: 'hk-week-demo',
     data () {
       return {
-        weeksList: [
+        weeksList1: null,
+        weeksList2: [
           {
             name: '周日',
             value: true
@@ -50,8 +52,11 @@
       }
     },
     methods: {
-      change (weeks) {
-        console.log(weeks)
+      change1 (weeks) {
+        console.log(this.weeksList1)
+      },
+      change2 (weeks) {
+        console.log(weeks, this.weeksList2)
       }
     }
   }
@@ -61,6 +66,7 @@
   .hk-week-demo
     margin-top 60px
     text-align center
+    font-size 17px
     &-block
       margin 20px 0
 </style>

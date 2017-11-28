@@ -20,6 +20,11 @@ export default new Router({
       path: '/week',
       name: 'week',
       component: () => import('../views/week')
+    },
+    {
+      path: '/slider',
+      name: 'slider',
+      component: () => import('../views/slider')
     }
   ]
 })

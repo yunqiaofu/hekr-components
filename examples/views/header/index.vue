@@ -4,11 +4,14 @@
   hk-header(
     :title="title",
     left-icon="fa fa-angle-left",
-    left-text="返回",
+    :left-text="leftText",
     :right-icon="rightIcon",
     right-text="更多",
+    @click-left="clickLeft",
+    @click-right="clickRight"
   )
-  hk-button(@click="clickButton") toggle rightIcon
+  hk-button(@click="toggleLeftText") toggle leftText
+  hk-button(@click="toggleRightIcon") toggle rightIcon  
 
   .hk-header-demo-title slot
   hk-header(
@@ -16,7 +19,20 @@
     left-text="返回",
     right-icon="fa fa-bars"
   )
-    i.fa.fa-bars(
+    i.fa.fa-angle-left(
+      slot="left-icon",
+      aria-hidden="true"
+    )
+    span(slot="right-text") 右边
+  
+  .hk-header-demo-title slot与props混合传入
+  hk-header(
+    :title="title",
+    left-text="返回",
+    right-icon="fa fa-bars",
+    right-text="更多"
+  )
+    i.fa.fa-angle-left(
       slot="left-icon",
       aria-hidden="true"
     )
@@ -28,12 +44,22 @@ export default {
   data () {
     return {
       title: '标题',
+      leftText: '',
       rightIcon: 'fa fa-angle-right'
     }
   },
   methods: {
-    clickButton () {
+    toggleLeftText () {
+      this.leftText = this.leftText ? '' : '返回'
+    },
+    toggleRightIcon () {
       this.rightIcon = this.rightIcon ? '' : 'fa fa-angle-right'
+    },
+    clickLeft () {
+      console.log('点击了左边')
+    },
+    clickRight () {
+      console.log('点击了右边')
     }
   }
 }
@@ -45,4 +71,6 @@ export default {
   text-align center
   &-title
     margin 10px auto
+  .hk-button
+    margin 30px auto
 </style>

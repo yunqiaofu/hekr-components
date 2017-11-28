@@ -79,16 +79,15 @@ export default {
 
 <style lang="stylus">
 .hk-button-demo
-  margin-top 60px
+  margin-top 6rem
   text-align center
   .hk-button
     display block
-    margin 7px auto
+    margin 0.7rem auto
   &-title
-    margin 10px auto
+    margin 1rem auto
   &-contenter
-    width 200px
+    width 20rem
     margin 0 auto
-    .hk-button
-      margin 7px auto
+
 </style>

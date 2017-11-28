@@ -15,6 +15,10 @@
       :to='{ name: "week" }',
       tag="li"
     ) Week
+    router-link.sidebar-nav-item(
+      :to='{ name: "slider" }',
+      tag="li"
+    ) Slider
 </template>
 
 <script>

@@ -22,9 +22,43 @@
         type: String,
         default: '重复'
       },
-      weeksList: {
+      value: {
         type: Array,
         default: () => [
+          {
+            name: '周日',
+            value: false
+          },
+          {
+            name: '周一',
+            value: false
+          },
+          {
+            name: '周二',
+            value: false
+          },
+          {
+            name: '周三',
+            value: false
+          },
+          {
+            name: '周四',
+            value: false
+          },
+          {
+            name: '周五',
+            value: false
+          },
+          {
+            name: '周六',
+            value: false
+          }
+        ]
+      }
+    },
+    data () {
+      return {
+        weeksList: [
           {
             name: '周日',
             value: false
@@ -61,6 +95,7 @@
     methods: {
       select (index) {
         this.weeksList[index].value = !this.weeksList[index].value
+        this.$emit('input', this.weeksList)
         this.$emit('weekChange', this.weeksList)
       }
     }
@@ -74,16 +109,16 @@
     width 100%
     border solid 1px #DEDEDE
     &-header
-      height 50px
+      height 2.5rem
       border-bottom solid 1px #DEDEDE
-      font-size: 17px
+      font-size: 0.85rem
       color: #030303
       letter-spacing: -0.41px
-      line-height 50px
+      line-height 2.5rem
       text-align left
       padding-left 4.5%
     &-body
-      height 110px
+      height 5.5rem
       &-item:first-child
         margin-left 1%
       &-item:last-child
@@ -93,16 +128,16 @@
         text-align center
         float left
         &-title
-          font-size $font-size-4
+          font-size 0.7rem
           color #666666
-          margin 14px 0
+          margin 0.7rem 0
         &-btn
-          background-image url("../../assest/icon/week_select.png")
-          width 26px
-          height 26px
+          background-image url("week_select.png")
+          width 1.3rem
+          height 1.3rem
           text-align center
           background-size cover
           margin 0 auto
         &-btn&-active
-          background-image url("../../assest/icon/week_select_active.png")
+          background-image url("week_select_active.png")
 </style>
