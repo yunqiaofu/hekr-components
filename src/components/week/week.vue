@@ -7,9 +7,9 @@
         :key="index",
         @click="select(index)"
       )
-        .hk-week-body-item-title {{i.week}}
+        .hk-week-body-item-title {{i.name}}
         .hk-week-body-item-btn(
-          :class="{'hk-week-body-item-active': i.selected}"
+          :class="{'hk-week-body-item-active': i.value}"
         )
 
 </template>
@@ -21,45 +21,37 @@
       header: {
         type: String,
         default: '重复'
-      }
-    },
-    data () {
-      return {
-        weeksList: [
+      },
+      weeksList: {
+        type: Array,
+        default: () => [
           {
-            week: '周日',
-            value: '7',
-            selected: false
+            name: '周日',
+            value: false
           },
           {
-            week: '周一',
-            value: '1',
-            selected: false
+            name: '周一',
+            value: false
           },
           {
-            week: '周二',
-            value: '2',
-            selected: false
+            name: '周二',
+            value: false
           },
           {
-            week: '周三',
-            value: '3',
-            selected: false
+            name: '周三',
+            value: false
           },
           {
-            week: '周四',
-            value: '4',
-            selected: true
+            name: '周四',
+            value: false
           },
           {
-            week: '周五',
-            value: '5',
-            selected: false
+            name: '周五',
+            value: false
           },
           {
-            week: '周六',
-            value: '6',
-            selected: false
+            name: '周六',
+            value: false
           }
         ]
       }
@@ -68,7 +60,8 @@
     },
     methods: {
       select (index) {
-        this.weeksList[index].selected = !this.weeksList[index].selected
+        this.weeksList[index].value = !this.weeksList[index].value
+        this.$emit('weekChange', this.weeksList)
       }
     }
   }
