@@ -78,12 +78,12 @@ export default {
 
 <style lang="stylus">
 .hk-slider-demo
-  margin-top 60px
+  margin-top 3rem
   text-align center
   &-title
-    margin 10px auto
+    margin 0.5rem auto
   &-container
-    margin 10px 15px
+    margin 0.5rem 0.75rem
   .hk-button
-    margin 10px auto
+    margin 0.5rem auto
 </style>

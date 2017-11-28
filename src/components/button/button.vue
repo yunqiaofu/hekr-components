@@ -72,17 +72,17 @@ type(name)
 
 .hk-button
   display inline-block
-  padding 1rem 1.2rem
+  padding 0.5rem 0.6rem
   background-color $color-white
   font-size $font-size-3
   border-radius $border-radius
-  border 0.1rem solid transparent
+  border 0.05rem solid transparent
   cursor pointer
   position relative
   // 暂时注释掉阴影效果，目前不需要
   // &-active
   // &:active:not(&-disabled)
-  //   box-shadow inset 0 3px 5px rgba(0, 0, 0, 0.125)
+  //   box-shadow inset 0 0.15rem 0.25rem rgba(0, 0, 0, 0.125)
 
   &-disabled
     opacity 0.65
@@ -95,11 +95,11 @@ type(name)
     bottom 0
     left 0
     right 0
-    height 0.1rem
+    height 0.05rem
     overflow hidden
     background-color alpha($color-black, 70%)
     &-bar
-      height 0.1rem
+      height 0.05rem
       background-color $color-white
       animation button-loading 0.6s ease-in-out infinite
 
