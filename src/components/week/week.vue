@@ -9,7 +9,7 @@
       )
         .hk-week-body-item-title {{i.name}}
         .hk-week-body-item-btn(
-          :class="{'hk-week-body-item-active': i.value}"
+          :class="getClass(index)"
         )
 
 </template>
@@ -24,36 +24,11 @@
       },
       value: {
         type: Array,
-        default: () => [
-          {
-            name: '周日',
-            value: false
-          },
-          {
-            name: '周一',
-            value: false
-          },
-          {
-            name: '周二',
-            value: false
-          },
-          {
-            name: '周三',
-            value: false
-          },
-          {
-            name: '周四',
-            value: false
-          },
-          {
-            name: '周五',
-            value: false
-          },
-          {
-            name: '周六',
-            value: false
-          }
-        ]
+        default: () => []
+      },
+      disabled: {
+        type: Array,
+        default: () => []
       }
     },
     data () {
@@ -61,42 +36,70 @@
         weeksList: [
           {
             name: '周日',
-            value: false
+            value: 0
           },
           {
             name: '周一',
-            value: false
+            value: 1
           },
           {
             name: '周二',
-            value: false
+            value: 2
           },
           {
             name: '周三',
-            value: false
+            value: 3
           },
           {
             name: '周四',
-            value: false
+            value: 4
           },
           {
             name: '周五',
-            value: false
+            value: 5
           },
           {
             name: '周六',
-            value: false
-          }
-        ]
+            value: 6
+          }],
+        valueList: [false, false, false, false, false, false, false]
       }
+    },
+    mounted () {
+      this.value.map((item) => {
+        this.$set(this.valueList, item, true)
+      })
     },
     computed: {
     },
     methods: {
       select (index) {
-        this.weeksList[index].value = !this.weeksList[index].value
-        this.$emit('input', this.weeksList)
-        this.$emit('weekChange', this.weeksList)
+        for (let i = 0; i < this.disabled.length; i++) {
+          if (this.disabled[i] === index) {
+            return
+          }
+        }
+        this.$set(this.valueList, index, !this.valueList[index])
+        let value = []
+        this.valueList.map((item, key) => {
+          if (item) {
+            value.push(this.weeksList[key].value)
+          }
+        })
+        this.$emit('input', value)
+        this.$emit('weekChange', value)
+      },
+      getClass (index) {
+        for (let i = 0; i < this.disabled.length; i++) {
+          if (this.disabled[i] === index) {
+            return {
+              'hk-week-body-item-disabled': true
+            }
+          }
+        }
+        return {
+          'hk-week-body-item-active': this.valueList[index]
+        }
       }
     }
   }
@@ -140,4 +143,7 @@
           margin 0 auto
         &-btn&-active
           background-image url("week_select_active.png")
+        &-btn&-disabled
+          background-image url("week_select_disabled.png")
+  
 </style>

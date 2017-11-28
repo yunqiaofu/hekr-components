@@ -1,6 +1,6 @@
 <template lang="pug">
   .hk-week-demo
-    .hk-week-demo-block 基本样式
+    .hk-week-demo-block 基本用法
     hk-week(
       @weekChange="change1",
       v-model="weeksList1"
@@ -11,6 +11,11 @@
       v-model="weeksList2",
       :header="'星期选择'"
     )
+    .hk-week-demo-block 设置不可选日期
+    hk-week(
+      :disabled="disabled",
+      :header="'星期选择'"
+    )
 </template>
 
 <script>
@@ -18,37 +23,9 @@
     name: 'hk-week-demo',
     data () {
       return {
-        weeksList1: null,
-        weeksList2: [
-          {
-            name: '周日',
-            value: true
-          },
-          {
-            name: '周一',
-            value: true
-          },
-          {
-            name: '周二',
-            value: false
-          },
-          {
-            name: '周三',
-            value: false
-          },
-          {
-            name: '周四',
-            value: false
-          },
-          {
-            name: '周五',
-            value: false
-          },
-          {
-            name: '周六',
-            value: false
-          }
-        ]
+        weeksList1: [],
+        weeksList2: [0, 2],
+        disabled: [1, 3]
       }
     },
     methods: {
