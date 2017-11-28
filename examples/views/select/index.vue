@@ -5,7 +5,7 @@
     ) 点击弹出
     .hk-select-demo-block 你选择了{{value}}
     hk-select(
-      :header="title",
+      :title="title",
       :options="options",
       :show="show"
       v-model="value",
