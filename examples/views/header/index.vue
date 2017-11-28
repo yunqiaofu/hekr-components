@@ -11,7 +11,7 @@
     @click-right="clickRight"
   )
   hk-button(@click="toggleLeftText") toggle leftText
-  hk-button(@click="toggleRightIcon") toggle rightIcon  
+  hk-button(@click="toggleRightIcon") toggle rightIcon
 
   .hk-header-demo-title slot
   hk-header(
@@ -24,7 +24,7 @@
       aria-hidden="true"
     )
     span(slot="right-text") 右边
-  
+
   .hk-header-demo-title slot与props混合传入
   hk-header(
     :title="title",
@@ -67,10 +67,10 @@ export default {
 
 <style lang="stylus">
 .hk-header-demo
-  margin-top 60px
+  margin-top 3rem
   text-align center
   &-title
-    margin 10px auto
+    margin 0.5rem auto
   .hk-button
-    margin 30px auto
+    margin 1.5rem auto
 </style>
