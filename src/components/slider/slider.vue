@@ -184,8 +184,8 @@ export default {
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
-$height = 4px
-$handle-size = 32px
+$height = 0.4rem
+$handle-size = 3.2rem
 .hk-slider
   &&-disabled
     .hk-slider-bar
@@ -197,7 +197,7 @@ $handle-size = 32px
         cursor not-allowed
 
   &-header
-    margin-bottom 30px
+    margin-bottom 3rem
     &:before
     &:after
       content ""
@@ -226,28 +226,28 @@ $handle-size = 32px
       width $handle-size
       height $handle-size
       position absolute
-      margin-left -16px
-      top -14px
+      margin-left -($handle-size / 2)
+      top -1.4rem
       &-circle
         width $handle-size * 0.5
         height $handle-size * 0.5
         background-color $color-primary
         border-radius 50%
         position absolute
-        top 7px
-        left 7px
+        top 0.8rem
+        left 0.8rem
         cursor pointer
         &-loading
           width $handle-size * (10 / 32)
           height $handle-size * (10 / 32)
-          margin 3px
+          margin 0.3rem
           background-image url("./loading.gif")
           background-size cover
           background-position center
           background-repeat no-repeat
 
   &-footer
-    margin-top 5px
+    margin-top 0.5rem
     &:before
     &:after
       content ""

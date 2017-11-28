@@ -72,11 +72,11 @@ type(name)
 
 .hk-button
   display inline-block
-  padding 10px 12px
+  padding 1rem 1.2rem
   background-color $color-white
   font-size $font-size-3
   border-radius $border-radius
-  border 1px solid transparent
+  border 0.1rem solid transparent
   cursor pointer
   position relative
   // 暂时注释掉阴影效果，目前不需要
@@ -95,11 +95,11 @@ type(name)
     bottom 0
     left 0
     right 0
-    height 1px
+    height 0.1rem
     overflow hidden
     background-color alpha($color-black, 70%)
     &-bar
-      height 1px
+      height 0.1rem
       background-color $color-white
       animation button-loading 0.6s ease-in-out infinite
 

@@ -64,20 +64,20 @@ export default {
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
-$height = 45px
-$height-2 = 30px
+$height = 4.5rem
+$height-2 = 3rem
 
 .hk-header
   position relative
   height $height
   line-height $height * 0.8
-  padding 3px 0
+  padding 0.3rem 0
   background-color $color-white
-  border-bottom 1px solid darken($color-white, 10%)
+  border-bottom 0.1rem solid darken($color-white, 10%)
   &-title
     height $height
     line-height $height * 0.9
-    margin 0 88px
+    margin 0 8.8rem
     text-align center
     font-size $font-size-2
     color #000
@@ -90,33 +90,33 @@ $height-2 = 30px
     height $height-2
     line-height $height-2 * 0.9
     position absolute
-    top 8px
+    top 0.8rem
     display block
     font-size $font-size-4
     color $color-black
     white-space nowrap
   &-left
-    left 12px
+    left 1.2rem
     text-align left
     &-icon
       float left
       line-height $height-2 * 0.7
       font-size $font-size-1
-      margin-right 6px
+      margin-right 0.6rem
     &-text
       float right
       height $height-2
       line-height $height-2 * 1.1
 
   &-right
-    right 12px
+    right 1.2rem
     text-align right
     &-icon
       float right
       height $height-2
       line-height $height-2 * 0.7
       font-size $font-size-1
-      margin-left 6px
+      margin-left 0.6rem
     &-text
       float left
       height $height-2
