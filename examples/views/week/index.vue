@@ -9,12 +9,12 @@
     hk-week(
       @weekChange="change2",
       v-model="weeksList2",
-      :header="'星期选择'"
+      :title="'星期选择'"
     )
     .hk-week-demo-block 设置不可选日期
     hk-week(
       :disabled="disabled",
-      :header="'星期选择'"
+      :title="'星期选择'"
     )
 </template>
 

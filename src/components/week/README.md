@@ -4,7 +4,7 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | value | 绑定值 | array | - | - |
-| header | 标题 | string | - | 重复 |
+| title | 标题 | string | - | 重复 |
 | disabled | 是否禁用 | array | - | - |
 
 ## Events

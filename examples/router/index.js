@@ -25,6 +25,11 @@ export default new Router({
       path: '/slider',
       name: 'slider',
       component: () => import('../views/slider')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/select')
     }
   ]
 })

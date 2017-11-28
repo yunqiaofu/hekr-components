@@ -1,6 +1,6 @@
 <template lang="pug">
   .hk-week
-    .hk-week-header {{header}}
+    .hk-week-header {{title}}
     .hk-week-body
       .hk-week-body-item(
         v-for="(i, index) in weeksList",
@@ -18,7 +18,7 @@
   export default {
     name: 'hk-week',
     props: {
-      header: {
+      title: {
         type: String,
         default: '重复'
       },
@@ -110,7 +110,8 @@
   .hk-week
     background-color $color-white
     width 100%
-    border solid 1px #DEDEDE
+    border-top solid 1px #DEDEDE
+    border-bottom solid 1px #DEDEDE
     &-header
       height 2.5rem
       border-bottom solid 1px #DEDEDE
@@ -145,5 +146,5 @@
           background-image url("week_select_active.png")
         &-btn&-disabled
           background-image url("week_select_disabled.png")
-  
+
 </style>
