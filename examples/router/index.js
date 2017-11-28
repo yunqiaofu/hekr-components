@@ -20,6 +20,16 @@ export default new Router({
       path: '/slider',
       name: 'slider',
       component: () => import('../views/slider')
+    },
+    {
+      path: '/icon',
+      name: 'icon',
+      component: () => import('../views/icon')
+    },
+    {
+      path: '/modal',
+      name: 'modal',
+      component: () => import('../views/modal')
     }
   ]
 })

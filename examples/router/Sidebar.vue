@@ -15,6 +15,14 @@
       :to='{ name: "slider" }',
       tag="li"
     ) Slider
+    router-link.sidebar-nav-item(
+      :to='{ name: "icon" }',
+      tag="li"
+    ) Icon
+    router-link.sidebar-nav-item(
+      :to='{ name: "modal" }',
+      tag="li"
+    ) Modal
 </template>
 
 <script>
