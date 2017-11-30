@@ -79,7 +79,6 @@ export default {
 
 <style lang="stylus">
 .hk-button-demo
-  margin-top 3rem
   text-align center
   .hk-button
     display block

@@ -1,15 +1,21 @@
 <template lang="pug">
 #app
-  Sidebar
-  router-view
+  sidebar
+  demo
+  docs
 </template>
 
 <script>
-import Sidebar from './router/Sidebar'
+import Sidebar from './Sidebar'
+import Demo from './Demo'
+import Docs from './Docs'
+
 export default {
   name: 'app',
   components: {
-    Sidebar
+    Sidebar,
+    Demo,
+    Docs
   }
 }
 </script>
@@ -17,6 +23,7 @@ export default {
 <style lang="stylus">
 @import "~normalize.css"
 @import "~font-awesome/css/font-awesome.css"
+@import "~github-markdown-css/github-markdown.css"
 body
   overflow-x hidden
   overflow-y auto

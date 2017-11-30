@@ -84,12 +84,12 @@ export default {
 </script>
 <style lang="stylus">
 .hk-modal-demo
-  width 100vw
-  height 100vh
   display flex
+  height 100%
   justify-content center
   align-items center
   background #f5f5f5
+  position relative
   .hk-button
     margin 10px
   &.dark
