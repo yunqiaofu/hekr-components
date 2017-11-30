@@ -1,14 +1,15 @@
 <template lang="pug">
-.hk-modal-demo(:class="{'dark': modalTheme === 'dark'}")
+.hk-modal-bar-demo(:class="{'dark': modalTheme === 'dark'}")
   .demo-button
     hk-button(@click="toggleBg") 切换背景
     hk-button(@click="toggleNum") 切换数量
-  hk-modal(:items="getItems", :theme="modalTheme", @change="func")
+    hk-button(@click="toggleColor") 切换颜色
+  hk-modal-bar(:items="getItems", :theme="modalTheme", :activeColor="activeColor", @change="func")
 </template>
 
 <script>
 export default {
-  name: 'hekr-modal-demo',
+  name: 'hekr-modal-bar-demo',
   data () {
     return {
       items: [
@@ -17,7 +18,9 @@ export default {
           label: '功能',
           name: 'home',
           active: true,
-          disabled: false
+          disabled: false,
+          fontColor: 'red',
+          activeColor: 'yellow'
         },
         {
           icon: 'fa fa-camera-retro',
@@ -42,6 +45,7 @@ export default {
         }
       ],
       modalTheme: 'light',
+      activeColor: '',
       num: 3
     }
   },
@@ -78,18 +82,25 @@ export default {
       } else {
         this.num ++
       }
+    },
+    toggleColor () {
+      if (this.activeColor === '') {
+        this.activeColor = 'red'
+      } else {
+        this.activeColor = ''
+      }
     }
   }
 }
 </script>
 <style lang="stylus">
-.hk-modal-demo
-  display flex
+.hk-modal-bar-demo
+  position relative
   height 100%
+  display flex
   justify-content center
   align-items center
   background #f5f5f5
-  position relative
   .hk-button
     margin 10px
   &.dark
