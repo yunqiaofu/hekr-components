@@ -16,7 +16,6 @@ export default {
 
 <style lang="stylus">
 .hk-icon-demo
-  margin-top 60px
   text-align center
   .hk-icon
     margin 7px
