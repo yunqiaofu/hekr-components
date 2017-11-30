@@ -23,6 +23,10 @@
       :to='{ name: "slider" }',
       tag="li"
     ) Slider
+    router-link.sidebar-nav-item(
+      :to='{ name: "timePicker" }',
+      tag="li"
+    ) timePicker
 </template>
 
 <script>

@@ -146,5 +146,4 @@
           background-image url("week_select_active.png")
         &-btn&-disabled
           background-image url("week_select_disabled.png")
-
 </style>
