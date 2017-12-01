@@ -5,7 +5,7 @@
   hk-dialog(
     v-model="visible",
     :title="title",
-    :modal="modal",
+    :show-mask="mask",
     text="您确定要滤芯复位吗？滤芯复位后滤芯数据将被清零"
   )
   hk-button(@click="showInputDialog") 类型为输入框且背景不可关闭
@@ -13,26 +13,27 @@
     v-model="visibleInput",
     type="input",
     title="修改设备名称",
-    :modal="modal",
-    :modalClickDisabled="true",
-    :inputProps="inputProps",
+    :show-mask="mask",
+    :mask-click-disabled="true",
+    :input-props="inputProps",
     @confirm="confirm"
   )
   hk-button(@click="showCoustomDialog") 自定义按钮文字
   hk-dialog(
     v-model="visibleCoustom",
     :title="title",
-    :modal="false",
+    :show-mask="false",
     text="滤芯寿命即将耗尽，请及时更换滤芯",
-    :showCancel="false",
-    confirmText="我知道了",
+    body-text-align="right",
+    :show-cancel="false",
+    confirm-text="我知道了",
     @confirm="confirm"
   )
   hk-button(@click="showFooterDialog") slot footer
   hk-dialog(
     v-model="visibleFooter",
     :title="title",
-    :modal="true",
+    :show-mask="true",
     text="滤芯寿命即将耗尽，请及时更换滤芯",
   )
     hk-button(slot="footer", @click="closeVvisibleFooter") 自定义按钮
@@ -45,7 +46,7 @@ export default {
     return {
       visible: false,
       title: '温馨提示',
-      modal: true,
+      mask: true,
       count: 0,
       bodyProps: {
         style: 'text-align: center'

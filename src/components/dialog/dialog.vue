@@ -1,33 +1,34 @@
 <template lang="pug">
 .hk-dialog(v-if="value")
   .hk-dialog-mask(
-    v-if="modal",
-    @click="clickModal"
+    v-if="showMask",
+    @click="clickMask"
   )
   .hk-dialog-container
-    .hk-dialog-container-header
-      slot(name="header") {{ title }}
-    .hk-dialog-container-body
-      slot(name="body")
-        input.hk-dialog-container-body-input(
-          v-if="type === 'input'",
-          v-bind="inputProps",
-          type="text",
-          v-model="inputValue"
-        )
-        .hk-dialog-container-body-text(v-else) {{ text }}
-    .hk-dialog-container-footer
-      slot(name="footer")
-        button.hk-dialog-container-footer-cancel(
-          v-if="showCancel",
-          :class="getCancelClass",
-          @click="cancel"
-        ) {{ cancelText }}
-        button.hk-dialog-container-footer-confirm(
-          v-if="showConfirm",
-          :class="getConfirmClass",
-          @click="confirm"
-        ) {{ confirmText }}
+    slot
+      .hk-dialog-container-header
+        slot(name="header") {{ title }}
+      .hk-dialog-container-body(:style="getBodyTextAlign")
+        slot(name="body")
+          input.hk-dialog-container-body-input(
+            v-if="type === 'input'",
+            v-bind="inputProps",
+            type="text",
+            v-model="inputValue"
+          )
+          .hk-dialog-container-body-text(v-else) {{ text }}
+      .hk-dialog-container-footer
+        slot(name="footer")
+          button.hk-dialog-container-footer-cancel(
+            v-if="showCancel",
+            :class="getCancelClass",
+            @click="cancel"
+          ) {{ cancelText }}
+          button.hk-dialog-container-footer-confirm(
+            v-if="showConfirm",
+            :class="getConfirmClass",
+            @click="confirm"
+          ) {{ confirmText }}
 
 </template>
 
@@ -49,11 +50,11 @@ export default {
         ].indexOf(val) !== -1
       }
     },
-    modal: {
+    showMask: {
       type: Boolean,
       default: true
     },
-    modalClickDisabled: {
+    maskClickDisabled: {
       type: Boolean,
       default: false
     },
@@ -64,6 +65,16 @@ export default {
     text: {
       type: String,
       default: ''
+    },
+    bodyTextAlign: {
+      type: String,
+      default: 'left',
+      validator: val => {
+        return [
+          'left',
+          'right'
+        ].indexOf(val) !== -1
+      }
     },
     inputProps: {
       type: Object,
@@ -92,6 +103,11 @@ export default {
     }
   },
   computed: {
+    getBodyTextAlign () {
+      return {
+        'text-align': this.bodyTextAlign
+      }
+    },
     getCancelClass () {
       return {
         'hk-dialog-container-footer-cancel-full': !this.showConfirm
@@ -104,8 +120,8 @@ export default {
     }
   },
   methods: {
-    clickModal () {
-      if (!this.modalClickDisabled) {
+    clickMask () {
+      if (!this.maskClickDisabled) {
         this.$emit('input', false)
       }
     },
@@ -144,7 +160,7 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
     right 0
     bottom 0
     left 0
-    background-color rgba(0, 0, 0, 0.15)
+    background-color rgba(0, 0, 0, 0.5)
   &-container
     width 13.5rem
     position absolute
@@ -162,12 +178,12 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
       font-size $font-size-3
       font-weight 500
       color #333
+      text-align center
     &-body
       padding 0.3rem 0.7rem
       &-text
         font-size $font-size-4
         color #999
-        text-align left
       &-input
         display block
         width 100%
