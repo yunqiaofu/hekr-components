@@ -30,6 +30,11 @@ export default new Router({
       path: '/modal',
       name: 'modal',
       component: () => import('../views/modal')
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import('../views/dialog')
     }
   ]
 })
