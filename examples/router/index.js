@@ -40,6 +40,16 @@ export default new Router({
       path: '/chart',
       name: 'chart',
       component: () => import('../views/chart')
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import('../views/dialog')
+    },
+    {
+      path: '/confirm',
+      name: 'confirm',
+      component: () => import('../views/confirm')
     }
   ]
 })
