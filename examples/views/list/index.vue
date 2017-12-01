@@ -34,6 +34,7 @@
     type="input",
     leftText="设备名称",
     :rightText="socketName",
+    :inputProps="inputProps",
     v-model="inputValue",
     border
   )
@@ -60,6 +61,10 @@ export default {
     return {
       socketNames: ['客厅插座', '卧室插座', '厨房插座', '卫生间插座'],
       index: 0,
+      inputProps: {
+        type: 'text', // 可选text, number, password
+        maxLength: 8
+      },
       inputValue: 'test'
     }
   },

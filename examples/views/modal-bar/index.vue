@@ -14,8 +14,8 @@ export default {
     return {
       items: [
         {
-          icon: 'fa fa-home',
-          label: '功能',
+          icon: 'fa fa-power-off',
+          label: '开关',
           name: 'home',
           active: true,
           disabled: false,
@@ -23,7 +23,7 @@ export default {
           activeColor: 'yellow'
         },
         {
-          icon: 'fa fa-camera-retro',
+          icon: 'fa fa-calendar',
           label: '预约',
           name: 'timing',
           active: false,
@@ -37,9 +37,9 @@ export default {
           disabled: false
         },
         {
-          icon: 'fa fa-cog',
-          label: '其他',
-          name: 'other',
+          icon: 'fa fa-bar-chart',
+          label: '图表',
+          name: 'chart',
           active: false,
           disabled: true
         }
@@ -66,6 +66,9 @@ export default {
           break
         case 'setting':
           console.log('setting')
+          break
+        case 'chart':
+          console.log('chart')
           break
       }
     },

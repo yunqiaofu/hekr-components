@@ -3,7 +3,7 @@
   slot(name="list")
     .hk-list-left
       slot(name="left")
-        i(
+        i.hk-list-left-icon(
           :class="leftIcon",
           v-if="leftIcon"
         )
@@ -19,16 +19,15 @@
         span(
           v-if="rightText"
         ) {{ rightText }}
-        i(
+        i.hk-list-right-icon(
           v-if="rightIcon",
           :class="rightIcon"
         )
     .hk-list-right(v-if="type === 'input'")
       input.hk-list-input(
-        type="text",
+        :type="inputProps.type",
         :value="value",
-        v-if="inputType === 'text'",
-        :maxLength="inputMaxLength",
+        :maxLength="inputProps.maxLength",
         @input="$emit('input', $event.target.value)"
       )
 </template>
@@ -56,16 +55,15 @@ export default {
       type: String,
       default: '#999999'
     },
-    value: {
-      type: String
-    },
-    inputType: {
-      type: String,
-      default: 'text'
-    },
-    inputMaxLength: {
-      type: Number,
-      default: 12
+    value: {},
+    inputProps: {
+      type: Object,
+      default: () => {
+        return {
+          type: 'text',
+          maxLength: 12
+        }
+      }
     },
     checked: {
       type: Boolean,
@@ -109,12 +107,12 @@ export default {
     border-bottom 1px solid #ccc
   &-left
     width 40%
-    i
+    &-icon
       padding-right .2rem
   &-right
     width 60%
     text-align right
-    i
+    &-icon
       padding-left .2rem
   &-input
     width 100%

@@ -27,9 +27,9 @@ export default new Router({
       component: () => import('../views/icon')
     },
     {
-      path: '/modalBar',
-      name: 'modalBar',
-      component: () => import('../views/modalBar')
+      path: '/modal-bar',
+      name: 'modal-bar',
+      component: () => import('../views/modal-bar')
     },
     {
       path: '/list',

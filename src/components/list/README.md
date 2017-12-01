@@ -4,16 +4,16 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| type | 列表类型，主要为右侧内容 | string | text/input/checkbox | --- |
-| leftText | 左侧文字 |	string | --- | --- |
-| leftIcon | 左侧图标class | string | --- | --- |
-| rightText | 右侧文字 | string | --- | --- |
-| rightIcon | 右侧图标class | string | --- | --- |
-| textColor | 右侧图标和文字颜色(type='text'时可用) | string | --- | --- |
-| value | type='input'或'checkout'时传值使用,v-model绑定 | --- | --- | --- |
-| inputType | type='input'时使用, input类型 | string | text | text |
-| inputMaxLength | 输入框最大长度 | number | --- | 12 |
-| border | 是否有下边框 | boolean | --- | false |
+| type | 列表类型，主要为右侧内容 | string | text/input/checkbox | - |
+| leftText | 左侧文字 |	string | - | - |
+| leftIcon | 左侧图标class | string | - | - |
+| rightText | 右侧文字 | string | - | - |
+| rightIcon | 右侧图标class | string | - | - |
+| textColor | 右侧图标和文字颜色(type='text'时可用) | string | - | - |
+| value | type='input'或'checkout'时传值使用,v-model绑定 | - | - | - |
+| inputProps.type | type='input'时使用, input类型 | string | text/number/password | text |
+| inputProps.maxLength | 输入框最大长度 | number | - | 12 |
+| border | 是否有下边框 | boolean | - | false |
 
 ## Slot
 | name | 说明|
