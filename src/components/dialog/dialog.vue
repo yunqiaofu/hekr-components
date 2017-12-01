@@ -72,6 +72,7 @@ export default {
       validator: val => {
         return [
           'left',
+          'center',
           'right'
         ].indexOf(val) !== -1
       }

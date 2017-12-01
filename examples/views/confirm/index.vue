@@ -20,7 +20,8 @@ export default {
       const a = this.$confirm({
         title: '温馨提示',
         text: '滤芯寿命即将耗尽，请及时更换滤芯',
-        showCancel: false
+        showCancel: false,
+        bodyTextAlign: 'center'
       })
       console.log(a)
       setTimeout(() => {

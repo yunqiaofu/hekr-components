@@ -38,6 +38,4 @@ this.$confirm({ ... })
 | confirmText | 确定按钮文字 | string | - | 确定 |
 
 ## 返回值
-返回值是一个经过封装的Promise对象，对象有一个```close```方法和一个属性vm
-1. close 可以用来关闭当前对话框
-2. vm为当前的Vue component对象
+返回值是一个经过封装的Promise对象，对象有一个```close```方法可以用来关闭当前对话框

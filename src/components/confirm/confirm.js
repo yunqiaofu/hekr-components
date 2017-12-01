@@ -20,23 +20,19 @@ export default options => {
   let vm = new ConfirmConstructor({
     propsData: options
   }).$mount()
-  vm.$once('confirm', () => {
-    vm.$destroy()
-    document.body.removeChild(vm.$el)
-    vm.resolve()
-  })
-  vm.$once('cancel', () => {
-    vm.$destroy()
-    document.body.removeChild(vm.$el)
-    vm.reject()
-  })
+  vm.$once('confirm', () => vm.resolve())
+  vm.$once('cancel', () => vm.reject())
   document.body.appendChild(vm.$el)
   const $ = new Promise((resolve, reject) => {
     vm.resolve = resolve
     vm.reject = reject
   })
-  $.vm = vm
   // 关闭方法
   $.close = () => vm.$emit('cancel')
+  // Promise结束之后执行
+  $.finally(() => {
+    vm.$destroy()
+    document.body.removeChild(vm.$el)
+  })
   return $
 }
