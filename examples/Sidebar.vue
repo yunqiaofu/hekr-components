@@ -4,7 +4,9 @@
     i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
-      :to='{ name: "header" }',
+      v-for="(name, index) in routes",
+      :key="index",
+      :to='{ name: name }',
       tag="li"
     ) Header
     router-link.sidebar-nav-item(
@@ -32,14 +34,23 @@
       tag="li"
     ) Check
 
+    ) {{ name | upperFirst }}
 </template>
 
 <script>
+import router from './router'
+
+const routes = []
+router.options.routes.forEach(route => {
+  routes.push(route.name)
+})
+
 export default {
   name: 'sidebar',
   data () {
     return {
-      isToggle: false
+      isToggle: false,
+      routes
     }
   },
   computed: {
@@ -48,6 +59,11 @@ export default {
     },
     getIcon () {
       return this.isToggle ? 'fa-times' : 'fa-bars'
+    }
+  },
+  filters: {
+    upperFirst (val) {
+      return `${val[0].toUpperCase()}${val.slice(1)}`
     }
   },
   methods: {

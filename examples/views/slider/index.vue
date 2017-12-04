@@ -78,7 +78,6 @@ export default {
 
 <style lang="stylus">
 .hk-slider-demo
-  margin-top 3rem
   text-align center
   &-title
     margin 0.5rem auto

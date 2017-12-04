@@ -27,9 +27,24 @@ export default new Router({
       component: () => import('../views/icon')
     },
     {
-      path: '/modal',
-      name: 'modal',
-      component: () => import('../views/modal')
+      path: '/modal-bar',
+      name: 'modal-bar',
+      component: () => import('../views/modal-bar')
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: () => import('../views/list')
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: () => import('../views/chart')
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import('../views/dialog')
     },
     {
       path: '/switch',
@@ -40,6 +55,10 @@ export default new Router({
       path: '/check',
       name: 'check',
       component: () => import('../views/check')
+    {
+      path: '/confirm',
+      name: 'confirm',
+      component: () => import('../views/confirm')
     }
   ]
 })

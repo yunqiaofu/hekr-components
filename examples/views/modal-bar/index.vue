@@ -1,26 +1,29 @@
 <template lang="pug">
-.hk-modal-demo(:class="{'dark': modalTheme === 'dark'}")
+.hk-modal-bar-demo(:class="{'dark': modalTheme === 'dark'}")
   .demo-button
     hk-button(@click="toggleBg") 切换背景
     hk-button(@click="toggleNum") 切换数量
-  hk-modal(:items="getItems", :theme="modalTheme", @change="func")
+    hk-button(@click="toggleColor") 切换颜色
+  hk-modal-bar(:items="getItems", :theme="modalTheme", :activeColor="activeColor", @change="func")
 </template>
 
 <script>
 export default {
-  name: 'hekr-modal-demo',
+  name: 'hekr-modal-bar-demo',
   data () {
     return {
       items: [
         {
-          icon: 'fa fa-home',
-          label: '功能',
+          icon: 'fa fa-power-off',
+          label: '开关',
           name: 'home',
           active: true,
-          disabled: false
+          disabled: false,
+          fontColor: 'red',
+          activeColor: 'yellow'
         },
         {
-          icon: 'fa fa-camera-retro',
+          icon: 'fa fa-calendar',
           label: '预约',
           name: 'timing',
           active: false,
@@ -34,14 +37,15 @@ export default {
           disabled: false
         },
         {
-          icon: 'fa fa-cog',
-          label: '其他',
-          name: 'other',
+          icon: 'fa fa-bar-chart',
+          label: '图表',
+          name: 'chart',
           active: false,
           disabled: true
         }
       ],
       modalTheme: 'light',
+      activeColor: '',
       num: 3
     }
   },
@@ -63,6 +67,9 @@ export default {
         case 'setting':
           console.log('setting')
           break
+        case 'chart':
+          console.log('chart')
+          break
       }
     },
     toggleBg () {
@@ -78,14 +85,21 @@ export default {
       } else {
         this.num ++
       }
+    },
+    toggleColor () {
+      if (this.activeColor === '') {
+        this.activeColor = 'red'
+      } else {
+        this.activeColor = ''
+      }
     }
   }
 }
 </script>
 <style lang="stylus">
-.hk-modal-demo
-  width 100vw
-  height 100vh
+.hk-modal-bar-demo
+  position relative
+  height 100%
   display flex
   justify-content center
   align-items center

@@ -26,7 +26,7 @@ npm run build --report
 1. 所有的js都必须强制使用eslint进行格式的规范，eslint规则使用eslint-config-standard规则，并且书写js时请尽量采用es6+的特性，并适时书写必要的注释
 2. 所有组件的css预处理语言使用stylus，在项目中不得使用其他css处理器
 3. template模板统一使用pug，使用pug的目的是规范template的格式，使整个项目更整洁代码风格一致
-4. 每个组件都必须放在一个文件夹下面，在文件夹下必须编写组件的README.md文件
+4. 每个组件都必须放在一个文件夹下面，在文件夹下必须编写组件的README.md文件，该README文件也同时会出现在调试界面
 5. 每个组件文件夹下必须有一个index.js文件，该文件主要是负责导出组件的install函数，可参考[src/components/button](./src/components/button)
 6. 编写组件必须在examples文件夹下编写对应的demo，开发的时候的入口文件就是examples/index.js
 
@@ -67,10 +67,12 @@ props: {
 examples
 │  App.vue
 │  index.js // 开发环境入口文件
+│  Sidebar.vue // 侧边导航
+│  Demo.vue // views文件夹下面的对应视图
+│  Docs.vue // 读取每一个组件下面的README文件，并生成组件的文档到视图
 │
 ├─router // vue 路由和导航相关
 │      index.js // 定义路由
-│      Sidebar.vue // 侧边导航
 │
 └─views // 路由视图
     └─button // 路由页面文件夹
