@@ -6,7 +6,9 @@
 <script>
 import router from './router'
 
-const components = {}
+const components = {
+  readme: () => import('../README.md')
+}
 router.options.routes.forEach(route => {
   components[`${route.name}-doc`] = () => import(`@/components/${route.name}/README.md`)
 })
@@ -32,7 +34,7 @@ export default {
       if (this.$route.name) {
         this.view = this.$route.name + '-doc'
       } else {
-        this.view = ''
+        this.view = 'readme'
       }
     }
   }
