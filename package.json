@@ -75,8 +75,9 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "dependencies": {
-    "chart.js": "^2.7.1",
-    "normalize.css": "^7.0.0"
-  }
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
