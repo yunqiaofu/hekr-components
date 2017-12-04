@@ -23,6 +23,15 @@
       :to='{ name: "modal" }',
       tag="li"
     ) Modal
+    router-link.sidebar-nav-item(
+      :to='{ name: "switch" }',
+      tag="li"
+    ) Switch
+    router-link.sidebar-nav-item(
+      :to='{ name: "check" }',
+      tag="li"
+    ) Check
+
 </template>
 
 <script>

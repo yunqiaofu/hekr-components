@@ -30,6 +30,16 @@ export default new Router({
       path: '/modal',
       name: 'modal',
       component: () => import('../views/modal')
+    },
+    {
+      path: '/switch',
+      name: 'switch',
+      component: () => import('../views/switch')
+    },
+    {
+      path: '/check',
+      name: 'check',
+      component: () => import('../views/check')
     }
   ]
 })
