@@ -110,8 +110,6 @@
   .hk-week
     background-color $color-white
     width 100%
-    border-top solid 1px #DEDEDE
-    border-bottom solid 1px #DEDEDE
     &-header
       height 2.5rem
       border-bottom solid 1px #DEDEDE

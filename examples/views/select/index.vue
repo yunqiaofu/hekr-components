@@ -4,13 +4,16 @@
       @click="show=!show"
     ) 点击弹出
     .hk-select-demo-block 你选择了{{value}}
-    hk-select(
-      :title="title",
-      :options="options",
+    hk-pop(
       :show="show"
-      v-model="value",
-      @change="change"
     )
+      hk-select(
+        :title="title",
+        :options="options",
+        :show="show"
+        v-model="value",
+        @change="change"
+      )
 </template>
 
 <script>
@@ -51,6 +54,8 @@
     margin-top 60px
     text-align center
     font-size 17px
+    height 100vh
+    background-color #efefef
     &-block
       margin 20px 0
 </style>

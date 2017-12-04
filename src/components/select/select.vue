@@ -1,7 +1,5 @@
 <template lang="pug">
-  .hk-select(
-    :class="{'hidden':!show}"
-  )
+  .hk-select
     .hk-select-header {{title}}
     ul.hk-select-body
       li.hk-select-body-item(
@@ -29,10 +27,6 @@
       value: {
         type: String,
         default: ''
-      },
-      show: {
-        type: Boolean,
-        default: false
       }
     },
     data () {
@@ -64,15 +58,9 @@
 
 <style lang="stylus">
   @import "../../stylus/variables.styl"
-  .hk-select.hidden
-    bottom -100%
   .hk-select
     background-color $color-white
     width 100%
-    border-top solid 1px #DFDFDF
-    position fixed
-    bottom 0
-    transition .5s
     &-header
       height 2.8rem
       line-height 2.8rem

@@ -1,30 +1,21 @@
-<template>
-  <div class="pd-select-item">
-    <div class="pd-select-line"></div>
-    <div class="pd-select-list">
-      <ul class="pd-select-ul" ref="list">
-        <li class="pd-select-list-item" v-for="el,index in renderData " :class="{'hidden':setHidden(el.index)}" :key="index">{{el.value}}</li>
-      </ul>
-    </div>
-    <ul class="pd-select-wheel" ref="wheel">
-      <li class="pd-select-wheel-item" :class="{'hidden':setHidden(el.index)}" :style="setWheelItemDeg(el.index)" :index="el.index" v-for="el,index in renderData " :key="index">{{el.value}}</li>
-    </ul>
-  </div>
+<template  lang="pug">
+  .hk-select-item
+    .hk-select-line
+      slot(name="unit")
+    .hk-select-list
+      .hk-select-ul(ref="list")
+        .hk-select-list-item(
+          v-for="el,index in renderData",
+          :class="{'hidden':setHidden(el.index)}",
+          :key="index") {{el.value}}
+    .hk-select-wheel(ref="wheel")
+      .hk-select-wheel-item(
+        :class="{'hidden':setHidden(el.index)}",
+        :style="setWheelItemDeg(el.index)",
+        :index="el.index" v-for="el,index in renderData ",
+        :key="index") {{el.value}}
 </template>
 <script>
-  /**
-   * Created by k186 on 2017/5/3.
-   * gitHub: https://github.com/k186/iosSelect
-   */
-
-  /*
-   * selectItem components
-   *
-   * @param value {String} current select value or init value
-   * @param listData {Array} loop array value
-   * @param type {String} 'cycle' ,default 'line'
-   *
-   * */
   export default{
     name: 'hk-time-item',
     data () {
@@ -42,15 +33,21 @@
         type: String,
         default: 'line'
       },
-      value: {},
-      change: {}
+      unit: {
+        type: String
+      },
+      unitMargin: {
+        type: Number,
+        default: 2
+      },
+      value: {}
     },
     computed: {
       renderData () {
         let temp = []
         for (let k = this.spin.start; k <= this.spin.end; k++) {
           let data = {
-            value: (this.getSpinData(k) || {}).name,
+            value: this.getSpinData(k),
             index: k
           }
           temp.push(data)
@@ -87,7 +84,7 @@
       },
       setWheelItemDeg (index) {
         return {
-          transform: `rotate3d(1, 0, 0, ${-index * 20 % 360}deg) translate3d(0px, 0px, 100px)`
+          transform: `rotate3d(1, 0, 0, ${-index * 20 % 360}deg) translate3d(0rem, 0rem, 5rem)`
         }
       },
       setWheelDeg (updateDeg, type, time = 1000) {
@@ -102,13 +99,13 @@
       setListTransform (translateY = 0, marginTop = 0, type, time = 1000) {
         if (type === 'end') {
           this.$refs.list.style.webkitTransition = `transform ${time}ms cubic-bezier(0.19, 1, 0.22, 1)`
-          this.$refs.list.style.webkitTransform = `translateY(${translateY - this.spin.branch * 34}px)`
-          this.$refs.list.style.marginTop = `${-marginTop}px`
+          this.$refs.list.style.webkitTransform = `translateY(${(translateY - this.spin.branch * 34) / 20}rem)`
+          this.$refs.list.style.marginTop = `${-marginTop / 20}rem`
           this.$refs.list.setAttribute('scroll', translateY)
         } else {
           this.$refs.list.style.webkitTransition = ''
-          this.$refs.list.style.webkitTransform = `translateY(${translateY - this.spin.branch * 34}px)`
-          this.$refs.list.style.marginTop = `${-marginTop}px`
+          this.$refs.list.style.webkitTransform = `translateY(${(translateY - this.spin.branch * 34) / 20}rem)`
+          this.$refs.list.style.marginTop = `${-marginTop / 20}rem`
           this.$refs.list.setAttribute('scroll', translateY)
         }
       },
@@ -196,9 +193,9 @@
       /* 获取选中值 */
       getPickValue (move) {
         let index = Math.abs(move / 34)
-        let pickValue = this.getSpinData(index) || {}
+        let pickValue = this.getSpinData(index)
         this.$emit('input', pickValue)
-        pickValue && this.change && this.change(pickValue)
+        this.$emit('onChange', pickValue)
       }
     },
     beforeDestroy () {
@@ -213,87 +210,63 @@
   $color-checked = #2c97f1
   $color-text-main = #333
   $color-text-second = #a8a8a8
-  .pd {
-    &-select {
-      &-item {
-        overflow: hidden;
-        width: 100%;
-        text-align: center;
-        height: 220px;
-        background: $color-background;
-        position: relative;
-      }
-      &-ul {
-        position: relative;
-      }
-      &-line, &-list, &-wheel {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 93px;
-      }
-      &-line {
-        z-index: 3;
-      }
-      &-list {
-        z-index: 2;
-        background: $color-background;
-      }
-      &-wheel {
-        z-index: 1;
-      }
-      &-line {
-        &:after, &:before {
-          position: absolute;
-          top: 0;
-          content: '';
-          display: table;
-          background: $color-checked;
-          width: 100%;
-          height: 2px;
-          -webkit-transform: scaleY(0.5);
-          transform: scaleY(0.5);
-          -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-        }
-        &:before {
-          bottom: -1px;
-          top: auto;
-        }
-      }
-      &-line, &-list {
-        height: 34px;
-        transform: translate3d(0px, 0px, 110px);
-      }
-      &-list {
-        overflow: hidden;
-      }
-      &-list-item {
-        text-shadow: 0 1px 1px rgba(102, 102, 102, 0.6);
-      }
-      &-list-item, &-wheel-item {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 34px;
-        font-size: 18px;
-        color: $color-text-main;
-        &.hidden {
-          visibility: hidden;
-          opacity: 0;
-        }
-      }
-      &-wheel {
-        transform-style: preserve-3d;
-        height: 34px;
-        &-item {
-          backface-visibility: hidden;
-          position: absolute;
-          top: 0;
-          width: 100%;
-          color: $color-text-second;
-        }
-      }
-    }
-  }
+  .hk
+    &-select
+      &-item
+        overflow hidden
+        width 100%
+        text-align center
+        height 8rem
+        background $color-background
+        position relative
+      &-ul
+        position relative
+      &-line, &-list, &-wheel
+        position absolute
+        left 0
+        right 0
+        top 3.15rem
+      &-line
+        z-index 3
+      &-list
+        z-index 2
+        background $color-background
+      &-wheel
+        z-index 1
+      &-line
+        border-bottom solid 1px #DEDEDE
+        border-top solid 1px #DEDEDE
+        line-height 1.7rem
+        font-size 12px
+        color #333333
+      &-line, &-list
+        height 1.7rem
+        transform translate3d(0rem, 0rem, 5.5rem)
+      &-list
+        overflow hidden
+      &-list-item
+        text-shadow 0 1px 1px rgba(102, 102, 102, 0.6)
+      &-list-item-span
+        color #333333
+        font-size 0.65rem
+        margin-left 0.5rem
+      &-list-item, &-wheel-item
+        white-space nowrap
+        overflow hidden
+        /*text-overflow ellipsis*/
+        line-height 1.7rem
+        font-size 0.9rem
+        color $color-text-main
+        &.hidden
+          visibility hidden
+          opacity 0
+      &-wheel
+        transform-style preserve-3d
+        height 1.7rem
+        &-item
+          backface-visibility hidden
+          position absolute
+          top 0
+          width 100%
+          color $color-text-second
 </style>

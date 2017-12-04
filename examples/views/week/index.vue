@@ -44,6 +44,8 @@
     margin-top 60px
     text-align center
     font-size 17px
+    height 100vh
+    background-color #efefef
     &-block
       margin 20px 0
 </style>

@@ -1,7 +1,48 @@
 <template lang="pug">
-  .hk-week-demo
-    hk-time-box
-      hk-time-item
+  .hk-time-demo(
+    @click="show=false; show2=false"
+  )
+    .hk-time-demo-block(
+      @click.stop="show2=!show2"
+    ) 默认样式{{date.h}}:{{date.m}}
+    hk-time-picker(
+      v-model="date",
+      :show="show2",
+      :type="'default'"
+    )
+    .hk-time-demo-block(
+      @click.stop="show=!show"
+    ) 自定义{{h}}:{{m}}:{{s}}
+
+    hk-time-box(
+      :title="'时间选择'",
+      :show="show"
+    )
+      hk-time-item(
+        :listData="hour",
+        :type="'cycle'",
+        v-model="h"
+      )
+        span.hk-time-demo-unit(
+        slot="unit"
+        ) 时
+      hk-time-item(
+        :listData="min",
+        :type="'cycle'",
+        v-model="m"
+      )
+        span.hk-time-demo-unit(
+          slot="unit"
+        ) 分
+      hk-time-item(
+        :listData="min",
+        :type="'cycle'",
+        v-model="s"
+      )
+        span.hk-time-demo-unit(
+        slot="unit"
+        ) 秒
+
 </template>
 
 <script>
@@ -9,29 +50,62 @@
     name: 'hk-week-demo',
     data () {
       return {
-        weeksList1: [],
-        weeksList2: [0, 2],
-        disabled: [1, 3]
+        h: 0,
+        m: 0,
+        s: 0,
+        M: 12,
+        d: 2,
+        show: false,
+        show2: false,
+        date: {h: '02', m: '00'}
+      }
+    },
+    computed: {
+      month () {
+        let month = []
+        for (let i = 1; i <= 12; i++) {
+          month.push(i)
+        }
+        return month
+      },
+      day () {
+        let day = []
+        for (let i = 1; i <= 31; i++) {
+          day.push(i)
+        }
+        return day
+      },
+      hour () {
+        let hour = []
+        for (let i = 0; i < 24; i++) {
+          hour.push(i)
+        }
+        return hour
+      },
+      min () {
+        let min = []
+        for (let i = 0; i < 60; i++) {
+          min.push(i)
+        }
+        return min
       }
     },
     methods: {
-      change1 (weeks) {
-        console.log(this.weeksList1)
-      },
-      change2 (weeks) {
-        console.log(weeks, this.weeksList2)
-      }
     }
   }
 </script>
 
 <style lang="stylus">
-  .hk-week-demo
+  .hk-time-demo
     margin-top 60px
     text-align center
     font-size 17px
+    height 100vh
+    background-color #efefef
     &-block
       margin 20px 0
+    &-unit
+      margin-left 2.5rem
 </style>
 
 
