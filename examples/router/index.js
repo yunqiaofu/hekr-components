@@ -55,6 +55,7 @@ export default new Router({
       path: '/check',
       name: 'check',
       component: () => import('../views/check')
+    },
     {
       path: '/confirm',
       name: 'confirm',

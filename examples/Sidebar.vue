@@ -8,32 +8,6 @@
       :key="index",
       :to='{ name: name }',
       tag="li"
-    ) Header
-    router-link.sidebar-nav-item(
-      :to='{ name: "button" }',
-      tag="li"
-    ) Button
-    router-link.sidebar-nav-item(
-      :to='{ name: "slider" }',
-      tag="li"
-    ) Slider
-    router-link.sidebar-nav-item(
-      :to='{ name: "icon" }',
-      tag="li"
-    ) Icon
-    router-link.sidebar-nav-item(
-      :to='{ name: "modal" }',
-      tag="li"
-    ) Modal
-    router-link.sidebar-nav-item(
-      :to='{ name: "switch" }',
-      tag="li"
-    ) Switch
-    router-link.sidebar-nav-item(
-      :to='{ name: "check" }',
-      tag="li"
-    ) Check
-
     ) {{ name | upperFirst }}
 </template>
 
