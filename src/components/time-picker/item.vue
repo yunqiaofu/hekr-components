@@ -3,7 +3,10 @@
     @touchstart.prevent="itemTouchStart",
     @touchmove.prevent="itemTouchMove",
     @touchend.prevent="itemTouchEnd",
-    @mousedown.stop="itemTouchStart"
+    @mousedown.stop="itemTouchStart",
+    @mousemove.stop="itemTouchMove",
+    @mouseup.stop="itemTouchEnd",
+    @mouseleave.stop="itemTouchEnd"
   )
     .hk-select-line
       slot(name="unit")
@@ -58,10 +61,6 @@
       }
     },
     mounted () {
-      /* 事件绑定 */
-      this.$el.addEventListener('mousemove', this.itemTouchMove)
-      this.$el.addEventListener('mouseup', this.itemTouchEnd)
-      this.$el.addEventListener('mouseleave', this.itemTouchEnd)
       /* 初始化状态 */
       let index = this.listData.indexOf(this.value)
       if (index === -1) {
@@ -111,7 +110,8 @@
           this.$refs.list.setAttribute('scroll', translateY)
         }
       },
-      itemTouchStart (event, type) {
+      itemTouchStart (event) {
+        console.log(event)
         this.start = true
         let finger
         if (event.changedTouches) {
@@ -122,10 +122,8 @@
         this.finger.startY = finger.pageY
         this.finger.startTime = event.timestamp || Date.now()
         this.finger.transformY = this.$refs.list.getAttribute('scroll')
-        event.preventDefault()
-        event.stopPropagation()
       },
-      itemTouchMove (event, type) {
+      itemTouchMove (event) {
         if (!this.start) {
           return
         }
@@ -140,8 +138,6 @@
         /* 设置css */
         let move = this.finger.lastY - this.finger.startY
         this.setStyle(move)
-        event.preventDefault()
-        event.stopPropagation()
       },
       itemTouchEnd (event) {
         if (!this.start) {
@@ -173,8 +169,6 @@
         } else {
           this.setStyle(move, 'end')
         }
-        event.preventDefault()
-        event.stopPropagation()
       },
       /* 设置css */
       setStyle (move, type, time) {
@@ -226,10 +220,6 @@
         this.$emit('input', pickValue)
         this.$emit('onChange', pickValue)
       }
-    },
-    beforeDestroy () {
-      this.$el.removeEventListener('mousemove', this.itemTouchMove)
-      document.removeEventListener('mouseup', this.itemTouchEnd)
     }
   }
 </script>
