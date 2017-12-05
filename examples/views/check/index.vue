@@ -1,14 +1,12 @@
 <template lang="pug">
 .hk-check-demo
   hk-check(
-    :active = "active",
-    @click="getRadio",
+    v-model = "active",
     :icon="icon",
     :offIcon="offIcon"
   )
   div radio组件
   hk-check(
-    :active = "active",
     :text="text",
     :icon="icon",
     :offIcon="offIcon",
@@ -16,9 +14,8 @@
   )
   div radio组件 disabled
   hk-check(
-    :active = "active",
-    :text="text",
-    @click="getRadio",
+    v-model = "active",
+    :text="text", 
     :icon="anoIcon",
     :offIcon="offIcon"
   )
@@ -35,7 +32,8 @@ export default {
       offIcon: 'fa fa-circle-o',
       anoIcon: 'fa fa-gratipay',
       active: true,
-      text: 'test radio'
+      text: 'test radio',
+      checked: true
     }
   },
   methods: {
