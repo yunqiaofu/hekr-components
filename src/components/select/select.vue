@@ -7,9 +7,9 @@
         :key="index",
         @click="select(index)"
       ) {{item.name}}
-        i.hk-select-body-item-icon(
-          :class="{'hk-select-body-item-icon-active':value === item.value, 'hk-select-body-item-icon-disabled': item.disabled}"
-        )
+        i.hk-select-body-item-icon.icon.hk-icon(
+          :class="{'hk-select-body-item-icon-disabled': item.disabled}"
+        ) {{value === item.value? '&#xe9c1;':'&#xe9bf'}}
 </template>
 
 <script>
@@ -81,16 +81,12 @@
         position relative
         &-icon
           position absolute
-          background-image url("select_active.png")
-          width 1.2rem
-          height 1.2rem
           background-size: cover;
           right 1rem
-          top 0.775rem
-        &-icon-active
-          background-image url("selected_active.png")
+          top 0rem
+          line-height 2.75rem
+          font-size 24px
+          color #0195fb
         &-icon&-icon-disabled
-          background-image url("select_disabled.png")
-        &-icon-active&-icon-disabled
-          background-image url("selected_disabled.png")
+          color #CCCCCC
 </style>

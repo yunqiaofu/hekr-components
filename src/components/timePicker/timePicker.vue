@@ -78,6 +78,7 @@
       },
       change () {
         this.$emit('input', {h: this.h, m: this.m})
+        this.$emit('onChange', {h: this.h, m: this.m})
       }
     }
   }

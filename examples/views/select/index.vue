@@ -37,7 +37,7 @@
           }
         ],
         title: '模式设定',
-        value: 'hot',
+        value: 'code',
         show: false
       }
     },

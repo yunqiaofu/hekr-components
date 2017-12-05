@@ -8,9 +8,9 @@
         @click="select(index)"
       )
         .hk-week-body-item-title {{i.name}}
-        .hk-week-body-item-btn(
+        .hk-week-body-item-btn.icon.hk-icon(
           :class="getClass(index)"
-        )
+        ) &#xe9c0;
 
 </template>
 
@@ -134,14 +134,15 @@
           color #666666
           margin 0.7rem 0
         &-btn
-          background-image url("week_select.png")
           width 1.3rem
           height 1.3rem
           text-align center
           background-size cover
           margin 0 auto
+          font-size 1.3rem
+          color #cccccc
         &-btn&-active
-          background-image url("week_select_active.png")
+          color #3ba4f7
         &-btn&-disabled
-          background-image url("week_select_disabled.png")
+          color #f0f0f0
 </style>
