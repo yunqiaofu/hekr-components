@@ -17,9 +17,24 @@ export default new Router({
       component: () => import('../views/button')
     },
     {
+      path: '/week',
+      name: 'week',
+      component: () => import('../views/week')
+    },
+    {
       path: '/slider',
       name: 'slider',
       component: () => import('../views/slider')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/select')
+    },
+    {
+      path: '/timePicker',
+      name: 'timePicker',
+      component: () => import('../views/timePicker')
     },
     {
       path: '/icon',
@@ -45,6 +60,16 @@ export default new Router({
       path: '/dialog',
       name: 'dialog',
       component: () => import('../views/dialog')
+    },
+    {
+      path: '/switch',
+      name: 'switch',
+      component: () => import('../views/switch')
+    },
+    {
+      path: '/check',
+      name: 'check',
+      component: () => import('../views/check')
     },
     {
       path: '/confirm',
