@@ -32,9 +32,9 @@ export default new Router({
       component: () => import('../views/select')
     },
     {
-      path: '/timePicker',
-      name: 'timePicker',
-      component: () => import('../views/timePicker')
+      path: '/time-picker',
+      name: 'time-picker',
+      component: () => import('../views/time-picker')
     },
     {
       path: '/icon',

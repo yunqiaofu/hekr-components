@@ -1,16 +1,16 @@
 <template lang="pug">
   .hk-select-demo
     hk-button(
-      @click="show=!show"
+      @click="show=true"
     ) 点击弹出
     .hk-select-demo-block 你选择了{{value}}
     hk-pop(
-      :show="show"
+      v-model="show",
+      :maskClickDisabled="true"
     )
       hk-select(
         :title="title",
         :options="options",
-        :show="show"
         v-model="value",
         @change="change"
       )

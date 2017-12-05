@@ -1,5 +1,10 @@
 <template  lang="pug">
-  .hk-select-item
+  .hk-select-item(
+    @touchstart.prevent="itemTouchStart",
+    @touchmove.prevent="itemTouchMove",
+    @touchend.prevent="itemTouchEnd",
+    @mousedown.stop="itemTouchStart"
+  )
     .hk-select-line
       slot(name="unit")
     .hk-select-list
@@ -21,7 +26,8 @@
     data () {
       return {
         spin: {start: -9, end: 9, branch: 9},
-        finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0}
+        finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0},
+        start: false
       }
     },
     props: {
@@ -35,10 +41,6 @@
       },
       unit: {
         type: String
-      },
-      unitMargin: {
-        type: Number,
-        default: 2
       },
       value: {}
     },
@@ -57,9 +59,9 @@
     },
     mounted () {
       /* 事件绑定 */
-      this.$el.addEventListener('touchstart', this.itemTouchStart)
-      this.$el.addEventListener('touchmove', this.itemTouchMove)
-      this.$el.addEventListener('touchend', this.itemTouchEnd)
+      this.$el.addEventListener('mousemove', this.itemTouchMove)
+      this.$el.addEventListener('mouseup', this.itemTouchEnd)
+      this.$el.addEventListener('mouseleave', this.itemTouchEnd)
       /* 初始化状态 */
       let index = this.listData.indexOf(this.value)
       if (index === -1) {
@@ -109,24 +111,49 @@
           this.$refs.list.setAttribute('scroll', translateY)
         }
       },
-      itemTouchStart (event) {
-        let finger = event.changedTouches[0]
+      itemTouchStart (event, type) {
+        this.start = true
+        let finger
+        if (event.changedTouches) {
+          finger = event.changedTouches[0]
+        } else {
+          finger = event
+        }
         this.finger.startY = finger.pageY
         this.finger.startTime = event.timestamp || Date.now()
         this.finger.transformY = this.$refs.list.getAttribute('scroll')
         event.preventDefault()
+        event.stopPropagation()
       },
-      itemTouchMove (event) {
-        let finger = event.changedTouches[0]
+      itemTouchMove (event, type) {
+        if (!this.start) {
+          return
+        }
+        let finger
+        if (event.changedTouches) {
+          finger = event.changedTouches[0]
+        } else {
+          finger = event
+        }
         this.finger.lastY = finger.pageY
         this.finger.lastTime = event.timestamp || Date.now()
         /* 设置css */
         let move = this.finger.lastY - this.finger.startY
         this.setStyle(move)
         event.preventDefault()
+        event.stopPropagation()
       },
       itemTouchEnd (event) {
-        let finger = event.changedTouches[0]
+        if (!this.start) {
+          return
+        }
+        this.start = false
+        let finger
+        if (event.changedTouches) {
+          finger = event.changedTouches[0]
+        } else {
+          finger = event
+        }
         this.finger.lastY = finger.pageY
         this.finger.lastTime = event.timestamp || Date.now()
         let move = this.finger.lastY - this.finger.startY
@@ -146,6 +173,8 @@
         } else {
           this.setStyle(move, 'end')
         }
+        event.preventDefault()
+        event.stopPropagation()
       },
       /* 设置css */
       setStyle (move, type, time) {
@@ -199,9 +228,8 @@
       }
     },
     beforeDestroy () {
-      this.$el.removeEventListener('touchstart', this.itemTouchStart)
-      this.$el.removeEventListener('touchmove', this.itemTouchMove)
-      this.$el.removeEventListener('touchend', this.itemTouchEnd)
+      this.$el.removeEventListener('mousemove', this.itemTouchMove)
+      document.removeEventListener('mouseup', this.itemTouchEnd)
     }
   }
 </script>

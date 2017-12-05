@@ -1,6 +1,6 @@
 import Item from './item.vue'
 import Box from './box.vue'
-import TimePicker from './timePicker.vue'
+import TimePicker from './time-picker.vue'
 
 export default Vue => {
   Vue.component(Item.name, Item)

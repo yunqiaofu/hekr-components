@@ -86,6 +86,7 @@
           top 0rem
           line-height 2.75rem
           font-size 24px
+          padding 0 !important
           color #0195fb
         &-icon&-icon-disabled
           color #CCCCCC

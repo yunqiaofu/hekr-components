@@ -1,47 +1,48 @@
 <template lang="pug">
-  .hk-time-demo(
-    @click="show=false; show2=false"
-  )
-    .hk-time-demo-block(
-      @click.stop="show2=!show2"
-    ) 默认样式{{date.h}}:{{date.m}}
-    hk-time-picker(
-      v-model="date",
-      :show="show2",
-      :type="'default'"
-    )
+  .hk-time-demo
     .hk-time-demo-block(
       @click.stop="show=!show"
-    ) 自定义{{h}}:{{m}}:{{s}}
-
-    hk-time-box(
-      :title="'时间选择'",
-      :show="show"
+    ) 默认样式{{date.h}}:{{date.m}}
+    hk-pop(
+      v-model="show"
     )
-      hk-time-item(
-        :listData="hour",
-        :type="'cycle'",
-        v-model="h"
+      hk-time-picker(
+        v-model="date",
+        :type="'default'"
       )
-        span.hk-time-demo-unit(
-        slot="unit"
-        ) 时
-      hk-time-item(
-        :listData="min",
-        :type="'cycle'",
-        v-model="m"
+    .hk-time-demo-block(
+      @click.stop="show2=!show2"
+    ) 自定义{{h}}:{{m}}:{{s}}
+    hk-pop(
+      v-model="show2"
+    )
+      hk-time-box(
+        :title="'时间选择'"
       )
-        span.hk-time-demo-unit(
+        hk-time-item(
+          :listData="hour",
+          :type="'cycle'",
+          v-model="h"
+        )
+          span.hk-time-demo-unit(
           slot="unit"
-        ) 分
-      hk-time-item(
-        :listData="min",
-        :type="'cycle'",
-        v-model="s"
-      )
-        span.hk-time-demo-unit(
-        slot="unit"
-        ) 秒
+          ) 时
+        hk-time-item(
+          :listData="min",
+          :type="'cycle'",
+          v-model="m"
+        )
+          span.hk-time-demo-unit(
+            slot="unit"
+          ) 分
+        hk-time-item(
+          :listData="min",
+          :type="'cycle'",
+          v-model="s"
+        )
+          span.hk-time-demo-unit(
+          slot="unit"
+          ) 秒
 
 </template>
 

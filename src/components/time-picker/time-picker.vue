@@ -1,8 +1,7 @@
 <template lang="pug">
   .hk-time-picker
     hk-time-box(
-      :title="'时间选择'",
-      :show="show"
+      :title="'时间选择'"
     )
       hk-time-item(
       :listData="hour",
@@ -32,10 +31,6 @@
       type: {
         type: String,
         default: 'default'
-      },
-      show: {
-        type: Boolean,
-        default: false
       },
       value: {
         type: Object,

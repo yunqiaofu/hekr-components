@@ -1,11 +1,8 @@
 <template lang="pug">
-  hk-pop(
-    :show="show"
-  )
-    .hk-time-box
-      .hk-time-box-title {{title}}
-      .hk-time-box-body
-        slot
+  .hk-time-box
+    .hk-time-box-title {{title}}
+    .hk-time-box-body
+      slot
 </template>
 <script>
   export default{
@@ -14,10 +11,6 @@
       title: {
         type: String,
         default: '倒计时时间'
-      },
-      show: {
-        type: Boolean,
-        default: false
       }
     }
   }

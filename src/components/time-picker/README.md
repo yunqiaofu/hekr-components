@@ -4,7 +4,6 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | value | 绑定值 | string | - | - |
-| show | 是否显示 | boolean | - | false |
 | type | 默认样式 | string | - | default |
 
 
