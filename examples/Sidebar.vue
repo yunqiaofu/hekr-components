@@ -4,37 +4,27 @@
     i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
-      :to='{ name: "header" }',
+      v-for="(name, index) in routes",
+      :key="index",
+      :to='{ name: name }',
       tag="li"
-    ) Header
-    router-link.sidebar-nav-item(
-      :to='{ name: "button" }',
-      tag="li"
-    ) Button
-    router-link.sidebar-nav-item(
-      :to='{ name: "week" }',
-      tag="li"
-    ) Week
-    router-link.sidebar-nav-item(
-      :to='{ name: "select" }',
-      tag="li"
-    ) Select
-    router-link.sidebar-nav-item(
-      :to='{ name: "slider" }',
-      tag="li"
-    ) Slider
-    router-link.sidebar-nav-item(
-      :to='{ name: "timePicker" }',
-      tag="li"
-    ) timePicker
+    ) {{ name | upperFirst }}
 </template>
 
 <script>
+import router from './router'
+
+const routes = []
+router.options.routes.forEach(route => {
+  routes.push(route.name)
+})
+
 export default {
   name: 'sidebar',
   data () {
     return {
-      isToggle: false
+      isToggle: false,
+      routes
     }
   },
   computed: {
@@ -43,6 +33,11 @@ export default {
     },
     getIcon () {
       return this.isToggle ? 'fa-times' : 'fa-bars'
+    }
+  },
+  filters: {
+    upperFirst (val) {
+      return `${val[0].toUpperCase()}${val.slice(1)}`
     }
   },
   methods: {

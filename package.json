@@ -6,14 +6,14 @@
   "main": "./hekr-components.js",
   "scripts": {
     "dev": "node build/dev-server.js",
+    "docs": "node build/docs.js",
     "start": "npm run dev",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src"
   },
-  "dependencies": {
-    "normalize.css": "^7.0.0",
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+  "peerDependencies": {
+    "chart.js": "^2.7.1",
+    "normalize.css": "^7.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -44,6 +44,7 @@
     "file-loader": "^1.1.4",
     "font-awesome": "^4.7.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "github-markdown-css": "^2.9.0",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.17.3",
     "lodash": "^4.17.4",
@@ -58,7 +59,10 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.8",
+    "vue": "^2.5.9",
     "vue-loader": "^13.3.0",
+    "vue-markdown-loader": "^2.3.0",
+    "vue-router": "^3.0.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
@@ -75,5 +79,8 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "dependencies": {
+    "chart.js": "^2.7.1"
+  }
 }

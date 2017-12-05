@@ -35,6 +35,36 @@ export default new Router({
       path: '/timePicker',
       name: 'timePicker',
       component: () => import('../views/timePicker')
+    },
+    {
+      path: '/icon',
+      name: 'icon',
+      component: () => import('../views/icon')
+    },
+    {
+      path: '/modal-bar',
+      name: 'modal-bar',
+      component: () => import('../views/modal-bar')
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: () => import('../views/list')
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: () => import('../views/chart')
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import('../views/dialog')
+    },
+    {
+      path: '/confirm',
+      name: 'confirm',
+      component: () => import('../views/confirm')
     }
   ]
 })
