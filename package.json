@@ -79,8 +79,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "dependencies": {
-    "chart.js": "^2.7.1"
-  }
+  ]
 }

@@ -23,7 +23,8 @@
     bottom -100%
   .hk-pop
     background-color $color-white
-    width 100%
+    left 0
+    right 0
     position fixed
     bottom 0
     transition .5s
