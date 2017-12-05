@@ -1,5 +1,4 @@
 'use strict'
-const fs = require('fs')
 const _ = require('lodash')
 const path = require('path')
 const utils = require('./utils')
@@ -14,20 +13,10 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const env = config.build.env
 
-const entry = { 'hekr-components': './src/index.js' }
-const folders = ['src/components', 'src/packages']
-folders.forEach(folder => {
-  fs.readdirSync(folder)
-    .forEach(file => {
-      const filename = path.resolve(folder, file)
-      if (fs.statSync(filename).isDirectory()) {
-        entry[path.join(file, 'index')] = filename
-      }
-    })
-})
-
 const webpackConfig = merge(baseWebpackConfig, {
-  entry,
+  entry: {
+    'hekr-components': './src/index.js'
+  },
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -41,6 +30,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     library: _.camelCase(pkg.name),
     libraryExport: 'default',
     libraryTarget: 'umd'
+  },
+  externals: {
+    'chart.js': 'Chart'
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html

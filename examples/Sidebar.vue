@@ -4,18 +4,27 @@
     i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
-      :to='{ name: "button" }',
+      v-for="(name, index) in routes",
+      :key="index",
+      :to='{ name: name }',
       tag="li"
-    ) Button
-    li.sidebar-nav-item asfsd
+    ) {{ name | upperFirst }}
 </template>
 
 <script>
+import router from './router'
+
+const routes = []
+router.options.routes.forEach(route => {
+  routes.push(route.name)
+})
+
 export default {
   name: 'sidebar',
   data () {
     return {
-      isToggle: false
+      isToggle: false,
+      routes
     }
   },
   computed: {
@@ -24,6 +33,11 @@ export default {
     },
     getIcon () {
       return this.isToggle ? 'fa-times' : 'fa-bars'
+    }
+  },
+  filters: {
+    upperFirst (val) {
+      return `${val[0].toUpperCase()}${val.slice(1)}`
     }
   },
   methods: {
@@ -39,26 +53,26 @@ export default {
 
 <style lang="stylus">
 .sidebar
-  width 256px
+  width 12.8rem
   position fixed
   top 0
   bottom 0
   left 0
   z-index 3000
   background-color #fff
-  border-right 1px solid #eee
+  border-right 0.05rem solid #eee
   transform translateX(-100%)
   transition transform 0.3s ease-in-out
   &-active
     transform translateX(0)
   &-toggle
-    width 30px
-    height 30px
-    line-height 29px
+    width 1.5rem
+    height 1.5rem
+    line-height 1.45rem
     text-align center
     color #fff
     position absolute
-    top  20px
+    top  1rem
     left 100%
     background-color #08f
   &-nav
@@ -72,14 +86,14 @@ export default {
     left 0
     overflow auto
     &-item
-      padding 6px 12px 6px 20px
-      border-bottom 1px solid #cccccc
+      padding 0.3rem 0.6rem 0.3rem 1rem
+      border-bottom 0.05rem solid #cccccc
       &:last-child
         border-bottom none
       &-active
         color #333
         background-color #f8f8f8
-        border-left 6px solid #08f
-        padding-left 14px
-        border-radius 4px 0 0 4px
+        border-left 0.3rem solid #08f
+        padding-left 0.7rem
+        border-radius 0.2rem 0 0 0.2rem
 </style>
