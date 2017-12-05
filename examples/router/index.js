@@ -47,6 +47,16 @@ export default new Router({
       component: () => import('../views/dialog')
     },
     {
+      path: '/switch',
+      name: 'switch',
+      component: () => import('../views/switch')
+    },
+    {
+      path: '/check',
+      name: 'check',
+      component: () => import('../views/check')
+    },
+    {
       path: '/confirm',
       name: 'confirm',
       component: () => import('../views/confirm')
