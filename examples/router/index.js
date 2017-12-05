@@ -17,9 +17,24 @@ export default new Router({
       component: () => import('../views/button')
     },
     {
+      path: '/week',
+      name: 'week',
+      component: () => import('../views/week')
+    },
+    {
       path: '/slider',
       name: 'slider',
       component: () => import('../views/slider')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/select')
+    },
+    {
+      path: '/timePicker',
+      name: 'timePicker',
+      component: () => import('../views/timePicker')
     },
     {
       path: '/icon',
