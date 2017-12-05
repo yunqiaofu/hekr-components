@@ -18,7 +18,7 @@ export default {
       type: Boolean,
       default: false
     },
-    activeColor: {
+    onColor: {
       type: String,
       default: '#3AA4F7'
     },
@@ -51,8 +51,8 @@ export default {
       if (this.disabled) {
         return
       }
-      if (this.activeColor && this.active) {
-        style = this.activeColor
+      if (this.onColor && this.active) {
+        style = this.onColor
       }
       if (this.offColor && !this.active) {
         style = this.offColor
