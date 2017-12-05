@@ -1,15 +1,15 @@
 <template lang="pug">
-.hk-modal-bar-demo(:class="{'dark': modalTheme === 'dark'}")
+.hk-bar-demo(:class="{'dark': modalTheme === 'dark'}")
   .demo-button
     hk-button(@click="toggleBg") 切换背景
     hk-button(@click="toggleNum") 切换数量
     hk-button(@click="toggleColor") 切换颜色
-  hk-modal-bar(:items="getItems", :theme="modalTheme", :activeColor="activeColor", @change="func")
+  hk-bar(:items="getItems", :theme="modalTheme", :activeColor="activeColor", @change="func")
 </template>
 
 <script>
 export default {
-  name: 'hekr-modal-bar-demo',
+  name: 'hekr-bar-demo',
   data () {
     return {
       items: [
@@ -97,7 +97,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-.hk-modal-bar-demo
+.hk-bar-demo
   position relative
   height 100%
   display flex
