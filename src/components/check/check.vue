@@ -1,11 +1,11 @@
 <template lang="pug">
 .hk-check(
-    @click="select"
-  )
-    hk-icon(
+  @click="select"
+)
+  hk-icon(
       :name = "getIcon",
       :text = "text",
-      :active = "active",
+      :active = "value",
       :disabled = "disabled",
       :fontColor = "fontColor",
       :activeColor = "activeColor"
@@ -35,7 +35,7 @@
         type: String,
         default: 'fa fa-circle-o'
       },
-      active: {
+      value: {
         type: Boolean,
         default: false
       },
@@ -47,10 +47,10 @@
     computed: {
       getIcon () {
         let icon = 'fa fa-check-circle'
-        if (this.active) {
+        if (this.value) {
           icon = this.icon
         }
-        if (!this.active) {
+        if (!this.value) {
           icon = this.offIcon
         }
         return icon
@@ -59,7 +59,7 @@
     methods: {
       select () {
         if (!this.disabled) {
-          this.$emit('click', this.active)
+          this.$emit('input', !this.value)
         }
       }
     }
@@ -69,10 +69,9 @@
 <style lang="stylus">
 @import "../../stylus/variables.styl"
 .hk-check {
-  display: inline-block
-}
+  display: inline-block;
   i {
     width: 100%
   }
-
+}
 </style>
