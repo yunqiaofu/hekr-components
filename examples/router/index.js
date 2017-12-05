@@ -27,11 +27,6 @@ export default new Router({
       component: () => import('../views/slider')
     },
     {
-      path: '/select',
-      name: 'select',
-      component: () => import('../views/select')
-    },
-    {
       path: '/timePicker',
       name: 'timePicker',
       component: () => import('../views/timePicker')

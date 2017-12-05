@@ -14,14 +14,13 @@
       @click.stop="show=!show"
     ) 自定义{{h}}:{{m}}:{{s}}
 
-    hk-time-box(
-      :title="'时间选择'",
-      :show="show"
+    hk-pop(
+      v-model="show"
     )
       hk-time-item(
+        v-model="h",
         :listData="hour",
-        :type="'cycle'",
-        v-model="h"
+        :type="'cycle'"
       )
         span.hk-time-demo-unit(
         slot="unit"
