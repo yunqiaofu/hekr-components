@@ -39,12 +39,6 @@ export default {
     }
   },
   computed: {
-    getClass () {
-      return {
-        'hk-icon-disabled': this.disabled,
-        'hk-icon-block': this.block
-      }
-    },
     getColorStyle () {
       return {
         'background-color': this.color.bgColor

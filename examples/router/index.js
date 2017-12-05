@@ -37,6 +37,11 @@ export default new Router({
       component: () => import('../views/timePicker')
     },
     {
+      path: '/pop',
+      name: 'pop',
+      component: () => import('../views/pop')
+    },
+    {
       path: '/icon',
       name: 'icon',
       component: () => import('../views/icon')
