@@ -6,7 +6,7 @@
 |--- | --- | --- | --- | --- |
 | activeColor | 选中颜色 | string | - | #3AA4F7 |
 | fontColor | 未选中颜色 | string | - | #666 |
-| text |  | 文案 | string | - |  |
+| text | 文案 | string | - | - |  |
 | icon | 选中图标 | string | - | fa-check-circle-o |
 | offIcon | 未选中图标 | string | - | fa-circle-o |
 | disabled | 是否禁用 | boolean | - | false |
