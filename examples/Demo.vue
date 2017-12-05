@@ -52,6 +52,8 @@ export default {
   overflow hidden
   @media (max-height: 720px)
     transform translate(0, -50%)
+  @media (max-width: 420px)
+    padding 0
 
   &-active
     transform translate(0, -50%)
@@ -81,4 +83,10 @@ export default {
     border-radius 3px
     overflow-x hidden
     overflow-y auto
+    transform translate3d(0, 0, 0)
+    @media (max-width: 420px)
+      top 0
+      right 0
+      bottom 0
+      left 0
 </style>

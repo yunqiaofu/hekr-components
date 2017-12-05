@@ -1,8 +1,15 @@
 <template lang="pug">
 .hk-pop(v-if="value")
-  .hk-pop-mask(@click="hide")
-  .hk-pop-container
-    slot
+  .hk-pop-mask(
+    v-if="showMask",
+    @click="hide"
+  )
+  transition(
+    name="hk-pop-fade-up",
+    :appear="true"
+  )
+    .hk-pop-container
+      slot
 </template>
 
 <script>
@@ -12,11 +19,21 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    showMask: {
+      type: Boolean,
+      default: true
+    },
+    maskClickDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     hide () {
-      this.$emit('input', false)
+      if (!this.maskClickDisabled) {
+        this.$emit('input', false)
+      }
     }
   }
 }
@@ -25,6 +42,11 @@ export default {
 <style lang="stylus">
 @import "../../stylus/variables.styl"
 .hk-pop
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
   &-mask
     background-color rgba(0, 0, 0, 0.5)
     position fixed
@@ -39,15 +61,19 @@ export default {
     right 0
     bottom 0
     left 0
+    width 100%
     box-shadow 0 0 0.05rem #ccc
     z-index $zindex-higher
-    animation fade-up 0.1s
-
-@keyframes fade-up
-  from
-    opacity 0
+  &-fade-up-enter-active
     transform translateY(100%)
-  to
-    opacity 1
+    opacity 0
+  &-fade-up-enter-active
+  &-fade-up-leave-active
+    transition all 0.3s ease-in-out
+  &-fade-up-enter-to
     transform translateY(0)
+    opacity 1
+  &-fade-up-leave-to
+    transform translateY(100%)
+    opacity 0
 </style>
