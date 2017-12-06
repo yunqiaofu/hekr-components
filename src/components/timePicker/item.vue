@@ -15,13 +15,16 @@
         .hk-select-list-item(
           v-for="el,index in renderData",
           :class="{'hidden':setHidden(el.index)}",
-          :key="index") {{el.value}}
+          :key="index"
+        ) {{el.value}}
     .hk-select-wheel(ref="wheel")
       .hk-select-wheel-item(
+        v-for="el,index in renderData ",
         :class="{'hidden':setHidden(el.index)}",
         :style="setWheelItemDeg(el.index)",
-        :index="el.index" v-for="el,index in renderData ",
-        :key="index") {{el.value}}
+        :index="el.index",
+        :key="index"
+      ) {{el.value}}
 </template>
 <script>
   export default{
@@ -223,7 +226,7 @@
     }
   }
 </script>
-<style lang="stylus" scoped="">
+<style lang="stylus">
   $color-background = #fff
   $color-checked = #2c97f1
   $color-text-main = #333
