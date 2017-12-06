@@ -1,5 +1,5 @@
 import Item from './item.vue'
-import TimePicker from './timePicker.vue'
+import TimePicker from './timepicker.vue'
 
 export default Vue => {
   Vue.component(Item.name, Item)

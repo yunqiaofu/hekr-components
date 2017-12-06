@@ -5,7 +5,7 @@
     .hk-week-body-item(
       v-for="(item, index) in items",
       :key="index",
-      :style="items | getItemStyle"
+      :style="items | getItemStyle",
       @click="select(item, index)"
     )
       .hk-week-body-item-title {{ item.name }}
