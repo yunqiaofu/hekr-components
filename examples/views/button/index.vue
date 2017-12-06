@@ -4,23 +4,13 @@
   hk-button 默认
   hk-button(type="primary") primary
   hk-button(type="warning") warning
-  hk-button(
-    type="info",
-    :active="active"
-    @click="clickButton"
-  ) info激活样式
+  hk-button(type="info") info
   .hk-button-demo-title 禁用样式
   hk-button(disabled) 默认
   hk-button(
     type="primary",
-    disabled,
-    loading
+    disabled
   ) primary
-  hk-button(
-    type="primary",
-    disabled,
-    active
-  ) primary激活样式切换
   hk-button(
     type="warning",
     disabled
@@ -31,11 +21,10 @@
   ) info
   .hk-button-demo-title 块级样式
   .hk-button-demo-contenter
-    hk-button(block, loading) 默认
+    hk-button(block) 默认
     hk-button(
       type="primary",
-      block,
-      loading
+      block
     ) primary
     hk-button(
       type="warning",
@@ -45,48 +34,25 @@
       type="info",
       block
     ) info
-  .hk-button-demo-title 加载中
-  hk-button(loading) 默认
-  hk-button(
-    type="primary",
-    loading
-  ) primary
-  hk-button(
-    type="warning",
-    loading
-  ) warning
-  hk-button(
-    type="info",
-    loading
-  ) info
 </template>
 
 <script>
 export default {
-  name: 'hk-button-demo',
-  data () {
-    return {
-      active: true
-    }
-  },
-  methods: {
-    clickButton () {
-      this.active = !this.active
-    }
-  }
+  name: 'hk-button-demo'
 }
 </script>
 
 <style lang="stylus">
 .hk-button-demo
+  margin-top 60px
   text-align center
   .hk-button
-    display block
-    margin 0.35rem auto
+    margin 7px
   &-title
-    margin 0.5rem auto
+    margin 10px auto
   &-contenter
-    width 10rem
+    width 200px
     margin 0 auto
-
+    .hk-button
+      margin 7px auto
 </style>

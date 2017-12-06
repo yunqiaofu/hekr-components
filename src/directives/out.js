@@ -39,7 +39,9 @@ const directive = {
  * 从而达到优化事件的目的
  */
 document.addEventListener('click', handler)
+document.addEventListener('touchend', handler)
 
 export default Vue => {
   Vue.directive('click-out', directive)
+  Vue.directive('touch-out', directive)
 }

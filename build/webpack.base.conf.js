@@ -17,10 +17,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.md$/,
-        loader: 'vue-markdown-loader'
-      },
-      {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
@@ -44,7 +40,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'images/[name].[ext]'
+          name: '[name].[ext]'
         }
       },
       {
@@ -52,7 +48,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'media/[name].[ext]'
+          name: '[name].[ext]'
         }
       },
       {
@@ -60,7 +56,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'fonts/[name].[ext]'
+          name: '[name].[ext]'
         }
       }
     ]

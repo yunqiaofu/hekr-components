@@ -1,1 +1,1 @@
-export clickOut from './click-out'
+export out from './out'
