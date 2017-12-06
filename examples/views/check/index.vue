@@ -2,21 +2,22 @@
 .hk-check-demo
   hk-check(
     v-model = "active",
-    :icon="icon",
+    :onIcon="icon",
     :offIcon="offIcon"
   )
   div radio组件
   hk-check(
+    v-model="active",
     :text="text",
-    :icon="icon",
+    :onIcon="icon",
     :offIcon="offIcon",
     :disabled="disabled"
   )
   div radio组件 disabled
   hk-check(
     v-model = "active",
-    :text="text", 
-    :icon="anoIcon",
+    :text="text",
+    :onIcon="anoIcon",
     :offIcon="offIcon"
   )
   div radio组件 改变icon

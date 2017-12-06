@@ -1,27 +1,23 @@
 <template lang="pug">
-  .hk-time-picker
-    hk-time-box(
-      :title="'时间选择'",
-      :show="show"
-    )
-      hk-time-item(
-      :listData="hour",
-      :type="'cycle'",
-      v-model="h",
-      @onChange="change"
-      )
-        span.hk-time-picker-unit(
-          slot="unit"
-        ) 时
-      hk-time-item(
-        :listData="min",
-        :type="'cycle'",
-        v-model="m",
-        @onChange="change"
-      )
-        span.hk-time-picker-unit(
-        slot="unit"
-        ) 分
+div
+  hk-time-item(
+  :listData="hour",
+  :type="'cycle'",
+  v-model="h",
+  @onChange="change"
+  )
+    span.hk-time-picker-unit(
+      slot="unit"
+    ) 时
+  //- hk-time-item(
+  //-   :listData="min",
+  //-   :type="'cycle'",
+  //-   v-model="m",
+  //-   @onChange="change"
+  //- )
+  //-   span.hk-time-picker-unit(
+  //-   slot="unit"
+  //-   ) 分
 
 </template>
 

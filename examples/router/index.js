@@ -27,14 +27,14 @@ export default new Router({
       component: () => import('../views/slider')
     },
     {
-      path: '/select',
-      name: 'select',
-      component: () => import('../views/select')
+      path: '/timepicker',
+      name: 'timepicker',
+      component: () => import('../views/timepicker')
     },
     {
-      path: '/timePicker',
-      name: 'timePicker',
-      component: () => import('../views/timePicker')
+      path: '/pop',
+      name: 'pop',
+      component: () => import('../views/pop')
     },
     {
       path: '/icon',
