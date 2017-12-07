@@ -1,46 +1,44 @@
 <template lang="pug">
-  .hk-time-demo(
-    @click="show=false; show2=false"
-  )
-    .hk-time-demo-block(
-      @click.stop="show2=!show2"
-    ) 默认样式{{date.h}}:{{date.m}}
-    hk-time-picker(
-      v-model="date",
-      :show="show2",
-      :type="'default'"
-    )
+  .hk-time-demo
     .hk-time-demo-block(
       @click.stop="show=!show"
-    ) 自定义{{h}}:{{m}}:{{s}}
-
+    ) 默认样式{{date.h}}:{{date.m}}:{{date.s}}
     hk-pop(
       v-model="show"
     )
-      hk-time-item(
-        v-model="h",
-        :listData="hour",
-        :type="'cycle'"
+      hk-timepicker(
+        v-model="date",
+        :type="'hh:mm:ss'",
+        :title="'倒计时时间'"
       )
-        span.hk-time-demo-unit(
-        slot="unit"
-        ) 时
-      hk-time-item(
-        :listData="min",
-        :type="'cycle'",
-        v-model="m"
-      )
-        span.hk-time-demo-unit(
+    .hk-time-demo-block(
+      @click.stop="show2=!show2"
+    ) 自定义{{t}}{{h}}时{{m}}分
+
+    hk-pop(
+      v-model="show2"
+    )
+      .hk-time-demo-box
+        hk-time-item(
+          :listData="time",
+          v-model="t"
+        )
+        hk-time-item(
+          v-model="h",
+          :listData="hour",
+          :type="'cycle'"
+        )
+          span.hk-time-demo-unit(
           slot="unit"
-        ) 分
-      hk-time-item(
-        :listData="min",
-        :type="'cycle'",
-        v-model="s"
-      )
-        span.hk-time-demo-unit(
-        slot="unit"
-        ) 秒
+          ) 时
+        hk-time-item(
+          :listData="min",
+          :type="'cycle'",
+          v-model="m"
+        )
+          span.hk-time-demo-unit(
+            slot="unit"
+          ) 分
 
 </template>
 
@@ -54,9 +52,11 @@
         s: 0,
         M: 12,
         d: 2,
+        t: '上午',
         show: false,
         show2: false,
-        date: {h: '02', m: '00'}
+        date: {h: 2, m: 3, s: 2},
+        time: ['上午', '下午']
       }
     },
     computed: {
@@ -76,7 +76,7 @@
       },
       hour () {
         let hour = []
-        for (let i = 0; i < 24; i++) {
+        for (let i = 0; i < 12; i++) {
           hour.push(i)
         }
         return hour
@@ -105,6 +105,8 @@
       margin 20px 0
     &-unit
       margin-left 2.5rem
+    &-box
+      display flex
 </style>
 
 

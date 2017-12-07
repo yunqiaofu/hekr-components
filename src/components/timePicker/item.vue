@@ -1,5 +1,13 @@
 <template  lang="pug">
-  .hk-select-item
+  .hk-select-item(
+    @touchstart.prevent="itemTouchStart",
+    @touchmove.prevent="itemTouchMove",
+    @touchend.prevent="itemTouchEnd",
+    @mousedown.stop="itemTouchStart",
+    @mousemove.stop="itemTouchMove",
+    @mouseup.stop="itemTouchEnd",
+    @mouseleave.stop="itemTouchEnd"
+  )
     .hk-select-line
       slot(name="unit")
     .hk-select-list
@@ -7,13 +15,16 @@
         .hk-select-list-item(
           v-for="el,index in renderData",
           :class="{'hidden':setHidden(el.index)}",
-          :key="index") {{el.value}}
+          :key="index"
+        ) {{el.value}}
     .hk-select-wheel(ref="wheel")
       .hk-select-wheel-item(
+        v-for="el,index in renderData ",
         :class="{'hidden':setHidden(el.index)}",
         :style="setWheelItemDeg(el.index)",
-        :index="el.index" v-for="el,index in renderData ",
-        :key="index") {{el.value}}
+        :index="el.index",
+        :key="index"
+      ) {{el.value}}
 </template>
 <script>
   export default{
@@ -21,7 +32,8 @@
     data () {
       return {
         spin: {start: -9, end: 9, branch: 9},
-        finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0}
+        finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0},
+        start: false
       }
     },
     props: {
@@ -35,10 +47,6 @@
       },
       unit: {
         type: String
-      },
-      unitMargin: {
-        type: Number,
-        default: 2
       },
       value: {}
     },
@@ -56,10 +64,6 @@
       }
     },
     mounted () {
-      /* 事件绑定 */
-      this.$el.addEventListener('touchstart', this.itemTouchStart)
-      this.$el.addEventListener('touchmove', this.itemTouchMove)
-      this.$el.addEventListener('touchend', this.itemTouchEnd)
       /* 初始化状态 */
       let index = this.listData.indexOf(this.value)
       if (index === -1) {
@@ -110,23 +114,45 @@
         }
       },
       itemTouchStart (event) {
-        let finger = event.changedTouches[0]
+        console.log(event)
+        this.start = true
+        let finger
+        if (event.changedTouches) {
+          finger = event.changedTouches[0]
+        } else {
+          finger = event
+        }
         this.finger.startY = finger.pageY
         this.finger.startTime = event.timestamp || Date.now()
         this.finger.transformY = this.$refs.list.getAttribute('scroll')
-        event.preventDefault()
       },
       itemTouchMove (event) {
-        let finger = event.changedTouches[0]
+        if (!this.start) {
+          return
+        }
+        let finger
+        if (event.changedTouches) {
+          finger = event.changedTouches[0]
+        } else {
+          finger = event
+        }
         this.finger.lastY = finger.pageY
         this.finger.lastTime = event.timestamp || Date.now()
         /* 设置css */
         let move = this.finger.lastY - this.finger.startY
         this.setStyle(move)
-        event.preventDefault()
       },
       itemTouchEnd (event) {
-        let finger = event.changedTouches[0]
+        if (!this.start) {
+          return
+        }
+        this.start = false
+        let finger
+        if (event.changedTouches) {
+          finger = event.changedTouches[0]
+        } else {
+          finger = event
+        }
         this.finger.lastY = finger.pageY
         this.finger.lastTime = event.timestamp || Date.now()
         let move = this.finger.lastY - this.finger.startY
@@ -197,15 +223,10 @@
         this.$emit('input', pickValue)
         this.$emit('onChange', pickValue)
       }
-    },
-    beforeDestroy () {
-      this.$el.removeEventListener('touchstart', this.itemTouchStart)
-      this.$el.removeEventListener('touchmove', this.itemTouchMove)
-      this.$el.removeEventListener('touchend', this.itemTouchEnd)
     }
   }
 </script>
-<style lang="stylus" scoped="">
+<style lang="stylus">
   $color-background = #fff
   $color-checked = #2c97f1
   $color-text-main = #333
