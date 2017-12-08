@@ -13,6 +13,8 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const env = config.build.env
 
+const libraryName = _.upperFirst(_.camelCase(pkg.name.replace('@hekr/', '')))
+
 const webpackConfig = merge(baseWebpackConfig, {
   entry: {
     'hekr-components': './src/index.js'
@@ -27,12 +29,17 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.distDir,
     filename: '[name].js',
-    library: _.camelCase(pkg.name),
+    library: libraryName,
     libraryExport: 'default',
     libraryTarget: 'umd'
   },
   externals: {
-    'chart.js': 'Chart'
+    'chart.js': {
+      commonjs: 'chart.js',
+      commonjs2: 'chart.js',
+      amd: 'chart.js',
+      root: 'Chart'
+    }
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
