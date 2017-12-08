@@ -34,7 +34,9 @@ export default {
       }
     }
   },
-
+  mounted () {
+    this.draw()
+  },
   watch: {
     config: {
       deep: true,
@@ -47,13 +49,13 @@ export default {
 
   methods: {
     draw () {
+      // 为了兼容浏览器引用的时候能够在NPM中打包chart.js
+      if (typeof Chart === 'undefined' && typeof window.Chart === 'undefined') {
+        throw new Error('Chart is not defined, To install it, you can run: npm install --save chart.js')
+      }
       this.ctx = this.$refs.canvas.getContext('2d')
-      this.chart = new Chart(this.ctx, this.config)
+      this.chart = new (Chart || window.Chart)(this.ctx, this.config)
     }
-  },
-
-  mounted () {
-    this.draw()
   }
 }
 </script>
