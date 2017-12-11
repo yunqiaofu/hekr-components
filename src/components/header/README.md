@@ -5,7 +5,7 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | title | 标题 | string | - | - |
-| leftIcon | 左边按钮图标 | string | - | - |
+| leftIcon | 左边按钮图标 | string | - | hk-icons-angel-left |
 | leftText | 左边按钮文字 | stirng | - | - |
 | rightIcon | 右边按钮图标 | stirng | - | - |
 | rightText | 右边按钮文字 | stirng | - | - |
