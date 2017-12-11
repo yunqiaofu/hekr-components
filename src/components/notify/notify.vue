@@ -123,6 +123,7 @@ export default {
     box-shadow 0 0.3rem 1rem rgba(0, 0, 0, 0.1)
     animation fade-up 0.3s
     &-body
+      min-width 4rem
       padding 0.5rem 0.7rem
       font-size 0.7rem
       color #999
