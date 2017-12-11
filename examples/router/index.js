@@ -75,6 +75,11 @@ export default new Router({
       path: '/confirm',
       name: 'confirm',
       component: () => import('../views/confirm')
+    },
+    {
+      path: '/notify',
+      name: 'notify',
+      component: () => import('../views/notify')
     }
   ]
 })
