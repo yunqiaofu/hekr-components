@@ -3,7 +3,6 @@
   .hk-header-demo-title 基本样式
   hk-header(
     :title="title",
-    left-icon="fa fa-angle-left",
     :left-text="leftText",
     :right-icon="rightIcon",
     right-text="更多",

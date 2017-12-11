@@ -49,7 +49,6 @@ export default {
   transition transform 0.2s ease-in-out
   background-color #fff
   z-index 10
-  overflow hidden
   @media (max-height: 720px)
     transform translate(0, -50%)
   @media (max-width: 420px)
