@@ -60,6 +60,11 @@ export default new Router({
       path: '/confirm',
       name: 'confirm',
       component: () => import('../views/confirm')
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/dashboard')
     }
   ]
 })
