@@ -17,6 +17,21 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+## 组件使用
+
+### NPM安装使用
+1. 运行```npm install @hekr/hekr-components --save```
+2. 安装chart.js依赖
+3. 引入组件```import HekrComponents from '@hekr/hekr-components'```
+4. 安装组件```Vue.use(HekrComponents)```
+5. 引入css文件```import '~@hekr/hekr-components/hekr-components.css'```
+6. 组件库中的自带图标使用方式为```hk-icons-{图标描述字符串}```
+
+### 全局script标签方式引入
+1. 在html中分别引入组件的js和css文件，组件会注册全局变量HekrComponents
+2. 在代码中使用```Vue.use(HekrComponents)```安装组件
+3. 如果在代码中没有使用到hk-chart组件，则可以不引入chart.js，如果使用到了，则需要引入chart.js，并且要保证chart.js会注册全局变量Chart供hk-chart使用，否者会报错
+4. 组件库中的自带图标使用方式为```hk-icons-{图标描述字符串}```
 
 ## 开发规范
 
