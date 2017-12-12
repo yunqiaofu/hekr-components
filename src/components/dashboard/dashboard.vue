@@ -14,7 +14,9 @@
       :viewBox="`0,0,${width},${height}`",
       @touchstart.prevent="handleTouchChange",
       @touchmove.prevent="handleTouchChange",
-      @touchend.prevent="handleTouchEnd"
+      @touchend.prevent="handleTouchEnd",
+      @mousedown.stop = "handleTouchChange"
+      @mouseup.stop = "handleTouchEnd"
     )
       path(
         v-for="path in pathEls",
@@ -24,25 +26,26 @@
       )
     .dashboard-btn(
       v-if="type !== 'touch'"
-      style="marginTop: -2rem"
     )
       .dashboard-reduce(
         ref="reduce"
-        @mousedown.prevent="onButton"
-        @mouseup.prevent= "offButton"
+        @touchstart.prevent="onButton"
+        @touchend.prevent= "offButton"
+        @mousedown.stop = "onButton"
+        @mouseup.stop = "offButton"
       ) -
       .dashboard-increase(
         ref="increase"
-        @mousedown.prevent="onButton"
-        @mouseup.prevent="offButton"
+        @touchstart.prevent="onButton"
+        @touchend.prevent="offButton"
+        @mousedown.stop = "onButton"
+        @mouseup.stop = "offButton"
       ) +
 
   slot
 </template>
-
 <script>
-import classnames from 'classnames'
-
+// import classnames from 'classnames'
 const DASHBOARD_CLASS = 'dashboard'
 const DASHBOARD_POINT = DASHBOARD_CLASS + '-point'
 const DASHBOARD_POINT_ACTIVE = DASHBOARD_POINT + '-active'
@@ -55,14 +58,11 @@ function setAttributes (dom, attrs) {
       dom.setAttribute(attr, attrs[attr])
     })
 }
-
 function createElementNS (type) {
   return document.createElementNS('http://www.w3.org/2000/svg', type)
 }
-
 export default {
   name: 'hk-dashboard',
-
   props: {
     value: {
       type: Number,
@@ -118,7 +118,6 @@ export default {
     }, // touch button
     disabled: Boolean
   },
-
   data () {
     return {
       onClicking: false,
@@ -134,7 +133,6 @@ export default {
       }
     }
   },
-
   computed: {
     pathEls () {
       const pathEls = []
@@ -154,9 +152,13 @@ export default {
         const offsetMin = stepMin * count
         const { x: minX, y: minY } = pathCircleMinEl.getPointAtLength(offsetMin)
 
-        const pointClasses = classnames(DASHBOARD_POINT, {
-          [DASHBOARD_POINT_ACTIVE]: count === select
-        })
+        let pointClasses = [DASHBOARD_POINT]
+        // classnames(DASHBOARD_POINT, {
+        //   [DASHBOARD_POINT_ACTIVE]: count === select
+        // })
+        if (count === select) {
+          pointClasses.push(DASHBOARD_POINT_ACTIVE)
+        }
 
         const percent = count / this.equalCount
         const weightPercent = 1 - percent
@@ -186,7 +188,6 @@ export default {
       return pathEls
     }
   },
-
   methods: {
     handleTouchChange (e) {
       // console.log(e)
@@ -197,7 +198,6 @@ export default {
         this.handleChange((e.touches && e.touches[0]) || {clientX: e.clientX, clientY: e.clientY})
       }
     },
-
     handleChange ({ clientX, clientY }) {
       const offsetX = clientX - this.centerX
       const offsetY = this.centerY - clientY
@@ -218,7 +218,6 @@ export default {
       const value = Math.round(angle) / 270
       this.move(value)
     },
-
     handleTouchEnd () {
       if (this.type === 'button') {
         return
@@ -227,20 +226,13 @@ export default {
         this.$emit('change', this.value)
       }
     },
-
     move (value) {
-      // if (value % this.step !== 0) {
-      //   value = value / this.step + value % this.step
-      //   console.log('dealll', value)
-      // }
       this.$emit('input', Math.round(value * (this.max - this.min)) + this.min)
       this.changeValue = Number(value.toFixed(2))
     },
-
     conRadiansToAngle (radians) {
       return 180 / Math.PI * radians
     },
-
     getCirclePath (type) {
       const { maxR, minR } = this
       const r = type === 'max' ? maxR : minR
@@ -252,11 +244,9 @@ export default {
       })
       return pathCircleEl
     },
-
     getCircleCircumference (r) {
       return 2 * Math.PI * r * 3 / 4
     },
-
     getCirclePoints (type) {
       const { height, width, maxR, minR } = this
       const cx = width / 2
@@ -270,23 +260,18 @@ export default {
       }
     },
     reduce () {
-      // let value = this.oValue
       if (this.value <= this.min) {
         return
       }
       var value = parseInt(this.value) - this.step
-      console.log('increase', value)
       this.$emit('input', value)
     },
     increase () {
-      console.log(this.value)
       if (this.value >= this.max) {
         return
       }
       var value = parseInt(this.value) + this.step
-      console.log('increase', value)
       this.$emit('input', value)
-      // this.move(value)
     },
     onButton (e) {
       if (this.disabled) {
@@ -322,22 +307,17 @@ export default {
       for (var i = 0; i < intervalId.length; i++) {
         clearInterval(intervalId[i])
       }
+      this.$emit('change', this.value)
       intervalId = []
-      // setintv = null
-      // clearInterval(setintv)
       this.onClicking = false
     }
   },
 
   mounted () {
     this.svgEl = this.$refs.svg
-
     const { left, top, width, height } = this.svgEl.getBoundingClientRect()
-
     this.centerX = left + width / 2
     this.centerY = top + height / 2
-    // document.addEventListener('mousedown', this.handleTouchChange)
-    // document.addEventListener('mouseup', this.handleTouchEnd)
   }
 }
 </script>
@@ -401,9 +381,9 @@ export default {
           &-active
             stroke-dashoffset 0
     &-btn
-      // margin-top -1.2rem
       width 100%
       text-align center
+      margin-top -2rem
     &-reduce, &-increase
       display inline-block
       width 30%

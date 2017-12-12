@@ -35,16 +35,15 @@ export default {
       active: true,
       text: '开关',
       min: 16,
-      max: 32,
+      max: 100,
       equalCount: 50,
       step: 1,
       type: 'both'
     }
   },
   methods: {
-    handleDashboard (d) {
-      console.log('example status', d)
-      // this.active = !d
+    handleDashboard (val) {
+      console.log('value status', val)
     }
   }
 }
