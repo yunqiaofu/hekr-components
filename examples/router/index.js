@@ -77,6 +77,11 @@ export default new Router({
       component: () => import('../views/confirm')
     },
     {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/dashboard')
+    },
+    {
       path: '/notify',
       name: 'notify',
       component: () => import('../views/notify')
