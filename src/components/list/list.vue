@@ -47,7 +47,6 @@ export default {
         ].indexOf(val) !== -1
       }
     },
-    },
     leftText: {
       type: String
     },
