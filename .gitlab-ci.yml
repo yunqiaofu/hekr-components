@@ -12,4 +12,4 @@
   when: always
   environment:
     name: 10.1.1.6
-    url: http://10.1.1.6:3200/
+    url: http://10.1.1.6:3100/
