@@ -32,7 +32,8 @@ export default {
       this.$notify({
         notify: '点我可关闭哟！',
         align: 'center',
-        showMask: true
+        showMask: true,
+        delay: 5000
       })
     }
   }
