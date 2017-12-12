@@ -37,7 +37,15 @@ export default {
   name: 'hk-list',
   props: {
     type: {
-      type: String
+      type: String,
+      default: 'text',
+      validator: val => {
+        return [
+          'text',
+          'input',
+          'checkbox'
+        ].indexOf(val) !== -1
+      }
     },
     leftText: {
       type: String
@@ -97,7 +105,6 @@ export default {
 
 .hk-list
   display flex
-  width calc(100% - 1rem)
   margin-left 1rem
   height 2.2rem
   line-height 2.2rem
