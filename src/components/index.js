@@ -12,8 +12,5 @@ export Dialog from './dialog'
 export Confirm from './confirm'
 export Switch from './switch'
 export Check from './check'
-<<<<<<< HEAD
 export Dashboard from './dashboard'
-=======
 export Notify from './notify'
->>>>>>> dev

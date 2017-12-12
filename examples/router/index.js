@@ -77,15 +77,14 @@ export default new Router({
       component: () => import('../views/confirm')
     },
     {
-<<<<<<< HEAD
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/dashboard')
-=======
+    },
+    {
       path: '/notify',
       name: 'notify',
       component: () => import('../views/notify')
->>>>>>> dev
     }
   ]
 })
