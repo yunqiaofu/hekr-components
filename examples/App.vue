@@ -31,5 +31,5 @@ body
 *
 html
 body
-  user-select text
+  user-select text !important
 </style>
