@@ -1,6 +1,6 @@
 <template lang="pug">
 .hk-switch-demo
-  .hk-icon-demo-title(
+  .hk-switch-demo-title(
     :style="{ margin: '20px' }"
   ) switch组件
   hk-switch(

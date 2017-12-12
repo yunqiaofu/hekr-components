@@ -17,9 +17,24 @@ export default new Router({
       component: () => import('../views/button')
     },
     {
+      path: '/week',
+      name: 'week',
+      component: () => import('../views/week')
+    },
+    {
       path: '/slider',
       name: 'slider',
       component: () => import('../views/slider')
+    },
+    {
+      path: '/timepicker',
+      name: 'timepicker',
+      component: () => import('../views/timepicker')
+    },
+    {
+      path: '/pop',
+      name: 'pop',
+      component: () => import('../views/pop')
     },
     {
       path: '/icon',
@@ -27,9 +42,9 @@ export default new Router({
       component: () => import('../views/icon')
     },
     {
-      path: '/modal-bar',
-      name: 'modal-bar',
-      component: () => import('../views/modal-bar')
+      path: '/bar',
+      name: 'bar',
+      component: () => import('../views/bar')
     },
     {
       path: '/list',
@@ -62,9 +77,15 @@ export default new Router({
       component: () => import('../views/confirm')
     },
     {
+<<<<<<< HEAD
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/dashboard')
+=======
+      path: '/notify',
+      name: 'notify',
+      component: () => import('../views/notify')
+>>>>>>> dev
     }
   ]
 })

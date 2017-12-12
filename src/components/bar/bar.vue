@@ -1,6 +1,10 @@
 <template lang="pug">
-.hk-modal-bar(:style="getColorStyle")
-  .hk-modal-bar-item(v-for="(item, index) in items", :key="item.name", @click="handleClick(item)")
+.hk-bar(:style="getColorStyle")
+  .hk-bar-item(
+    v-for="(item, index) in items",
+    :key="index",
+    @click="handleClick(item)"
+  )
     hk-icon(
       :name = "item.icon",
       :text = "item.label",
@@ -14,7 +18,7 @@
 
 <script>
 export default {
-  name: 'hk-modal-bar',
+  name: 'hk-bar',
   props: {
     items: {
       type: Array,
@@ -35,12 +39,6 @@ export default {
     }
   },
   computed: {
-    getClass () {
-      return {
-        'hk-icon-disabled': this.disabled,
-        'hk-icon-block': this.block
-      }
-    },
     getColorStyle () {
       return {
         'background-color': this.color.bgColor
@@ -74,8 +72,7 @@ export default {
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
-
-.hk-modal-bar
+.hk-bar
   display flex
   justify-content space-around
   position fixed

@@ -39,7 +39,8 @@ export default {
       default: ''
     },
     leftIcon: {
-      type: String
+      type: String,
+      default: 'hk-icons-angel-left'
     },
     leftText: {
       type: String
@@ -103,6 +104,9 @@ $height-2 = 1.5rem
       line-height $height-2 * 0.7
       font-size $font-size-1
       margin-right 0.3rem
+      .hk-icons-angel-left
+        font-size 1.05rem
+
     &-text
       float right
       height $height-2

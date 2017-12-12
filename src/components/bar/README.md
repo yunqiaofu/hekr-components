@@ -1,4 +1,4 @@
-# hk-modal-bar
+# hk-bar
 
 ## Props
 

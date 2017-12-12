@@ -1,133 +1,66 @@
 <template lang="pug">
-canvas.hk-chart
+.hk-chart
+  canvas(ref="canvas")
 </template>
 
 <script>
 import Chart from 'chart.js'
-
 const types = ['line', 'bar', 'radar', 'polarArea', 'pie', 'doughnut', 'bubble']
-
 export default {
   name: 'hk-chart',
-
-  data () {
-    return {
-      chart: null,
-      width: 200,
-      height: 200
-    }
-  },
-
   props: {
     type: {
       type: String,
+      default: 'line',
       validator (value) {
-        return ~types.indexOf(value)
-      },
-      default: 'line'
+        return types.indexOf(value) !== -1
+      }
     },
-
-    labels: {
-      type: Array,
-      default: () => []
-    },
-
     data: {
-      type: Array,
-      default: () => []
-    },
-
-    config: {
       type: Object,
-      required: true,
-      default: () => ({})
+      default: () => {}
     },
-
     options: {
       type: Object,
-      default: () => ({})
-    },
-
-    gradients: Array
+      default: () => {}
+    }
   },
-
+  computed: {
+    config () {
+      return {
+        type: this.type,
+        data: this.data,
+        options: this.options
+      }
+    }
+  },
+  mounted () {
+    this.draw()
+  },
   watch: {
-    data: {
+    config: {
+      deep: true,
       handler () {
-        this.reset()
-      },
-      deep: true
-    },
-
-    type () {
-      this.reset()
-    },
-
-    options: {
-      handler () {
-        this.reset()
-      },
-      deep: true
+        this.chart.destroy()
+        this.draw()
+      }
     }
   },
 
   methods: {
-    create () {
-      const canvas = this.$el.getContext('2d')
-
-      if (this.gradients) {
-        this.gradients.forEach((colors, index) => {
-          const gradient = canvas.createLinearGradient(
-            this.width / 2,
-            0,
-            this.width / 2,
-            this.height
-          )
-
-          colors.forEach((color, index) => {
-            gradient.addColorStop(index, color)
-          })
-
-          this.config.datasets[index].backgroundColor = gradient
-        })
+    draw () {
+      // 为了兼容浏览器引用的时候能够在NPM中打包chart.js
+      if (typeof Chart === 'undefined' && typeof window.Chart === 'undefined') {
+        throw new Error('Chart is not defined, To install it, you can run: npm install --save chart.js')
       }
-
-      const config = { ...this.config }
-
-      config.datasets = config.datasets
-        .map((dataset, index) => {
-          dataset.data = this.data[index]
-
-          return dataset
-        })
-
-      config.labels = this.labels
-
-      return new Chart(canvas, {
-        type: this.type,
-        data: config,
-        options: this.options
-      })
-    },
-
-    reset () {
-      this.$nextTick(() => {
-        this.chart.destroy()
-        this.chart = this.create()
-      })
+      this.ctx = this.$refs.canvas.getContext('2d')
+      this.chart = new (Chart || window.Chart)(this.ctx, this.config)
     }
-  },
-
-  mounted () {
-    this.$nextTick(() => {
-      this.chart = this.create()
-    })
   }
 }
 </script>
 
 <style lang="stylus">
-canvas.hk-chart
-  width 100%
-  max-width 600px
+.hk-chart
+  position relative
 </style>
