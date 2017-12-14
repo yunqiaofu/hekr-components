@@ -3,7 +3,7 @@
   .hk-bar-item(
     v-for="(item, index) in items",
     :key="index",
-    @click="handleClick(item)"
+    @click="handleClick(item, index)"
   )
     hk-icon(
       :name = "item.icon",
@@ -61,9 +61,9 @@ export default {
     }
   },
   methods: {
-    handleClick (val) {
+    handleClick (val, index) {
       if (!val.disabled) {
-        this.$emit('change', val)
+        this.$emit('change', val, index)
       }
     }
   }

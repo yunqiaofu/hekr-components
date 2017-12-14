@@ -336,7 +336,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "../../stylus/variables.styl"
 .hk-swipe
   position relative
   overflow-x hidden
@@ -349,7 +348,7 @@ export default {
     left 50%
     transform translateX(-50%)
     list-style none
-    z-index $zindex-higher
+    z-index 10
     &-item
       width 0.35rem
       height 0.35rem
