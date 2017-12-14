@@ -111,17 +111,14 @@ export default {
     },
 
     reset () {
-      this.$nextTick(() => {
-        this.chart.destroy()
-        this.chart = this.create()
-      })
+      // this.chart.clear()
+      // this.chart.destroy()
+      this.chart = this.create()
     }
   },
 
   mounted () {
-    this.$nextTick(() => {
-      this.chart = this.create()
-    })
+    this.chart = this.create()
   }
 }
 </script>

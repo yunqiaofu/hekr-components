@@ -7,7 +7,7 @@
           :class="leftIcon",
           v-if="leftIcon"
         )
-        span(
+        span.hk-list-left-icon(
           v-if="leftText"
         ) {{ leftText }}
     .hk-list-right(
@@ -94,7 +94,11 @@ export default {
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
-
+ellipsis() {
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+}
 .hk-list
   display flex
   width calc(100% - 1rem)
@@ -103,14 +107,17 @@ export default {
   line-height 2.2rem
   padding .5rem 1rem .5rem 0
   font-size $font-size-4
+  ellipsis()
   &-border
     border-bottom 1px solid #ccc
   &-left
     width 40%
+    ellipsis()
     &-icon
       padding-right .2rem
   &-right
     width 60%
+    ellipsis()
     text-align right
     &-icon
       padding-left .2rem
