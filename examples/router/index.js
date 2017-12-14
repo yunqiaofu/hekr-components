@@ -85,6 +85,11 @@ export default new Router({
       path: '/notify',
       name: 'notify',
       component: () => import('../views/notify')
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: () => import('../views/order')
     }
   ]
 })

@@ -1,6 +1,8 @@
 <template lang="pug">
   .hk-timepicker
-    .hk-timepicker-title {{title}}
+    .hk-timepicker-title(
+      v-if="needTitle"
+    ) {{title}}
     .hk-timepicker-box
       hk-time-item(
         v-if="type.indexOf('hh')!==-1",
@@ -57,6 +59,10 @@
       title: {
         type: String,
         default: '倒计时时间'
+      },
+      needTitle: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -84,9 +90,11 @@
     },
     methods: {
       format (n, l) {
-        n = n.toString()
-        while (n.length < l) {
-          n = '0' + n
+        if (n) {
+          n = n.toString()
+          while (n.length < l) {
+            n = '0' + n
+          }
         }
         return n
       },
