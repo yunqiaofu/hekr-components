@@ -29,7 +29,7 @@ export default {
         transform: `translate3d(${this.offset}px, 0, 0)`
       }
       if (this.show) {
-        style.visibility = 'visible'
+        style.display = 'block'
       }
       if (this.animate) {
         style.transition = `transform ${this.speed}ms ease-in-out`
@@ -47,7 +47,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "../../stylus/variables.styl"
 .hk-swipe-item
   position absolute
   top 0
@@ -56,9 +55,8 @@ export default {
   left 0
   width 100%
   height 100%
-  visibility hidden
+  display none
   &-active
-    z-index $zindex-base
     transform none
-    visibility visible
+    display block
 </style>
