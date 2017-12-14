@@ -68,6 +68,9 @@ export default {
   watch: {
     auto () {
       this.autoplay()
+    },
+    index () {
+      this.$emit('change', this.index)
     }
   },
   methods: {
