@@ -215,6 +215,11 @@ export default {
         return
       }
       let offset = this.getX(e) - this.oX
+      if (!offset) {
+        this.isDragging = false
+        this.oX = 0
+        return
+      }
       // 不能连续滑动几个
       if (this.$el.offsetWidth < Math.abs(offset)) {
         offset = Math.abs(offset) / offset * this.$el.offsetWidth
