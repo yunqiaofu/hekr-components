@@ -19,7 +19,7 @@
     leftText="设备名称",
     :rightText="socketName",
     rightIcon="fa fa-angle-right",
-    @list-click="changeValue",
+    @click="changeValue",
     border
   )
   hk-list(
@@ -38,6 +38,20 @@
     v-model="inputValue",
     border
   )
+  hk-list(
+    type="switch",
+    leftText="设备开关",
+    v-model="switchValue",
+    :disabled="disabled",
+    border
+  )
+  hk-list(
+    type="check",
+    leftText="选择",
+    v-model="checkValue",
+    :disabled="disabled",
+    border
+  )
   h2 使用slot
   hk-list(
     border
@@ -50,6 +64,9 @@
     border
   )
     span(slot="right", class="delete") 任意文字
+
+  .demo-button
+    hk-button(@click="toggleDisabled") 切换Disabled
     
 
 </template>
@@ -65,7 +82,10 @@ export default {
         type: 'text', // 可选text, number, password
         maxLength: 8
       },
-      inputValue: 'test'
+      inputValue: 'test',
+      switchValue: true,
+      checkValue: false,
+      disabled: false
     }
   },
   computed: {
@@ -80,16 +100,22 @@ export default {
       } else {
         this.index ++
       }
+    },
+    toggleDisabled () {
+      this.disabled = !this.disabled
     }
   }
 }
 </script>
 <style lang="stylus">
 .hk-list-demo
-  margin-top 20%
   .hk-list
     background #fff
     .delete
       color red
+  .demo-button
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
 </style>
 
