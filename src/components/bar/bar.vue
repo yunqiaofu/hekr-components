@@ -75,11 +75,12 @@ export default {
 .hk-bar
   display flex
   justify-content space-around
+  align-items center
   position fixed
   bottom 0
   left 0
   right 0
-  padding .5rem 1rem
+  height 4rem
   &-item
     text-align center
 </style>
