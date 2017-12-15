@@ -73,6 +73,7 @@ $height-2 = 1.5rem
   top 0
   right 0
   left 0
+  z-index $zindex-lower
   height $height
   line-height $height * 0.8
   padding 0.15rem 0
