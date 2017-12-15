@@ -7,7 +7,7 @@
           :class="leftIcon",
           v-if="leftIcon"
         )
-        span(
+        span.hk-list-left-icon(
           v-if="leftText"
         ) {{ leftText }}
     .hk-list-right(
@@ -30,6 +30,23 @@
         :maxLength="inputProps.maxLength",
         @input="$emit('input', $event.target.value)"
       )
+    .hk-list-right(v-if="type === 'switch'")
+      hk-switch(
+        :active="value",
+        :onColor="switchProps.onColor",
+        :offColor="switchProps.offColor",
+        :disabled="disabled",
+        @click="getSwitch"
+      )
+    .hk-list-right(v-if="type === 'check'")
+      hk-check(
+        v-model="checkValue",
+        :onColor="checkProps.onColor",
+        :offColor="checkProps.offColor",
+        :onIcon="checkProps.onIcon",
+        :offIcon="checkProps.offIcon",
+        :disabled="disabled"
+      )
 </template>
 
 <script>
@@ -43,7 +60,8 @@ export default {
         return [
           'text',
           'input',
-          'checkbox'
+          'switch',
+          'check'
         ].indexOf(val) !== -1
       }
     },
@@ -73,13 +91,43 @@ export default {
         }
       }
     },
-    checked: {
-      type: Boolean,
-      default: false
+    switchProps: {
+      type: Object,
+      default: () => {
+        return {
+          onColor: '#3AA4F7',
+          offColor: '#C0BFBF'
+        }
+      }
+    },
+    checkProps: {
+      type: Object,
+      default: () => {
+        return {
+          onColor: '#3AA4F7',
+          offColor: '#666',
+          onIcon: 'hk-icons-check-checked',
+          offIcon: 'hk-icons-circle'
+        }
+      }
     },
     border: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      checkValue: this.value
+    }
+  },
+  watch: {
+    checkValue () {
+      this.$emit('input', this.checkValue)
     }
   },
   computed: {
@@ -91,33 +139,49 @@ export default {
   },
   methods: {
     handleClick () {
-      this.$emit('list-click')
+      this.$emit('click')
     },
     rightClick () {
       this.$emit('right-click')
+    },
+    getSwitch (d) {
+      const value = !d
+      this.$emit('input', value)
     }
+    // getCheck () {
+    //   this.$emit('input', this.checkValue)
+    // }
   }
 }
 </script>
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
-
+ellipsis() {
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+}
 .hk-list
   display flex
+  justify-content center
+  align-items center
   margin-left 1rem
   height 2.2rem
   line-height 2.2rem
-  padding .5rem 1rem .5rem 0
+  padding .2rem 1rem .2rem 0
   font-size $font-size-4
+  ellipsis()
   &-border
     border-bottom 1px solid #ccc
   &-left
     width 40%
+    ellipsis()
     &-icon
       padding-right .2rem
   &-right
     width 60%
+    ellipsis()
     text-align right
     &-icon
       padding-left .2rem
