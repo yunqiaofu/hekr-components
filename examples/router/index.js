@@ -27,14 +27,14 @@ export default new Router({
       component: () => import('../views/slider')
     },
     {
-      path: '/select',
-      name: 'select',
-      component: () => import('../views/select')
+      path: '/timepicker',
+      name: 'timepicker',
+      component: () => import('../views/timepicker')
     },
     {
-      path: '/timePicker',
-      name: 'timePicker',
-      component: () => import('../views/timePicker')
+      path: '/pop',
+      name: 'pop',
+      component: () => import('../views/pop')
     },
     {
       path: '/icon',
@@ -42,9 +42,9 @@ export default new Router({
       component: () => import('../views/icon')
     },
     {
-      path: '/modal-bar',
-      name: 'modal-bar',
-      component: () => import('../views/modal-bar')
+      path: '/bar',
+      name: 'bar',
+      component: () => import('../views/bar')
     },
     {
       path: '/list',
@@ -75,6 +75,21 @@ export default new Router({
       path: '/confirm',
       name: 'confirm',
       component: () => import('../views/confirm')
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/dashboard')
+    },
+    {
+      path: '/notify',
+      name: 'notify',
+      component: () => import('../views/notify')
+    },
+    {
+      path: '/swipe',
+      name: 'swipe',
+      component: () => import('../views/swipe')
     }
   ]
 })

@@ -1,108 +1,90 @@
 <template lang="pug">
-  .hk-week
-    .hk-week-header {{title}}
-    .hk-week-body
-      .hk-week-body-item(
-        v-for="(i, index) in weeksList",
-        :key="index",
-        @click="select(index)"
-      )
-        .hk-week-body-item-title {{i.name}}
-        .hk-week-body-item-btn.icon.hk-icon(
-          :class="getClass(index)"
-        ) &#xe9c0;
-
+.hk-week
+  .hk-week-header {{ title }}
+  .hk-week-body
+    .hk-week-body-item(
+      v-for="(item, index) in items",
+      :key="index",
+      :style="items | getItemStyle",
+      @click="select(item, index)"
+    )
+      .hk-week-body-item-title {{ item.name }}
+      .hk-week-body-item-check(:class="item | getIconClass")
+        i(:class="icon")
 </template>
 
 <script>
-  export default {
-    name: 'hk-week',
-    props: {
-      title: {
-        type: String,
-        default: '重复'
-      },
-      value: {
-        type: Array,
-        default: () => []
-      },
-      disabled: {
-        type: Array,
-        default: () => []
-      }
+const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+export default {
+  name: 'hk-week',
+  props: {
+    title: {
+      type: String,
+      default: '重复'
     },
-    data () {
+    value: {
+      type: Array,
+      default: () => []
+    },
+    disabled: {
+      type: Array,
+      default: () => []
+    },
+    labels: {
+      type: Array,
+      default: () => week
+    },
+    icon: {
+      type: String,
+      default: 'hk-icons-week-checked'
+    }
+  },
+  computed: {
+    items () {
+      return this.labels.map((item, index) => ({
+        name: item,
+        checked: this.value.find(val => val === index) !== undefined,
+        disabled: this.disabled.find(val => val === index) !== undefined
+      }))
+    }
+  },
+
+  filters: {
+    getItemStyle (val) {
       return {
-        weeksList: [
-          {
-            name: '周日',
-            value: 0
-          },
-          {
-            name: '周一',
-            value: 1
-          },
-          {
-            name: '周二',
-            value: 2
-          },
-          {
-            name: '周三',
-            value: 3
-          },
-          {
-            name: '周四',
-            value: 4
-          },
-          {
-            name: '周五',
-            value: 5
-          },
-          {
-            name: '周六',
-            value: 6
-          }],
-        valueList: [false, false, false, false, false, false, false]
+        width: `${100 / val.length}%`
       }
     },
-    mounted () {
-      this.value.map((item) => {
-        this.$set(this.valueList, item, true)
-      })
-    },
-    computed: {
-    },
-    methods: {
-      select (index) {
-        for (let i = 0; i < this.disabled.length; i++) {
-          if (this.disabled[i] === index) {
-            return
-          }
-        }
-        this.$set(this.valueList, index, !this.valueList[index])
-        let value = []
-        this.valueList.map((item, key) => {
-          if (item) {
-            value.push(this.weeksList[key].value)
-          }
-        })
-        this.$emit('input', value)
-        this.$emit('weekChange', value)
-      },
-      getClass (index) {
-        for (let i = 0; i < this.disabled.length; i++) {
-          if (this.disabled[i] === index) {
-            return {
-              'hk-week-body-item-disabled': true
-            }
-          }
-        }
-        return {
-          'hk-week-body-item-active': this.valueList[index]
-        }
+    getIconClass (val) {
+      return {
+        'hk-week-body-item-check-checked': val.checked,
+        'hk-week-body-item-check-disabled': val.disabled
       }
     }
+  },
+
+  methods: {
+    select (item, itemIndex) {
+      if (item.disabled) {
+        return
+      }
+      let index = -1
+      for (let i = 0; i < this.value.length; i++) {
+        if (this.value[i] === itemIndex) {
+          index = i
+          break
+        }
+      }
+      const value = [...this.value]
+      if (index !== -1) {
+        value.splice(index, 1)
+      } else {
+        value.push(itemIndex)
+      }
+      this.$emit('input', value)
+    }
   }
+}
 </script>
 
 <style lang="stylus">
@@ -113,18 +95,20 @@
     &-header
       height 2.5rem
       border-bottom solid 1px #DEDEDE
-      font-size: 0.85rem
-      color: #030303
+      font-size 0.85rem
+      color #030303
       letter-spacing: -0.41px
       line-height 2.5rem
       text-align left
       padding-left 4.5%
     &-body
       height 5.5rem
-      &-item:first-child
-        margin-left 1%
-      &-item:last-child
-        margin-right 1%
+      &:before
+      &:after
+        content ""
+        display table
+        clear both
+        float none
       &-item
         width 14%
         text-align center
@@ -133,16 +117,17 @@
           font-size 0.7rem
           color #666666
           margin 0.7rem 0
-        &-btn
-          width 1.3rem
-          height 1.3rem
+        &-check
           text-align center
           background-size cover
           margin 0 auto
           font-size 1.3rem
-          color #cccccc
-        &-btn&-active
-          color #3ba4f7
-        &-btn&-disabled
-          color #f0f0f0
+          color #ccc
+          &&-disabled
+            cursor not-allowed
+            color lighten(#ccc, 30%)
+          &-checked
+            color #3ba4f7
+            &&^[-1]-disabled
+              color lighten(#3ba4f7, 30%)
 </style>

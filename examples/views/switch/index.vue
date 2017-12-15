@@ -1,6 +1,6 @@
 <template lang="pug">
 .hk-switch-demo
-  .hk-icon-demo-title(
+  .hk-switch-demo-title(
     :style="{ margin: '20px' }"
   ) switch组件
   hk-switch(
@@ -12,7 +12,7 @@
   ) switch默认样式
   hk-switch(
     :active="active",
-    :activeColor="activeColor",
+    :onColor="onColor",
     :offColor="offColor",
     :text="text",
     @click="getSwitch",
@@ -23,7 +23,7 @@
   hk-switch(
     :disabled="disabled",
     :active="active",
-    :activeColor="activeColor",
+    :onColor="onColor",
   )
   div switch为disabled
 </template>
@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       disabled: true,
-      activeColor: 'red',
+      onColor: 'red',
       offColor: 'orange',
       active: true,
       text: '开关'

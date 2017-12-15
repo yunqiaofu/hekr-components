@@ -27,4 +27,9 @@ export default {
 body
   overflow-x hidden
   overflow-y auto
+
+*
+html
+body
+  user-select text !important
 </style>
