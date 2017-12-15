@@ -67,6 +67,8 @@ export default {
 <style lang="stylus">
 .hk-header-demo
   text-align center
+  .hk-header
+    position relative
   &-title
     margin 0.5rem auto
   .hk-button
