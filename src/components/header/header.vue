@@ -69,7 +69,10 @@ $height = 2.25rem
 $height-2 = 1.5rem
 
 .hk-header
-  position relative
+  position fixed
+  top 0
+  right 0
+  left 0
   height $height
   line-height $height * 0.8
   padding 0.15rem 0
