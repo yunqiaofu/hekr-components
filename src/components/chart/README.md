@@ -13,6 +13,7 @@
 
 ### gradients参数说明
 渐变的位置定义：0 -> 1 对应图形顶部到底部，即曲线到坐标轴的方向
+如果传递了gradients,则会重写data中的datasets中的backgroundColor为传入的渐变色，其他保持不变，完全和chart.js官方的文档一致
 1. gradients项目为对象时：
 ```javascript
 gradients = [{
