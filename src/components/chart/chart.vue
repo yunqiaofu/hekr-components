@@ -5,6 +5,7 @@
 
 <script>
 import Chart from 'chart.js'
+import cloneDeep from 'lodash/cloneDeep'
 const types = ['line', 'bar', 'radar', 'polarArea', 'pie', 'doughnut', 'bubble']
 export default {
   name: 'hk-chart',
@@ -23,22 +24,35 @@ export default {
     options: {
       type: Object,
       default: () => {}
-    }
-  },
-  computed: {
-    config () {
-      return {
-        type: this.type,
-        data: this.data,
-        options: this.options
-      }
+    },
+    gradients: {
+      type: Array,
+      default: () => []
     }
   },
   mounted () {
     this.draw()
   },
   watch: {
-    config: {
+    type () {
+      this.chart.destroy()
+      this.draw()
+    },
+    data: {
+      deep: true,
+      handler () {
+        this.chart.destroy()
+        this.draw()
+      }
+    },
+    options: {
+      deep: true,
+      handler () {
+        this.chart.destroy()
+        this.draw()
+      }
+    },
+    gradients: {
       deep: true,
       handler () {
         this.chart.destroy()
@@ -54,7 +68,31 @@ export default {
         throw new Error('Chart is not defined, To install it, you can run: npm install --save chart.js')
       }
       this.ctx = this.$refs.canvas.getContext('2d')
-      this.chart = new (Chart || window.Chart)(this.ctx, this.config)
+      const config = cloneDeep({
+        type: this.type,
+        data: this.data,
+        options: this.options
+      })
+      if (this.gradients.length) {
+        const $gradients = this.ctx.createLinearGradient(0, 0, 0, this.ctx.canvas.height)
+        config.data.datasets = config.data.datasets.map((item, index) => {
+          const colors = this.gradients
+          colors.forEach((it, i) => {
+            if (typeof it === 'string') {
+              it = {
+                pos: i / colors.length,
+                color: it
+              }
+            }
+            $gradients.addColorStop(it.pos, it.color)
+          })
+          return {
+            ...item,
+            backgroundColor: $gradients
+          }
+        })
+      }
+      this.chart = new (Chart || window.Chart)(this.ctx, config)
     }
   }
 }

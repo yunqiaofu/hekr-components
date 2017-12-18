@@ -5,12 +5,21 @@
   hk-chart(
     :type="charts1.type"
     :data="charts1.data",
-    :options="charts1.options"
+    :options="charts1.options",
+    :gradients="gradients"
   )
 
   hk-button(@click="handleClick") update
 
-  h3 折线图
+  h3 曲线图渐变数组
+
+  hk-chart(
+    type="line",
+    :data="charts2.data",
+    :options="charts2.options",
+    :gradients="gradients2"
+  )
+  h3 直方图
 
   hk-chart(
     :type="charts2.type",
@@ -34,8 +43,6 @@ export default {
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           datasets: [{
             label: 'My First dataset',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            borderColor: 'rgb(255, 99, 132)',
             data: [
               randomScalingFactor(),
               randomScalingFactor(),
@@ -44,13 +51,9 @@ export default {
               randomScalingFactor(),
               randomScalingFactor(),
               randomScalingFactor()
-            ],
-            fill: false
+            ]
           }, {
             label: 'My Second dataset',
-            fill: false,
-            backgroundColor: 'rgba(255, 99, 255, 0.5)',
-            borderColor: 'rgb(255, 99, 255)',
             data: [
               randomScalingFactor(),
               randomScalingFactor(),
@@ -64,36 +67,44 @@ export default {
         },
         options: {
           responsive: true,
-          title: {
-            display: true,
-            text: 'Chart.js Line Chart'
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false
-          },
-          hover: {
-            mode: 'nearest',
-            intersect: true
+          legend: {
+            // display: false
           },
           scales: {
             xAxes: [{
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Month'
+              gridLines: {
+                display: false,
+                drawBorder: false
               }
             }],
             yAxes: [{
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Value'
-              }
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              position: 'right'
             }]
           }
         }
       },
+      gradients: [
+        {
+          pos: 1,
+          color: 'rgba(0,100,255,0.5)'
+        },
+        {
+          pos: 0.6,
+          color: 'rgba(0,100,255,0.4)'
+        },
+        {
+          pos: 0.4,
+          color: 'rgba(0,100,255,0.3)'
+        },
+        {
+          pos: 0,
+          color: 'rgba(0,100,255,0.1)'
+        }
+      ],
       charts2: {
         type: 'bar',
         data: {
@@ -127,7 +138,6 @@ export default {
               randomScalingFactor()
             ]
           }]
-
         },
         options: {
           responsive: true,
@@ -139,7 +149,8 @@ export default {
             text: 'Chart.js Bar Chart'
           }
         }
-      }
+      },
+      gradients2: ['rgba(255,0,0,0)', 'rgba(255,0,0,0.3)']
     }
   },
   methods: {
