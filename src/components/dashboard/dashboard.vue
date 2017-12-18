@@ -66,7 +66,7 @@ export default {
   props: {
     value: {
       type: Number,
-      require: true
+      required: true
     },
     // value 的范围
     min: {

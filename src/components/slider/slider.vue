@@ -3,7 +3,7 @@
   //- header
   .hk-slider-header
     .hk-slider-header-title {{ title }}
-    .hk-slider-header-value {{ `${value}${unit}` }}
+    .hk-slider-header-value {{ `${val}${unit}` }}
 
   //- 滑动条
   .hk-slider-bar(
@@ -74,6 +74,7 @@ export default {
   },
   data () {
     return {
+      val: this.value,
       ox: 0,
       oValue: this.value,
       isDraging: false
@@ -87,7 +88,7 @@ export default {
     },
     getRatio () {
       // 按步长求值
-      const value = Math.round(this.value / this.step) * this.step
+      const value = Math.round(this.val / this.step) * this.step
       let ratio = (value - this.min) / (this.max - this.min)
       if (ratio < 0) {
         ratio = 0
@@ -116,12 +117,17 @@ export default {
     document.removeEventListener('mousemove', this.dragging)
     document.removeEventListener('mouseup', this.dragend)
   },
+  watch: {
+    value (val) {
+      this.val = val
+    }
+  },
   methods: {
     getX (e) {
       if (e.type.indexOf('mouse') !== -1) {
         return e.clientX
       } else {
-        return e.touches[0].clientX
+        return e.changedTouches[0].clientX
       }
     },
     select (e) {
@@ -138,6 +144,7 @@ export default {
       if (value > this.max) {
         value = this.max
       }
+      this.val = value
       this.$emit('input', value)
       this.$emit('select', value)
     },
@@ -147,8 +154,8 @@ export default {
       }
       this.isDraging = true
       this.ox = this.getX(e)
-      this.oValue = this.value
-      this.$emit('dragstart', this.value)
+      this.oValue = this.val
+      this.$emit('dragstart', this.val)
     },
     dragging (e) {
       if (this.disabled || !this.isDraging) {
@@ -165,18 +172,31 @@ export default {
       if (value > this.max) {
         value = this.max
       }
+      this.val = value
       this.$emit('input', value)
       this.$emit('dragging', value)
     },
-    dragend () {
+    dragend (e) {
       if (this.disabled || !this.isDraging) {
         return
       }
       this.isDraging = false
+      const x = this.getX(e) - this.ox
       // 计算当前值
-      this.oValue = this.value
-      this.$emit('input', this.value)
-      this.$emit('dragend', this.value)
+      let value = x / this.$refs.bar.clientWidth * (this.max - this.min) + this.oValue
+      // 按步长求值
+      value = Math.round(value / this.step) * this.step
+      if (value < this.min) {
+        value = this.min
+      }
+      if (value > this.max) {
+        value = this.max
+      }
+      this.val = value
+      // 计算当前值
+      this.oValue = value
+      this.$emit('input', value)
+      this.$emit('dragend', value)
     }
   }
 }

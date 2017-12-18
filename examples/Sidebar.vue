@@ -88,6 +88,7 @@ export default {
     &-item
       padding 0.3rem 0.6rem 0.3rem 1rem
       border-bottom 0.05rem solid #cccccc
+      cursor pointer
       &:last-child
         border-bottom none
       &-active
