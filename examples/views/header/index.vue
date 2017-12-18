@@ -7,7 +7,8 @@
     :right-icon="rightIcon",
     right-text="更多",
     @click-left="clickLeft",
-    @click-right="clickRight"
+    @click-right="clickRight",
+    border
   )
   hk-button(@click="toggleLeftText") toggle leftText
   hk-button(@click="toggleRightIcon") toggle rightIcon

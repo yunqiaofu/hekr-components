@@ -9,6 +9,7 @@
 | leftText | 左边按钮文字 | stirng | - | - |
 | rightIcon | 右边按钮图标 | stirng | - | - |
 | rightText | 右边按钮文字 | stirng | - | - |
+| border | 是否显示下边框线 | boolean | - | false |
 
 ## Slot
 | name | 说明|
@@ -19,7 +20,7 @@
 | leftText | 左边文字 |
 | right | 右边按钮(包含图标和文字) |
 | rightIcon | 右边图标 |
-| rightText | 右边文字 | 
+| rightText | 右边文字 |
 
 ## Events
 | 事件名称 | 说明 |	回调参数 |

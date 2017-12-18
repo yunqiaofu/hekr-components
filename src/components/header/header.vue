@@ -1,5 +1,5 @@
 <template lang="pug">
-.hk-header
+.hk-header(:class="getClass")
 
   //- 左边
   .hk-header-left(@click="clickLeft")
@@ -50,6 +50,17 @@ export default {
     },
     rightText: {
       type: String
+    },
+    border: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    getClass () {
+      return {
+        'hk-header-border': this.border
+      }
     }
   },
   methods: {
@@ -77,8 +88,9 @@ $height-2 = 1.5rem
   height $height
   line-height $height * 0.8
   padding 0.15rem 0
-  background-color $color-white
-  border-bottom 0.05rem solid darken($color-white, 10%)
+
+  &-border
+    border-bottom 0.05rem solid darken($color-white, 10%)
   &-title
     height $height
     line-height $height * 0.9
