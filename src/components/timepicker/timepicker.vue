@@ -65,14 +65,6 @@
         default: true
       }
     },
-    watch () {
-      value (n, o) {
-        console.log(n, o)
-        this.h = this.format(n.h, 2)
-        this.m = this.format(n.m, 2)
-        this.s = this.format(n.s, 2)
-      }
-    },
     data () {
       return {
         h: this.format(this.value.h, 2),
