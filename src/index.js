@@ -16,6 +16,7 @@ const install = Vue => {
 
   Object.keys(directives)
     .forEach(key => Vue.use(directives[key]))
+
   Object.keys(utils)
     .forEach(key => utils[key](Vue))
 }
