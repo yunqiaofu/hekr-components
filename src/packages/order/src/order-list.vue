@@ -1,13 +1,13 @@
 
 <template lang="pug">
-  .order-list
-    hk-header.order-list-title(
+  .hk-order-list
+    hk-header.hk-order-list-title(
       :title="'定时预约'",
       @click-left="back",
       :rightText="isEdit?'完成':'编辑'",
       @click-right="toEdit"
     )
-    .order-list-body
+    .hk-order-list-body
       hk-order-item(
         v-for="t,k in list",
         :border="k<len-1",
@@ -16,10 +16,11 @@
         @check="check(t,k)",
         :isEdit="isEdit",
         @remove="remove(t,k)",
-        @edit="edit(t,k)"
+        @edit="edit(t,k)",
+        :options="options"
       )
-    .order-list-footer
-      hk-button.order-list-btn(
+    .hk-order-list-footer
+      hk-button.hk-order-list-btn(
         :type="'primary'",
         @click="go('add')"
       ) 添加预约
@@ -30,6 +31,10 @@
     name: 'hk-order',
     props: {
       value: {
+        type: Array,
+        default: () => []
+      },
+      options: {
         type: Array,
         default: () => []
       }
@@ -80,7 +85,7 @@
 </script>
 
 <style lang="stylus">
-  .order-list
+  .hk-order-list
     background-color: #f5f5f5;
     &-title
       position fixed !important

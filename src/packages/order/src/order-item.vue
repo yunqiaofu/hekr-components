@@ -18,7 +18,11 @@
     .hk-order-item-right(
       :class="{'hk-order-item-right-delete':isDelete}",
       @click="check"
-    ) {{oValue.enable?'定时开':'定时关'}}
+    )
+      span(
+        v-for="item in options",
+        v-if="oValue.code[item.argument]!==undefined"
+      ) {{getLabel(item.maps,oValue.code[item.argument])}}
       i.hk-order-item-right-icon(
         :class="{'hk-order-item-right-icon-disable': !this.oValue.enable,'hk-icons-check-checked': !this.isEdit,'hk-icons-angel-right': this.isEdit}"
       )
@@ -46,6 +50,10 @@
       value: {
         type: Object,
         default: () => {}
+      },
+      options: {
+        type: Array,
+        default: () => []
       }
     },
     computed: {
@@ -74,6 +82,13 @@
     },
 
     methods: {
+      getLabel (maps, value) {
+        for (let i = 0; i < maps.length; i++) {
+          if (maps[i].value === value) {
+            return maps[i].name + '  '
+          }
+        }
+      },
       format (n, l) {
         if (n) {
           n = n.toString()
