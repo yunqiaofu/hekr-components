@@ -178,7 +178,7 @@
     &-right
       position absolute
       right 1rem
-      font-size 0.85rem
+      font-size 1.2rem
       color #a4a4a4
       line-height 3rem
       transition all 0.1s ease-in-out
