@@ -1,20 +1,22 @@
 
 <template lang="pug">
-  .order
+  .hk-order
     order-list(
       v-if="page==='list'",
       @go="go",
       v-model="list",
       @check="check",
       @remove="remove",
-      @edit="edit"
+      @edit="edit",
+      :options="options"
     )
     order-add(
       v-if="page==='add'",
       @go="go",
       @onAdd="onAdd",
       @onEdit="onEdit",
-      :template="myTemplate"
+      :template="myTemplate",
+      :options="options"
     )
     order-add(
       v-if="page==='edit'",
@@ -23,7 +25,8 @@
       @onAdd="onAdd",
       @onEdit="onEdit",
       :selected="selected",
-      :template="myTemplate"
+      :template="myTemplate",
+      :options="options"
     )
 </template>
 
@@ -50,6 +53,10 @@
             taskName: '未命名'
           }
         }
+      },
+      options: {
+        type: Array,
+        default: () => []
       }
     },
     data () {
@@ -117,7 +124,7 @@
 </script>
 
 <style lang="stylus">
-  .order
+  .hk-order
     position fixed
     height 100%
     width 100%
