@@ -5,6 +5,7 @@
 |--- | --- | --- | --- | --- |
 | lists | 预约列表 | array | - |  |
 | template | 预约参数模版 | object | - | -|
+| options | 操作选项 | array | - | -|
 
 ### Events
 | 事件名称 | 说明 |	回调参数 |

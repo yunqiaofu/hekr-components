@@ -5,7 +5,8 @@
       @onRemove="onRemove",
       @onEdit="onEdit",
       @onAdd="onAdd",
-      :template="template"
+      :template="template",
+      :options="options"
     )
 </template>
 
@@ -13,8 +14,7 @@
   const template = {
     taskName: '新加预约',
     code: {
-      curtain_Sw: 1,
-      cmdId: 2
+      cmdTag: 'setSw'
     },
     schedulerType: 'LOOP'
   }
@@ -23,7 +23,39 @@
     data () {
       return {
         list: [],
-        template: template
+        template: template,
+        options: [
+          {
+            type: 'button',
+            argument: 'curtain_Sw',
+            label: '开 / 关',
+            maps: [
+              {
+                name: '定时开',
+                value: 1
+              },
+              {
+                name: '定时关',
+                value: 0
+              }],
+            defaultValue: 0
+          },
+          {
+            type: 'button',
+            argument: 'curtain_Qr',
+            label: '强 / 弱',
+            maps: [
+              {
+                name: '强',
+                value: 1
+              },
+              {
+                name: '弱',
+                value: 0
+              }],
+            defaultValue: 0
+          }
+        ]
       }
     },
     methods: {
