@@ -66,6 +66,8 @@ export default {
   @media (max-width: 960px)
     margin 0 auto
   &-source
+    max-width 960px
+    margin 0 auto
     padding 1rem 0
     &-title
       padding 0.3rem 0
