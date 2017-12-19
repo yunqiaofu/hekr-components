@@ -90,6 +90,11 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: () => import('../views/order')
+    },
+    {
+      path: '/swipe',
+      name: 'swipe',
+      component: () => import('../views/swipe')
     }
   ]
 })

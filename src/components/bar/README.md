@@ -16,7 +16,6 @@
 |--- | --- | --- | --- | --- |
 | icon | 图标class | string | - | - |
 | label | 图标下文字 |	string | - | - |
-| name | 标识 | string | - | - |
 | active | 是否处于激活状态 | boolean | - | false |
 | disabled | 是否禁用 | boolean | - | false |
 | fontColor | 未激活状态颜色 | string | - | 跟随theme改变 |
@@ -27,4 +26,4 @@
 ## Events
 | 事件名称 | 说明 |	回调参数 |
 |--- | --- | --- |
-| change | 点击事件 | 点击的name字段 |
+| change | 点击事件 | 当前item对象和下标值index |
