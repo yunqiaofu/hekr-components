@@ -1,20 +1,20 @@
 
 <template lang="pug">
-  .hk-add
-    hk-header.hk-add-header(
+  .hk-order-add
+    hk-header.hk-order-add-header(
       :title="'预约设置'",
       @click-left="go('list')",
       :rightText="'保存'",
       @click-right="save"
     )
-    .hk-add-tag
+    .hk-order-add-tag
       span 标签
-      input.hk-add-tag-input(
+      input.hk-order-add-tag-input(
         placeholder="未命名",
         v-model="taskName"
       )
-    .hk-add-timepick-title 时间
-    .hk-add-timepick
+    .hk-order-add-timepick-title 时间
+    .hk-order-add-timepick
       hk-timepicker(
         v-model="date",
         :type="'hh:mm'",
@@ -23,14 +23,14 @@
     hk-week(
       v-model="week"
     )
-    .hk-add-control(
+    .hk-order-add-control(
       v-for="item in options",
       :key="item.argument"
     ) {{item.label}}
-      .hk-add-control-btn(
+      .hk-order-add-control-btn(
         v-for="i,k in item.maps",
         :key="k",
-        :class="{'hk-add-control-active':code[item.argument]===i.value}",
+        :class="{'hk-order-add-control-active':code[item.argument]===i.value}",
         @click="click(item.argument, i.value)"
       ) {{i.name}}
 </template>
@@ -64,7 +64,7 @@
         taskName: myTemplate.taskName,
         enable: myTemplate.enable,
         week: [],
-        date: {h: 1, m: 1},
+        date: {h: myTemplate.date.hour || 1, m: myTemplate.date.minute || 1},
         code: {}
       }
     },
@@ -75,7 +75,6 @@
         l.push(weeks.indexOf(repeatList[i]))
       }
       this.week = l
-      this.date = {h: this.myTemplate.date.hour || 0, m: this.myTemplate.date.minute || 0}
       this.taskName = this.myTemplate.taskName
       this.code = this.myTemplate.code
     },
@@ -123,7 +122,8 @@
             repeatList: this.repeatList
           },
           taskName: this.taskName,
-          code: this.code
+          code: this.code,
+          schedulerType: this.repeatList.length === 0 ? 'ONCE' : 'LOOP'
         }
         this.$emit('input', ob)
         if (this.myTemplate.taskId || this.type === 'edit') {
@@ -139,7 +139,7 @@
 </script>
 
 <style lang="stylus">
-  .hk-add
+  .hk-order-add
     height 100vh
     background-color #f5f5f5
     &-header
@@ -150,19 +150,18 @@
       text-align left
       line-height 2.2rem
       padding-left 1rem
-      border-bottom 1px solid #dedede
+      border-bottom 0.05rem solid #dedede
       margin-top 2.75rem
       &-input
         margin-left 0.5rem
         border none
         outline none
-      span:first-child
+        width calc(100% - 3.5rem)
+      span
         font-size 0.8rem
         color #030303
-        letter-spacing -0.39px
-      span:nth-child(2)
-        color #cccccc
-        margin-left 1rem
+        display inline-block
+        width 50px
     &-timepick-title
       background-color #fff
       padding-left 1rem
@@ -171,7 +170,6 @@
       font-size 0.8rem
       color #030303
       text-align left
-      letter-spacing -0.39px
     &-timepick
       margin-bottom 0.5rem
       padding-bottom 0.5rem
@@ -184,7 +182,7 @@
       margin-top 0.5rem
       text-align left
       &-btn
-        border 1px solid #cccccc
+        border 0.05rem solid #cccccc
         border-radius 0.2rem
         width 2.7rem
         height 1.15rem
@@ -196,6 +194,6 @@
         line-height 1.05rem
         cursor pointer
       &-active
-        border 1px solid #3aa4f7
+        border 0.05rem solid #3aa4f7
         color #3aa4f7
 </style>
