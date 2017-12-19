@@ -15,8 +15,7 @@
     taskName: '新加预约',
     code: {
       cmdTag: 'setSw'
-    },
-    schedulerType: 'LOOP'
+    }
   }
   export default {
     name: 'hk-order-demo',
