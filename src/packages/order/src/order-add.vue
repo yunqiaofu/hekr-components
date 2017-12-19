@@ -1,7 +1,7 @@
 
 <template lang="pug">
   .add
-    hk-header(
+    hk-header.add-header(
       :title="'预约设置'",
       @click-left="go('list')",
       :rightText="'保存'",
@@ -63,7 +63,6 @@
       }
     },
     mounted () {
-      console.log(this.selected, this.template, this.myTemplate)
       const repeatList = this.myTemplate.date.repeatList || []
       let l = []
       for (let i = 0; i < repeatList.length; i++) {
@@ -127,56 +126,58 @@
   .add
     height 100vh
     background-color #f5f5f5
+    &-header
+      background-color #fff
     &-tag
       background #ffffff
-      height 44px
+      height 2.2rem
       text-align left
-      line-height 44px
-      padding-left 20px
+      line-height 2.2rem
+      padding-left 1rem
       border-bottom 1px solid #dedede
-      margin-top 10px
+      margin-top 2.75rem
       &-input
-        margin-left 10px
+        margin-left 0.5rem
         border none
         outline none
       span:first-child
-        font-size 16px
+        font-size 0.8rem
         color #030303
         letter-spacing -0.39px
       span:nth-child(2)
         color #cccccc
-        margin-left 20px
+        margin-left 1rem
     &-timepick-title
       background-color #fff
-      padding-left 20px
-      height 44px
-      line-height 44px
-      font-size 16px
+      padding-left 1rem
+      height 2.2rem
+      line-height 2.2rem
+      font-size 0.8rem
       color #030303
       text-align left
       letter-spacing -0.39px
     &-timepick
-      margin-bottom 10px
-      padding-bottom 10px
+      margin-bottom 0.5rem
+      padding-bottom 0.5rem
       background-color #fff
     &-control
       background #ffffff
-      height 44px
-      line-height 44px
-      padding-left 20px
-      margin-top 10px
+      height 2.2rem
+      line-height 2.2rem
+      padding-left 1rem
+      margin-top 0.5rem
       text-align left
       &-btn
         border 1px solid #cccccc
-        border-radius 4px
-        width 54px
-        height 23px
+        border-radius 0.2rem
+        width 2.7rem
+        height 1.15rem
         float right
         text-align center
-        font-size 12px
+        font-size 0.6rem
         color rgba(0,0,0,0.65)
-        margin 10px
-        line-height 21px
+        margin 0.5rem
+        line-height 1.05rem
         cursor pointer
       &-active
         border 1px solid #3aa4f7

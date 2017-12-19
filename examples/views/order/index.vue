@@ -2,6 +2,9 @@
   .hk-notify-demo
     hk-order(
       :lists="list",
+      @onRemove="onRemove",
+      @onEdit="onEdit",
+      @onAdd="onAdd",
       :template="template"
     )
 </template>
@@ -24,6 +27,15 @@
       }
     },
     methods: {
+      onRemove (data) {
+        console.log('onRemove', data)
+      },
+      onEdit (data) {
+        console.log('onEdit', data)
+      },
+      onAdd (data) {
+        console.log('onAdd', data)
+      }
     }
   }
 </script>
