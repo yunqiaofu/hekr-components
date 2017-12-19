@@ -84,6 +84,7 @@
     background-color: #f5f5f5;
     &-title
       position fixed !important
+      background-color #fff
       top 0
       width 100%
       z-index: 100
@@ -104,6 +105,6 @@
       margin 1rem auto
       left 50%
       transform translateX(-50%)
-      max-width 320px
+      max-width 16rem
 
 </style>

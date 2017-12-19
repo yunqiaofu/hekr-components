@@ -78,15 +78,12 @@
       orderAdd
     },
     mounted () {
-      console.log('mounted', this.lists)
     },
     activated () {
       this.page = 'list'
-      console.log('activated', this.lists)
     },
     watch: {
       lists (n, o) {
-        console.log('watch', this.list, n)
         this.list = n
       }
     },
