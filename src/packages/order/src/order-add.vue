@@ -11,7 +11,7 @@
       span 标签
       input.add-tag-input(
         placeholder="未命名",
-        v-model="name"
+        v-model="taskName"
       )
     .add-timepick-title 时间
     .add-timepick
@@ -25,25 +25,53 @@
     )
     .add-control 开 / 关
       .add-control-btn(
-        :class="{'add-control-active':!checked}",
-        @click="checked=false"
+        :class="{'add-control-active':!enable}",
+        @click="enable=false"
       ) 定时关
       .add-control-btn(
-        @click="checked=true",
-        :class="{'add-control-active':checked}"
+        @click="enable=true",
+        :class="{'add-control-active':enable}"
       ) 定时开
 </template>
 
 <script>
+  const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
   export default {
     name: 'order-add',
-    data () {
-      return {
-        date: {h: 2, m: 3},
-        week: [],
-        name: '',
-        checked: true
+    props: {
+      selected: {
+        type: Object,
+        default: () => {}
+      },
+      type: {
+        type: String,
+        default: 'add'
+      },
+      template: {
+        type: Object,
+        default: () => {}
       }
+    },
+    data () {
+      let myTemplate = this.selected || this.template
+      return {
+        myTemplate: myTemplate,
+        taskName: myTemplate.taskName,
+        enable: myTemplate.enable,
+        week: [],
+        date: {h: 1, m: 1}
+      }
+    },
+    mounted () {
+      console.log(this.selected, this.template, this.myTemplate)
+      const repeatList = this.myTemplate.date.repeatList || []
+      let l = []
+      for (let i = 0; i < repeatList.length; i++) {
+        l.push(weeks.indexOf(repeatList[i]))
+      }
+      this.week = l
+      this.date = {h: this.myTemplate.date.hour || 0, m: this.myTemplate.date.minute || 0}
+      this.taskName = this.myTemplate.taskName
     },
     computed: {
       hour () {
@@ -59,6 +87,13 @@
           min.push(i)
         }
         return min
+      },
+      repeatList () {
+        let l = []
+        for (let i = 0; i < this.week.length; i++) {
+          l.push(weeks[this.week[i]])
+        }
+        return l
       }
     },
     methods: {
@@ -67,20 +102,28 @@
       },
       save () {
         let ob = {
-          date: this.date,
-          week: this.week,
-          name: this.name,
-          checked: this.checked
+          ...this.myTemplate,
+          date: {
+            hour: this.date.h,
+            minute: this.date.m,
+            repeatList: this.repeatList
+          },
+          taskName: this.taskName,
+          enable: this.enable
         }
-        this.$emit('add', ob)
         this.$emit('input', ob)
+        if (this.myTemplate.taskId || this.type === 'edit') {
+          this.$emit('onEdit', ob)
+        } else {
+          this.$emit('onAdd', ob)
+        }
+        this.go('list')
       }
     }
   }
 </script>
 
 <style lang="stylus">
-  @import "../../../stylus/variables.styl"
   .add
     height 100vh
     background-color #f5f5f5
@@ -94,6 +137,8 @@
       margin-top 10px
       &-input
         margin-left 10px
+        border none
+        outline none
       span:first-child
         font-size 16px
         color #030303

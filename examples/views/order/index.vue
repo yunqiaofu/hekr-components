@@ -1,38 +1,26 @@
 <template lang="pug">
   .hk-notify-demo
     hk-order(
-      :list="list"
+      :lists="list",
+      :template="template"
     )
 </template>
 
 <script>
+  const template = {
+    taskName: '新加预约',
+    code: {
+      curtain_Sw: 1,
+      cmdId: 2
+    },
+    schedulerType: 'LOOP'
+  }
   export default {
     name: 'hk-order-demo',
     data () {
       return {
-        list: [
-          {
-            id: 1,
-            time: '7:00',
-            day: '周一 周二 周三',
-            name: '未命名',
-            checked: true
-          },
-          {
-            id: 2,
-            time: '8:00',
-            day: '周一 周二 周三',
-            name: '未命名',
-            checked: false
-          },
-          {
-            id: 3,
-            time: '10:00',
-            day: '周二 周三',
-            name: '未命名',
-            checked: true
-          }
-        ]
+        list: [],
+        template: template
       }
     },
     methods: {

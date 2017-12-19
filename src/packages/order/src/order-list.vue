@@ -1,26 +1,28 @@
 
 <template lang="pug">
   .order-list
-    hk-header(
+    hk-header.order-list-title(
       :title="'定时预约'",
       @click-left="back",
       :rightText="isEdit?'完成':'编辑'",
-      @click-right="edit"
+      @click-right="toEdit"
     )
     .order-list-body
       hk-order-item(
         v-for="t,k in list",
         :border="k<len-1",
-        :key="t.id",
-        v-model="t",
-        @check="check",
+        :key="t.taskId",
+        v-model="list[k]",
+        @check="check(t,k)",
         :isEdit="isEdit",
-        @remove="remove(t,k)"
+        @remove="remove(t,k)",
+        @edit="edit(t,k)"
       )
-    hk-button.order-list-btn(
-      :type="'primary'",
-      @click="go('add')"
-    ) 添加预约
+    .order-list-footer
+      hk-button.order-list-btn(
+        :type="'primary'",
+        @click="go('add')"
+      ) 添加预约
 </template>
 
 <script>
@@ -43,8 +45,16 @@
         isEdit: false
       }
     },
+    activated () {
+      this.isEdit = false
+    },
+    watch: {
+      value (n, o) {
+        this.list = n
+      }
+    },
     methods: {
-      edit () {
+      toEdit () {
         this.isEdit = !this.isEdit
       },
       back () {
@@ -53,9 +63,12 @@
       go (route) {
         this.$emit('go', route)
       },
-      check () {
-        console.log('order-list', this.list)
-        this.$emit('check', this.list)
+      edit (selected, index) {
+        this.$emit('edit', selected, index)
+      },
+      check (item, index) {
+        this.$emit('check', item)
+        this.$emit('input', this.list)
       },
       remove (item, index) {
         this.list.splice(index, 1)
@@ -68,14 +81,29 @@
 
 <style lang="stylus">
   .order-list
-    height 100vh
+    background-color: #f5f5f5;
+    &-title
+      position fixed !important
+      top 0
+      width 100%
+      z-index: 100
     &-body
-      margin-top 10px
+      margin 2.75rem 0 4rem 0
+      background-color: #f5f5f5;
+    &-footer
+      position fixed
+      left 0
+      right 100%
+      width 100%
+      height 4rem
+      bottom 0
+      background-color #fff
     &-btn
       width 80%
-      max-width 320px
-      position absolute !important
+      position: absolute !important;
+      margin 1rem auto
       left 50%
       transform translateX(-50%)
-      bottom 20px
+      max-width 320px
+
 </style>

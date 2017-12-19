@@ -1,9 +1,15 @@
-# hk-week
+# hk-order
 ## Props
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| value | 选中的下标集合作为绑定值 | array | - | - |
-| title | 组件标题 | string | - | 重复 |
-| disabled | 在集合中的下标将会被禁用 | array | - | - |
-| labels | 对应的项目的标题集合 | array | - | ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] |
+| lists | 预约列表 | array | - |  |
+| template | 预约参数模版 | object | - | -|
+
+### Events
+| 事件名称 | 说明 |	回调参数 |
+|--- | --- | --- |
+| onRemove | 删除预约 | object |
+| onEdit | 编辑预约 | object |
+| onAdd | 新增预约 | object |
+
