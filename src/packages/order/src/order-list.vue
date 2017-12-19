@@ -4,7 +4,7 @@
     hk-header.hk-order-list-title(
       :title="'定时预约'",
       @click-left="back",
-      :rightText="isEdit?'完成':'编辑'",
+      :rightText="value.length===0?'':isEdit?'完成':'编辑'",
       @click-right="toEdit"
     )
     .hk-order-list-body
