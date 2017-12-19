@@ -24,6 +24,9 @@ export default {
 @import "~normalize.css"
 @import "~font-awesome/css/font-awesome.css"
 @import "~github-markdown-css/github-markdown.css"
+html
+  font-size 20px !important
+
 body
   overflow-x hidden
   overflow-y auto
