@@ -8,7 +8,7 @@
     )
       hk-timepicker(
         v-model="date",
-        :type="'hh:mm:ss'",
+        :type="'hh:mm'",
         :title="'倒计时时间'"
       )
     .hk-time-demo-block(
