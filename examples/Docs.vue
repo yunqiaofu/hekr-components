@@ -10,7 +10,7 @@ const components = {
   readme: () => import('../README.md')
 }
 router.options.routes.forEach(route => {
-  components[`${route.name}-doc`] = () => import(`@/components/${route.name}/README.md`)
+  components[`${route.name}-doc`] = () => import(`./views/${route.name}/README.md`)
 })
 
 export default {
