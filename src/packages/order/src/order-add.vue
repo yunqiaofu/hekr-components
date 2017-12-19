@@ -1,20 +1,20 @@
 
 <template lang="pug">
-  .add
-    hk-header.add-header(
+  .hk-add
+    hk-header.hk-add-header(
       :title="'预约设置'",
       @click-left="go('list')",
       :rightText="'保存'",
       @click-right="save"
     )
-    .add-tag
+    .hk-add-tag
       span 标签
-      input.add-tag-input(
+      input.hk-add-tag-input(
         placeholder="未命名",
         v-model="taskName"
       )
-    .add-timepick-title 时间
-    .add-timepick
+    .hk-add-timepick-title 时间
+    .hk-add-timepick
       hk-timepicker(
         v-model="date",
         :type="'hh:mm'",
@@ -23,15 +23,16 @@
     hk-week(
       v-model="week"
     )
-    .add-control 开 / 关
-      .add-control-btn(
-        :class="{'add-control-active':!enable}",
-        @click="enable=false"
-      ) 定时关
-      .add-control-btn(
-        @click="enable=true",
-        :class="{'add-control-active':enable}"
-      ) 定时开
+    .hk-add-control(
+      v-for="item in options",
+      :key="item.argument"
+    ) {{item.label}}
+      .hk-add-control-btn(
+        v-for="i,k in item.maps",
+        :key="k",
+        :class="{'hk-add-control-active':code[item.argument]===i.value}",
+        @click="click(item.argument, i.value)"
+      ) {{i.name}}
 </template>
 
 <script>
@@ -50,6 +51,10 @@
       template: {
         type: Object,
         default: () => {}
+      },
+      options: {
+        type: Array,
+        default: () => []
       }
     },
     data () {
@@ -59,7 +64,8 @@
         taskName: myTemplate.taskName,
         enable: myTemplate.enable,
         week: [],
-        date: {h: 1, m: 1}
+        date: {h: 1, m: 1},
+        code: {}
       }
     },
     mounted () {
@@ -71,6 +77,7 @@
       this.week = l
       this.date = {h: this.myTemplate.date.hour || 0, m: this.myTemplate.date.minute || 0}
       this.taskName = this.myTemplate.taskName
+      this.code = this.myTemplate.code
     },
     computed: {
       hour () {
@@ -95,9 +102,17 @@
         return l
       }
     },
+    watch: {
+    },
     methods: {
       go (route) {
         this.$emit('go', route)
+      },
+      click (argument, value) {
+        this.code[argument] = value
+        this.code = {
+          ...this.code
+        }
       },
       save () {
         let ob = {
@@ -108,12 +123,13 @@
             repeatList: this.repeatList
           },
           taskName: this.taskName,
-          enable: this.enable
+          code: this.code
         }
         this.$emit('input', ob)
         if (this.myTemplate.taskId || this.type === 'edit') {
           this.$emit('onEdit', ob)
         } else {
+          ob.enable = true // 新增默认可用
           this.$emit('onAdd', ob)
         }
         this.go('list')
@@ -123,7 +139,7 @@
 </script>
 
 <style lang="stylus">
-  .add
+  .hk-add
     height 100vh
     background-color #f5f5f5
     &-header
