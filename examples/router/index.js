@@ -95,6 +95,11 @@ export default new Router({
       path: '/swipe',
       name: 'swipe',
       component: () => import('../views/swipe')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/select')
     }
   ]
 })
