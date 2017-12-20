@@ -43,6 +43,7 @@ export default {
       }
       if (this.$route.name) {
         this.view = this.$route.name + '-doc'
+        this.source = ''
         this.$http = axios.CancelToken.source()
         await axios.get(`/views/${this.$route.name}/index.vue`, {
           cancelToken: this.$http.token
@@ -59,13 +60,11 @@ export default {
       }
     },
     setHljs () {
-      this.$nextTick(() => {
-        setTimeout(() => {
-          this.$el.querySelectorAll('pre code').forEach(item => {
-            hljs.highlightBlock(item)
-          })
-        }, 50)
-      })
+      setTimeout(() => {
+        this.$el.querySelectorAll('pre code').forEach(item => {
+          hljs.highlightBlock(item)
+        })
+      }, 50)
     }
   }
 }
