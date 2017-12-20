@@ -5,11 +5,12 @@
     .docs-source-title 示例源码
     .docs-source-code
       pre
-        code {{ source }}
+        code.language-html {{ source }}
 </template>
 
 <script>
 import axios from 'axios'
+import hljs from 'highlight.js'
 import router from './router'
 const components = {
   readme: () => import('../README.md')
@@ -36,28 +37,44 @@ export default {
     }
   },
   methods: {
-    setView () {
+    async setView () {
       if (this.$http) {
         this.$http.cancel()
       }
       if (this.$route.name) {
         this.view = this.$route.name + '-doc'
         this.$http = axios.CancelToken.source()
-        axios.get(`/views/${this.$route.name}/index.vue`, {
+        await axios.get(`/views/${this.$route.name}/index.vue`, {
           cancelToken: this.$http.token
         }).then(({ data }) => {
           this.source = data
+        }).catch(() => {
+          this.$nitify('获取源码文件失败')
         })
+        this.setHljs()
       } else {
         this.source = ''
         this.view = 'readme'
+        this.setHljs()
       }
+    },
+    setHljs () {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.$el.querySelectorAll('pre code').forEach(item => {
+            hljs.highlightBlock(item)
+          })
+        }, 50)
+      })
     }
   }
 }
 </script>
 
 <style lang="stylus">
+@import '~highlight.js/styles/monokai.css'
+@import "~github-markdown-css/github-markdown.css"
+
 .docs
   padding 1rem
   text-align left
@@ -65,24 +82,32 @@ export default {
   margin-left 40px
   @media (max-width: 960px)
     margin 0 auto
+  pre
+    background #272822
+    border-radius 3px
+  code
+    display block
+    overflow-x auto
+    padding 0.5em
+    background #272822
+    color #ddd
+    border-radius 3px
+
   &-source
     max-width 960px
     margin 0 auto
     padding 1rem 0
     &-title
-      padding 0.3rem 0
+      padding 0.5rem 0
       font-size 1rem
       font-weight 600
     &-code
-      padding 0.8rem
-      overflow auto
       font-size 85%
       line-height 1.45
-      background-color #f6f8fa
       border-radius 3px
       word-wrap normal
+
 .markdown-body
   max-width 960px
   margin 0 auto
-
 </style>

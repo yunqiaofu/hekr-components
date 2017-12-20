@@ -53,6 +53,8 @@ export default {
       },
       visibleInput: false,
       inputProps: {
+        value: '空气净化器',
+        type: 'text',
         maxlength: 12,
         placeholder: '请输入设备名称'
       },
