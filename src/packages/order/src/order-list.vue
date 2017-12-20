@@ -63,7 +63,7 @@
         this.isEdit = !this.isEdit
       },
       back () {
-        this.$router.go(-1)
+        this.$emit('back')
       },
       go (route) {
         this.$emit('go', route)

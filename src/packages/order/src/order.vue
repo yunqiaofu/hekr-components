@@ -8,7 +8,8 @@
       @check="check",
       @remove="remove",
       @edit="edit",
-      :options="options"
+      :options="options",
+      @back="back"
     )
     order-add(
       v-if="page==='add'",
@@ -95,6 +96,9 @@
       }
     },
     methods: {
+      back () {
+        this.$emit('back')
+      },
       go (page) {
         this.page = page
       },
