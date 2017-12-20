@@ -5,6 +5,7 @@
       @onRemove="onRemove",
       @onEdit="onEdit",
       @onAdd="onAdd",
+      @back="back",
       :template="template",
       :options="options"
     )
@@ -15,8 +16,7 @@
     taskName: '新加预约',
     code: {
       cmdTag: 'setSw'
-    },
-    schedulerType: 'LOOP'
+    }
   }
   export default {
     name: 'hk-order-demo',
@@ -67,6 +67,9 @@
       },
       onAdd (data) {
         console.log('onAdd', data)
+      },
+      back () {
+        console.log('back')
       }
     }
   }
