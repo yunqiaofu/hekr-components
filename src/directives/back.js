@@ -74,7 +74,6 @@ const back = new Proxy(stack, {
             throw new TypeError('[push]参数callback必须是Function')
           }
           const key = `function-${Date.now()}-${Math.round(Math.random() * 1000)}-${stack.length}`
-          console.log(key)
           stack.push({
             key,
             callback () {
