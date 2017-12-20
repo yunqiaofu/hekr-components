@@ -150,7 +150,7 @@
     padding 0.5rem 1rem
     position relative
     &-border
-      border-bottom 1px solid #cccccc
+      border-bottom 0.05rem solid #cccccc
     &-left-icon
       position absolute
       left 0.8rem
@@ -178,10 +178,9 @@
     &-right
       position absolute
       right 1rem
-      font-size 0.85rem
+      font-size 1.2rem
       color #a4a4a4
       line-height 3rem
-      letter-spacing -0.41px
       transition all 0.1s ease-in-out
       &-delete
         transform translateX(-1.3rem)
