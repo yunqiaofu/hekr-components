@@ -23,7 +23,7 @@ export default {
 <style lang="stylus">
 @import "~normalize.css"
 @import "~font-awesome/css/font-awesome.css"
-@import "~github-markdown-css/github-markdown.css"
+
 html
   font-size 20px !important
 
