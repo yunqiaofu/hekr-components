@@ -36,6 +36,7 @@ this.$confirm({ ... })
 | cancelText | 取消按钮文字 | string | - | 取消 |
 | showConfirm | 控制显示确定按钮 | boolean | - | true |
 | confirmText | 确定按钮文字 | string | - | 确定 |
+| vback | 是否支持v-back | boolean | - | true |
 
 ## 返回值
 返回值是一个经过封装的Promise对象，对象有一个```close```方法可以用来关闭当前对话框
