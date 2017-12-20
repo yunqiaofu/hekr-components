@@ -84,13 +84,13 @@ export default {
   pre
     background #272822
     border-radius 3px
-  code
-    display block
-    overflow-x auto
-    padding 0.5em
-    background #272822
-    color #ddd
-    border-radius 3px
+    code
+      display block
+      overflow-x auto
+      padding 0.5em
+      background #272822
+      color #ddd
+      border-radius 3px
 
   &-source
     max-width 960px
