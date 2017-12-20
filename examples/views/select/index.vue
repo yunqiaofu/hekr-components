@@ -52,7 +52,7 @@
   .hk-select-demo
     text-align center
     font-size 17px
-    height 100vh
+    height 100%
     &-title
       margin 10px auto
     &-block

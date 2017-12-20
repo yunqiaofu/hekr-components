@@ -11,8 +11,9 @@
 | max | value的最大值 | string | - | 32 |
 | equalCount | 刻度的数量 | number | - | 50 |
 | step | 间隔 | number | - | 1 |
-| beginColor | 开始的颜色 | string | - | 50 |
-| endColor | 结束的颜色 | string | - | 50 |
+| beginColor | 开始的颜色 | string | - |  |
+| endColor | 结束的颜色 | string | - |  |
+| defaultColor | 默认未选颜色 | string | - |  |
 | disabled | 是否禁用状态 | boolean |	- | false |
 | block | 是否为块级样式 | boolean | - | false |
 | loading | 是否显示加载动画 | boolean | - | false |

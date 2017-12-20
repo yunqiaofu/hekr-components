@@ -93,8 +93,6 @@
     &-body
       margin 0 0 0.7rem 1rem
       padding 0
-      max-height 8.25rem
-      overflow: auto
       &-item
         list-style none
         text-align left
