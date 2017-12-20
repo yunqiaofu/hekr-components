@@ -4,7 +4,7 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| type | 按钮类型 | string | both / touch / button
+| type | 按钮类型 | string | both / touch / button / none
 | maxR | 外径值 | number | - | 125 |
 | minR | 内径值 | number | - | 100 |
 | min | value的最小值 | number | - | 16 |
