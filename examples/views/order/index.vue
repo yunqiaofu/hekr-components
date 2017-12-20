@@ -5,6 +5,7 @@
       @onRemove="onRemove",
       @onEdit="onEdit",
       @onAdd="onAdd",
+      @back="back",
       :template="template",
       :options="options"
     )
@@ -66,6 +67,9 @@
       },
       onAdd (data) {
         console.log('onAdd', data)
+      },
+      back () {
+        console.log('back')
       }
     }
   }
