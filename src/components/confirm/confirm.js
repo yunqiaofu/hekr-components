@@ -28,10 +28,19 @@ export default Vue => {
     })
     // 关闭方法
     $.close = () => vm.$emit('cancel')
+
+    let key
+    if (options.vback !== false) {
+      key = vm.$back.push($.close)
+    }
+
     // Promise结束之后执行
     $.finally(() => {
       vm.$destroy()
       document.body.removeChild(vm.$el)
+      if (key) {
+        vm.$back.delete(key)
+      }
     })
     return $
   }
