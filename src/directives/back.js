@@ -1,6 +1,6 @@
 // 存储back操作
 const stack = []
-window.sss = stack
+
 if (process.env.NODE_ENV === 'development') {
   let style = {
     'color': '#fff',
