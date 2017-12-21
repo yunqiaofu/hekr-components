@@ -13,7 +13,8 @@
           :class="{'hk-select-body-item-icon-disabled': item.disabled}"
         )
           hk-icon(
-            :name="getIcon(item)"
+            :name="getIcon(item).icon"
+            :style="getIcon(item).style"
           )
 </template>
 
@@ -67,13 +68,14 @@
       },
       getIcon (item) {
         let icon = item.checked ? item.onIcon : item.offIcon
+        let style = item.checked ? 'color: #0195fb' : 'color: #666'
         if (!item.onIcon && item.checked) {
           icon = this.onIcon
         }
         if (!item.offIcon && !item.checked) {
           icon = this.offIcon
         }
-        return icon
+        return {icon: icon, style: style}
       }
     }
   }
