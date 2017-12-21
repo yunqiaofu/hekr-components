@@ -94,10 +94,9 @@ export default {
     width 100%
     &-header
       height 2.5rem
-      border-bottom solid 1px #DEDEDE
+      border-bottom solid 0.05rem #DEDEDE
       font-size 0.85rem
       color #030303
-      letter-spacing: -0.41px
       line-height 2.5rem
       text-align left
       padding-left 4.5%
