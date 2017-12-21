@@ -1,9 +1,7 @@
 <template lang="pug">
 .hk-check-demo
   hk-check(
-    v-model = "active",
-    :onIcon="icon",
-    :offIcon="offIcon"
+    v-model="active"
   )
   div radio组件
   hk-check(

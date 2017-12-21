@@ -4,25 +4,23 @@
     :style="{ margin: '20px' }"
   ) switch组件
   hk-switch(
-    :active="active",
-    @click="getSwitch"
+    v-model="active"
   )
   div(
     :style="{ margin: '20px' }"
   ) switch默认样式
   hk-switch(
-    :active="active",
+    v-model="active",
     :onColor="onColor",
     :offColor="offColor",
-    :text="text",
-    @click="getSwitch",
+    :text="text"
   )
   div(
     :style="{ margin: '20px' }"
   ) switch修改背景颜色
   hk-switch(
+    v-model="active",
     :disabled="disabled",
-    :active="active",
     :onColor="onColor",
   )
   div switch为disabled
@@ -38,12 +36,6 @@ export default {
       offColor: 'orange',
       active: true,
       text: '开关'
-    }
-  },
-  methods: {
-    getSwitch (d) {
-      console.log('example status', d)
-      this.active = !d
     }
   }
 }

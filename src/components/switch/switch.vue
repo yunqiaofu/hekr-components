@@ -1,19 +1,23 @@
 <template lang="pug">
-.hk-switch
-  .hk-switch-wrap
-    .hk-switch-switch(
-      :class="getClass",
-      @click="toggle",
-      :style="{ backgroundColor : getStyle, borderColor : getStyle }"
-    )
-      .hk-switch-switch-toggle
-    .hk-switch-text {{text}}
+.hk-switch(
+  :class="getClass"
+)
+  .hk-switch-container(
+    :style="getStyle",
+    @click="toggle"
+  )
+    .hk-switch-container-toggle
+  .hk-switch-text(v-if="text") {{ text }}
 </template>
 
 <script>
 export default {
   name: 'hk-switch',
   props: {
+    value: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -29,41 +33,36 @@ export default {
     text: {
       type: String,
       default: ''
-    },
-    active: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
     getClass () {
-      const className = []
-      if (this.active) {
-        className.push('hk-switch-switch-on')
+      return {
+        'hk-switch-on': this.value,
+        'hk-switch-disabled': this.disabled
       }
-      if (this.disabled) {
-        className.push('hk-switch-switch-disabled')
-      }
-      return className.join(' ')
     },
     getStyle () {
-      var style = ''
       if (this.disabled) {
         return
       }
-      if (this.onColor && this.active) {
-        style = this.onColor
+      if (this.value) {
+        return {
+          'background-color': this.onColor,
+          'border-color': this.onColor
+        }
+      } else {
+        return {
+          'background-color': this.offColor,
+          'border-color': this.offColor
+        }
       }
-      if (this.offColor && !this.active) {
-        style = this.offColor
-      }
-      return style
     }
   },
   methods: {
     toggle () {
       if (!this.disabled) {
-        this.$emit('click', this.active)
+        this.$emit('input', !this.value)
       }
     }
   }
@@ -71,51 +70,41 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "../../stylus/variables.styl"
-.hk-switch {
-  display: inline-block
+.hk-switch
+  display inline-block
   text-align center
-  .hk-switch-switch {
-    display: inline-block
-    border: 1px solid #C0BFBF;
-    background-color: #C0BFBF;
-    width: 2rem;
-    height: 1.2rem;
-    border-radius: 1rem;
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-      float: none;
-    }
-    &-toggle {
-      background-color: #fff;
-      width: 1rem;
-      height: 1rem;
-      margin: 0.05rem;
-      border-radius: 50%;
-      transition: all 0.2s ease-in-out;
-    }
-    &-on {
-      background-color: #3AA4F7;
-      border-color: #3AA4F7;
-      .hk-switch-switch-toggle {
-        float: right;
-        background-color: #fff;
-      }
-    }
-    &-disabled {
-      .hk-switch-switch-toggle {
-        background-color: #B2B2B2;
-      };
-      cursor: not-allowed;
-      background-color: #ccc;
-      border-color: #ccc
-    }
-    .hk-switch-text {
-      color: #666
-      font-size: 0.7rem
-    }
-  }
-}
+  &-container
+    border 0.05rem solid #c0bfbf
+    background-color #c0bfbf
+    width 2rem
+    height 1.2rem
+    border-radius 1rem
+    cursor pointer
+    &-toggle
+      background-color #fff
+      width 1rem
+      height 1rem
+      margin 0.05rem
+      border-radius 50%
+      transition transform 0.2s ease-in-out
+
+  &-text
+    margin-top 0.15rem
+    font-size 0.75rem
+    color #666
+
+  &-on &-container
+      background-color #3aa4f7
+      border-color #3aa4f7
+      &-toggle
+        transform translateX(0.8rem)
+        background-color #fff
+
+  &-disabled &-container
+    background-color #ccc
+    border 0.05rem solid #ccc
+    cursor not-allowed
+    &-toggle
+      background-color #b2b2b2
+
 </style>

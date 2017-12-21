@@ -96,7 +96,7 @@ $height-2 = 1.5rem
     line-height $height * 0.9
     margin 0 4.4rem
     text-align center
-    font-size $font-size-2
+    font-size 0.9rem
     color #000
     font-weight 500
     white-space nowrap

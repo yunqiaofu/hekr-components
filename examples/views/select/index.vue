@@ -1,10 +1,19 @@
 <template lang="pug">
   .hk-select-demo
-    .hk-icon-demo-title select
+    .hk-icon-demo-title 单选
     hk-select(
+      v-model="value1",
       :title="title",
-      :type="type"
-      :options="options",
+      :items="items",
+      @change="change"
+    )
+    .hk-icon-demo-title 多选并且没有标题
+    hk-button(@click="changeDisabled") 改变disabled
+    hk-select(
+      v-model="value2",
+      :items="items",
+      multiple,
+      :disabled="disabled",
       @change="change"
     )
 </template>
@@ -14,35 +23,32 @@
     name: 'hk-select-demo',
     data () {
       return {
-        type: 'single',
-        options: [
+        value1: [1],
+        value2: [0, 2],
+        disabled: false,
+        items: [
           {
-            name: '制冷模式',
-            checked: true, // 必选
-            disabled: false
+            name: '制冷模式'
           },
           {
-            name: '制热模式',
-            checked: false,
-            offIcon: 'hk-icons-circle', // 可选
-            disabled: false
+            name: '制热模式'
           },
           {
             name: '送风模式',
-            checked: false,
-            onIcon: 'fa fa-gratipay', // 可选
-            disabled: false
+            checkProps: {
+              disabled: true
+            }
           }
         ],
-        title: '模式设定',
-        value: 'code',
-        show: false
+        title: '模式设定'
       }
     },
     methods: {
       change (value) {
         console.log('getvalue', value)
-        this.show = false
+      },
+      changeDisabled () {
+        this.disabled = !this.disabled
       }
     }
   }
