@@ -30,7 +30,6 @@ export default Vue => {
     if (!options.only) {
       $notify._.push(colse)
     }
-    console.dir($notify._)
     // 关闭方法
     return colse
   }
