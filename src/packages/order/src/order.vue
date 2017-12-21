@@ -9,10 +9,12 @@
       @remove="remove",
       @edit="edit",
       :options="options",
-      @back="back"
+      @back="back",
+      :setting="setting"
     )
     order-add(
       v-if="page==='add'",
+      v-back="vback",
       @go="go",
       @onAdd="onAdd",
       @onEdit="onEdit",
@@ -21,6 +23,7 @@
     )
     order-add(
       v-if="page==='edit'",
+      v-back="vback",
       :type="'edit'",
       @go="go",
       @onAdd="onAdd",
@@ -58,6 +61,14 @@
       options: {
         type: Array,
         default: () => []
+      },
+      setting: {
+        type: Object,
+        default: () => {
+          return {
+            maxLen: 10
+          }
+        }
       }
     },
     data () {
@@ -96,6 +107,9 @@
       }
     },
     methods: {
+      vback () {
+        this.page = 'list'
+      },
       back () {
         this.$emit('back')
       },
