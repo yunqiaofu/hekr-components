@@ -1,6 +1,9 @@
 <template lang="pug">
 .hk-dashboard
   .dashboard(ref="dashboard")
+    .dashboard-cover(
+      :style="{ width: width / 30 + 'rem', height: height / 30 + 'rem'}"
+    )
     .dashboard-inner
       slot(
         name="inner"
@@ -25,7 +28,7 @@
         :style="path.style"
       )
     .dashboard-btn(
-      v-if="type !== 'touch'"
+      v-if="type !== 'touch' && type !== 'none'"
     )
       .dashboard-reduce(
         ref="reduce"
@@ -66,7 +69,7 @@ export default {
   props: {
     value: {
       type: Number,
-      require: true
+      required: true
     },
     // value 的范围
     min: {
@@ -112,10 +115,14 @@ export default {
       type: String,
       default: 'rgb(65, 185, 242)'
     },
+    defaultColor: {
+      type: String,
+      default: 'rgb(135, 135, 135'
+    },
     type: {
       type: String,
       default: 'both'
-    }, // touch button
+    }, // touch button none
     disabled: Boolean
   },
   data () {
@@ -156,7 +163,7 @@ export default {
         // classnames(DASHBOARD_POINT, {
         //   [DASHBOARD_POINT_ACTIVE]: count === select
         // })
-        if (count === select) {
+        if (count === select && this.type !== 'button' && this.type !== 'none') {
           pointClasses.push(DASHBOARD_POINT_ACTIVE)
         }
 
@@ -178,11 +185,20 @@ export default {
         const red = Math.round(begredCol * percent + endredCol * weightPercent)
         const green = Math.round(beggreCol * percent + endgreCol * weightPercent)
         const blue = Math.round(begblueCol * percent + endblueCol * weightPercent)
-
+        let strokeStl = ''
+        if (count <= select) {
+          if (this.disabled) {
+            strokeStl = 'stroke: #363636'
+            return
+          }
+          strokeStl = `stroke: rgb(${red},${green},${blue})`
+        } else {
+          strokeStl = `stroke: ${this.defaultColor}`
+        }
         pathEls.push({
           d: `M ${minX} ${minY} L ${maxX} ${maxY}`,
           class: pointClasses,
-          style: count <= select && (this.disabled ? 'stroke: #363636' : `stroke: rgb(${red},${green},${blue})`)
+          style: strokeStl // count <= select && (this.disabled ? 'stroke: #363636' : `stroke: rgb(${red},${green},${blue})`)
         })
       }
       return pathEls
@@ -190,8 +206,7 @@ export default {
   },
   methods: {
     handleTouchChange (e) {
-      // console.log(e)
-      if (this.type === 'button') {
+      if (this.type === 'button' || this.type === 'none') {
         return
       }
       if (!this.disabled) {
@@ -333,6 +348,11 @@ export default {
     justify-content center
     align-items center
 
+    &-cover
+      border 1px solid rgba(0, 0, 0, 0)
+      border-radius 50%
+      z-index 99
+      position absolute
     &-inner
       position absolute
       top 50%
@@ -391,4 +411,5 @@ export default {
       font-size 1.2rem
       line-height 2rem
       text-align center
+
 </style>

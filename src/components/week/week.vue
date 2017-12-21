@@ -81,7 +81,7 @@ export default {
       } else {
         value.push(itemIndex)
       }
-      this.$emit('input', value)
+      this.$emit('input', value.sort())
     }
   }
 }

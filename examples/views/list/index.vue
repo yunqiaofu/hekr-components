@@ -54,9 +54,10 @@
   )
   h2 使用slot
   hk-list(
-    border
+    border,
+    @click="changeInput"
   )
-    span(slot="list") 内容内容内容，不分左右 {{ inputValue }}
+    span(slot="list") 点击这里会改变输入框type不分左右 {{ inputValue }}
   hk-list(
     type="text",
     leftIcon="fa fa-home",
@@ -67,7 +68,7 @@
 
   .demo-button
     hk-button(@click="toggleDisabled") 切换Disabled
-    
+
 
 </template>
 
@@ -100,6 +101,9 @@ export default {
       } else {
         this.index ++
       }
+    },
+    changeInput () {
+      this.inputProps.type = this.inputProps.type === 'text' ? 'password' : 'text'
     },
     toggleDisabled () {
       this.disabled = !this.disabled

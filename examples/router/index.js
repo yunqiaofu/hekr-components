@@ -87,9 +87,24 @@ export default new Router({
       component: () => import('../views/notify')
     },
     {
+      path: '/order',
+      name: 'order',
+      component: () => import('../views/order')
+    },
+    {
       path: '/swipe',
       name: 'swipe',
       component: () => import('../views/swipe')
+    },
+    {
+      path: '/v-back',
+      name: 'v-back',
+      component: () => import('../views/v-back')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/select')
     }
   ]
 })

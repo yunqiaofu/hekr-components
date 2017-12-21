@@ -13,7 +13,7 @@
           input.hk-dialog-container-body-input(
             v-if="type === 'input'",
             v-bind="inputProps",
-            type="text",
+            :type="getInputType",
             v-model="inputValue"
           )
           .hk-dialog-container-body-text(v-else) {{ text }}
@@ -118,6 +118,20 @@ export default {
       return {
         'hk-dialog-container-footer-confirm-full': !this.showCancel
       }
+    },
+    getInputValue () {
+      return (this.inputProps || {}).value || ''
+    },
+    getInputType () {
+      return (this.inputProps || {}).type || 'text'
+    }
+  },
+  mounted () {
+    this.inputValue = this.getInputValue
+  },
+  watch: {
+    getInputValue (val) {
+      this.inputValue = val
     }
   },
   methods: {

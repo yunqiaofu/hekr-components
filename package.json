@@ -1,6 +1,6 @@
 {
   "name": "@hekr/hekr-components",
-  "version": "0.0.10",
+  "version": "0.1.6",
   "description": "A Vue.js project",
   "author": "nashaofu <diaocheng@outlook.com>",
   "main": "./hekr-components.js",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "axios": "^0.17.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.1.1",
@@ -46,6 +47,7 @@
     "font-awesome": "^4.7.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "github-markdown-css": "^2.9.0",
+    "highlight.js": "^9.12.0",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.17.3",
     "lodash": "^4.17.4",
@@ -61,17 +63,21 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.8",
-    "vue": "^2.5.9",
+    "vue": "^2.5.11",
     "vue-loader": "^13.3.0",
     "vue-markdown-loader": "^2.3.0",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "^2.5.11",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-merge": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.hekr.me:front-end/hekr-components.git"
   },
   "engines": {
     "node": ">= 4.0.0",

@@ -62,6 +62,7 @@ app.use(require('connect-history-api-fallback')())
 app.use(devMiddleware)
 
 app.use(express.static('./static'))
+app.use('/views', express.static('./examples/views'))
 
 var _resolve
 var _reject
