@@ -9,7 +9,8 @@
       @remove="remove",
       @edit="edit",
       :options="options",
-      @back="back"
+      @back="back",
+      :setting="setting"
     )
     order-add(
       v-if="page==='add'",
@@ -58,6 +59,14 @@
       options: {
         type: Array,
         default: () => []
+      },
+      setting: {
+        type: Object,
+        default: () => {
+          return {
+            maxLen: 10
+          }
+        }
       }
     },
     data () {

@@ -7,7 +7,8 @@
       @onAdd="onAdd",
       @back="back",
       :template="template",
-      :options="options"
+      :options="options",
+      :setting="setting"
     )
 </template>
 
@@ -37,8 +38,7 @@
               {
                 name: '定时关',
                 value: 0
-              }],
-            defaultValue: 0
+              }]
           },
           {
             type: 'button',
@@ -52,10 +52,12 @@
               {
                 name: '弱',
                 value: 0
-              }],
-            defaultValue: 0
+              }]
           }
-        ]
+        ],
+        setting: {
+          maxLen: 10
+        }
       }
     },
     methods: {
