@@ -68,6 +68,7 @@
 
   .demo-button
     hk-button(@click="toggleDisabled") 切换Disabled
+    hk-button(@click="toggleSwitch") 切换Switch
 
 
 </template>
@@ -107,6 +108,10 @@ export default {
     },
     toggleDisabled () {
       this.disabled = !this.disabled
+    },
+    toggleSwitch () {
+      this.switchValue = !this.switchValue
+      this.checkValue = !this.checkValue
     }
   }
 }
@@ -118,8 +123,10 @@ export default {
     .delete
       color red
   .demo-button
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
+    width 100%
+    text-align center
+    margin-top 20px
+    .hk-button
+      margin 10px
 </style>
 
