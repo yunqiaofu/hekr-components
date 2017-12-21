@@ -27,45 +27,14 @@ if (process.env.NODE_ENV === 'development') {
   stack.splice = (...arg) => log('移除back-->splice', () => splice.call(stack, ...arg))
 }
 
-const deleteBack = key => {
-  for (let i = 0, length = stack.length; i < length; i++) {
-    if (key === stack[i].key) {
-      stack.splice(i, 1)
-      break
-    }
-  }
-}
-
-const directive = {
-  // 指令绑定时调用
-  bind ($el, binding, vnode, oldVnode) {
-    const key = `${binding.expression}-${Date.now()}-${Math.round(Math.random() * 1000)}-${stack.length}`
-    $el.__BACK__ = key
-    stack.push({
-      key: key,
-      callback () {
-        if (typeof binding.value === 'boolean') {
-          vnode.context[binding.expression] = false
-        } else if (typeof binding.value === 'function') {
-          binding.value()
-        }
-        deleteBack($el.__BACK__)
-      }
-    })
-  },
-  unbind ($el, binding, vnode, oldVnode) {
-    deleteBack($el.__BACK__)
-  }
-}
-
 // 不让外部修改
 const back = new Proxy(stack, {
   get (target, key, receiver) {
     switch (key) {
       case 'pop':
         return () => {
-          if (stack.length) {
-            stack.pop().callback()
+          if (target.length) {
+            target.pop().callback()
           }
         }
       case 'push':
@@ -73,18 +42,25 @@ const back = new Proxy(stack, {
           if (typeof callback !== 'function') {
             throw new TypeError('[push]参数callback必须是Function')
           }
-          const key = `function-${Date.now()}-${Math.round(Math.random() * 1000)}-${stack.length}`
-          stack.push({
+          const key = `v-back-${Date.now()}-${Math.round(Math.random() * 10000)}-${target.length}`
+          target.push({
             key,
             callback () {
               callback()
-              deleteBack(key)
+              back.delete(key)
             }
           })
           return key
         }
       case 'delete':
-        return deleteBack
+        return key => {
+          for (let i = 0, length = target.length; i < length; i++) {
+            if (key === target[i].key) {
+              target.splice(i, 1)
+              break
+            }
+          }
+        }
       default:
         if (target.hasOwnProperty(key)) {
           return Reflect.get(target, key, receiver)
@@ -94,6 +70,22 @@ const back = new Proxy(stack, {
   },
   set (target, key, value, receiver) { }
 })
+
+const directive = {
+  // 指令绑定时调用
+  bind ($el, binding, vnode, oldVnode) {
+    $el.__BACK__ = back.push(() => {
+      if (typeof binding.value === 'boolean') {
+        vnode.context[binding.expression] = false
+      } else if (typeof binding.value === 'function') {
+        binding.value()
+      }
+    })
+  },
+  unbind ($el, binding, vnode, oldVnode) {
+    back.delete($el.__BACK__)
+  }
+}
 
 export default Vue => {
   Vue.prototype.$back = back
