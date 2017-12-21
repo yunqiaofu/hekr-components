@@ -114,7 +114,6 @@
         }
       },
       itemTouchStart (event) {
-        console.log(event)
         this.start = true
         let finger
         if (event.changedTouches) {

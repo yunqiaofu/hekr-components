@@ -57,7 +57,6 @@
 <style lang="stylus">
   .hk-select-demo
     text-align center
-    font-size 17px
     height 100%
     &-title
       margin 10px auto
