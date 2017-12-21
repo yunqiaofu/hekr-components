@@ -1,30 +1,23 @@
 // 存储back操作
 const stack = []
 
-if (process.env.NODE_ENV === 'development') {
+// 打印日志
+const log = title => {
   let style = {
     'color': '#fff',
-    'background-color': '#272822',
-    'padding': '4px 7px',
+    'background': '#41b883',
+    'padding': '1px 4px',
     'border-radius': '3px',
     'font-weight': 'lighter'
   }
-  style = Object.keys(style).map(key => `${key}:${style[key]}`).join(';')
-
-  const log = (title, action) => {
+  if (title) {
+    style = Object.keys(style).map(key => `${key}:${style[key]}`).join(';')
     console.groupCollapsed(`%c${title}`, style)
-    console.log('%c变化前', 'color: gray', [...stack])
-    const val = action()
-    console.log('%c变化后', 'color: gray', [...stack])
+    console.log('%cbefore', 'color: gray', [...back])
+  } else {
+    console.log('%cafter', 'color: gray', [...back])
     console.groupEnd()
-    return val
   }
-  const splice = stack.splice
-  const push = stack.push
-  const pop = stack.pop
-  stack.pop = (...arg) => log('移除back-->pop', () => pop.call(stack, ...arg))
-  stack.push = (...arg) => log('添加back-->push', () => push.call(stack, ...arg))
-  stack.splice = (...arg) => log('移除back-->splice', () => splice.call(stack, ...arg))
 }
 
 // 不让外部修改
@@ -33,15 +26,18 @@ const back = new Proxy(stack, {
     switch (key) {
       case 'pop':
         return () => {
+          log('移除back-->pop')
           if (target.length) {
             target.pop().callback()
           }
+          log()
         }
       case 'push':
         return callback => {
           if (typeof callback !== 'function') {
             throw new TypeError('[push]参数callback必须是Function')
           }
+          log('添加back-->push')
           const key = `v-back-${Date.now()}-${Math.round(Math.random() * 10000)}-${target.length}`
           target.push({
             key,
@@ -50,16 +46,19 @@ const back = new Proxy(stack, {
               back.delete(key)
             }
           })
+          log()
           return key
         }
       case 'delete':
         return key => {
+          log('移除back-->delete')
           for (let i = 0, length = target.length; i < length; i++) {
             if (key === target[i].key) {
               target.splice(i, 1)
               break
             }
           }
+          log()
         }
       default:
         if (target.hasOwnProperty(key)) {
