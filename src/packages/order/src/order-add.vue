@@ -161,7 +161,7 @@
         font-size 0.8rem
         color #030303
         display inline-block
-        width 50px
+        width 2.5rem
     &-timepick-title
       background-color #fff
       padding-left 1rem

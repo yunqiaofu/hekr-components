@@ -14,6 +14,7 @@
     )
     order-add(
       v-if="page==='add'",
+      v-back="vback",
       @go="go",
       @onAdd="onAdd",
       @onEdit="onEdit",
@@ -22,6 +23,7 @@
     )
     order-add(
       v-if="page==='edit'",
+      v-back="vback",
       :type="'edit'",
       @go="go",
       @onAdd="onAdd",
@@ -105,6 +107,9 @@
       }
     },
     methods: {
+      vback () {
+        this.page = 'list'
+      },
       back () {
         this.$emit('back')
       },

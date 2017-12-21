@@ -128,7 +128,6 @@
       margin-left 1rem
       color #383838
       text-align left
-      letter-spacing -0.43px
     &-timepicker-unit
       margin-left 2.5rem
 </style>
