@@ -5,7 +5,8 @@
 |--- | --- | --- | --- | --- |
 | lists | 预约列表 | array | - |  |
 | template | 预约参数模版 | object | - | -|
-| options | 操作选项 | array | - | -|
+| options | 操作选项 | array | { type: 'button',argument: 'curtain_Qr',label: '强 / 弱',maps: [{name: '强',value: 1},{name: '弱',value: 0}]} | -|
+| setting | 配置信息 | object | {maxLen:10} | {maxLen:10} |
 
 ### Events
 | 事件名称 | 说明 |	回调参数 |

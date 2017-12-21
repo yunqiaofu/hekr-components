@@ -22,6 +22,7 @@
     .hk-order-list-footer
       hk-button.hk-order-list-btn(
         :type="'primary'",
+        :disabled="list.length+1>setting.maxLen",
         @click="go('add')"
       ) 添加预约
 </template>
@@ -37,6 +38,14 @@
       options: {
         type: Array,
         default: () => []
+      },
+      setting: {
+        type: Object,
+        default: () => {
+          return {
+            maxLen: 10
+          }
+        }
       }
     },
     computed: {

@@ -349,7 +349,7 @@ export default {
     align-items center
 
     &-cover
-      border 1px solid rgba(0, 0, 0, 0)
+      border 0.05rem solid rgba(0, 0, 0, 0)
       border-radius 50%
       z-index 99
       position absolute

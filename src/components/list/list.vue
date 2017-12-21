@@ -1,52 +1,46 @@
 <template lang="pug">
-.hk-list(@click="handleClick", :class="{'hk-list-border': border}")
+.hk-list(
+    :class="getClass",
+    @click="click"
+  )
   slot(name="list")
     .hk-list-left
       slot(name="left")
         i.hk-list-left-icon(
-          :class="leftIcon",
-          v-if="leftIcon"
+          v-if="leftIcon",
+          :class="leftIcon"
         )
         span.hk-list-left-icon(
           v-if="leftText"
         ) {{ leftText }}
+
+    .hk-list-right(v-if="type === 'input'")
+      input.hk-list-right-input(
+        v-bind="inputProps",
+        v-model="getValue",
+        :type="getInputType"
+      )
+    .hk-list-right(v-else-if="type === 'switch'")
+      hk-switch(
+        v-bind="switchProps",
+        v-model="getValue"
+      )
+    .hk-list-right(v-else-if="type === 'check'")
+      hk-check(
+        v-bind="checkProps",
+        v-model="getValue"
+      )
     .hk-list-right(
-      v-if="type === 'text'",
-      @click="rightClick",
-      :style="getColorStyle"
+      v-else,
+      :style="getRightStyle",
+      @click="rightClick"
     )
       slot(name="right")
-        span(
-          v-if="rightText"
-        ) {{ rightText }}
+        span(v-if="rightText") {{ rightText }}
         i.hk-list-right-icon(
           v-if="rightIcon",
           :class="rightIcon"
         )
-    .hk-list-right(v-if="type === 'input'")
-      input.hk-list-input(
-        :type="inputProps.type",
-        :value="value",
-        :maxLength="inputProps.maxLength",
-        @input="$emit('input', $event.target.value)"
-      )
-    .hk-list-right(v-if="type === 'switch'")
-      hk-switch(
-        :active="value",
-        :onColor="switchProps.onColor",
-        :offColor="switchProps.offColor",
-        :disabled="disabled",
-        @click="getSwitch"
-      )
-    .hk-list-right(v-if="type === 'check'")
-      hk-check(
-        v-model="checkValue",
-        :onColor="checkProps.onColor",
-        :offColor="checkProps.offColor",
-        :onIcon="checkProps.onIcon",
-        :offIcon="checkProps.offIcon",
-        :disabled="disabled"
-      )
 </template>
 
 <script>
@@ -56,7 +50,7 @@ export default {
     type: {
       type: String,
       default: 'text',
-      validator: val => {
+      validator (val) {
         return [
           'text',
           'input',
@@ -81,76 +75,54 @@ export default {
       type: String,
       default: '#999999'
     },
-    value: {},
-    inputProps: {
-      type: Object,
-      default: () => {
-        return {
-          type: 'text',
-          maxLength: 12
-        }
-      }
-    },
-    switchProps: {
-      type: Object,
-      default: () => {
-        return {
-          onColor: '#3AA4F7',
-          offColor: '#C0BFBF'
-        }
-      }
-    },
-    checkProps: {
-      type: Object,
-      default: () => {
-        return {
-          onColor: '#3AA4F7',
-          offColor: '#666',
-          onIcon: 'hk-icons-check-checked',
-          offIcon: 'hk-icons-circle'
-        }
-      }
-    },
     border: {
       type: Boolean,
       default: false
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      checkValue: this.value
-    }
-  },
-  watch: {
-    checkValue () {
-      this.$emit('input', this.checkValue)
+    value: {},
+    inputProps: {
+      type: Object,
+      default: () => {}
+    },
+    switchProps: {
+      type: Object,
+      default: () => {}
+    },
+    checkProps: {
+      type: Object,
+      default: () => {}
     }
   },
   computed: {
-    getColorStyle () {
+    getClass () {
+      return {
+        'hk-list-border': this.border
+      }
+    },
+    getRightStyle () {
       return {
         'color': this.textColor
+      }
+    },
+    getInputType () {
+      return (this.inputProps || {}).type || 'text'
+    },
+    getValue: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.$emit('input', val)
       }
     }
   },
   methods: {
-    handleClick () {
+    click () {
       this.$emit('click')
     },
     rightClick () {
       this.$emit('right-click')
-    },
-    getSwitch (d) {
-      const value = !d
-      this.$emit('input', value)
     }
-    // getCheck () {
-    //   this.$emit('input', this.checkValue)
-    // }
   }
 }
 </script>
@@ -162,6 +134,7 @@ ellipsis() {
   overflow hidden
   text-overflow ellipsis
 }
+
 .hk-list
   display flex
   justify-content center
@@ -173,7 +146,7 @@ ellipsis() {
   font-size $font-size-4
   ellipsis()
   &-border
-    border-bottom 1px solid #ccc
+    border-bottom 0.05rem solid #ccc
   &-left
     width 40%
     ellipsis()
@@ -185,9 +158,10 @@ ellipsis() {
     text-align right
     &-icon
       padding-left .2rem
-  &-input
-    width 100%
-    background none
-    outline none
-    border 0px
+    &-input
+      width 100%
+      background none
+      outline none
+      border 0
+
 </style>
