@@ -1,116 +1,123 @@
 <template lang="pug">
-  .hk-select
-    .hk-select-header(
-      v-if="title"
-    ) {{title}}
-    ul.hk-select-body
-      li.hk-select-body-item(
-        v-for="(item,index) in getOptions",
-        :key="index",
-        @click="select(index)"
-      ) {{item.name}}
-        i.hk-select-body-item-icon.icon.hk-icon(
-          :class="{'hk-select-body-item-icon-disabled': item.disabled}"
-        )
-          hk-icon(
-            :name="getIcon(item).icon"
-            :style="getIcon(item).style"
-          )
+.hk-select
+  .hk-select-header(v-if="title") {{ title }}
+  hk-list(
+    v-for="(item, index) in items",
+    :key="index",
+    type="check",
+    :leftText="item.name",
+    :value="getValue(index)",
+    :checkProps="getCheckProps(item.checkProps)",
+    border,
+    @input="select($event, index, item)"
+  )
 </template>
 
 <script>
-  export default {
-    name: 'hk-select',
-    props: {
-      title: {
-        type: String,
-        default: ''
-      },
-      options: {
-        type: Array,
-        default: () => []
+export default {
+  name: 'hk-select',
+  props: {
+    value: {
+      type: [Number, Array],
+      default: 0,
+      validator (val) {
+        if (Array.isArray(val)) {
+          return !val.find(it => typeof it !== 'number')
+        }
+        return typeof val === 'number'
       }
     },
-    data () {
+    title: {
+      type: String,
+      default: ''
+    },
+    items: {
+      type: Array,
+      default: () => []
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    getValue (index) {
+      if (this.multiple) {
+        if (Array.isArray(this.value)) {
+          return this.value.indexOf(index) !== -1
+        } else {
+          return this.value === index
+        }
+      } else {
+        if (Array.isArray(this.value)) {
+          return this.value[0] === index
+        } else {
+          return this.value === index
+        }
+      }
+    },
+    getCheckProps (checkProps) {
       return {
-        selected: null,
-        oldOptions: null,
-        offIcon: 'hk-icons-circle',
-        onIcon: 'hk-icons-check-checked'
+        ...checkProps,
+        disabled: this.disabled
       }
     },
-    mounted () {
-      this.oldOptions = this.options
-    },
-    computed: {
-      getOptions () {
-        return this.oldOptions
+    select (checked, index, item) {
+      if (this.disabled) {
+        return
+      }
+      if (this.multiple) {
+        this.selectMultiple(checked, index, item)
+      } else {
+        this.selectSingle(checked, index, item)
       }
     },
-    watch: {
-      selected (Nval) {
-        this.oldOptions.map((item, key) => {
-          if (key === Nval) {
-            this.oldOptions[key].checked = true
-          } else {
-            this.oldOptions[key].checked = false
-          }
-        })
-      }
+    selectSingle (checked, index, item) {
+      this.$emit('input', index)
+      this.$emit('change', {
+        value: index,
+        checked,
+        index,
+        item
+      })
     },
-    methods: {
-      select (index) {
-        if (this.options[index].disabled) {
-          return
+    selectMultiple (checked, index, item) {
+      let value = this.value
+      if (Array.isArray(value)) {
+        value = new Set(value)
+        if (checked) {
+          value.add(index)
+        } else {
+          value.delete(index)
         }
-        this.selected = index
-        this.$emit('change', this.selected)
-      },
-      getIcon (item) {
-        let icon = item.checked ? item.onIcon : item.offIcon
-        let style = item.checked ? 'color: #0195fb' : 'color: #666'
-        if (!item.onIcon && item.checked) {
-          icon = this.onIcon
-        }
-        if (!item.offIcon && !item.checked) {
-          icon = this.offIcon
-        }
-        return {icon: icon, style: style}
+      } else {
+        value = [value, index]
       }
+      value = [...value]
+      this.$emit('input', value)
+      this.$emit('change', {
+        value,
+        checked,
+        index,
+        item
+      })
     }
   }
+}
 </script>
 
 <style lang="stylus">
   @import "../../stylus/variables.styl"
   .hk-select
     background-color $color-white
-    width 100%
+    text-align left
     &-header
-      height 2.8rem
-      line-height 2.8rem
-      border-bottom solid 1px #DFDFDF
+      height 2.2rem
+      line-height 2.2rem
+      border-bottom solid 0.05rem #dfdfdf
       margin-left 1rem
-      text-align left
-    &-body
-      margin 0 0 0.7rem 1rem
-      padding 0
-      &-item
-        list-style none
-        text-align left
-        border-bottom solid 1px #DFDFDF
-        height 2.75rem
-        line-height 2.75rem
-        position relative
-        &-icon
-          position absolute
-          background-size: cover;
-          right 1rem
-          top 0rem
-          line-height 2.75rem
-          font-size 1.2rem
-          padding 0 !important
-          color #0195fb
-        &-icon&-icon-disabled
-          color #CCCCCC
 </style>
