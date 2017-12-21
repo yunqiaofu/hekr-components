@@ -128,6 +128,9 @@ export default {
   watch: {
     checkValue () {
       this.$emit('input', this.checkValue)
+    },
+    value () {
+      this.checkValue = this.value
     }
   },
   computed: {
@@ -148,9 +151,6 @@ export default {
       const value = !d
       this.$emit('input', value)
     }
-    // getCheck () {
-    //   this.$emit('input', this.checkValue)
-    // }
   }
 }
 </script>
