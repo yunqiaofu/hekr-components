@@ -255,10 +255,10 @@
       &-wheel
         z-index 1
       &-line
-        border-bottom solid 1px #DEDEDE
-        border-top solid 1px #DEDEDE
+        border-bottom solid 0.05rem #DEDEDE
+        border-top solid 0.05rem #DEDEDE
         line-height 1.7rem
-        font-size 12px
+        font-size 0.6rem
         color #333333
       &-line, &-list
         height 1.7rem
@@ -266,7 +266,7 @@
       &-list
         overflow hidden
       &-list-item
-        text-shadow 0 1px 1px rgba(102, 102, 102, 0.6)
+        text-shadow 0 0.05rem 0.05rem rgba(102, 102, 102, 0.6)
       &-list-item-span
         color #333333
         font-size 0.65rem
