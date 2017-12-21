@@ -18,15 +18,21 @@ export default {
   methods: {
     showNotify () {
       this.show = true
+      console.dir(this.$notify)
     },
     showNotify1 () {
       this.$notify('提示，呵呵呵！提示，呵呵呵提示，呵呵呵')
+      console.dir(this.$notify)
     },
     showNotify2 () {
       this.$notify({
         notify: '提示，呵呵呵！提示，呵呵呵提示，呵呵呵',
-        align: 'center'
+        align: 'center',
+        only: true
       })
+      console.dir(this.$notify)
+      this.$notify('我不会关闭前面的提示')
+      console.dir(this.$notify)
     },
     showNotify3 () {
       this.$notify({
@@ -35,6 +41,7 @@ export default {
         showMask: true,
         delay: 5000
       })
+      console.dir(this.$notify)
     }
   }
 }

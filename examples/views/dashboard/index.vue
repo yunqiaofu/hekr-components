@@ -11,6 +11,7 @@
     :equalCount="equalCount",
     :step="step",
     :type="type",
+    :defaultColor="defaultColor",
     @change="handleDashboard"
   )
     span.title(
@@ -32,6 +33,7 @@ export default {
       disabled: false,
       onColor: 'red',
       offColor: 'orange',
+      defaultColor: '#d0c643',
       active: true,
       text: '开关',
       min: 16,

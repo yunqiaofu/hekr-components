@@ -95,6 +95,16 @@ export default new Router({
       path: '/swipe',
       name: 'swipe',
       component: () => import('../views/swipe')
+    },
+    {
+      path: '/v-back',
+      name: 'v-back',
+      component: () => import('../views/v-back')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/select')
     }
   ]
 })

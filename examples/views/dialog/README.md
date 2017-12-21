@@ -11,7 +11,7 @@
 | title | 对话框标题 | string | - | - |
 | text | 对话框内容文字 | string | - | - |
 | bodyTextAlign | 对话框body部分文字对齐方式 | string | left/center/right | left |
-| inputProps | 对话框为input时，input的属性 | object | - | - |
+| inputProps | 对话框为input时，input的属性，可以传入输入框的初始值 | object | - | - |
 | showCancel | 控制显示取消按钮 | boolean | - | true |
 | cancelText | 取消按钮文字 | string | - | 取消 |
 | showConfirm | 控制显示确定按钮 | boolean | - | true |
