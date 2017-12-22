@@ -17,12 +17,11 @@ this.$confirm({ ... })
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| showMask | 控制显示背景遮罩 | boolean | - | true |
-| maskClickDisabled | 控制显示背景遮罩点击事件 | boolean | - | false |
-| notify | 提示内容文字 | string | - | - |
+| message | 提示内容文字 | string | - | - |
 | delay | 自动关闭延时时长(ms) | number | - | 3000 |
-| align | 文字对齐方式 | string | left/center/right | left |
 | closeabled | 是否可点击关闭 | boolean | - | true |
+| align | 文字对齐方式 | string | left/center/right | left |
+| only | 控制是否只显示一个提示，如果有提示了就会关闭掉打开的only为true的所有提示 | boolean | - | true |
 
 ### 返回值
 返回值是一个函数，可以用来关闭当前提示
@@ -34,9 +33,13 @@ this.$confirm({ ... })
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | value | 绑定值，控制显示隐藏 | boolean | - | false |
-| showMask | 控制显示背景遮罩 | boolean | - | true |
-| maskClickDisabled | 控制显示背景遮罩点击事件 | boolean | - | false |
-| notify | 提示内容文字 | string | - | - |
+| message | 提示内容文字 | string | - | - |
 | delay | 自动关闭延时时长(ms) | number | - | 3000 |
 | align | 文字对齐方式 | string | left/center/right | left |
 | closeabled | 是否可点击关闭 | boolean | - | true |
+
+### Slot
+
+| name | 说明|
+| --- | --- |
+| - | 提示区域的内容 |
