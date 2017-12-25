@@ -9,8 +9,12 @@ Vue.config.productionTip = false
 
 hekrComponents.locale.extend({
   fr: {
+    confirm: {
+      title: 'pointe'
+    },
     dialog: {
-      confirmText: 'Déterminer'
+      cancelText: 'annulé',
+      confirmText: 'déterminer'
     }
   }
 })
