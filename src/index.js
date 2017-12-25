@@ -1,15 +1,22 @@
-import * as components from './components'
+import rem from './rem'
+import locale from './locale'
 import * as packages from './packages'
 import * as directives from './directives'
-import * as utils from './utils'
+import * as components from './components'
 import './stylus/hekr-components.styl'
 
-const install = Vue => {
+const install = (Vue, {
+  lang = 'zh-CN'
+} = {}) => {
   if (install.installed) {
     return
   }
-  Object.keys(components)
-    .forEach(key => Vue.use(components[key]))
+
+  // rem单位支持
+  Vue.use(rem)
+
+  // 安装语言包
+  Vue.use(locale, lang)
 
   Object.keys(packages)
     .forEach(key => Vue.use(packages[key]))
@@ -17,13 +24,14 @@ const install = Vue => {
   Object.keys(directives)
     .forEach(key => Vue.use(directives[key]))
 
-  Object.keys(utils)
-    .forEach(key => utils[key](Vue))
+  Object.keys(components)
+    .forEach(key => Vue.use(components[key]))
 }
 
 export default {
   version: process.env.VERSION,
   install,
+  locale,
   ...components,
   ...packages,
   ...directives

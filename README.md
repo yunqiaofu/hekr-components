@@ -33,6 +33,29 @@ npm run build --report
 3. 如果在代码中没有使用到hk-chart组件，则可以不引入chart.js，如果使用到了，则需要引入chart.js，并且要保证chart.js会注册全局变量Chart供hk-chart使用，否者会报错
 4. 组件库中的自带图标使用方式为```hk-icons-{图标描述字符串}```
 
+### 多语言支持
+1. 组件默认语言为中文(zh-CN)
+2. 组建中包含中文(zh-CN)和英文(en-US)两种语言
+3. 扩展支持其他语言：在安装组件时使用传入其他的语言包即可
+4. 使用示例
+```javascript
+// 使用内置的中文
+Vue.use(hekrComponents, {
+  lang: 'zh-CN'
+})
+
+// 使用自定义语言
+hekrComponents.locale.extend = {
+  'fr': {/** 语言配置 */},
+  'zh-TW': { },
+  'zh-CN': {/** 递归合并的方式进行语言替换 */ }
+}
+
+Vue.use(hekrComponents, {
+  lang: 'fr'
+})
+```
+
 ### 在项目中使用时注意事项
 1. 本组件库是采用rem为单位开发的，所以在项目中也尽量使用rem为单位开发
 2. 组件库已经默认集成了rem适配的代码，所以在项目中不需要再写rem适配
