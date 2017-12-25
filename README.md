@@ -48,7 +48,12 @@ Vue.use(hekrComponents, {
 hekrComponents.locale.extend = {
   'fr': {/** 语言配置 */},
   'zh-TW': { },
-  'zh-CN': {/** 递归合并的方式进行语言替换 */ }
+  'zh-CN': {
+    /** 递归合并的方式进行语言替换 */
+    dialog: {
+      comfirmText: '确定',
+      cancelText: '确定'
+    }
 }
 
 Vue.use(hekrComponents, {
