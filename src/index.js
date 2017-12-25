@@ -19,13 +19,13 @@ const install = (Vue, {
   Vue.use(locale, lang)
 
   Object.keys(packages)
-    .forEach(key => Vue.use(packages[key]))
+    .forEach(key => Vue.use(packages[key], locale.langs[locale.lang]))
 
   Object.keys(directives)
-    .forEach(key => Vue.use(directives[key]))
+    .forEach(key => Vue.use(directives[key], locale.langs[locale.lang]))
 
   Object.keys(components)
-    .forEach(key => Vue.use(components[key]))
+    .forEach(key => Vue.use(components[key], locale.langs[locale.lang]))
 }
 
 export default {
