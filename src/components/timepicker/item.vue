@@ -10,8 +10,13 @@
   )
     .hk-select-line
       slot(name="unit")
-    .hk-select-list
-      .hk-select-ul(ref="list")
+    .hk-select-list(
+      style="opacity: 0"
+    )
+      .hk-select-ul(
+        ref="list",
+        style="display: none"
+      )
         .hk-select-list-item(
           v-for="el,index in renderData",
           :class="{'hidden':setHidden(el.index)}",
