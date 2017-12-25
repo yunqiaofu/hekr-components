@@ -46,22 +46,23 @@ const install = (Vue, lang) => {
   if (!langs[lang]) {
     Vue.util.warn(`没有找到语言包${lang}，使用默认语言包zh-CN`)
   }
-  lang = langs[lang] || langs['zh-CN']
+  lang = langs[lang] ? lang : 'zh-CN'
 
   Vue.mixin({
     beforeCreate () {
-      this.lang = lang
+      this.lang = langs[lang]
     },
     beforeDestroy () {
       delete this.lang
     }
   })
-
-  return lang
+  locale.lang = lang
 }
 
-export default {
+const locale = {
   extend,
   install,
   langs
 }
+
+export default locale
