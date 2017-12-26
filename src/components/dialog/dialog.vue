@@ -87,7 +87,9 @@ export default {
     },
     cancelText: {
       type: String,
-      default: '取消'
+      default () {
+        return this.lang.dialog.cancelText
+      }
     },
     showConfirm: {
       type: Boolean,
@@ -95,7 +97,9 @@ export default {
     },
     confirmText: {
       type: String,
-      default: '确定'
+      default () {
+        return this.lang.dialog.confirmText
+      }
     }
   },
   data () {

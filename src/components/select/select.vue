@@ -111,13 +111,14 @@ export default {
 </script>
 
 <style lang="stylus">
-  @import "../../stylus/variables.styl"
-  .hk-select
-    background-color $color-white
-    text-align left
-    &-header
-      height 2.2rem
-      line-height 2.2rem
-      border-bottom solid 0.05rem #dfdfdf
-      margin-left 1rem
+@import "../../stylus/variables.styl"
+.hk-select
+  background-color $color-white
+  text-align left
+  &-header
+    height 2.2rem
+    line-height 2.2rem
+    border-bottom solid 0.05rem #dfdfdf
+    font-size $font-size-3
+    margin-left 1rem
 </style>
