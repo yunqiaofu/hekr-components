@@ -14,13 +14,14 @@
 </template>
 
 <script>
-const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 export default {
   name: 'hk-week',
   props: {
     title: {
       type: String,
-      default: '重复'
+      default () {
+        return this.lang.week.title
+      }
     },
     value: {
       type: Array,
@@ -32,7 +33,9 @@ export default {
     },
     labels: {
       type: Array,
-      default: () => week
+      default () {
+        return [this.lang.week.SUN, this.lang.week.MON, this.lang.week.TUE, this.lang.week.WED, this.lang.week.THU, this.lang.week.FRI, this.lang.week.SAT]
+      }
     },
     icon: {
       type: String,

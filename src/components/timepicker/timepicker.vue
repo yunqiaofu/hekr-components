@@ -13,7 +13,7 @@
       )
         span.hk-timepicker-unit(
           slot="unit"
-        ) 时
+        ) {{lang.timepicker.hour}}
       hk-time-item(
         v-if="type.indexOf('mm')!==-1",
         :listData="min",
@@ -23,7 +23,7 @@
       )
         span.hk-timepicker-unit(
           slot="unit"
-        ) 分
+        ) {{lang.timepicker.min}}
       hk-time-item(
         v-if="type.indexOf('ss')!==-1",
         :listData="min",
@@ -33,7 +33,7 @@
       )
         span.hk-timepicker-unit(
           slot="unit"
-        ) 秒
+        ) {{lang.timepicker.sec}}
 </template>
 
 <script>
@@ -58,7 +58,10 @@
       },
       title: {
         type: String,
-        default: '倒计时时间'
+        default () {
+          console.log(this.lang.timepicker.title)
+          return this.lang.timepicker.title
+        }
       },
       needTitle: {
         type: Boolean,
