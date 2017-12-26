@@ -38,7 +38,8 @@
       return {
         spin: {start: -9, end: 9, branch: 9},
         finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0},
-        start: false
+        start: false,
+        selected: this.value
       }
     },
     props: {
@@ -93,7 +94,8 @@
       },
       setWheelItemDeg (index) {
         return {
-          transform: `rotate3d(1, 0, 0, ${-index * 20 % 360}deg) translate3d(0rem, 0rem, 5rem)`
+          transform: `rotate3d(1, 0, 0, ${-index * 20 % 360}deg) translate3d(0rem, 0rem, 5rem)`,
+          color: this.selected % this.listData.length === index % this.listData.length ? '#000' : null
         }
       },
       setWheelDeg (updateDeg, type, time = 1000) {
@@ -119,7 +121,6 @@
         }
       },
       itemTouchStart (event) {
-        console.log(event)
         this.start = true
         let finger
         if (event.changedTouches) {
@@ -225,6 +226,7 @@
       getPickValue (move) {
         let index = Math.abs(move / 34)
         let pickValue = this.getSpinData(index)
+        this.selected = pickValue
         this.$emit('input', pickValue)
         this.$emit('onChange', pickValue)
       }
