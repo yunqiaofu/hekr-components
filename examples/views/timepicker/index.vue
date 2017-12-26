@@ -8,8 +8,7 @@
     )
       hk-timepicker(
         v-model="date",
-        :type="'hh:mm'",
-        :title="'倒计时时间'"
+        :type="'hh:mm'"
       )
     .hk-time-demo-block(
       @click.stop="show2=!show2"
