@@ -2,18 +2,18 @@
 <template lang="pug">
   .hk-order-add
     hk-header.hk-order-add-header(
-      :title="'预约设置'",
+      :title="lang.order.setting",
       @click-left="go('list')",
-      :rightText="'保存'",
+      :rightText="lang.order.save",
       @click-right="save"
     )
     .hk-order-add-tag
-      span 标签
+      span {{lang.order.label}}
       input.hk-order-add-tag-input(
-        placeholder="未命名",
+        placeholder="lang.order.taskName",
         v-model="taskName"
       )
-    .hk-order-add-timepick-title 时间
+    .hk-order-add-timepick-title {{lang.order.time}}
     .hk-order-add-timepick
       hk-timepicker(
         v-model="date",
@@ -140,7 +140,9 @@
 
 <style lang="stylus">
   .hk-order-add
-    height 100vh
+    position fixed
+    width 100%
+    height 100%
     background-color #f5f5f5
     &-header
       background-color #fff

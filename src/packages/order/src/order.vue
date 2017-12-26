@@ -47,14 +47,14 @@
       },
       template: {
         type: Object,
-        default: () => {
+        default () {
           return {
             date: {
               minute: 1,
               hour: 1,
               repeatList: []
             },
-            taskName: '未命名'
+            taskName: this.lang.order.taskName
           }
         }
       },
@@ -87,7 +87,7 @@
             hour: 1,
             repeatList: []
           },
-          taskName: '未命名',
+          taskName: this.lang.order.taskName,
           ...this.template
         }
       }
