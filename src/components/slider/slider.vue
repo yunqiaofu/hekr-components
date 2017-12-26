@@ -137,7 +137,7 @@ export default {
       const { x } = this.$refs.bar.getBoundingClientRect()
       let value = (e.pageX - x) / this.$refs.bar.clientWidth * (this.max - this.min)
       // 按步长求值
-      value = Math.round(value / this.step) * this.step
+      value = this.toFixed(Math.round(value / this.step) * this.step)
       if (value < this.min) {
         value = this.min
       }
@@ -165,7 +165,7 @@ export default {
       // 计算当前值
       let value = x / this.$refs.bar.clientWidth * (this.max - this.min) + this.oValue
       // 按步长求值
-      value = Math.round(value / this.step) * this.step
+      value = this.toFixed(Math.round(value / this.step) * this.step)
       if (value < this.min) {
         value = this.min
       }
@@ -185,7 +185,7 @@ export default {
       // 计算当前值
       let value = x / this.$refs.bar.clientWidth * (this.max - this.min) + this.oValue
       // 按步长求值
-      value = Math.round(value / this.step) * this.step
+      value = this.toFixed(Math.round(value / this.step) * this.step)
       if (value < this.min) {
         value = this.min
       }
@@ -197,6 +197,13 @@ export default {
       this.oValue = value
       this.$emit('input', value)
       this.$emit('dragend', value)
+    },
+    toFixed (val) {
+      const step = this.step.toString().split('.')
+      if (!step[1]) {
+        return val
+      }
+      return Number(val.toFixed(step[1].length))
     }
   }
 }
