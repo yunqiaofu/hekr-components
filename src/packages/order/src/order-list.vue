@@ -2,9 +2,9 @@
 <template lang="pug">
   .hk-order-list
     hk-header.hk-order-list-title(
-      :title="'定时预约'",
+      :title="lang.order.timing",
       @click-left="back",
-      :rightText="value.length===0?'':isEdit?'完成':'编辑'",
+      :rightText="value.length===0?'':isEdit?lang.order.done:lang.order.edit",
       @click-right="toEdit"
     )
     .hk-order-list-body
@@ -24,7 +24,7 @@
         :type="'primary'",
         :disabled="list.length+1>setting.maxLen",
         @click="go('add')"
-      ) 添加预约
+      ) {{lang.order.add}}
 </template>
 
 <script>

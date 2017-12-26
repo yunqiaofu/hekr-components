@@ -19,7 +19,7 @@ hekrComponents.locale.extend({
   }
 })
 Vue.use(hekrComponents, {
-  lang: 'fr'
+  lang: 'en-US'
 })
 console.log(hekrComponents)
 /* eslint-disable no-new */
