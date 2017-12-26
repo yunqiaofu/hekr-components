@@ -37,7 +37,6 @@ export default {
       setTimeout(() => {
         this.$back.pop()
         console.log(this.$back.length)
-        console.log([...this.$back])
         if (this.$back.length) {
           this.closeDialog()
         }
@@ -53,14 +52,14 @@ export default {
       console.dir(this.$back)
       const key = this.$back.push(() => d.close())
       d.finally(() => {
-        console.log('删除key前', [...this.$back])
+        console.log('删除key前', this.$back.length)
         this.$back.delete(key)
-        console.log('删除key后', [...this.$back])
+        console.log('删除key后', this.$back.length)
       })
-      console.log([...this.$back])
+      console.log(this.$back.length)
     },
     confirm (value) {
-      console.log([...this.$back])
+      console.log(this.$back.length)
       console.log(value)
     }
   }

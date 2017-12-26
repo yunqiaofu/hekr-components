@@ -8,7 +8,7 @@
 
 ## vue原型对象结构
 ```javascript
-this.$back // 直接访问返回back深度数组
+this.$back // back对象
 this.$back.length // back的深度
 this.$back.pop() // 关闭最后一个打开的浮层
 this.$back.push(callback: Function) // 添加一个控制量进入,并返回添加进去的对象标识key
