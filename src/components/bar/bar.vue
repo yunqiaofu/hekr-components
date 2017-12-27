@@ -74,13 +74,18 @@ export default {
 @import "../../stylus/variables.styl"
 .hk-bar
   display flex
+  display -webkit-flex
   justify-content space-around
+  -webkit-justify-content space-around
   align-items center
+  -webkit-align-items center
   position fixed
   bottom 0
   left 0
   right 0
+  width 100%
   height 4rem
+  padding 0 .5rem
   &-item
     text-align center
 </style>
