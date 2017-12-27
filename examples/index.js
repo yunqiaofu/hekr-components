@@ -6,8 +6,22 @@ import router from './router'
 import hekrComponents from '../src'
 
 Vue.config.productionTip = false
-Vue.use(hekrComponents)
 
+hekrComponents.locale.extend({
+  fr: {
+    confirm: {
+      title: 'pointe'
+    },
+    dialog: {
+      cancelText: 'annulé',
+      confirmText: 'déterminer'
+    }
+  }
+})
+Vue.use(hekrComponents, {
+  lang: 'en-US'
+})
+console.log(hekrComponents)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

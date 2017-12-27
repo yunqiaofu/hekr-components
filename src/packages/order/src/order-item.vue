@@ -35,7 +35,6 @@
 </template>
 
 <script>
-  const weeks = {SUN: '周日', MON: '周一', TUE: '周二', WED: '周三', THU: '周四', FRI: '周五', SAT: '周六'}
   export default {
     name: 'hk-order-item',
     props: {
@@ -61,6 +60,7 @@
         return this.format(this.oValue.date.hour, 2) + ':' + this.format(this.oValue.date.minute, 2)
       },
       days () {
+        const weeks = {SUN: this.lang.week.SUN, MON: this.lang.week.MON, TUE: this.lang.week.TUE, WED: this.lang.week.WED, THU: this.lang.week.THU, FRI: this.lang.week.FRI, SAT: this.lang.week.SAT}
         const repeatList = this.oValue.date.repeatList || []
         let days = ''
         for (let j = 0; j < repeatList.length; j++) {

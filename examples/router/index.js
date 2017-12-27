@@ -105,6 +105,11 @@ export default new Router({
       path: '/select',
       name: 'select',
       component: () => import('../views/select')
+    },
+    {
+      path: '/alert',
+      name: 'alert',
+      component: () => import('../views/alert')
     }
   ]
 })

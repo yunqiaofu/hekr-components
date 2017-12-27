@@ -53,6 +53,17 @@
       :step="10",
       title="Step"
     )
+  .hk-slider-demo-title step为小数
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="value2",
+      :min="0",
+      :max="1",
+      minText="0%",
+      maxText="100%",
+      :step="0.01",
+      title="Step"
+    )
 </template>
 
 <script>
@@ -62,7 +73,8 @@ export default {
     return {
       value: 30,
       disabled: true,
-      loading: true
+      loading: true,
+      value2: 0
     }
   },
   methods: {

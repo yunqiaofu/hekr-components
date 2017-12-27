@@ -87,7 +87,9 @@ export default {
     },
     cancelText: {
       type: String,
-      default: '取消'
+      default () {
+        return this.lang.dialog.cancelText
+      }
     },
     showConfirm: {
       type: Boolean,
@@ -95,7 +97,9 @@ export default {
     },
     confirmText: {
       type: String,
-      default: '确定'
+      default () {
+        return this.lang.dialog.confirmText
+      }
     }
   },
   data () {
@@ -182,7 +186,7 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
     top 50%
     left 50%
     z-index 1
-    transform translate(-50%, -50%)
+    transform translate3d(-50%, -50%, 0)
     margin 0 auto
     border-radius 0.15rem
     background-color $color-white
@@ -237,8 +241,8 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
 @keyframes fade-up
   from
     opacity 0
-    transform translate(-50%, -70%)
+    transform translate3d(-50%, -70%, 0)
   to
     opacity 1
-    transform translate(-50%, -50%)
+    transform translate3d(-50%, -50%, 0)
 </style>

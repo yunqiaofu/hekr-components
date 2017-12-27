@@ -116,7 +116,7 @@ export default {
     top 50%
     left 50%
     z-index 1
-    transform translate(-50%, -50%)
+    transform translate3d(-50%, -50%, 0)
     margin 0 auto
     border-radius 0.2rem
     background-color $color-white
@@ -132,8 +132,8 @@ export default {
 @keyframes fade-up
   from
     opacity 0
-    transform translate(-50%, -70%)
+    transform translate3d(-50%, -70%, 0)
   to
     opacity 1
-    transform translate(-50%, -50%)
+    transform translate3d(-50%, -50%, 0)
 </style>
