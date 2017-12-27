@@ -24,7 +24,7 @@
         v-if="oValue.code[item.argument]!==undefined"
       ) {{getLabel(item.maps,oValue.code[item.argument])}}
       i.hk-order-item-right-icon(
-        :class="{'hk-order-item-right-icon-disable': !this.oValue.enable,'hk-icons-check-checked': !this.isEdit,'hk-icons-angel-right': this.isEdit}"
+        :class="{'hk-order-item-right-icon-disable': !this.oValue.enable || this.oValue.expired,'hk-icons-check-checked': !this.isEdit,'hk-icons-angel-right': this.isEdit}"
       )
     .hk-order-item-delete(
       :class="{'hk-order-item-delete-active':isDelete&&isEdit}",
