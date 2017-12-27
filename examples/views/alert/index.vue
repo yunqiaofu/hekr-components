@@ -1,12 +1,7 @@
 <template lang="pug">
   .hk-alert-demo
     hk-alert.hk-alert-demo-alert(
-      :text="'室内温度传感器故障'"
-    )
-
-    hk-alert.hk-alert-demo-alert(
-      :text="'室内温度传感器故障室内温度传感器故障室内温度传感器故障室内温度传感器故障室内温度传感器故障室内温度传感器故障'",
-      :icon="'hk-icons-check-checked'"
+      :list="list"
     )
 </template>
 
@@ -15,6 +10,22 @@
     name: 'hk-alert-demo',
     data () {
       return {
+        list: [
+          {
+            text: '室内温度传感器故障',
+            icon: 'hk-icons-check-checked'
+          },
+          {
+            text: '室度传感器故障',
+            icon: 'hk-icons-check-checked'
+          },
+          {
+            text: '警告室度传感器故障警告室度传感器故障警告室度传感器故障'
+          },
+          {
+            text: '警告2'
+          }
+        ]
       }
     },
     methods: {
