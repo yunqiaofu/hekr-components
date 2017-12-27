@@ -1,7 +1,10 @@
 <template lang="pug">
-.hk-alert 
-  i(:class="icon")
-  span {{text}}
+.hk-alert
+  .hk-alert-container
+    slot
+      .hk-alert-icon
+        i(:class="icon")
+      .hk-alert-text {{ text }}
 </template>
 
 <script>
@@ -15,37 +18,30 @@ export default {
       type: String,
       default: 'hk-icons-waring'
     }
-  },
-  computed: {
-  },
-  methods: {
   }
 }
 </script>
 
 <style lang="stylus">
-@import "../../stylus/variables.styl"
 .hk-alert
-  width 100%
-  padding-left 1rem
-  height 2rem
-  background rgba(0,0,0,0.50)
-  font-size 0.6rem
-  color #ffffff
-  line-height 2rem
-  text-align left
-  vertical-align middle
-  white-space nowrap
-  overflow hidden
-  text-overflow ellipsis
-  i 
-    display inline-block
-    vertical-align middle
-    font-size: 1rem
+  padding 0 0.2rem
+  background-color rgba(0, 0, 0, 0.5)
+  &-container
+    font-size 0.6rem
     color #fff
-    margin-right 0.4rem
-  span
-    display inline-block
-    vertical-align middle  
+    text-align left
+  &-icon
+    width 2rem
+    height 2rem
+    line-height 2rem
+    text-align center
+    font-size 1rem
+  &-text
+    height 2rem
+    line-height 2rem
+    margin-top -2rem
+    margin-left 2rem
     white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
 </style>

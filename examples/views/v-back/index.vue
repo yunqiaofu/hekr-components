@@ -37,7 +37,6 @@ export default {
       setTimeout(() => {
         this.$back.pop()
         console.log(this.$back.length)
-        console.log([...this.$back])
         if (this.$back.length) {
           this.closeDialog()
         }
@@ -50,16 +49,17 @@ export default {
       const d = this.$confirm({
         text: '我是测试v-back的, 实际使用中这里已经集成了v-back，不用再写了，直接调用就好了, 要关闭我直接传递参数vback:false就行了'
       })
+      console.dir(this.$back)
       const key = this.$back.push(() => d.close())
       d.finally(() => {
-        console.log('删除key前', [...this.$back])
+        console.log('删除key前', this.$back.length)
         this.$back.delete(key)
-        console.log('删除key后', [...this.$back])
+        console.log('删除key后', this.$back.length)
       })
-      console.log([...this.$back])
+      console.log(this.$back.length)
     },
     confirm (value) {
-      console.log([...this.$back])
+      console.log(this.$back.length)
       console.log(value)
     }
   }
