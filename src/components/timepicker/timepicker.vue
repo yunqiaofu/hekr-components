@@ -140,7 +140,7 @@
 <style lang="stylus">
   .hk
     &-timepicker-box
-      background-color #fff
+      background-color #ffffff
       height 8rem
       &-item
         float left
