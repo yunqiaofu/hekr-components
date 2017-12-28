@@ -1,23 +1,59 @@
 <template lang="pug">
 .hk-alert
-  .hk-alert-container
-    slot
-      .hk-alert-icon
-        i(:class="icon")
-      .hk-alert-text {{ text }}
+  .hk-alert-animate(
+    :style="setAnimate"
+  )
+    .hk-alert-container(
+      v-for="item,k in myList",
+      :key="k"
+    )
+      slot(
+        :item="item"
+      )
+        .hk-alert-icon
+          i(:class="item.icon||'hk-icons-waring'")
+        .hk-alert-text {{ item.text }}
 </template>
 
 <script>
 export default {
   name: 'hk-alert',
   props: {
-    text: {
-      type: String
-    },
-    icon: {
-      type: String,
-      default: 'hk-icons-waring'
+    list: {
+      type: Array,
+      default: () => []
     }
+  },
+  data () {
+    return {
+      running: false
+    }
+  },
+  computed: {
+    myList () {
+      return this.list.concat(this.list)
+    },
+    setAnimate () {
+      const t = this.list.length
+      if (t > 1) {
+        return {
+          animationDuration: t + 's',
+          animationPlayState: this.running ? 'running' : 'paused'
+        }
+      } else {
+        return {
+          animation: 'none'
+        }
+      }
+    }
+  },
+  mounted () {
+    this.interval = setInterval(() => {
+      this.running = !this.running
+    }, 1000)
+  },
+  destoryed () {
+    this.interval && clearInterval(this.interval)
   }
 }
 </script>
@@ -25,7 +61,16 @@ export default {
 <style lang="stylus">
 .hk-alert
   padding 0 0.2rem
+  height 2rem
   background-color rgba(0, 0, 0, 0.5)
+  overflow hidden
+  &-animate
+    animation: up 2s linear infinite
+  @keyframes up
+    from 
+      transform translateY(0)
+    to  
+      transform translateY(-50%)  
   &-container
     font-size 0.6rem
     color #fff

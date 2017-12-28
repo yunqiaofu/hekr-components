@@ -4,7 +4,8 @@
       v-if="needTitle"
     ) {{title}}
     .hk-timepicker-box
-      hk-time-item(
+      hk-time-item.hk-timepicker-box-item(
+        :style="setWidth"
         v-if="type.indexOf('hh')!==-1",
         :listData="hour",
         :type="'cycle'",
@@ -14,8 +15,9 @@
         span.hk-timepicker-unit(
           slot="unit"
         ) {{lang.timepicker.hour}}
-      hk-time-item(
+      hk-time-item.hk-timepicker-box-item(
         v-if="type.indexOf('mm')!==-1",
+        :style="setWidth"
         :listData="min",
         :type="'cycle'",
         v-model="m",
@@ -24,8 +26,9 @@
         span.hk-timepicker-unit(
           slot="unit"
         ) {{lang.timepicker.min}}
-      hk-time-item(
+      hk-time-item.hk-timepicker-box-item(
         v-if="type.indexOf('ss')!==-1",
+        :style="setWidth"
         :listData="min",
         :type="'cycle'",
         v-model="s",
@@ -76,6 +79,21 @@
       }
     },
     computed: {
+      setWidth () {
+        let count = 0
+        if (this.type.indexOf('h') !== 0) {
+          count++
+        }
+        if (this.type.indexOf('m') !== 0) {
+          count++
+        }
+        if (this.type.indexOf('s') !== 0) {
+          count++
+        }
+        return {
+          width: count ? 100 / count + '%' : '100%'
+        }
+      },
       hour () {
         let hour = []
         for (let i = 0; i < 24; i++) {
@@ -122,8 +140,10 @@
 <style lang="stylus">
   .hk
     &-timepicker-box
-      display flex
-      background-color #fff
+      background-color #ffffff
+      height 8rem
+      &-item
+        float left
     &-timepicker-title
       height 2rem
       line-height 2rem
