@@ -9,7 +9,7 @@
     :appear="true"
   )
     .hk-pop-container
-      slot
+      slot    
 </template>
 
 <script>
