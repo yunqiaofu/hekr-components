@@ -141,6 +141,7 @@
   .hk
     &-timepicker-box
       background-color #fff
+      height 8rem
       &-item
         float left
     &-timepicker-title
