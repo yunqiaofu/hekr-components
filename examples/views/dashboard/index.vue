@@ -11,6 +11,8 @@
     :equalCount="equalCount",
     :step="step",
     :type="type",
+    :beginColor="onColor",
+    :endColor="offColor"
     :defaultColor="defaultColor",
     @change="handleDashboard"
   )
@@ -31,8 +33,8 @@ export default {
     return {
       temp: 30,
       disabled: false,
-      onColor: 'red',
-      offColor: 'orange',
+      onColor: '#666',
+      offColor: 'rgba(123,180,224, 0.5)',
       defaultColor: '#d0c643',
       active: true,
       text: '开关',
