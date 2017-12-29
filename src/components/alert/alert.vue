@@ -36,7 +36,6 @@ export default {
     },
     setAnimate () {
       let t = this.list.length
-      console.log(t, this.count)
       if (t > 1 && this.count <= t * 2 - 1) {
         return {
           animationDuration: t + 's',
