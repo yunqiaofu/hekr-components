@@ -28,7 +28,8 @@
         :style="path.style"
       )
     .dashboard-btn(
-      v-if="type !== 'touch' && type !== 'none'"
+      v-if="type !== 'touch' && type !== 'none'",
+      :style="{color: disabled ? '#a4a4a4' : '#000'}"
     )
       .dashboard-reduce(
         ref="reduce"
@@ -109,15 +110,15 @@ export default {
     },
     beginColor: {
       type: String,
-      default: 'rgb(37, 101, 225)'
+      default: 'rgba(37, 101, 225, 1)'
     },
     endColor: {
       type: String,
-      default: 'rgb(65, 185, 242)'
+      default: 'rgba(65, 185, 242, 1)'
     },
     defaultColor: {
       type: String,
-      default: 'rgb(135, 135, 135'
+      default: 'rgba(135, 135, 135, 1)'
     },
     type: {
       type: String,
@@ -160,40 +161,45 @@ export default {
         const { x: minX, y: minY } = pathCircleMinEl.getPointAtLength(offsetMin)
 
         let pointClasses = [DASHBOARD_POINT]
-        // classnames(DASHBOARD_POINT, {
-        //   [DASHBOARD_POINT_ACTIVE]: count === select
-        // })
+
         if (count === select && this.type !== 'button' && this.type !== 'none') {
           pointClasses.push(DASHBOARD_POINT_ACTIVE)
         }
 
+        let deBeginColor = this.beginColor
+        let deEndColor = this.endColor
+        // 16进制转 RGB
+        if (deEndColor.indexOf('rgb') === -1) {
+          deEndColor = this.hexToRgb(deEndColor)
+        }
+        if (deBeginColor.indexOf('rgb') === -1) {
+          deBeginColor = this.hexToRgb(deBeginColor)
+        }
+
         const percent = count / this.equalCount
         const weightPercent = 1 - percent
-        // rgb(195, 74, 113) rgb(65, 185, 242)
-        // const red = Math.round(37 * percent + 65 * weightPercent)
-        // const green = Math.round(101 * percent + 185 * weightPercent)
-        // const blue = Math.round(225 * percent + 242 * weightPercent)
-        const beginColor = (this.beginColor.split('(')[1]).split(',')
-        const endColor = (this.endColor.split('(')[1]).split(',')
+        const beginColor = (deBeginColor.split('(')[1]).split(',')
+        const endColor = (deEndColor.split('(')[1]).split(',')
         let begredCol = beginColor[0]
         let beggreCol = beginColor[1]
-        let begblueCol = parseInt(beginColor[2].split(')')[0])
+        let begblueCol = parseInt(beginColor[2])
+        let begOpaCol = beginColor[3] && parseInt(beginColor[3])
         let endredCol = endColor[0]
         let endgreCol = endColor[1]
-        let endblueCol = parseInt(endColor[2].split(')')[0])
-
+        let endblueCol = parseInt(endColor[2])
+        let endOpaCol = endColor[3] && parseInt(endColor[3])
+        let opacity = begOpaCol || endOpaCol || 1
         const red = Math.round(begredCol * percent + endredCol * weightPercent)
         const green = Math.round(beggreCol * percent + endgreCol * weightPercent)
         const blue = Math.round(begblueCol * percent + endblueCol * weightPercent)
         let strokeStl = ''
         if (count <= select) {
-          if (this.disabled) {
-            strokeStl = 'stroke: #363636'
-            return
-          }
-          strokeStl = `stroke: rgb(${red},${green},${blue})`
+          strokeStl = `stroke: rgba(${red},${green},${blue},${opacity})`
         } else {
           strokeStl = `stroke: ${this.defaultColor}`
+        }
+        if (this.disabled) {
+          strokeStl = 'stroke: #a4a4a4'
         }
         pathEls.push({
           d: `M ${minX} ${minY} L ${maxX} ${maxY}`,
@@ -205,6 +211,17 @@ export default {
     }
   },
   methods: {
+    hexToRgb (hex) {
+      var rgb = []
+      hex = hex.substr(1) // 去除前缀 # 号
+      if (hex.length === 3) { // 处理 "#abc" 成 "#aabbcc"
+        hex = hex.replace(/(.)/g, '$1$1')
+      }
+      hex.replace(/../g, function (color) {
+        rgb.push(parseInt(color, 0x10)) // 按16进制将字符串转换为数字
+      })
+      return 'rgb(' + rgb.join(',') + ')'
+    },
     handleTouchChange (e) {
       if (this.type === 'button' || this.type === 'none') {
         return
