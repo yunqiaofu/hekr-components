@@ -110,6 +110,11 @@ export default new Router({
       path: '/alert',
       name: 'alert',
       component: () => import('../views/alert')
+    },
+    {
+      path: '/loading',
+      name: 'loading',
+      component: () => import('../views/loading')
     }
   ]
 })
