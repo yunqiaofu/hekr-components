@@ -79,6 +79,9 @@
     "type": "git",
     "url": "git@gitlab.hekr.me:front-end/hekr-components.git"
   },
+  "publishConfig": {
+    "registry": "http://npm.hekr.me"
+  },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
