@@ -26,7 +26,8 @@ export default {
   },
   data () {
     return {
-      running: false
+      running: false,
+      count: 0
     }
   },
   computed: {
@@ -34,13 +35,14 @@ export default {
       return this.list.concat(this.list)
     },
     setAnimate () {
-      const t = this.list.length
-      if (t > 1) {
+      let t = this.list.length
+      if (t > 1 && this.count <= t * 2 - 1) {
         return {
           animationDuration: t + 's',
           animationPlayState: this.running ? 'running' : 'paused'
         }
       } else {
+        this.count = 0
         return {
           animation: 'none'
         }
@@ -50,6 +52,7 @@ export default {
   mounted () {
     this.interval = setInterval(() => {
       this.running = !this.running
+      this.count++
     }, 1000)
   },
   destoryed () {

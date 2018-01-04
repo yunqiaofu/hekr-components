@@ -9,6 +9,13 @@
   )
   hk-list(
     type="text",
+    leftIcon="fa fa-home",
+    leftText="温度",
+    :rightText="index",
+    border
+  )
+  hk-list(
+    type="text",
     leftIcon="fa fa-edit",
     leftText="新建群控类",
     rightIcon="fa fa-angle-right",
@@ -42,14 +49,14 @@
     type="switch",
     leftText="设备开关",
     v-model="switchValue",
-    :disabled="disabled",
+    :switchProps="props",
     border
   )
   hk-list(
     type="check",
     leftText="选择",
     v-model="checkValue",
-    :disabled="disabled",
+    :checkProps="props",
     border
   )
   h2 使用slot
@@ -82,12 +89,15 @@ export default {
       index: 0,
       inputProps: {
         type: 'text', // 可选text, number, password
-        maxLength: 8
+        maxLength: 8,
+        disabled: false
       },
       inputValue: 'test',
       switchValue: true,
       checkValue: false,
-      disabled: false
+      props: {
+        disabled: false
+      }
     }
   },
   computed: {
@@ -107,7 +117,8 @@ export default {
       this.inputProps.type = this.inputProps.type === 'text' ? 'password' : 'text'
     },
     toggleDisabled () {
-      this.disabled = !this.disabled
+      this.props.disabled = !this.props.disabled
+      this.inputProps.disabled = !this.inputProps.disabled
     },
     toggleSwitch () {
       this.switchValue = !this.switchValue

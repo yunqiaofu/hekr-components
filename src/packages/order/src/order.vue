@@ -96,8 +96,6 @@
       orderList,
       orderAdd
     },
-    mounted () {
-    },
     activated () {
       this.page = 'list'
     },

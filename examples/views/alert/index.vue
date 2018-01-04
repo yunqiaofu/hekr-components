@@ -3,6 +3,10 @@
     hk-alert.hk-alert-demo-alert(
       :list="list"
     )
+
+    hk-alert.hk-alert-demo-alert(
+      :list="list2"
+    )
 </template>
 
 <script>
@@ -12,18 +16,30 @@
       return {
         list: [
           {
-            text: '室内温度传感器故障',
+            text: '2室度传感器故障'
+          }
+        ],
+        list2: [
+          {
+            text: '1室内温度传感器故障',
             icon: 'hk-icons-check-checked'
           },
           {
-            text: '室度传感器故障',
+            text: '2室度传感器故障'
+          },
+          {
+            text: '3室度传感器故障'
+          },
+          {
+            text: '4室度传感器故障'
+          },
+          {
+            text: '5室度传感器故障',
             icon: 'hk-icons-check-checked'
           },
           {
-            text: '警告室度传感器故障警告室度传感器故障警告室度传感器故障'
-          },
-          {
-            text: '警告2'
+            text: '6室度传感器故障',
+            icon: 'hk-icons-check-checked'
           }
         ]
       }

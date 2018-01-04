@@ -36,7 +36,7 @@
       @click="rightClick"
     )
       slot(name="right")
-        span(v-if="rightText") {{ rightText }}
+        span(v-if="rightText || rightText === 0") {{ rightText }}
         i.hk-list-right-icon(
           v-if="rightIcon",
           :class="rightIcon"
@@ -60,13 +60,13 @@ export default {
       }
     },
     leftText: {
-      type: String
+      type: [String, Number]
     },
     leftIcon: {
       type: String
     },
     rightText: {
-      type: String
+      type: [String, Number]
     },
     rightIcon: {
       type: String

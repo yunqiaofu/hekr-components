@@ -101,8 +101,6 @@
         return l
       }
     },
-    watch: {
-    },
     methods: {
       go (route) {
         this.$emit('go', route)
