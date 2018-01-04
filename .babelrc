@@ -11,11 +11,5 @@
   "plugins": [
     "transform-runtime",
     "transform-export-extensions"
-  ],
-  "env": {
-    "test": {
-      "presets": ["env", "stage-2"],
-      "plugins": ["istanbul"]
-    }
-  }
+  ]
 }

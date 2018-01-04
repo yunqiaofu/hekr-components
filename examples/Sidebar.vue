@@ -4,27 +4,21 @@
     i.fa(:class="getIcon",aria-hidden="true")
   ul.sidebar-nav
     router-link.sidebar-nav-item(
-      v-for="(name, index) in routes",
+      v-for="(item, index) in routes",
       :key="index",
-      :to='{ name: name }',
+      :to="item.path",
       tag="li"
-    ) {{ name | upperFirst }}
+    ) {{ item.name | upperFirst }}
 </template>
 
 <script>
-import router from './router'
-
-const routes = []
-router.options.routes.forEach(route => {
-  routes.push(route.name)
-})
+import { routes } from './router'
 
 export default {
   name: 'sidebar',
   data () {
     return {
-      isToggle: false,
-      routes
+      isToggle: false
     }
   },
   computed: {
@@ -33,6 +27,9 @@ export default {
     },
     getIcon () {
       return this.isToggle ? 'fa-times' : 'fa-bars'
+    },
+    routes () {
+      return routes.sort((a, b) => a.name.localeCompare(b.name))
     }
   },
   filters: {
