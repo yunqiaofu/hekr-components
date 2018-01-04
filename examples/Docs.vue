@@ -11,11 +11,11 @@
 <script>
 import axios from 'axios'
 import hljs from 'highlight.js'
-import router from './router'
+import { routes } from './router'
 const components = {
   readme: () => import('../README.md')
 }
-router.options.routes.forEach(route => {
+routes.forEach(route => {
   components[`${route.name}-doc`] = () => import(`./views/${route.name}/README.md`)
 })
 
