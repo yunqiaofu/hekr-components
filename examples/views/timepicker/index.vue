@@ -1,13 +1,19 @@
 <template lang="pug">
   .hk-time-demo
+    input(
+      v-model="inputH"
+    )
+    input(
+      v-model="inputM"
+    )
     .hk-time-demo-block(
       @click.stop="show=!show"
-    ) 默认样式{{date.h}}:{{date.m}}:{{date.s}}
+    ) 默认样式{{inputH}}:{{inputM}}:{{date.s}}
     hk-pop(
       v-model="show"
     )
       hk-timepicker(
-        v-model="date",
+        v-model="myTime",
         :type="'hh:mm'"
       )
     .hk-time-demo-block(
@@ -51,6 +57,8 @@
         s: 0,
         M: 12,
         d: 2,
+        inputH: 2,
+        inputM: 3,
         t: '上午',
         show: false,
         show2: false,
@@ -65,6 +73,12 @@
           month.push(i)
         }
         return month
+      },
+      myTime () {
+        return {
+          h: this.inputH,
+          m: this.inputM
+        }
       },
       day () {
         let day = []

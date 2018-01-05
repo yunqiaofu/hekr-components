@@ -34,14 +34,6 @@
 <script>
   export default{
     name: 'hk-time-item',
-    data () {
-      return {
-        spin: {start: -9, end: 9, branch: 9},
-        finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0},
-        start: false,
-        selected: this.value
-      }
-    },
     props: {
       listData: {
         type: Array,
@@ -55,6 +47,14 @@
         type: String
       },
       value: {}
+    },
+    data () {
+      return {
+        spin: {start: -9, end: 9, branch: 9},
+        finger: {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0},
+        start: false,
+        selected: this.value
+      }
     },
     computed: {
       renderData () {
@@ -71,6 +71,19 @@
     },
     mounted () {
       /* 初始化状态 */
+      let index = this.listData.indexOf(this.value)
+      if (index === -1) {
+        console.warn('当前初始值不存在，请检查后listData范围！！')
+        this.setListTransform()
+        this.getPickValue(0)
+      } else {
+        let move = index * 34
+        /* 因为往上滑动所以是负 */
+        this.setStyle(-move)
+        this.setListTransform(-move, -move)
+      }
+    },
+    activated () {
       let index = this.listData.indexOf(this.value)
       if (index === -1) {
         console.warn('当前初始值不存在，请检查后listData范围！！')
