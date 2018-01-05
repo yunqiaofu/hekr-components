@@ -71,7 +71,10 @@
     },
     mounted () {
       /* 初始化状态 */
+      // this.selected = this.value
+      // console.log('mounted', this.selected, this.value)
       let index = this.listData.indexOf(this.value)
+      console.log('mounted', index)
       if (index === -1) {
         console.warn('当前初始值不存在，请检查后listData范围！！')
         this.setListTransform()
@@ -84,6 +87,9 @@
       }
     },
     activated () {
+      this.spin = {start: -9, end: 9, branch: 9}
+      this.finger = {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0}
+      this.selected = this.value
       let index = this.listData.indexOf(this.value)
       if (index === -1) {
         console.warn('当前初始值不存在，请检查后listData范围！！')
@@ -106,9 +112,13 @@
         }
       },
       setWheelItemDeg (index) {
+        let count = index % this.listData.length
+        if (count < 0) {
+          count = this.listData.length + count
+        }
         return {
           transform: `rotate3d(1, 0, 0, ${-index * 20 % 360}deg) translate3d(0rem, 0rem, 5rem)`,
-          color: this.selected % this.listData.length === index % this.listData.length ? '#000' : null
+          color: this.selected === this.listData[count] ? '#000' : null
         }
       },
       setWheelDeg (updateDeg, type, time = 1000) {
@@ -218,7 +228,7 @@
           this.setListTransform(endMove, margin, type, time)
           this.setWheelDeg(endDeg, type, time)
           /* 设置$emit 延迟 */
-          setTimeout(() => this.getPickValue(endMove), 100)
+          setTimeout(() => this.getPickValue(endMove), 300)
         } else {
           this.setListTransform(updateMove, margin)
           this.setWheelDeg(updateDeg)
@@ -237,9 +247,10 @@
       },
       /* 获取选中值 */
       getPickValue (move) {
-        let index = Math.abs(move / 34)
-        let pickValue = this.getSpinData(index)
+        let index = move / 34 % this.listData.length
+        let pickValue = this.listData[index <= 0 ? -index : this.listData.length - index]
         this.selected = pickValue
+        console.log('pickValue', pickValue)
         this.$emit('input', pickValue)
         this.$emit('onChange', pickValue)
       }
