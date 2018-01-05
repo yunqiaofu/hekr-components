@@ -73,33 +73,12 @@
     },
     data () {
       return {
+        h: this.format(this.value.h, 2),
+        m: this.format(this.value.m, 2),
+        s: this.format(this.value.s, 2)
       }
     },
     computed: {
-      h: {
-        get () {
-          return this.format(this.value.h, 2)
-        },
-        set (val) {
-          console.log(val)
-        }
-      },
-      m: {
-        get () {
-          return this.format(this.value.m, 2)
-        },
-        set (val) {
-          console.log(val)
-        }
-      },
-      s: {
-        get () {
-          return this.format(this.value.s, 2)
-        },
-        set (val) {
-          console.log(val)
-        }
-      },
       setWidth () {
         let count = 0
         if (this.type.indexOf('h') !== 0) {

@@ -8,12 +8,12 @@
     )
     .hk-time-demo-block(
       @click.stop="show=!show"
-    ) 默认样式{{inputH}}:{{inputM}}:{{date.s}}
+    ) 默认样式{{date.h}}:{{date.m}}:{{date.s}}
     hk-pop(
       v-model="show"
     )
       hk-timepicker(
-        v-model="myTime",
+        v-model="date",
         :type="'hh:mm'"
       )
     .hk-time-demo-block(
@@ -74,10 +74,15 @@
         }
         return month
       },
-      myTime () {
-        return {
-          h: this.inputH,
-          m: this.inputM
+      myTime: {
+        get () {
+          return {
+            h: this.inputH,
+            m: this.inputM
+          }
+        },
+        set (val) {
+          console.log(val)
         }
       },
       day () {
