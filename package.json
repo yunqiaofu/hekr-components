@@ -1,6 +1,6 @@
 {
   "name": "@hekr/hekr-components",
-  "version": "0.1.18",
+  "version": "0.1.21",
   "description": "A Vue.js project",
   "author": "nashaofu <diaocheng@outlook.com>",
   "main": "./hekr-components.js",
@@ -78,6 +78,9 @@
   "repository": {
     "type": "git",
     "url": "git@gitlab.hekr.me:front-end/hekr-components.git"
+  },
+  "publishConfig": {
+    "registry": "http://npm.hekr.me"
   },
   "engines": {
     "node": ">= 4.0.0",
