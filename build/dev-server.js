@@ -2,6 +2,8 @@
 require('./check-versions')()
 
 const config = require('../config')
+
+process.env.BABEL_ENV = 'development'
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
@@ -84,8 +86,7 @@ devMiddleware.waitUntilValid(() => {
     process.env.PORT = port
     var uri = 'http://localhost:' + port
     console.log('> Listening at ' + uri + '\n')
-    // when env is testing, don't need open it
-    if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+    if (autoOpenBrowser) {
       opn(uri)
     }
     server = app.listen(port)
