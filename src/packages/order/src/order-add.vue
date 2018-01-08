@@ -59,12 +59,13 @@
     },
     data () {
       let myTemplate = this.selected || this.template
+      let now = new Date()
       return {
         myTemplate: myTemplate,
         taskName: myTemplate.taskName,
         enable: myTemplate.enable,
         week: [],
-        date: {h: myTemplate.date.hour || 1, m: myTemplate.date.minute || 1},
+        date: {h: myTemplate.date.hour || now.getHours(), m: myTemplate.date.minute || now.getMinutes()},
         code: {}
       }
     },
