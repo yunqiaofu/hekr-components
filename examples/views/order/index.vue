@@ -29,7 +29,7 @@
           {
             type: 'button',
             argument: 'curtain_Sw',
-            label: '开 / 关',
+            label: 'open / close',
             maps: [
               {
                 name: '定时开',
