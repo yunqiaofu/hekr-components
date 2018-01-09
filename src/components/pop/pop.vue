@@ -62,12 +62,13 @@ export default {
     transform translateY(100%)
     opacity 0
   &-fade-up-enter-active
-  &-fade-up-leave-active
     transition all 0.3s ease-in-out
+  &-fade-up-leave-active
+    transition all 0.2s ease-in
   &-fade-up-enter-to
     transform translateY(0)
     opacity 1
   &-fade-up-leave-to
-    transform translateY(100%)
+    transform translateY(50%)
     opacity 0
 </style>
