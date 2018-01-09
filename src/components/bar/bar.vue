@@ -3,6 +3,7 @@
   .hk-bar-item(
     v-for="(item, index) in items",
     :key="index",
+    v-show="!item.hide",
     @click="handleClick(item, index)"
   )
     hk-icon(
