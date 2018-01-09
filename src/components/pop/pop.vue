@@ -64,7 +64,7 @@ export default {
   &-fade-up-enter-active
     transition all 0.3s ease-in-out
   &-fade-up-leave-active
-    transition all 0.2s ease-in
+    transition all 0.2s ease-in 0.1s
   &-fade-up-enter-to
     transform translateY(0)
     opacity 1
