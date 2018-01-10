@@ -24,7 +24,7 @@ const merge = (...arg) => {
         if (!arg[0][key] || typeof arg[0][key] !== 'object' || typeof arg[i + 1][key] !== 'object') {
           arg[0][key] = arg[i + 1][key]
         } else {
-          arg[0][key] = merge(arg[0][key], arg[i + 1][key])
+          arg[0][key] = merge({}, arg[0][key], arg[i + 1][key])
         }
       })
     i++

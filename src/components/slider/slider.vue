@@ -145,6 +145,7 @@ export default {
         value = this.max
       }
       this.val = value
+      this.oValue = value
       this.$emit('input', value)
       this.$emit('select', value)
     },
