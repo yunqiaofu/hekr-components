@@ -40,6 +40,7 @@
 </template>
 
 <script>
+  const now = new Date()
   export default {
     name: 'hk-timepicker',
     props: {
@@ -54,15 +55,14 @@
       value: {
         type: Object,
         default: {
-          h: '00',
-          m: '00',
-          s: '00'
+          h: now.getHours(),
+          m: now.getMinutes(),
+          s: now.getSeconds()
         }
       },
       title: {
         type: String,
         default () {
-          console.log(this.lang.timepicker.title)
           return this.lang.timepicker.title
         }
       },

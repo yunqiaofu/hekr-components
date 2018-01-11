@@ -1,15 +1,14 @@
 <template lang="pug">
-.hk-pop(v-if="value")
+.hk-pop
   .hk-pop-mask(
-    v-if="showMask",
+    v-if="value && showMask",
     @click="hide"
   )
   transition(
-    name="hk-pop-fade-up",
-    :appear="true"
+    name="hk-pop-fade-up"
   )
-    .hk-pop-container
-      slot    
+    .hk-pop-container(v-if="value")
+      slot
 </template>
 
 <script>
@@ -42,11 +41,6 @@ export default {
 <style lang="stylus">
 @import "../../stylus/variables.styl"
 .hk-pop
-  position fixed
-  top 0
-  right 0
-  bottom 0
-  left 0
   &-mask
     background-color rgba(0, 0, 0, 0.5)
     position fixed
@@ -68,12 +62,13 @@ export default {
     transform translateY(100%)
     opacity 0
   &-fade-up-enter-active
-  &-fade-up-leave-active
     transition all 0.3s ease-in-out
+  &-fade-up-leave-active
+    transition all 0.2s ease-in 0.1s
   &-fade-up-enter-to
     transform translateY(0)
     opacity 1
   &-fade-up-leave-to
-    transform translateY(100%)
+    transform translateY(50%)
     opacity 0
 </style>

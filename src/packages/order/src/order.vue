@@ -37,7 +37,7 @@
 <script>
   import orderList from './order-list.vue'
   import orderAdd from './order-add.vue'
-
+  const now = new Date()
   export default {
     name: 'hk-order',
     props: {
@@ -50,8 +50,8 @@
         default () {
           return {
             date: {
-              minute: 1,
-              hour: 1,
+              minute: now.getMinutes(),
+              hour: now.getHours(),
               repeatList: []
             },
             taskName: this.lang.order.taskName
@@ -72,6 +72,7 @@
       }
     },
     data () {
+      console.log('template', this.template)
       return {
         page: 'list',
         list: this.lists,
@@ -83,8 +84,8 @@
       myTemplate () {
         return {
           date: {
-            minute: 1,
-            hour: 1,
+            minute: now.getMinutes(),
+            hour: now.getHours(),
             repeatList: []
           },
           taskName: this.lang.order.taskName,

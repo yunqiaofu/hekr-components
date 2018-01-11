@@ -1,5 +1,11 @@
 <template lang="pug">
   .hk-time-demo
+    input(
+      v-model="inputH"
+    )
+    input(
+      v-model="inputM"
+    )
     .hk-time-demo-block(
       @click.stop="show=!show"
     ) 默认样式{{date.h}}:{{date.m}}:{{date.s}}
@@ -51,6 +57,8 @@
         s: 0,
         M: 12,
         d: 2,
+        inputH: 2,
+        inputM: 3,
         t: '上午',
         show: false,
         show2: false,
@@ -65,6 +73,17 @@
           month.push(i)
         }
         return month
+      },
+      myTime: {
+        get () {
+          return {
+            h: this.inputH,
+            m: this.inputM
+          }
+        },
+        set (val) {
+          console.log(val)
+        }
       },
       day () {
         let day = []
