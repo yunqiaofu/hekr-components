@@ -17,6 +17,11 @@
 | disabled | 是否禁用状态 | boolean |	- | false |
 | block | 是否为块级样式 | boolean | - | false |
 | loading | 是否显示加载动画 | boolean | - | false |
+| unit | 单位 | string | - | ℃ |
+| valueStyle | 内容的样式 | object | - |  |
+| title | 标题 | string | - | 设置温度 |
+
+
 
 ## Slot
 | name | 说明|

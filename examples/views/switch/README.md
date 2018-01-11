@@ -9,8 +9,3 @@
 | offColor | switch类型未选中颜色 | string | - | #C0BFBF |
 | text | 文案 | string | - | - |  |
 | disabled | 是否禁用 | boolean | - | false |
-
-## Events
-| 事件名称 | 说明 | 回调参数 |
-|--- | --- | --- |
-| click | 鼠标点选事件 | 改变后的值 |
