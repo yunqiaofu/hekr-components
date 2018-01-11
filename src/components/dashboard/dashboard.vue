@@ -54,7 +54,6 @@
   slot
 </template>
 <script>
-// import classnames from 'classnames'
 const DASHBOARD_CLASS = 'hk-dashboard'
 const DASHBOARD_POINT = DASHBOARD_CLASS + '-point'
 const DASHBOARD_POINT_ACTIVE = DASHBOARD_POINT + '-active'
@@ -73,15 +72,6 @@ function createElementNS (type) {
 export default {
   name: 'hk-dashboard',
   props: {
-    title: {
-      type: String
-    },
-    unit: {
-      type: String
-    },
-    valueStyle: {
-      type: Object
-    },
     value: {
       type: Number,
       required: true
@@ -94,6 +84,29 @@ export default {
     max: {
       type: Number,
       default: 100
+    },
+    type: {
+      type: String,
+      default: 'none',
+      validator (val) {
+        return [
+          'none',
+          'touch',
+          'button',
+          'both'
+        ].indexOf(val) !== -1
+      }
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    unit: {
+      type: String,
+      default: ''
+    },
+    valueStyle: {
+      type: Object
     },
     // svg 的大小
     width: {
@@ -134,10 +147,6 @@ export default {
       type: String,
       default: 'rgba(135, 135, 135, 1)'
     },
-    type: {
-      type: String,
-      default: 'both'
-    }, // touch button none
     disabled: Boolean
   },
   data () {
