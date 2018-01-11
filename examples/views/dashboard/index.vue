@@ -36,13 +36,10 @@
     :min="min",
     :equalCount="equalCount",
     :step="step",
-    :type="type",
     :beginColor="onColor",
     :endColor="offColor"
     :defaultColor="defaultColor",
-    :title="title",
     :valueStyle="valueStyle",
-    unit="h",
     @change="handleDashboard"
   )
 </template>
