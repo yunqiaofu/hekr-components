@@ -74,12 +74,10 @@ export default {
   name: 'hk-dashboard',
   props: {
     title: {
-      type: String,
-      default: '设置温度'
+      type: String
     },
     unit: {
-      type: String,
-      default: '℃'
+      type: String
     },
     valueStyle: {
       type: Object
