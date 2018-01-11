@@ -3,6 +3,8 @@
   .hk-icon-demo-title(
     :style="{ margin: '20px' }"
   ) dashboard 组件
+
+  h3 自定义内容
   hk-dashboard(
     v-model="temp",
     :disabled="disabled",
@@ -24,6 +26,25 @@
       div(
       ) 状态一
       div 状态二
+
+  h3 默认内容
+  hk-dashboard(
+    style="marginTop: 20px"
+    v-model="temp",
+    :disabled="disabled",
+    :max="max",
+    :min="min",
+    :equalCount="equalCount",
+    :step="step",
+    :type="type",
+    :beginColor="onColor",
+    :endColor="offColor"
+    :defaultColor="defaultColor",
+    :title="title",
+    :valueStyle="valueStyle",
+    unit="h",
+    @change="handleDashboard"
+  )
 </template>
 
 <script>
@@ -42,7 +63,9 @@ export default {
       max: 100,
       equalCount: 50,
       step: 1,
-      type: 'both'
+      type: 'both',
+      title: '设置湿度',
+      valueStyle: {fontSize: '90px', color: 'red'}
     }
   },
   methods: {
