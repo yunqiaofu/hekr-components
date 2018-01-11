@@ -24,47 +24,53 @@ export default {
   components,
   data () {
     return {
-      view: '',
       source: ''
+    }
+  },
+  computed: {
+    route () {
+      return this.$route.name
+    },
+    view () {
+      return this.route ? `${this.route}-doc` : 'readme'
     }
   },
   mounted () {
     this.setView()
   },
   watch: {
-    $route () {
+    route () {
       this.setView()
     }
   },
   methods: {
-    async setView () {
+    setView () {
       if (this.$http) {
         this.$http.cancel()
       }
-      if (this.$route.name) {
-        this.view = this.$route.name + '-doc'
-        this.source = ''
+      this.source = ''
+      if (this.route) {
         this.$http = axios.CancelToken.source()
-        await axios.get(`/views/${this.$route.name}/index.vue`, {
+        axios.get(`/views/${this.route}/index.vue`, {
           cancelToken: this.$http.token
         }).then(({ data }) => {
           this.source = data
         }).catch(() => {
           this.$nitify('获取源码文件失败')
+        }).finally(() => {
+          this.$http = null
+          this.setHljs()
         })
-        this.setHljs()
       } else {
-        this.source = ''
-        this.view = 'readme'
         this.setHljs()
       }
     },
     setHljs () {
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.$el.querySelectorAll('pre code').forEach(item => {
           hljs.highlightBlock(item)
         })
-      }, 50)
+      })
     }
   }
 }
