@@ -78,6 +78,12 @@
         s: this.format(this.value.s, 2)
       }
     },
+    activated () {
+      console.log('activated', this.value.h)
+      this.h = this.format(this.value.h, 2)
+      this.m = this.format(this.value.m, 2)
+      this.s = this.format(this.value.s, 2)
+    },
     computed: {
       setWidth () {
         let count = 0
