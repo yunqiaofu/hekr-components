@@ -3,10 +3,11 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| lists | 预约列表 | array | - |  |
-| template | 预约参数模版 | object | - | -|
-| options | 操作选项 | array | { type: 'button',argument: 'curtain_Qr',label: '强 / 弱',maps: [{name: '强',value: 1},{name: '弱',value: 0}]} | -|
-| setting | 配置信息 | object | {maxLen:10} | {maxLen:10} |
+| lists | 预约列表 | array | - | - |
+| template.taskName | 预约名称 | string | - | - |
+| template.code.cmdTag | 预约命令 | string | - | - |
+| options | 命令中的每一个参数配置项 | array | - | -|
+| setting | 配置信息 | object | - | { maxLen: 10 } |
 
 ### Events
 | 事件名称 | 说明 |	回调参数 |
