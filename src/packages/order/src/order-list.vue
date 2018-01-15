@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  import hkOrderItem from './order-item.vue'
   export default {
     name: 'hk-order',
     props: {
@@ -47,6 +48,9 @@
           }
         }
       }
+    },
+    components: {
+      hkOrderItem
     },
     computed: {
       len () {
