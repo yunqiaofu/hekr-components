@@ -28,11 +28,19 @@
       :key="item.argument"
     ) {{item.label}}
       .hk-order-add-control-btn(
+        v-if="item.type==='button'"
         v-for="i,k in item.maps",
         :key="k",
         :class="{'hk-order-add-control-active':code[item.argument]===i.value}",
         @click="click(item.argument, i.value)"
       ) {{i.name}}
+      .hk-order-add-control-select
+      hk-select(
+        v-model="value1",
+        :title="title",
+        :items="items",
+        @change="change"
+      )
 </template>
 
 <script>
