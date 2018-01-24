@@ -15,7 +15,15 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'default'
+      default: 'default',
+      validator (val) {
+        return [
+          'default',
+          'primary',
+          'warning',
+          'info'
+        ].indexOf(val) !== -1
+      }
     },
     active: {
       type: Boolean,

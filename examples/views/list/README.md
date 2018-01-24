@@ -5,9 +5,9 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | type | 列表类型，主要为右侧内容 | string | text/input/check/switch | - |
-| leftText | 左侧文字 |	string | - | - |
+| leftText | 左侧文字/数字 |	string/number | - | - |
 | leftIcon | 左侧图标class | string | - | - |
-| rightText | 右侧文字 | string | - | - |
+| rightText | 右侧文字/数字 | string/number | - | - |
 | rightIcon | 右侧图标class | string | - | - |
 | textColor | 右侧图标和文字颜色(type='text'时可用) | string | - | - |
 | value | type='input'或'checkout'时传值使用,v-model绑定 | - | - | - |

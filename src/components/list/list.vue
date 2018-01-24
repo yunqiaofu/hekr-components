@@ -11,7 +11,7 @@
           :class="leftIcon"
         )
         span.hk-list-left-icon(
-          v-if="leftText"
+          v-if="leftText || leftText === 0"
         ) {{ leftText }}
 
     .hk-list-right(v-if="type === 'input'")

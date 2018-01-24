@@ -134,8 +134,8 @@ export default {
       if (this.disabled) {
         return
       }
-      const { x } = this.$refs.bar.getBoundingClientRect()
-      let value = (e.pageX - x) / this.$refs.bar.clientWidth * (this.max - this.min)
+      const { left } = this.$refs.bar.getBoundingClientRect()
+      let value = (e.pageX - left) / this.$refs.bar.clientWidth * (this.max - this.min)
       // 按步长求值
       value = this.toFixed(Math.round(value / this.step) * this.step)
       if (value < this.min) {
@@ -145,6 +145,7 @@ export default {
         value = this.max
       }
       this.val = value
+      this.oValue = value
       this.$emit('input', value)
       this.$emit('select', value)
     },

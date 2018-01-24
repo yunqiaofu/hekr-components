@@ -1,16 +1,21 @@
 <template lang="pug">
-.hk-dashboard
-  .dashboard(ref="dashboard")
-    .dashboard-cover(
+.hk-dashboard-wrap
+  .hk-dashboard(ref="dashboard")
+    .hk-dashboard-cover(
       :style="{ width: width / 30 + 'rem', height: height / 30 + 'rem'}"
     )
-    .dashboard-inner
+    .hk-dashboard-inner
       slot(
         name="inner"
       )
-        .dashboard-text 设定温度
-        .dashboard-value {{ value }}℃
-    svg.dashboard-svg(
+        .hk-dashboard-text {{title}}
+        .hk-dashboard-value(
+          :style="valueStyle"
+        )
+          span {{ value }}
+          span.hk-dashboard-unit {{ unit }}
+
+    svg.hk-dashboard-svg(
       ref="svg",
       :width="width/20 + 'rem'",
       :height="height/20 + 'rem'",
@@ -27,18 +32,18 @@
         :class="path.class",
         :style="path.style"
       )
-    .dashboard-btn(
+    .hk-dashboard-btn(
       v-if="type !== 'touch' && type !== 'none'",
       :style="{color: disabled ? '#a4a4a4' : '#000'}"
     )
-      .dashboard-reduce(
+      .hk-dashboard-reduce(
         ref="reduce"
         @touchstart.prevent="onButton"
         @touchend.prevent= "offButton"
         @mousedown.stop = "onButton"
         @mouseup.stop = "offButton"
       ) -
-      .dashboard-increase(
+      .hk-dashboard-increase(
         ref="increase"
         @touchstart.prevent="onButton"
         @touchend.prevent="offButton"
@@ -49,8 +54,7 @@
   slot
 </template>
 <script>
-// import classnames from 'classnames'
-const DASHBOARD_CLASS = 'dashboard'
+const DASHBOARD_CLASS = 'hk-dashboard'
 const DASHBOARD_POINT = DASHBOARD_CLASS + '-point'
 const DASHBOARD_POINT_ACTIVE = DASHBOARD_POINT + '-active'
 var setintv = null
@@ -80,6 +84,29 @@ export default {
     max: {
       type: Number,
       default: 100
+    },
+    type: {
+      type: String,
+      default: 'none',
+      validator (val) {
+        return [
+          'none',
+          'touch',
+          'button',
+          'both'
+        ].indexOf(val) !== -1
+      }
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    unit: {
+      type: String,
+      default: ''
+    },
+    valueStyle: {
+      type: Object
     },
     // svg 的大小
     width: {
@@ -120,10 +147,6 @@ export default {
       type: String,
       default: 'rgba(135, 135, 135, 1)'
     },
-    type: {
-      type: String,
-      default: 'both'
-    }, // touch button none
     disabled: Boolean
   },
   data () {
@@ -355,10 +378,10 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-dashboard
+.hk-dashboard-wrap
   position relative
   width 100%
-  .dashboard
+  .hk-dashboard
     width 100%
     display flex
     flex-direction column
@@ -381,11 +404,12 @@ export default {
       color #f2c649
       font-family Helvetica Neue
       font-weight 300
-      -webkit-background-clip text
-      background-clip text
-      -webkit-text-fill-color transparent
-      background-image linear-gradient(330deg, #1b49db, #41b9f2), linear-gradient(#f8f5f8, #f8f5f8)
-
+      // -webkit-background-clip text
+      // background-clip text
+      // -webkit-text-fill-color transparent
+      // background-image linear-gradient(330deg, #1b49db, #41b9f2), linear-gradient(#f8f5f8, #f8f5f8)
+    &-unit
+      font-size 0.7rem
     &-text
       font-size 0.9rem
       text-align center
@@ -397,7 +421,7 @@ export default {
       transform-origin 50% 50%
 
     &-point
-      stroke-width 3
+      stroke-width 2
       stroke rgb(135, 135, 135)
       transition all .2s cubic-bezier(0.23, 1, 0.32, 1) 0ms
       transform-origin 50% 50%
@@ -413,7 +437,7 @@ export default {
 
     &-svg
       &&-move
-        .dashboard-point
+        .hk-dashboard-point
           stroke rgb(131, 114, 60)
           &-active
             stroke-dashoffset 0
@@ -425,7 +449,7 @@ export default {
       display inline-block
       width 30%
       height 2rem
-      font-size 1.2rem
+      font-size 1.6rem
       line-height 2rem
       text-align center
 

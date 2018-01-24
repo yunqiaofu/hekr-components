@@ -1,6 +1,6 @@
 {
   "name": "@hekr/hekr-components",
-  "version": "0.1.21",
+  "version": "0.2.5",
   "description": "A Vue.js project",
   "author": "nashaofu <diaocheng@outlook.com>",
   "main": "./hekr-components.js",
