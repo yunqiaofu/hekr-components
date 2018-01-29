@@ -122,18 +122,17 @@ export default {
     check (item) {
       this.$emit('onEdit', item)
     },
-    onAdd (date) {
-      this.$emit('onAdd', date)
-      this.list.push(date)
+    onAdd (data) {
+      this.$emit('onAdd', data)
+      this.list.push(data)
     },
     remove (item, index) {
       this.$emit('onRemove', item)
     },
-    onEdit (date) {
-      this.$emit('onEdit', date)
-      this.selected = date
-      this.list[this.index] = date
-      this.$emit('input', this.list)
+    onEdit (data) {
+      this.$emit('onEdit', data)
+      this.selected = data
+      this.list[this.index] = data
     }
   }
 }
