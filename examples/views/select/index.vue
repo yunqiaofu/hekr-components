@@ -1,4 +1,4 @@
-<template lang="pug">
+  <template lang="pug">
   .hk-select-demo
     .hk-icon-demo-title 单选
     hk-select(
