@@ -36,3 +36,10 @@ export default {
   ...packages,
   ...directives
 }
+
+export {
+  locale,
+  components,
+  packages,
+  directives
+}
