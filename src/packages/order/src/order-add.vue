@@ -26,21 +26,39 @@
     .hk-order-add-control(
       v-for="item in options",
       :key="item.argument"
-    ) {{item.label}}
-      .hk-order-add-control-btn(
-        v-if="item.type==='button'"
-        v-for="i,k in item.maps",
-        :key="k",
-        :class="{'hk-order-add-control-active':code[item.argument]===i.value}",
-        @click="click(item.argument, i.value)"
-      ) {{i.name}}
-      .hk-order-add-control-select
-        hk-pop(v-model="show2")
+      @click="selectShow(item)"
+    )
+      span(
+        v-if="item.type!=='slider'"
+      ) {{item.label}}
+        .hk-order-add-control-btn(
+          v-if="item.type==='button'"
+          v-for="i,k in item.maps",
+          :key="k",
+          :class="{'hk-order-add-control-active':value[item.argument]===i.value}",
+          @click="click(item.argument, i.value)"
+        ) {{i.name}}
+      span(
+        v-if="item.type==='slider'"
+      )
+        hk-slider(
+          v-model="value[item.argument]",
+          :min="item.min",
+          :max="item.max",
+          :title="item.label",
+          :unit="item.unit"
+        )
+      .hk-order-add-control-right(
+        v-if="item.type==='select'"
+      ) {{item.maps[value[item.argument]].name}}
+      hk-pop(
+        v-if="item.type==='select'"
+        v-model="showSelect[item.argument]"
+      )
         hk-select(
-          v-model="value",
-          :items="items",
-          multiple,
-          @change="change"
+          v-model="value[item.argument]",
+          :title="item.label",
+          :items="item.maps"
         )
 </template>
 
@@ -69,13 +87,30 @@
     data () {
       let myTemplate = this.selected || this.template
       let now = new Date()
+      let value = {}
+      let showSelect = {}
+      for (let i = 0; i < this.options.length; i++) {
+        if (this.options[i].type === 'slider') {
+          value[this.options[i].argument] = this.options[i].min
+        } else if (this.options[i].type === 'select') {
+          value[this.options[i].argument] = 0
+        } else {
+          value[this.options[i].argument] = this.options[i].maps[0].value
+        }
+        showSelect[this.options[i].argument] = false
+      }
       return {
         myTemplate: myTemplate,
         taskName: myTemplate.taskName,
         enable: myTemplate.enable,
         week: [],
         date: {h: myTemplate.date.hour || now.getHours(), m: myTemplate.date.minute || now.getMinutes()},
-        code: {}
+        code: {},
+        showSelect: showSelect,
+        selectValue: [],
+        value: value,
+        selectList: [],
+        selectType: ''
       }
     },
     mounted () {
@@ -87,6 +122,17 @@
       this.week = l
       this.taskName = this.myTemplate.taskName
       this.code = this.myTemplate.code
+      let selecteObj = {}
+      for (let i = 0; i < this.options.length; i++) {
+        if (this.options[i].type === 'select') {
+          selecteObj[this.options[i].argument] = {
+            show: false,
+            maps: this.options[i].maps
+          }
+        }
+      }
+      this.selecteObj = selecteObj
+      console.log('this.selecteObj', this.selecteObj)
     },
     computed: {
       hour () {
@@ -112,15 +158,23 @@
       }
     },
     methods: {
+      selectShow (item) {
+        if (item.type === 'select') {
+          this.showSelect[item.argument] = !this.showSelect[item.argument]
+          this.selectType = item.argument
+          this.selectList = item.maps
+        }
+      },
       go (route) {
         this.$emit('go', route)
       },
       click (argument, value) {
-        this.code[argument] = value
-        this.code = {
-          ...this.code
-        }
+        this.value[argument] = value
+        // this.code = {
+        //   ...this.code
+        // }
       },
+
       save () {
         let ob = {
           ...this.myTemplate,
@@ -130,7 +184,7 @@
             repeatList: this.repeatList
           },
           taskName: this.taskName,
-          code: this.code,
+          code: this.value,
           schedulerType: this.repeatList.length === 0 ? 'ONCE' : 'LOOP'
         }
         this.$emit('input', ob)
@@ -151,6 +205,8 @@
     position fixed
     width 100%
     height 100%
+    overflow auto
+    padding-bottom 2rem
     background-color #f5f5f5
     &-header
       background-color #fff
@@ -186,9 +242,8 @@
       background-color #fff
     &-control
       background #ffffff
-      height 2.2rem
       line-height 2.2rem
-      padding-left 1rem
+      padding 0  1rem
       margin-top 0.5rem
       text-align left
       &-btn
@@ -203,6 +258,14 @@
         margin 0.5rem
         line-height 1.05rem
         cursor pointer
+      &-right
+        width 2.7rem
+        margin 0.5rem
+        height 1.15rem
+        float right
+        text-align center
+        font-size 0.8rem
+        line-height 1.05rem
       &-active
         border 0.05rem solid #3aa4f7
         color #3aa4f7

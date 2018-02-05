@@ -71,6 +71,14 @@
                 name: '3档',
                 value: 3
               }]
+          },
+          {
+            type: 'slider',
+            argument: 'hd',
+            label: '湿度',
+            min: 0,
+            max: 100,
+            unit: '%'
           }
         ],
         setting: {
