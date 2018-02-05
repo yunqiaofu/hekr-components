@@ -20,7 +20,7 @@ npm run build --report
 ## 组件使用
 
 ### 开发文档
-http://10.1.1.6:3100/   
+http://10.1.1.6:3100/
 
 ### NPM安装使用
 1. 运行```npm install @hekr/hekr-components --save```
@@ -41,14 +41,19 @@ http://10.1.1.6:3100/
 2. 组建中包含中文(zh-CN)和英文(en-US)两种语言
 3. 扩展支持其他语言：在安装组件时使用传入其他的语言包即可
 4. 使用示例
+* 使用内置语言
 ```javascript
+import hekrComponents from '@hekr/hekr-components'
 // 使用内置的中文
 Vue.use(hekrComponents, {
   lang: 'zh-CN'
 })
-
+```
+* 扩展语言
+```javascript
+import hekrComponents, { locale } from '@hekr/hekr-components'
 // 使用自定义语言
-hekrComponents.locale.extend = {
+locale.extend = {
   'fr': {/** 语言配置 */},
   'zh-TW': { },
   'zh-CN': {

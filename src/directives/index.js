@@ -1,2 +1,2 @@
-export back from './back'
-export clickOut from './click-out'
+export Back from './back'
+export ClickOut from './click-out'
