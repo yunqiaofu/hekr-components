@@ -35,12 +35,13 @@
         @click="click(item.argument, i.value)"
       ) {{i.name}}
       .hk-order-add-control-select
-      hk-select(
-        v-model="value1",
-        :title="title",
-        :items="items",
-        @change="change"
-      )
+        hk-pop(v-model="show2")
+        hk-select(
+          v-model="value",
+          :items="items",
+          multiple,
+          @change="change"
+        )
 </template>
 
 <script>
