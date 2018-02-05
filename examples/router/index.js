@@ -113,6 +113,11 @@ export const routes = [
     path: '/loading',
     name: 'loading',
     component: () => import('../views/loading')
+  },
+  {
+    path: '/locale',
+    name: 'locale',
+    component: () => import('../views/locale')
   }
 ]
 
