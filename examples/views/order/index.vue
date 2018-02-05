@@ -53,6 +53,32 @@
                 name: '弱',
                 value: 0
               }]
+          },
+          {
+            type: 'select',
+            argument: 'flow',
+            label: '风速',
+            maps: [
+              {
+                name: '1档',
+                value: 1
+              },
+              {
+                name: '2档',
+                value: 2
+              },
+              {
+                name: '3档',
+                value: 3
+              }]
+          },
+          {
+            type: 'slider',
+            argument: 'hd',
+            label: '湿度',
+            min: 0,
+            max: 100,
+            unit: '%'
           }
         ],
         setting: {
