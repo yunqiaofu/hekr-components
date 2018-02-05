@@ -22,7 +22,7 @@
       span(
         v-for="item in options",
         v-if="oValue.code[item.argument]!==undefined"
-      ) {{getLabel(item.maps,oValue.code[item.argument])}}
+      ) {{getLabel(item,oValue.code[item.argument])}}
       i.hk-order-item-right-icon(
         :class="{'hk-order-item-right-icon-disable': !this.oValue.enable || this.oValue.expired,'hk-icons-check-checked': !this.isEdit,'hk-icons-angel-right': this.isEdit}"
       )
@@ -82,11 +82,15 @@
     },
 
     methods: {
-      getLabel (maps, value) {
-        for (let i = 0; i < maps.length; i++) {
-          if (maps[i].value === value) {
-            return maps[i].name + '  '
+      getLabel (item, value) {
+        if (item.maps) {
+          for (let i = 0; i < item.maps.length; i++) {
+            if (item.maps[i].value === value) {
+              return item.maps[i].name + '  '
+            }
           }
+        } else {
+          return item.label + value + item.unit
         }
       },
       format (n, l) {
