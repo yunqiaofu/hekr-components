@@ -184,7 +184,10 @@
             repeatList: this.repeatList
           },
           taskName: this.taskName,
-          code: this.value,
+          code: {
+            ...this.code,
+            ...this.value
+          },
           schedulerType: this.repeatList.length === 0 ? 'ONCE' : 'LOOP'
         }
         this.$emit('input', ob)
