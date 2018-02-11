@@ -88,6 +88,7 @@ $height-2 = 1.5rem
   height $height
   line-height $height * 0.8
   padding 0.15rem 0
+  color $color-black
 
   &-border
     border-bottom 0.05rem solid darken($color-white, 10%)
@@ -97,7 +98,6 @@ $height-2 = 1.5rem
     margin 0 4.4rem
     text-align center
     font-size 0.9rem
-    color #000
     font-weight 500
     white-space nowrap
     overflow hidden
@@ -110,7 +110,6 @@ $height-2 = 1.5rem
     top 0.4rem
     display block
     font-size $font-size-4
-    color $color-black
     white-space nowrap
   &-left
     left 0.6rem
