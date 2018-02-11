@@ -1,9 +1,12 @@
 {
   "name": "@hekr/hekr-components",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "A Vue.js project",
   "author": "nashaofu <diaocheng@outlook.com>",
-  "main": "./hekr-components.js",
+  "main": "dist/hekr-components.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "dev": "node build/dev-server.js",
     "docs": "node build/docs.js",

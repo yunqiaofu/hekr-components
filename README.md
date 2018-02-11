@@ -27,7 +27,7 @@ http://10.1.1.6:3100/
 2. 安装chart.js依赖
 3. 引入组件```import HekrComponents from '@hekr/hekr-components'```
 4. 安装组件```Vue.use(HekrComponents)```
-5. 引入css文件```import '~@hekr/hekr-components/hekr-components.css'```
+5. 引入css文件```import '~@hekr/hekr-components/dist/hekr-components.css'```
 6. 组件库中的自带图标使用方式为```hk-icons-{图标描述字符串}```
 
 ### 全局script标签方式引入
