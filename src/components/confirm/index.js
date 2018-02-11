@@ -1,5 +1,5 @@
 import Confirm from './confirm'
 
-export default (Vue, lang) => {
-  Vue.prototype.$confirm = Confirm(Vue, lang)
+export default (Vue) => {
+  Vue.prototype.$confirm = Confirm(Vue)
 }
