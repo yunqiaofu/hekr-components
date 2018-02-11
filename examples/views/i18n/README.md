@@ -35,7 +35,7 @@ Vue.use(hekrComponents, {
 ```html
 <template lang="pug">
 .hk-dialog-demo
-  .hk-dialog-demo-title 属性上也挂在有{{ this.lang.demo.title }}
+  .hk-dialog-demo-title 属性上也挂在有，未来会废弃{{ this.lang.demo.title }}
   .hk-dialog-demo-title 推荐使用方式{{ $i('demo.title') }}
   hk-button(@click) 切换语言
 </template>

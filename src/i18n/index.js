@@ -15,11 +15,11 @@ i18n.install = (Vue, {
 
   Vue.mixin({
     beforeCreate () {
-      this.lang = i18n.i18n
+      this.lang = i18n.i18n // 兼容上一个版本，后续会删除
       i18n.append(this)
     },
     beforeDestroy () {
-      delete this.lang
+      delete this.lang // 兼容上一个版本，后续会删除
       i18n.delete(this)
     }
   })

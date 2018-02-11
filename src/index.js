@@ -33,6 +33,7 @@ export default {
   version: process.env.VERSION,
   install,
   i18n,
+  locale: i18n, // 兼容上一个版本
   ...components,
   ...packages,
   ...directives
@@ -40,6 +41,7 @@ export default {
 
 export {
   i18n,
+  i18n as locale, // 兼容上一个版本
   components,
   packages,
   directives
