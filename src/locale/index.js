@@ -35,7 +35,8 @@ const merge = (...arg) => {
 const extend = lang => {
   Object.keys(lang)
     .forEach(key => {
-      langs[key] = merge({}, langs['zh-CN'], langs[key], lang[key])
+      const k = key.toLocaleLowerCase().replace(/_/g, '-')
+      langs[key] = merge({}, langs['zh-CN'], langs[k], lang[key])
     })
 }
 
