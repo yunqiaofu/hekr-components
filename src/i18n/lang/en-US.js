@@ -25,12 +25,12 @@ export default {
   order: {
     timing: 'Timing',
     setting: 'Setting',
-    save: 'save',
-    edit: 'edit',
-    add: 'add',
+    save: 'Save',
+    edit: 'Edit',
+    add: 'Add',
     taskName: 'undefined',
     label: 'label',
     time: 'time',
-    done: 'done'
+    done: 'Done'
   }
 }

@@ -85,7 +85,7 @@
         this.$emit('edit', selected, index)
       },
       check (item, index) {
-        this.$emit('check', item)
+        this.$emit('check', item, index)
         this.$emit('input', this.list)
       },
       remove (item, index) {
