@@ -91,7 +91,7 @@
         console.log('onRemove', data)
       },
       onEdit (data) {
-        console.log('onEdit', data)
+        console.log('onEditonEdit', data)
       },
       onAdd (data) {
         console.log('onAdd', data)
