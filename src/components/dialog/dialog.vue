@@ -23,12 +23,12 @@
             v-if="showCancel",
             :class="getCancelClass",
             @click="cancel"
-          ) {{ cancelText }}
+          ) {{ cancelText || $i('dialog.cancelText') }}
           button.hk-dialog-container-footer-confirm(
             v-if="showConfirm",
             :class="getConfirmClass",
             @click="confirm"
-          ) {{ confirmText }}
+          ) {{ confirmText || $i('dialog.confirmText') }}
 
 </template>
 
@@ -86,20 +86,14 @@ export default {
       default: true
     },
     cancelText: {
-      type: String,
-      default () {
-        return this.lang.dialog.cancelText
-      }
+      type: String
     },
     showConfirm: {
       type: Boolean,
       default: true
     },
     confirmText: {
-      type: String,
-      default () {
-        return this.lang.dialog.confirmText
-      }
+      type: String
     }
   },
   data () {

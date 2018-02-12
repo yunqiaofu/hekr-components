@@ -1,11 +1,11 @@
 import Dialog from '../dialog/dialog.vue'
 
-export default (Vue, lang) => {
+export default Vue => {
   const ConfirmConstructor = Vue.extend(Dialog)
   return options => {
     if (typeof options === 'string') {
       options = {
-        title: lang.confirm.title,
+        title: Vue.prototype.$i('confirm.title'),
         text: options
       }
     }
