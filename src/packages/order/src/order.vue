@@ -71,7 +71,7 @@ export default {
   data () {
     return {
       page: 'list',
-      list: this.lists,
+      list: [...this.lists],
       date: new Date(),
       index: -1,
       selected: {}
@@ -119,8 +119,9 @@ export default {
       this.selected = this.list[this.index]
       this.page = 'edit'
     },
-    check (item) {
-      this.$emit('onEdit', item)
+    check (item, index) {
+      console.log('item', item, index)
+      this.$emit('onEdit', this.list[index])
     },
     onAdd (data) {
       this.$emit('onAdd', data)

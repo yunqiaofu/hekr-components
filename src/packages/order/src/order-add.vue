@@ -12,6 +12,7 @@
       input.hk-order-add-tag-input(
         placeholder="lang.order.taskName",
         v-model="taskName"
+        maxlength="12"
       )
     .hk-order-add-timepick-title {{lang.order.time}}
     .hk-order-add-timepick
