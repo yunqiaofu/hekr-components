@@ -17,15 +17,12 @@ export default class I18n {
   }
 
   get (key) {
+    if (typeof key !== 'string') return
     const k = key.split('.')
     let val = this.i18n[k[0]]
-    if (!val) {
-      return val
-    }
+    if (!val) return val
     for (let i = 1, length = k.length; i < length; i++) {
-      if (!val[k[i]]) {
-        break
-      }
+      if (!val[k[i]]) return
       val = val[k[i]]
     }
     return val
