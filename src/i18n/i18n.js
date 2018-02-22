@@ -9,7 +9,8 @@ export default class I18n {
       'zh-cn': zhCN,
       'en-us': enUS
     }
-    this.vm = []
+    this.vm = null
+    this.vms = []
   }
 
   get i18n () {
@@ -17,15 +18,12 @@ export default class I18n {
   }
 
   get (key) {
+    if (typeof key !== 'string') return
     const k = key.split('.')
     let val = this.i18n[k[0]]
-    if (!val) {
-      return val
-    }
+    if (!val) return val
     for (let i = 1, length = k.length; i < length; i++) {
-      if (!val[k[i]]) {
-        break
-      }
+      if (!val[k[i]]) return
       val = val[k[i]]
     }
     return val
@@ -40,28 +38,31 @@ export default class I18n {
       this.lang = 'zh-CN'
       console.warn(`没有找到语言包${lang}，使用默认语言包zh-CN`)
     }
-    this.vm.forEach(vm => {
-      vm.lang = this.i18n
+    this.vms.forEach(vm => {
+      vm.lang = this.i18n // 后续会废弃
       vm.$forceUpdate()
     })
   }
 
   extend (langs) {
+    const _langs = this.langs
     Object.keys(langs)
       .forEach(key => {
         const k = key.toLocaleLowerCase().replace(/_/g, '-')
-        this.langs[k] = merge({}, this.langs['zh-cn'], this.langs[k], langs[key])
+        _langs[k] = merge({}, _langs['zh-cn'], _langs[k], langs[key])
       })
+    // 确保vue响应
+    this.langs = _langs
   }
 
   append (vm) {
-    this.vm.push(vm)
+    this.vms.push(vm)
   }
 
   delete (vm) {
-    for (let i = 0, length = this.vm.length; i < length; i++) {
-      if (vm._uid === this.vm[i]._uid) {
-        this.vm.splice(i, 1)
+    for (let i = 0, length = this.vms.length; i < length; i++) {
+      if (vm._uid === this.vms[i]._uid) {
+        this.vms.splice(i, 1)
         break
       }
     }
