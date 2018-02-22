@@ -4,6 +4,7 @@ import enUS from './lang/en-US'
 
 export default class I18n {
   constructor () {
+    this.$ = null
     this.lang = 'zh-CN'
     this.langs = {
       'zh-cn': zhCN,
