@@ -11,7 +11,7 @@ i18n.install = (Vue, {
   i18n.use(lang)
 
   // 使其响应，可用在计算属性中
-  i18n.$ = new Vue({ data: i18n })
+  i18n.vm = new Vue({ data: i18n })
   Vue.prototype.$i18n = i18n
   Vue.prototype.$i = key => i18n.get(key)
 

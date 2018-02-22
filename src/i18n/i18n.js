@@ -4,13 +4,13 @@ import enUS from './lang/en-US'
 
 export default class I18n {
   constructor () {
-    this.$ = null
     this.lang = 'zh-CN'
     this.langs = {
       'zh-cn': zhCN,
       'en-us': enUS
     }
-    this.vm = []
+    this.vm = null
+    this.vms = []
   }
 
   get i18n () {
@@ -38,8 +38,8 @@ export default class I18n {
       this.lang = 'zh-CN'
       console.warn(`没有找到语言包${lang}，使用默认语言包zh-CN`)
     }
-    this.vm.forEach(vm => {
-      vm.lang = this.i18n
+    this.vms.forEach(vm => {
+      vm.lang = this.i18n // 后续会废弃
       vm.$forceUpdate()
     })
   }
@@ -56,13 +56,13 @@ export default class I18n {
   }
 
   append (vm) {
-    this.vm.push(vm)
+    this.vms.push(vm)
   }
 
   delete (vm) {
-    for (let i = 0, length = this.vm.length; i < length; i++) {
-      if (vm._uid === this.vm[i]._uid) {
-        this.vm.splice(i, 1)
+    for (let i = 0, length = this.vms.length; i < length; i++) {
+      if (vm._uid === this.vms[i]._uid) {
+        this.vms.splice(i, 1)
         break
       }
     }
