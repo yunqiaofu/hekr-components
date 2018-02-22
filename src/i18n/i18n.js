@@ -45,11 +45,14 @@ export default class I18n {
   }
 
   extend (langs) {
+    const _langs = this.langs
     Object.keys(langs)
       .forEach(key => {
         const k = key.toLocaleLowerCase().replace(/_/g, '-')
-        this.langs[k] = merge({}, this.langs['zh-cn'], this.langs[k], langs[key])
+        _langs[k] = merge({}, _langs['zh-cn'], _langs[k], langs[key])
       })
+    // 确保vue响应
+    this.langs = _langs
   }
 
   append (vm) {
