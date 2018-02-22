@@ -10,6 +10,7 @@
   div 或其他会重新求值的方式
   br
   div {{ $i('i18n.test') }}
+  div 计算属性: {{ getTest }}
 </template>
 
 <script>
@@ -24,6 +25,11 @@ export default {
     },
     propTest2: {
       type: String
+    }
+  },
+  computed: {
+    getTest () {
+      return this.$i('i18n.test')
     }
   },
   methods: {
