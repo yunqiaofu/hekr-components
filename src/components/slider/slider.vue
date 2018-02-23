@@ -75,9 +75,7 @@ export default {
   data () {
     return {
       val: this.value,
-      ox: 0,
-      oValue: this.value,
-      isDraging: false
+      is: false
     }
   },
   computed: {
@@ -124,87 +122,59 @@ export default {
   },
   methods: {
     getX (e) {
-      if (e.type.indexOf('mouse') !== -1) {
-        return e.clientX
-      } else {
-        return e.changedTouches[0].clientX
-      }
+      return e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
     },
     select (e) {
-      if (this.disabled) {
-        return
+      this.update(e)
+      if (!this.disabled) {
+        this.$emit('select', this.val)
       }
-      const { left } = this.$refs.bar.getBoundingClientRect()
-      let value = (e.pageX - left) / this.$refs.bar.clientWidth * (this.max - this.min)
-      // 按步长求值
-      value = this.toFixed(Math.round(value / this.step) * this.step)
-      if (value < this.min) {
-        value = this.min
-      }
-      if (value > this.max) {
-        value = this.max
-      }
-      this.val = value
-      this.oValue = value
-      this.$emit('input', value)
-      this.$emit('select', value)
     },
     dragstart (e) {
+      this.is = true
+      this.update(e)
+      if (!this.disabled) {
+        this.$emit('dragstart', this.val)
+      }
+    },
+    dragging (e) {
+      if (this.is) {
+        this.update(e)
+        if (!this.disabled) {
+          this.$emit('dragging', this.val)
+        }
+      }
+    },
+    dragend (e) {
+      if (this.is) {
+        this.update(e)
+        if (!this.disabled) {
+          this.$emit('dragend', this.val)
+        }
+      }
+      this.is = false
+    },
+    update (e) {
       if (this.disabled) {
         return
       }
-      this.isDraging = true
-      this.ox = this.getX(e)
-      this.oValue = this.val
-      this.$emit('dragstart', this.val)
-    },
-    dragging (e) {
-      if (this.disabled || !this.isDraging) {
-        return
-      }
-      const x = this.getX(e) - this.ox
-      // 计算当前值
-      let value = x / this.$refs.bar.clientWidth * (this.max - this.min) + this.oValue
+      const x = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
+      const { left } = this.$refs.bar.getBoundingClientRect()
+      let value = (x - left) / this.$refs.bar.clientWidth * (this.max - this.min)
       // 按步长求值
-      value = this.toFixed(Math.round(value / this.step) * this.step)
-      if (value < this.min) {
-        value = this.min
-      }
-      if (value > this.max) {
-        value = this.max
-      }
-      this.val = value
-      this.$emit('input', value)
-      this.$emit('dragging', value)
-    },
-    dragend (e) {
-      if (this.disabled || !this.isDraging) {
-        return
-      }
-      this.isDraging = false
-      const x = this.getX(e) - this.ox
-      // 计算当前值
-      let value = x / this.$refs.bar.clientWidth * (this.max - this.min) + this.oValue
-      // 按步长求值
-      value = this.toFixed(Math.round(value / this.step) * this.step)
-      if (value < this.min) {
-        value = this.min
-      }
-      if (value > this.max) {
-        value = this.max
-      }
-      this.val = value
-      // 计算当前值
-      this.oValue = value
-      this.$emit('input', value)
-      this.$emit('dragend', value)
-    },
-    toFixed (val) {
+      value = Math.round(value / this.step) * this.step
       const step = this.step.toString().split('.')
-      if (!step[1]) {
-        return val
+      if (step[1]) {
+        value = Number(value.toFixed(step[1].length))
       }
-      return Number(val.toFixed(step[1].length))
+      if (value < this.min) {
+        value = this.min
+      }
+      if (value > this.max) {
+        value = this.max
+      }
+      this.val = value
+      this.$emit('input', this.val)
     }
   }
 }

@@ -32,5 +32,9 @@ export default {
     label: '标签',
     time: '时间',
     done: '完成'
+  },
+  'pop-colorpicker': {
+    confirm: '确定',
+    cancel: '取消'
   }
 }
