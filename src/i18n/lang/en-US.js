@@ -32,5 +32,9 @@ export default {
     label: 'label',
     time: 'time',
     done: 'Done'
+  },
+  'pop-colorpicker': {
+    confirm: 'comfirm',
+    cancel: 'cancel'
   }
 }

@@ -1,13 +1,28 @@
 # hk-colorpicker
+该组件导出了两个组件分别为`hk-colorpicker`和`hk-pop-colorpicker`
 
-## Props
+## hk-colorpicker
+
+### Props
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| value | 是否选中，绑定值 | boolean | - | false |
-| text | 文案 | string | - | - |  |
-| onColor | 选中颜色 | string | - | #3AA4F7 |
-| offColor | 未选中颜色 | string | - | #666 |
-| onIcon | 选中图标 | string | - | hk-icons-check-checked |
-| offIcon | 未选中图标 | string | - | hk-icons-circle |
+| value | rgb颜色值对象，绑定值 | object | - | { r: 0, g: 0, b: 0} |
 | disabled | 是否禁用 | boolean | - | false |
+
+## hk-colorpicker
+
+### Props
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+|--- | --- | --- | --- | --- |
+| value | 显示隐藏pop，绑定值 | boolean | - | false |
+| color | rgb颜色值对象 | object | - | { r: 0, g: 0, b: 0} |
+| disabled | 是否禁用 | boolean | - | false |
+
+### Events
+
+| 事件名称 | 说明 |	回调参数 |
+|--- | --- | --- |
+| cancel | 取消按钮点击事件 | rgb颜色值 |
+| confirm | 确定按钮点击事件 | rgb颜色值 |

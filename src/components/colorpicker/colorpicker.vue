@@ -4,8 +4,12 @@
     v-model="hsv",
     :disabled="disabled"
   )
+  .hk-colorpicker-color(
+    :style="bgcolor"
+  )
   hk-colorpicker-hue(
-    v-model="h"
+    v-model="h",
+    :disabled="disabled"
   )
 </template>
 
@@ -49,7 +53,7 @@ export default {
         return rgbToHsv(this.rgb)
       },
       set (val) {
-        this.$emit('input', hsvToRgb(val))
+        this.rgb = hsvToRgb(val)
       }
     },
     h: {
@@ -57,10 +61,16 @@ export default {
         return this.hsv.h
       },
       set (val) {
-        const hsv = this.hsv
-        if (hsv.s === 0) hsv.s = 0.000001
-        if (hsv.v === 0) hsv.v = 0.000001
-        this.hsv = { ...hsv, h: val }
+        this.hsv = { ...this.hsv, h: val }
+      }
+    },
+    bgcolor () {
+      const r = parseInt(this.rgb.r)
+      const g = parseInt(this.rgb.g)
+      const b = parseInt(this.rgb.b)
+
+      return {
+        'background-color': `rgb(${r},${g},${b})`
       }
     }
   }
@@ -69,6 +79,12 @@ export default {
 
 <style lang="stylus">
 .hk-colorpicker
+  &-color
+    width 1rem
+    height 1rem
+    margin 0.5rem 0.4rem
+    border-radius 50%
+    box-shadow 0 0 0 1px #fff, inset 0 0 1px 1px rgba(0,0,0,.3), 0 0 1px 2px rgba(0,0,0,.4)
   &-hue
-    margin 0.5rem 0.3rem
+    margin -1.2rem 0.4rem 0.7rem 2rem
 </style>

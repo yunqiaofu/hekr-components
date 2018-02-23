@@ -41,10 +41,11 @@ export const hsvToRgb = ({ h, s, v }) => {
   if (h < 0) h = 0
   if (h >= 360) h = 359
 
-  if (s < 0) s = 0
+  // 设置为0.00001是为了保证不产生跳跃
+  if (s <= 0) s = 0.00001
   if (s > 1) s = 1
 
-  if (v < 0) v = 0
+  if (v <= 0) v = 0.00001
   if (v > 1) v = 1
 
   const C = v * s
