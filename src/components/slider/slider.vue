@@ -124,11 +124,7 @@ export default {
   },
   methods: {
     getX (e) {
-      if (e.type.indexOf('mouse') !== -1) {
-        return e.clientX
-      } else {
-        return e.changedTouches[0].clientX
-      }
+      return e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
     },
     select (e) {
       if (this.disabled) {

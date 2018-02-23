@@ -118,6 +118,11 @@ export const routes = [
     path: '/i18n',
     name: 'i18n',
     component: () => import('../views/i18n')
+  },
+  {
+    path: '/colorpicker',
+    name: 'colorpicker',
+    component: () => import('../views/colorpicker')
   }
 ]
 
