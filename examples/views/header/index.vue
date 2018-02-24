@@ -45,7 +45,7 @@ export default {
     return {
       title: '标题',
       leftText: '',
-      rightIcon: 'fa fa-angle-right'
+      rightIcon: 'hk-icons-angel-right'
     }
   },
   methods: {
@@ -53,7 +53,7 @@ export default {
       this.leftText = this.leftText ? '' : '返回'
     },
     toggleRightIcon () {
-      this.rightIcon = this.rightIcon ? '' : 'fa fa-angle-right'
+      this.rightIcon = this.rightIcon ? '' : 'hk-icons-angel-right'
     },
     clickLeft () {
       console.log('点击了左边')
@@ -74,4 +74,6 @@ export default {
     margin 0.5rem auto
   .hk-button
     margin 1.5rem auto
+  .fa
+    font-size 1.4rem
 </style>

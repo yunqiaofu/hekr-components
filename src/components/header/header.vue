@@ -117,10 +117,8 @@ $height-2 = 1.5rem
     &-icon
       float left
       line-height $height-2 * 0.7
-      font-size $font-size-1
+      font-size 1.05rem
       margin-right 0.3rem
-      .hk-icons-angel-left
-        font-size 1.05rem
 
     &-text
       float right
@@ -134,7 +132,7 @@ $height-2 = 1.5rem
       float right
       height $height-2
       line-height $height-2 * 0.7
-      font-size $font-size-1
+      font-size 1.05rem
       margin-left 0.3rem
     &-text
       float left
