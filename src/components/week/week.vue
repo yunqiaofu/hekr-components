@@ -1,6 +1,6 @@
 <template lang="pug">
 .hk-week
-  .hk-week-header {{ title }}
+  .hk-week-header {{ title || $i('week.title') }}
   .hk-week-body
     .hk-week-body-item(
       v-for="(item, index) in items",
@@ -18,10 +18,7 @@ export default {
   name: 'hk-week',
   props: {
     title: {
-      type: String,
-      default () {
-        return this.lang.week.title
-      }
+      type: String
     },
     value: {
       type: Array,
@@ -32,10 +29,7 @@ export default {
       default: () => []
     },
     labels: {
-      type: Array,
-      default () {
-        return [this.lang.week.SUN, this.lang.week.MON, this.lang.week.TUE, this.lang.week.WED, this.lang.week.THU, this.lang.week.FRI, this.lang.week.SAT]
-      }
+      type: Array
     },
     icon: {
       type: String,
@@ -44,7 +38,16 @@ export default {
   },
   computed: {
     items () {
-      return this.labels.map((item, index) => ({
+      const labels = this.labels || [
+        this.$i('week.SUN'),
+        this.$i('week.MON'),
+        this.$i('week.TUE'),
+        this.$i('week.WED'),
+        this.$i('week.THU'),
+        this.$i('week.FRI'),
+        this.$i('week.SAT')
+      ]
+      return labels.map((item, index) => ({
         name: item,
         checked: this.value.find(val => val === index) !== undefined,
         disabled: this.disabled.find(val => val === index) !== undefined
