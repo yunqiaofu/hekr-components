@@ -1,5 +1,7 @@
-import Confirm from './confirm'
+import Confirm from './confirm.vue'
+import WrapConfirm from './wrap-confirm'
 
-export default (Vue, lang) => {
-  Vue.prototype.$confirm = Confirm(Vue, lang)
+export default (Vue) => {
+  Vue.component(Confirm.name, Confirm)
+  Vue.prototype.$confirm = WrapConfirm(Vue)
 }

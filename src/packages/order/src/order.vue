@@ -48,7 +48,7 @@ export default {
       type: Object,
       default () {
         return {
-          taskName: this.lang.order.taskName,
+          taskName: '',
           code: {
             cmdTag: ''
           }
@@ -80,7 +80,7 @@ export default {
   computed: {
     getTemplate () {
       return {
-        taskName: this.lang.order.taskName,
+        taskName: this.$i('order.taskName'),
         code: {
           cmdTag: ''
         },

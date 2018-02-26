@@ -2,7 +2,7 @@
   .hk-timepicker
     .hk-timepicker-title(
       v-if="needTitle"
-    ) {{title}}
+    ) {{ title || $i('timepicker.title') }}
     .hk-timepicker-box
       hk-time-item.hk-timepicker-box-item(
         :style="setWidth"
@@ -14,7 +14,7 @@
       )
         span.hk-timepicker-unit(
           slot="unit"
-        ) {{lang.timepicker.hour}}
+        ) {{ $i('timepicker.hour') }}
       hk-time-item.hk-timepicker-box-item(
         v-if="type.indexOf('mm')!==-1",
         :style="setWidth"
@@ -25,7 +25,7 @@
       )
         span.hk-timepicker-unit(
           slot="unit"
-        ) {{lang.timepicker.min}}
+        ) {{ $i('timepicker.min') }}
       hk-time-item.hk-timepicker-box-item(
         v-if="type.indexOf('ss')!==-1",
         :style="setWidth"
@@ -36,7 +36,7 @@
       )
         span.hk-timepicker-unit(
           slot="unit"
-        ) {{lang.timepicker.sec}}
+        ) {{ $i('timepicker.sec') }}
 </template>
 
 <script>
@@ -61,10 +61,7 @@
         }
       },
       title: {
-        type: String,
-        default () {
-          return this.lang.timepicker.title
-        }
+        type: String
       },
       needTitle: {
         type: Boolean,
