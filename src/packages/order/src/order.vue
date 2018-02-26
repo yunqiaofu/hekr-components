@@ -117,6 +117,8 @@ export default {
     edit (item, index) {
       this.index = index
       this.selected = this.list[this.index]
+      this.selected.date.hour = this.selected.date.hour.toString()
+      this.selected.date.minute = this.selected.date.minute.toString()
       this.page = 'edit'
     },
     check (item, index) {
