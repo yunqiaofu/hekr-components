@@ -102,7 +102,7 @@
         }
       },
       format (n, l) {
-        if (n) {
+        if (n || n === 0) {
           n = n.toString()
           while (n.length < l) {
             n = '0' + n
