@@ -60,7 +60,15 @@
         return this.format(this.oValue.date.hour, 2) + ':' + this.format(this.oValue.date.minute, 2)
       },
       days () {
-        const weeks = {SUN: this.lang.week.SUN, MON: this.lang.week.MON, TUE: this.lang.week.TUE, WED: this.lang.week.WED, THU: this.lang.week.THU, FRI: this.lang.week.FRI, SAT: this.lang.week.SAT}
+        const weeks = {
+          SUN: this.$i('week.SUN'),
+          MON: this.$i('week.MON'),
+          TUE: this.$i('week.TUE'),
+          WED: this.$i('week.WED'),
+          THU: this.$i('week.THU'),
+          FRI: this.$i('week.FRI'),
+          SAT: this.$i('week.SAT')
+        }
         const repeatList = this.oValue.date.repeatList || []
         let days = ''
         for (let j = 0; j < repeatList.length; j++) {
