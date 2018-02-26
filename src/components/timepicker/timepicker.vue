@@ -109,12 +109,13 @@
         for (let i = 0; i < 60; i++) {
           min.push(this.format(i, 2))
         }
+        console.log('min', min)
         return min
       }
     },
     methods: {
       format (n, l) {
-        if (n) {
+        if (n === 0 || n) {
           n = n.toString()
           while (n.length < l) {
             n = '0' + n
