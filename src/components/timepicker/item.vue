@@ -71,12 +71,8 @@
     },
     mounted () {
       /* 初始化状态 */
-      // this.selected = this.value
-      // console.log('mounted', this.selected, this.value)
       let index = this.listData.indexOf(this.value)
-      console.log('mounted', index)
       if (index === -1) {
-        console.warn('当前初始值不存在，请检查后listData范围！！')
         this.setListTransform()
         this.getPickValue(0)
       } else {
@@ -91,10 +87,8 @@
         this.spin = {start: -9, end: 9, branch: 9}
         this.finger = {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0}
         this.selected = this.value
-        console.log('activated', this.selected, this.value)
         let index = this.listData.indexOf(this.value)
         if (index === -1) {
-          console.warn('当前初始值不存在，请检查后listData范围！！')
           this.setListTransform()
           this.getPickValue(0)
         } else {
@@ -253,7 +247,6 @@
         let index = move / 34 % this.listData.length
         let pickValue = this.listData[index <= 0 ? -index : this.listData.length - index]
         this.selected = pickValue
-        console.log('pickValue', pickValue)
         this.$emit('input', pickValue)
         this.$emit('onChange', pickValue)
       }

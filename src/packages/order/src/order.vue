@@ -4,46 +4,41 @@
   hk-order-list(
     v-if="page==='list'",
     @go="go",
-    v-model="list",
+    :tasks="list",
+    :setting="setting"
+    :options="options",
     @check="check",
     @remove="remove",
     @edit="edit",
-    :options="options",
     @back="back",
-    :setting="setting"
   )
-  hk-order-add(
-    v-if="page==='add'",
+  hk-order-edit(
+    v-if="page==='add' || page==='edit'",
     v-back="vback",
-    @go="go",
-    @onAdd="onAdd",
-    @onEdit="onEdit",
+    :type="page",
     :template="getTemplate",
-    :options="options"
-  )
-  hk-order-add(
-    v-if="page==='edit'",
-    v-back="vback",
-    :type="'edit'",
-    @go="go",
-    @onAdd="onAdd",
-    @onEdit="onEdit",
+    :options="options",
     :selected="selected",
-    :template="getTemplate",
-    :options="options"
+    @go="go",
+    @onAdd="onAdd",
+    @onEdit="onEdit"
   )
 </template>
 
 <script>
 import HkOrderList from './order-list.vue'
-import HkOrderAdd from './order-add.vue'
+import HkOrderEdit from './order-edit.vue'
 export default {
   name: 'hk-order',
   components: {
     HkOrderList,
-    HkOrderAdd
+    HkOrderEdit
   },
   props: {
+    lists: {
+      type: Array,
+      default: () => []
+    },
     template: {
       type: Object,
       default () {
@@ -59,10 +54,6 @@ export default {
       type: Array,
       default: () => []
     },
-    lists: {
-      type: Array,
-      default: () => []
-    },
     setting: {
       type: Object,
       default: () => ({ maxLen: 10 })
@@ -73,8 +64,7 @@ export default {
       page: 'list',
       list: [...this.lists],
       date: new Date(),
-      index: -1,
-      selected: {}
+      selected: null
     }
   },
   computed: {
@@ -97,11 +87,17 @@ export default {
     this.page = 'list'
   },
   watch: {
-    lists (n, o) {
-      this.list = n
+    lists: {
+      deep: true,
+      handler (val) {
+        this.list = [ ...val ]
+      }
     },
-    page () {
+    page (val) {
       this.date = new Date()
+      if (val === 'add' || val === 'list') {
+        this.selected = null
+      }
     }
   },
   methods: {
@@ -116,26 +112,44 @@ export default {
     },
     edit (item, index) {
       this.index = index
-      this.selected = this.list[this.index]
-      this.selected.date.hour = this.selected.date.hour.toString()
-      this.selected.date.minute = this.selected.date.minute.toString()
+      const date = item.date
+      const code = item.code
+      this.selected = {
+        ...item,
+        code: { ...code },
+        date: {
+          ...date,
+          hour: date.hour,
+          minute: date.minute,
+          repeatList: [...(date.repeatList || [])]
+        }
+      }
       this.page = 'edit'
     },
     check (item, index) {
-      console.log('item', item, index)
-      this.$emit('onEdit', this.list[index])
+      const tasks = [ ...this.list ]
+      tasks[index] = item
+      this.list = [ ...tasks ]
+      this.$emit('onEdit', item)
     },
     onAdd (data) {
+      const tasks = [ ...this.list ]
+      tasks.push(data)
+      this.list = [ ...tasks ]
       this.$emit('onAdd', data)
-      this.list.push(data)
     },
     remove (item, index) {
+      const tasks = [ ...this.list ]
+      tasks.splice(index, 1)
+      this.list = [ ...tasks ]
       this.$emit('onRemove', item)
     },
-    onEdit (data) {
-      this.$emit('onEdit', data)
-      this.selected = data
-      this.list[this.index] = data
+    onEdit (item) {
+      const tasks = [ ...this.list ]
+      tasks[this.index] = item
+      this.list = [ ...tasks ]
+      this.selected = null
+      this.$emit('onEdit', item)
     }
   }
 }
@@ -144,8 +158,8 @@ export default {
 <style lang="stylus">
 .hk-order
   position fixed
-  height 100%
-  width 100%
-  overflow auto
-  background-color #f5f5f5
+  top 0
+  right 0
+  bottom 0
+  left 0
 </style>

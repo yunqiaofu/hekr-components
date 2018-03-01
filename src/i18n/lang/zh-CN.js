@@ -28,7 +28,8 @@ export default {
     save: '保存',
     edit: '编辑',
     add: '添加预约',
-    taskName: '未命名',
+    taskName: '新预约',
+    placeholder: '请填写预约名称',
     label: '标签',
     time: '时间',
     done: '完成'
