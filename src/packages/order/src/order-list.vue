@@ -1,128 +1,137 @@
 
 <template lang="pug">
-  .hk-order-list
-    hk-header.hk-order-list-title(
-      :title="lang.order.timing",
-      @click-left="back",
-      :rightText="value.length===0?'':isEdit?lang.order.done:lang.order.edit",
-      @click-right="toEdit"
+.hk-order-list
+  hk-header(
+    :title="$i('order.timing')",
+    @click-left="back",
+    :rightText="rightText",
+    @click-right="toEdit"
+  )
+  .hk-order-list-container
+    hk-order-item(
+      v-for="(t, k) in list",
+      :key="k",
+      :task="list[k]",
+      :isEdit="isEdit",
+      :options="options",
+      @remove="remove(t, k)",
+      @edit="edit(t, k)",
+      @check="check(t, k)"
     )
-    .hk-order-list-body
-      hk-order-item(
-        v-for="t,k in list",
-        :border="k<len-1",
-        :key="t.taskId",
-        v-model="list[k]",
-        @check="check(t,k)",
-        :isEdit="isEdit",
-        @remove="remove(t,k)",
-        @edit="edit(t,k)",
-        :options="options"
-      )
-    .hk-order-list-footer
-      hk-button.hk-order-list-btn(
-        :type="'primary'",
-        :disabled="list.length+1>setting.maxLen",
-        @click="go('add')"
-      ) {{lang.order.add}}
+  .hk-order-list-footer
+    hk-button(
+      :type="'primary'",
+      :disabled="list.length + 1 > setting.maxLen",
+      block,
+      @click="go('add')"
+    ) {{ $i('order.add') }}
 </template>
 
 <script>
-  import hkOrderItem from './order-item.vue'
-  export default {
-    name: 'hk-order',
-    props: {
-      value: {
-        type: Array,
-        default: () => []
-      },
-      options: {
-        type: Array,
-        default: () => []
-      },
-      setting: {
-        type: Object,
-        default: () => {
-          return {
-            maxLen: 10
-          }
-        }
-      }
+import hkOrderItem from './order-item.vue'
+export default {
+  name: 'hk-order-list',
+  components: {
+    hkOrderItem
+  },
+  props: {
+    tasks: {
+      type: Array,
+      default: () => []
     },
-    components: {
-      hkOrderItem
+    options: {
+      type: Array,
+      default: () => []
     },
-    computed: {
-      len () {
-        return this.list.length || 0
-      }
+    setting: {
+      type: Object,
+      default: () => ({ maxLen: 10 })
+    }
+  },
+  data () {
+    return {
+      list: [ ...this.tasks ],
+      isEdit: false
+    }
+  },
+  computed: {
+    len () {
+      return this.list.length || 0
     },
-    data () {
-      return {
-        list: this.value,
-        isEdit: false
-      }
-    },
-    activated () {
-      this.isEdit = false
-    },
-    watch: {
-      value (n, o) {
-        this.list = n
-      }
-    },
-    methods: {
-      toEdit () {
-        this.isEdit = !this.isEdit
-      },
-      back () {
-        this.$emit('back')
-      },
-      go (route) {
-        this.$emit('go', route)
-      },
-      edit (selected, index) {
-        this.$emit('edit', selected, index)
-      },
-      check (item, index) {
-        this.$emit('check', item, index)
-        this.$emit('input', this.list)
-      },
-      remove (item, index) {
-        this.list.splice(index, 1)
-        this.$emit('remove', item)
-        this.$emit('input', this.list)
+    rightText () {
+      return this.list.length === 0
+        ? ''
+        : this.isEdit
+          ? this.$i('order.done')
+          : this.$i('order.edit')
+    }
+  },
+  activated () {
+    this.isEdit = false
+  },
+  watch: {
+    tasks: {
+      deep: true,
+      handler (val) {
+        this.list = [ ...val ]
       }
     }
+  },
+  methods: {
+    toEdit () {
+      this.isEdit = !this.isEdit
+    },
+    back () {
+      this.$emit('back')
+    },
+    go (route) {
+      this.$emit('go', route)
+    },
+    edit (selected, index) {
+      this.$emit('edit', selected, index)
+    },
+    check (item, index) {
+      const data = {
+        ...item,
+        enable: item.expired ? true : !item.enable
+      }
+      this.$emit('check', data, index)
+    },
+    remove (item, index) {
+      this.$emit('remove', item, index)
+    }
   }
+}
 </script>
 
 <style lang="stylus">
-  .hk-order-list
-    background-color: #f5f5f5;
-    &-title
-      position fixed !important
-      background-color #fff
-      top 0
-      width 100%
-      z-index: 100
-    &-body
-      margin 2.75rem 0 4rem 0
-      background-color: #f5f5f5;
-    &-footer
-      position fixed
-      left 0
-      right 100%
-      width 100%
-      height 4rem
-      bottom 0
-      background-color #fff
-    &-btn
+.hk-order-list
+  position absolute
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color #f5f5f5
+  .hk-header
+    background-color #fff
+  &-container
+    position absolute
+    top 2.25rem
+    right 0
+    bottom 4rem
+    left 0
+    padding 0.5rem 0
+    overflow-x hidden
+    overflow-y auto
+  &-footer
+    height 4rem
+    position absolute
+    right 0
+    bottom 0
+    left 0
+    background-color #fff
+    .hk-button
       width 80%
-      position: absolute !important;
-      margin 1rem auto
-      left 50%
-      transform translateX(-50%)
       max-width 16rem
-
+      margin 1rem auto
 </style>

@@ -76,7 +76,6 @@
       }
     },
     activated () {
-      console.log('activated', this.value.h)
       this.h = this.format(this.value.h, 2)
       this.m = this.format(this.value.m, 2)
       this.s = this.format(this.value.s, 2)
@@ -109,7 +108,6 @@
         for (let i = 0; i < 60; i++) {
           min.push(this.format(i, 2))
         }
-        console.log('min', min)
         return min
       }
     },
