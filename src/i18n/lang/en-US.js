@@ -28,7 +28,8 @@ export default {
     save: 'Save',
     edit: 'Edit',
     add: 'Add',
-    taskName: 'undefined',
+    taskName: 'New appointment',
+    placeholder: 'Please fill in the reservation name',
     label: 'label',
     time: 'time',
     done: 'Done'
