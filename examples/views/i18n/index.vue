@@ -2,6 +2,7 @@
 .hk-i18n-demo
   .hk-i18n-demo-title 语言包
   hk-button(@click="click") 切换语言
+  div 当前语言：{{ this.$i18n.lang }}
   div props默认文本不能改变，因为只会求值一次
   br
   div  propTest： {{ propTest }}
