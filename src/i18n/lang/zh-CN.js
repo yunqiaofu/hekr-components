@@ -29,7 +29,7 @@ export default {
     edit: '编辑',
     add: '添加预约',
     taskName: '新预约',
-    placeholder: '请填写预约名称',
+    placeholder: '最多12个字符',
     label: '标签',
     time: '时间',
     done: '完成'

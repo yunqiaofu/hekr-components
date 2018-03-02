@@ -11,7 +11,7 @@
   )
     .hk-order-item-left-time {{ time }}
     .hk-order-item-left-day {{ days }}
-    .hk-order-item-left-day {{ data.taskName }}
+    .hk-order-item-left-name {{ data.taskName }}
   .hk-order-item-right(
     :class="{ 'hk-order-item-right-delete': isDelete }",
     @click="check"
@@ -128,6 +128,7 @@ export default {
       this.$emit('check')
     },
     remove () {
+      this.isDelete = false
       this.$emit('remove')
     }
   }
@@ -168,7 +169,10 @@ export default {
       font-size 1rem
       line-height 1.25rem
       color #333333
-    &-day
+    &-day,
+    &-name
+      height 0.85rem
+      line-height 0.85rem
       font-size 0.6rem
       color #999999
   &-right

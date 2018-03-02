@@ -8,103 +8,105 @@
       @back="back",
       :template="template",
       :options="options",
-      :setting="setting"
+      :maxlength="maxlength"
     )
 </template>
 
 <script>
-  const template = {
-    taskName: '新加预约',
-    code: {
-      cmdTag: 'setSw'
-    }
-  }
-  export default {
-    name: 'hk-order-demo',
-    data () {
-      return {
-        list: [],
-        template: template,
-        options: [
-          {
-            type: 'button',
-            argument: 'curtain_Sw',
-            label: 'open / close',
-            maps: [
-              {
-                name: '定时开',
-                value: 1
-              },
-              {
-                name: '定时关',
-                value: 0
-              }]
-          },
-          {
-            type: 'button',
-            argument: 'curtain_Qr',
-            label: '强 / 弱',
-            maps: [
-              {
-                name: '强',
-                value: 1
-              },
-              {
-                name: '弱',
-                value: 0
-              }]
-          },
-          {
-            type: 'select',
-            argument: 'flow',
-            label: '风速',
-            maps: [
-              {
-                name: '1档',
-                value: 1
-              },
-              {
-                name: '2档',
-                value: 2
-              },
-              {
-                name: '3档',
-                value: 3
-              }]
-          },
-          {
-            type: 'slider',
-            argument: 'hd',
-            label: '湿度',
-            min: 0,
-            max: 100,
-            unit: '%'
-          }
-        ],
-        setting: {
-          maxLen: 10
+export default {
+  name: 'hk-order-demo',
+  data () {
+    return {
+      list: [],
+      template: {
+        taskName: this.$i('order.taskName'),
+        code: {
+          cmdTag: 'setSw'
         }
-      }
+      },
+      options: [
+        {
+          type: 'button',
+          argument: 'curtain_Sw',
+          label: 'open / close',
+          maps: [
+            {
+              name: '定时开',
+              value: 1
+            },
+            {
+              name: '定时关',
+              value: 0
+            }]
+        },
+        {
+          type: 'button',
+          argument: 'curtain_Qr',
+          label: '强 / 弱',
+          maps: [
+            {
+              name: '强',
+              value: 1
+            },
+            {
+              name: '弱',
+              value: 0
+            }]
+        },
+        {
+          type: 'select',
+          argument: 'flow',
+          label: '风速',
+          maps: [
+            {
+              name: '1档',
+              value: 1
+            },
+            {
+              name: '2档',
+              value: 2
+            },
+            {
+              name: '3档',
+              value: 3
+            }]
+        },
+        {
+          type: 'slider',
+          argument: 'hd',
+          label: '湿度',
+          min: 0,
+          max: 100,
+          unit: '%'
+        }
+      ],
+      maxlength: 10
+    }
+  },
+  methods: {
+    onRemove (data, index) {
+      this.list.splice(index, 1)
+      console.log('onRemove', data)
     },
-    methods: {
-      onRemove (data) {
-        console.log('onRemove', data)
-      },
-      onEdit (data) {
-        console.log('onEditonEdit', data)
-      },
-      onAdd (data) {
-        console.log('onAdd', data)
-      },
-      back () {
-        console.log('back')
-      }
+    onEdit (data, index) {
+      const list = [ ...this.list ]
+      list[index] = data
+      this.list = list
+      console.log('onEditonEdit', data)
+    },
+    onAdd (data) {
+      this.list.push(data)
+      console.log('onAdd', data)
+    },
+    back () {
+      console.log('back')
     }
   }
+}
 </script>
 
 <style lang="stylus">
-  .hk-notify-demo
-    text-align center
+.hk-notify-demo
+  text-align center
 </style>
 

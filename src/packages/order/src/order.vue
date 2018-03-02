@@ -5,7 +5,7 @@
     v-if="page==='list'",
     @go="go",
     :tasks="list",
-    :setting="setting"
+    :maxlength="maxlength",
     :options="options",
     @check="check",
     @remove="remove",
@@ -41,22 +41,15 @@ export default {
     },
     template: {
       type: Object,
-      default () {
-        return {
-          taskName: '',
-          code: {
-            cmdTag: ''
-          }
-        }
-      }
+      default: () => ({ taskName: '', code: { cmdTag: '' } })
     },
     options: {
       type: Array,
       default: () => []
     },
-    setting: {
-      type: Object,
-      default: () => ({ maxLen: 10 })
+    maxlength: {
+      type: Number,
+      default: 10
     }
   },
   data () {
@@ -64,6 +57,7 @@ export default {
       page: 'list',
       list: [...this.lists],
       date: new Date(),
+      index: null,
       selected: null
     }
   },
@@ -142,14 +136,15 @@ export default {
       const tasks = [ ...this.list ]
       tasks.splice(index, 1)
       this.list = [ ...tasks ]
-      this.$emit('onRemove', item)
+      this.$emit('onRemove', item, index)
     },
     onEdit (item) {
       const tasks = [ ...this.list ]
       tasks[this.index] = item
       this.list = [ ...tasks ]
+      this.$emit('onEdit', item, this.index)
       this.selected = null
-      this.$emit('onEdit', item)
+      this.index = null
     }
   }
 }
