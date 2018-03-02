@@ -3,8 +3,10 @@ import zhCN from './lang/zh-CN'
 import enUS from './lang/en-US'
 
 export default class I18n {
-  constructor () {
-    this.lang = 'zh-CN'
+  constructor ({
+    lang = 'en-US'
+  } = {}) {
+    this.lang = lang
     this.langs = {
       'zh-cn': zhCN,
       'en-us': enUS
@@ -35,8 +37,8 @@ export default class I18n {
     if (this.langs[lan]) {
       this.lang = lang
     } else {
-      this.lang = 'zh-CN'
-      console.warn(`没有找到语言包${lang}，使用默认语言包zh-CN`)
+      this.lang = 'en-US'
+      console.warn(`没有找到语言包${lang}，使用默认语言包en-US`)
     }
     this.vms.forEach(vm => {
       vm.lang = this.i18n // 后续会废弃
@@ -49,7 +51,7 @@ export default class I18n {
     Object.keys(langs)
       .forEach(key => {
         const k = key.toLocaleLowerCase().replace(/_/g, '-')
-        _langs[k] = merge({}, _langs['zh-cn'], _langs[k], langs[key])
+        _langs[k] = merge({}, _langs['en-us'], _langs[k], langs[key])
       })
     // 确保vue响应
     this.langs = _langs

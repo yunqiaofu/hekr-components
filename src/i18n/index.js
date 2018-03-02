@@ -2,7 +2,7 @@ import I18n from './i18n'
 
 const i18n = new I18n()
 i18n.install = (Vue, {
-  lang = 'zh-CN',
+  lang = 'en-US',
   langs
 } = {}) => {
   if (langs) {
