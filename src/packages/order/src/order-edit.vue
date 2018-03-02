@@ -94,7 +94,7 @@ export default {
     }
   },
   data () {
-    let myTemplate = this.selected || this.template
+    let myTemplate = { ...(this.selected || this.template) }
     let now = new Date()
     let value = {}
     let selectes = {}

@@ -29,9 +29,7 @@ i18n.extend({
   }
 })
 
-Vue.use(hekrComponents, {
-  lang: 'en-US'
-})
+Vue.use(hekrComponents)
 
 console.log(hekrComponents, i18n)
 /* eslint-disable no-new */

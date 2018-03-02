@@ -9,19 +9,19 @@
   )
   .hk-order-list-container
     hk-order-item(
-      v-for="(t, k) in list",
-      :key="k",
-      :task="list[k]",
+      v-for="(task, index) in list",
+      :key="index",
+      :task="task",
       :isEdit="isEdit",
       :options="options",
-      @remove="remove(t, k)",
-      @edit="edit(t, k)",
-      @check="check(t, k)"
+      @remove="remove(task, index)",
+      @edit="edit(task, index)",
+      @check="check(task, index)"
     )
   .hk-order-list-footer
     hk-button(
       :type="'primary'",
-      :disabled="list.length + 1 > setting.maxLen",
+      :disabled="list.length + 1 > maxlength",
       block,
       @click="go('add')"
     ) {{ $i('order.add') }}
@@ -43,9 +43,9 @@ export default {
       type: Array,
       default: () => []
     },
-    setting: {
-      type: Object,
-      default: () => ({ maxLen: 10 })
+    maxlength: {
+      type: Number,
+      default: 10
     }
   },
   data () {

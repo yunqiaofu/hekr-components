@@ -6,7 +6,7 @@ import * as components from './components'
 import './stylus/hekr-components.styl'
 
 const install = (Vue, {
-  lang = 'zh-CN',
+  lang = 'en-US',
   langs
 } = {}) => {
   if (install.installed) {
