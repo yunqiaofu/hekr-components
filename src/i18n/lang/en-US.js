@@ -32,7 +32,8 @@ export default {
     placeholder: 'Maximum 12 alphabets',
     label: 'label',
     time: 'time',
-    done: 'Done'
+    done: 'Done',
+    overTask: 'Shedules reach the amount limit'
   },
   'pop-colorpicker': {
     confirm: 'comfirm',

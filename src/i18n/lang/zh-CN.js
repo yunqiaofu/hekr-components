@@ -32,7 +32,8 @@ export default {
     placeholder: '最多12个字符',
     label: '标签',
     time: '时间',
-    done: '完成'
+    done: '完成',
+    overTask: '预约条数已到上限'
   },
   'pop-colorpicker': {
     confirm: '确定',

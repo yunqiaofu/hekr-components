@@ -13,8 +13,7 @@
     :equalCount="equalCount",
     :step="step",
     :type="type",
-    :beginColor="onColor",
-    :endColor="offColor"
+    :scaleColor="scaleColor",
     :defaultColor="defaultColor",
     @change="handleDashboard"
   )
@@ -36,8 +35,7 @@
     :min="min",
     :equalCount="equalCount",
     :step="step",
-    :beginColor="onColor",
-    :endColor="offColor"
+    :scaleColor="scaleColor",
     :defaultColor="defaultColor",
     :valueStyle="valueStyle",
     @change="handleDashboard"
@@ -51,8 +49,7 @@ export default {
     return {
       temp: 30,
       disabled: false,
-      onColor: '#666',
-      offColor: 'rgba(123,180,224, 0.5)',
+      scaleColor: ['#666', '#ff0000'],
       defaultColor: '#d0c643',
       active: true,
       text: '开关',
