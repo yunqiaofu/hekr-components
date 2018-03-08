@@ -13,7 +13,7 @@
     .hk-order-item-left-day {{ days }}
     .hk-order-item-left-name {{ data.taskName }}
   .hk-order-item-right(
-    :class="{ 'hk-order-item-right-delete': isDelete }",
+    :class="{ 'hk-order-item-right-delete': isDelete}",
     @click="check"
   )
     span(
@@ -88,6 +88,11 @@ export default {
       deep: true,
       handler (val) {
         this.data = { ...val }
+      }
+    },
+    isEdit (val) {
+      if (!val) {
+        this.isDelete = false
       }
     }
   },

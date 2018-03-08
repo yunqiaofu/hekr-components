@@ -24,7 +24,8 @@
       :disabled="list.length + 1 > maxlength",
       block,
       @click="go('add')"
-    ) {{ $i('order.add') }}
+  )  {{ getAddTxt }}
+    //- {{ $i('order.add') }}
 </template>
 
 <script>
@@ -64,6 +65,12 @@ export default {
         : this.isEdit
           ? this.$i('order.done')
           : this.$i('order.edit')
+    },
+    getAddTxt () {
+      if (this.list.length >= this.maxlength) {
+        return this.$i('order.overTask')
+      }
+      return this.$i('order.add')
     }
   },
   activated () {
@@ -124,7 +131,7 @@ export default {
     overflow-x hidden
     overflow-y auto
   &-footer
-    height 4rem
+    // height 4rem
     position absolute
     right 0
     bottom 0

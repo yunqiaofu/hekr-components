@@ -5,15 +5,14 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | type | 按钮类型 | string | both / touch / button / none
-| maxR | 外径值 | number | - | 125 |
-| minR | 内径值 | number | - | 100 |
+| maxR | 外径值(绘制外圈圆的直径,通过此设置来加长或缩短刻度条的长度) | number | - | 125 |
+| minR | 内径值(绘制内圈圆的直径,通过此设置来加长或缩短刻度条的长度) | number | - | 100 |
 | min | value的最小值 | number | - | 16 |
 | max | value的最大值 | number | - | 32 |
 | equalCount | 刻度的数量 | number | - | 50 |
-| step | 间隔 | number | - | 1 |
-| beginColor | 开始的颜色(不支持以颜色名称为值)) | string | - |  |
-| endColor | 结束的颜色((不支持以颜色名称为值)) | string | - |  |
-| defaultColor | 默认未选颜色 | string | - |  |
+| step | 每一个刻度之间的间隔值 | number | - | 1 |
+| scaleColor | value值对应刻度条颜色(不支持以颜色名称为值, 如: 'red', 最多支持两种颜色) | array | - |  |
+| defaultColor | 默认刻度颜色 | string | - |  |
 | disabled | 是否禁用状态 | boolean |	- | false |
 | block | 是否为块级样式 | boolean | - | false |
 | loading | 是否显示加载动画 | boolean | - | false |
@@ -26,7 +25,7 @@
 ## Slot
 | name | 说明|
 | --- | --- |
-| inner | 内容 |
+| inner | 内容(设置后会覆盖默认的内容) |
 
 ## Events
 | 事件名称 | 说明 |	回调参数 |
