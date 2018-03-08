@@ -1,6 +1,6 @@
 {
   "name": "@hekr/hekr-components",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A Vue.js UI Toolkit for Hekr",
   "author": "nashaofu <diaocheng@outlook.com>",
   "main": "dist/hekr-components.js",
@@ -91,7 +91,7 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
+    "last 7 versions",
     "not ie <= 8"
   ]
 }
