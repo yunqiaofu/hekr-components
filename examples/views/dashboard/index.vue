@@ -13,7 +13,8 @@
     :equalCount="equalCount",
     :step="step",
     :type="type",
-    :scaleColor="scaleColor",
+    :beginColor="beginColor",
+    :endColor="endColor",
     :defaultColor="defaultColor",
     @change="handleDashboard"
   )
@@ -35,7 +36,8 @@
     :min="min",
     :equalCount="equalCount",
     :step="step",
-    :scaleColor="scaleColor",
+    :beginColor="beginColor",
+    :endColor="endColor",
     :defaultColor="defaultColor",
     :valueStyle="valueStyle",
     @change="handleDashboard"
@@ -49,7 +51,8 @@ export default {
     return {
       temp: 30,
       disabled: false,
-      scaleColor: ['#666', '#ff0000'],
+      beginColor: '#666',
+      endColor: '#ff0000',
       defaultColor: '#d0c643',
       active: true,
       text: '开关',
