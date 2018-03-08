@@ -135,14 +135,14 @@ export default {
       type: Number,
       default: 1
     },
-    beginColor: {
-      type: String,
-      default: 'rgba(37, 101, 225, 1)'
+    scaleColor: {
+      type: Array,
+      default: ['rgba(37, 101, 225, 1)', 'rgba(65, 185, 242, 1)']
     },
-    endColor: {
-      type: String,
-      default: 'rgba(65, 185, 242, 1)'
-    },
+    // endColor: {
+    //   type: String,
+    //   default: 'rgba(65, 185, 242, 1)'
+    // },
     defaultColor: {
       type: String,
       default: 'rgba(135, 135, 135, 1)'
@@ -189,8 +189,8 @@ export default {
           pointClasses.push(DASHBOARD_POINT_ACTIVE)
         }
 
-        let deBeginColor = this.beginColor
-        let deEndColor = this.endColor
+        let deBeginColor = this.scaleColor[1] || this.scaleColor[0] // this.beginColor
+        let deEndColor = this.scaleColor[0]
         // 16进制转 RGB
         if (deEndColor.indexOf('rgb') === -1) {
           deEndColor = this.hexToRgb(deEndColor)
