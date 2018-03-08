@@ -11,7 +11,8 @@
 | max | value的最大值 | number | - | 32 |
 | equalCount | 刻度的数量 | number | - | 50 |
 | step | 每一个刻度之间的间隔值 | number | - | 1 |
-| scaleColor | value值对应刻度条颜色(不支持以颜色名称为值, 如: 'red', 最多支持两种颜色) | array | - |  |
+| beginColor | value值对应刻度条颜色渐变的开始值(不支持以颜色名称为值, 如: 'red') | array | - |  |
+| endColor | value值对应刻度条颜色渐变的结束值(不支持以颜色名称为值, 如: 'red') | array | - |  |
 | defaultColor | 默认刻度颜色 | string | - |  |
 | disabled | 是否禁用状态 | boolean |	- | false |
 | block | 是否为块级样式 | boolean | - | false |
