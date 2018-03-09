@@ -14,33 +14,34 @@
           v-if="leftText || leftText === 0"
         ) {{ leftText }}
 
-    .hk-list-right(v-if="type === 'input'")
-      input.hk-list-right-input(
-        v-bind="inputProps",
-        v-model="getValue",
-        :type="getInputType"
-      )
-    .hk-list-right(v-else-if="type === 'switch'")
-      hk-switch(
-        v-bind="switchProps",
-        v-model="getValue"
-      )
-    .hk-list-right(v-else-if="type === 'check'")
-      hk-check(
-        v-bind="checkProps",
-        v-model="getValue"
-      )
-    .hk-list-right(
-      v-else,
-      :style="getRightStyle",
-      @click="rightClick"
-    )
+    .hk-list-right
       slot(name="right")
-        span(v-if="rightText || rightText === 0") {{ rightText }}
-        i.hk-list-right-icon(
-          v-if="rightIcon",
-          :class="rightIcon"
+        input.hk-list-right-input(
+          v-if="type === 'input'",
+          v-bind="inputProps",
+          v-model="getValue",
+          :type="getInputType"
         )
+        hk-switch(
+          v-else-if="type === 'switch'",
+          v-bind="switchProps",
+          v-model="getValue"
+        )
+        hk-check(
+          v-else-if="type === 'check'",
+          v-bind="checkProps",
+          v-model="getValue"
+        )
+        .hk-list-right-text(
+          v-else,
+          :style="getRightStyle",
+          @click="rightClick"
+        )
+          span(v-if="rightText || rightText === 0") {{ rightText }}
+          i.hk-list-right-icon(
+            v-if="rightIcon",
+            :class="rightIcon"
+          )
 </template>
 
 <script>
@@ -163,5 +164,7 @@ ellipsis() {
       background none
       outline none
       border 0
+    .hk-switch
+      padding-top 0.8rem
 
 </style>
