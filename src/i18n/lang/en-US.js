@@ -24,7 +24,7 @@ export default {
   },
   order: {
     timing: 'Timing',
-    setting: 'Setting',
+    setting: 'Timing Setting',
     save: 'Save',
     edit: 'Edit',
     add: 'Add',
