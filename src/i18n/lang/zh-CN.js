@@ -38,5 +38,8 @@ export default {
   'pop-colorpicker': {
     confirm: '确定',
     cancel: '取消'
+  },
+  offline: {
+    text: '设备已离线，请稍后操作！'
   }
 }
