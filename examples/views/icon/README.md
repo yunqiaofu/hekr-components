@@ -1,5 +1,7 @@
 # hk-icon
 
+图标地址：[iconfont公司账号下项目hekr-components](http://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=494637)
+
 ## Props
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |

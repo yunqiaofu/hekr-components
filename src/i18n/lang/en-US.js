@@ -38,5 +38,8 @@ export default {
   'pop-colorpicker': {
     confirm: 'comfirm',
     cancel: 'cancel'
+  },
+  offline: {
+    text: 'The device is offline. Please try it later!'
   }
 }

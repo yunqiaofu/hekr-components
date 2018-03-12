@@ -123,6 +123,11 @@ export const routes = [
     path: '/colorpicker',
     name: 'colorpicker',
     component: () => import('../views/colorpicker')
+  },
+  {
+    path: '/offline',
+    name: 'offline',
+    component: () => import('../views/offline')
   }
 ]
 

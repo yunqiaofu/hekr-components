@@ -52,6 +52,11 @@
     text="hk-icons-waring",
     block
   )
+  hk-icon(
+    name="hk-icons-offline",
+    text="hk-icons-offline",
+    block
+  )
 </template>
 
 <script>
