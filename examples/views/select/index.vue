@@ -24,7 +24,7 @@
     data () {
       return {
         value1: [1],
-        value2: [0, 2],
+        value2: 0,
         disabled: false,
         items: [
           {

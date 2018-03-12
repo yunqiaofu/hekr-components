@@ -14,7 +14,7 @@
           v-if="leftText || leftText === 0"
         ) {{ leftText }}
 
-    .hk-list-right
+    .hk-list-right(@click="rightClick")
       slot(name="right")
         input.hk-list-right-input(
           v-if="type === 'input'",
@@ -34,8 +34,7 @@
         )
         .hk-list-right-text(
           v-else,
-          :style="getRightStyle",
-          @click="rightClick"
+          :style="getRightStyle"
         )
           span(v-if="rightText || rightText === 0") {{ rightText }}
           i.hk-list-right-icon(

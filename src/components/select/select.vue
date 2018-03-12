@@ -9,7 +9,7 @@
     :value="getValue(index)",
     :checkProps="getCheckProps(item.checkProps)",
     border,
-    @input="select($event, index, item)"
+    @right-click="select(index, item)"
   )
 </template>
 
@@ -66,30 +66,30 @@ export default {
         disabled: this.disabled
       }
     },
-    select (checked, index, item) {
+    select (index, item) {
       if (this.disabled) {
         return
       }
       if (this.multiple) {
-        this.selectMultiple(checked, index, item)
+        this.selectMultiple(index, item)
       } else {
-        this.selectSingle(checked, index, item)
+        this.selectSingle(index, item)
       }
     },
-    selectSingle (checked, index, item) {
+    selectSingle (index, item) {
       this.$emit('input', index)
       this.$emit('change', {
         value: index,
-        checked,
+        checked: true,
         index,
         item
       })
     },
-    selectMultiple (checked, index, item) {
+    selectMultiple (index, item) {
       let value = this.value
       if (Array.isArray(value)) {
         value = new Set(value)
-        if (checked) {
+        if (!value.has(index)) {
           value.add(index)
         } else {
           value.delete(index)
@@ -101,7 +101,7 @@ export default {
       this.$emit('input', value)
       this.$emit('change', {
         value,
-        checked,
+        checked: value.indexOf(index) !== -1,
         index,
         item
       })

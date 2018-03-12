@@ -2,13 +2,14 @@
   .hk-notify-demo
     hk-order(
       :lists="list",
+      :title="title",
+      :template="template",
+      :options="options",
+      :maxlength="maxlength",
       @onRemove="onRemove",
       @onEdit="onEdit",
       @onAdd="onAdd",
-      @back="back",
-      :template="template",
-      :options="options",
-      :maxlength="maxlength"
+      @back="back"
     )
 </template>
 
@@ -80,6 +81,7 @@ export default {
           unit: '%'
         }
       ],
+      title: '预约标题(可选)',
       maxlength: 10
     }
   },

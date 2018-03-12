@@ -8,6 +8,7 @@
 | template.code.cmdTag | 预约命令 | string | - | - |
 | options | 命令中的每一个参数配置项 | array | - | -|
 | maxlength | 预约列表最多条数 | number | - | 10 |
+| title | 预约列表标题 | string | - | - |
 
 ### Events
 | 事件名称 | 说明 |	回调参数 |
