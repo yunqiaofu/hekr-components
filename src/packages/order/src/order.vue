@@ -3,10 +3,11 @@
 .hk-order
   hk-order-list(
     v-if="page==='list'",
-    @go="go",
     :tasks="list",
-    :maxlength="maxlength",
     :options="options",
+    :title="title",
+    :maxlength="maxlength",
+    @go="go",
     @check="check",
     @remove="remove",
     @edit="edit",
@@ -46,6 +47,9 @@ export default {
     options: {
       type: Array,
       default: () => []
+    },
+    title: {
+      type: String
     },
     maxlength: {
       type: Number,

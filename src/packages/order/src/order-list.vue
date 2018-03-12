@@ -2,7 +2,7 @@
 <template lang="pug">
 .hk-order-list
   hk-header(
-    :title="$i('order.timing')",
+    :title="title || $i('order.timing')",
     @click-left="back",
     :rightText="rightText",
     @click-right="toEdit"
@@ -25,7 +25,6 @@
       block,
       @click="go('add')"
   )  {{ getAddTxt }}
-    //- {{ $i('order.add') }}
 </template>
 
 <script>
@@ -43,6 +42,9 @@ export default {
     options: {
       type: Array,
       default: () => []
+    },
+    title: {
+      type: String
     },
     maxlength: {
       type: Number,
