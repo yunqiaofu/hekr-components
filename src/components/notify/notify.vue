@@ -109,7 +109,7 @@ export default {
   right 0
   bottom 0
   left 0
-  z-index $zindex-base
+  z-index $zindex-higher
   &-container
     max-width 13.5rem
     position absolute
