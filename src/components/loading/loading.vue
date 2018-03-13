@@ -34,13 +34,13 @@ export default {
     right 0
     bottom 0
     left 0
-    z-index $zindex-base
+    z-index $zindex-higher
     background-color rgba(0,0,0,0.3)
   &-container
     position fixed
     top 50%
     left 50%
-    z-index $zindex-base
+    z-index $zindex-higher
     padding 0.7rem
     transform translate3d(-50%, -50%, 0) scale3d(1,1,1)
     border-radius 0.2rem

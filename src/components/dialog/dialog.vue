@@ -166,7 +166,7 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
   right 0
   bottom 0
   left 0
-  z-index $zindex-base
+  z-index $zindex-higher
   &-mask
     position absolute
     top 0
