@@ -55,7 +55,7 @@ export default {
   bottom 0
   left 0
   background-color rgba(0,0,0,0.8)
-  z-index $zindex-higher
+  z-index $zindex-base
   &-container
     max-width 80%
     max-height 60%
