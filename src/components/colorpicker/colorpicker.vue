@@ -1,90 +1,199 @@
 <template lang="pug">
 .hk-colorpicker
-  hk-colorpicker-saturation(
-    v-model="hsv",
-    :disabled="disabled"
-  )
-  .hk-colorpicker-color(
-    :style="bgcolor"
-  )
-  hk-colorpicker-hue(
-    v-model="h",
-    :disabled="disabled"
-  )
+  .hk-colorpicker-container
+    .hk-colorpicker-container-canvas(
+      ref="canvas",
+      @touchstart.prevent="dragstart",
+      @touchmove.prevent="dragging",
+      @touchend.prevent="dragend",
+      @mousedown="dragstart"
+    )
+      canvas(
+        ref="ctx",
+        :width="width",
+        :height="height"
+      )
+      .hk-colorpicker-container-canvas-point(:style="getPointStyle")
 </template>
 
 <script>
-import { rgbToHsv, hsvToRgb } from './color'
-import ColorpickerHue from './colorpicker-hue.vue'
-import ColorpickerSaturation from './colorpicker-saturation.vue'
+import colorpicker from './color.png'
 
 export default {
   name: 'hk-colorpicker',
-  components: {
-    'hk-colorpicker-hue': ColorpickerHue,
-    'hk-colorpicker-saturation': ColorpickerSaturation
-  },
   props: {
     value: {
       type: Object,
-      default: () => ({ r: 0, g: 0, b: 0 })
+      default: () => ({r: 255, g: 255, b: 255})
     },
     disabled: {
       type: Boolean,
       default: false
     }
   },
+  data () {
+    return {
+      is: false,
+      ctx: null,
+      width: 280,
+      height: 280,
+      pointerTop: 0,
+      pointerLeft: 0,
+      timer: null,
+      delay: 100
+    }
+  },
   computed: {
-    rgb: {
-      get () {
-        const r = this.value.r >= 0 && this.value.r <= 255 ? this.value.r : 0
-        const g = this.value.g >= 0 && this.value.g <= 255 ? this.value.g : 0
-        const b = this.value.b >= 0 && this.value.b <= 255 ? this.value.b : 0
-        return { r, g, b }
-      },
-      set (val) {
-        if (!this.disabled) {
-          this.$emit('input', val)
+    rgb () {
+      const r = this.value.r >= 0 && this.value.r <= 255 ? this.value.r : 0
+      const g = this.value.g >= 0 && this.value.g <= 255 ? this.value.g : 0
+      const b = this.value.b >= 0 && this.value.b <= 255 ? this.value.b : 0
+      return { r, g, b }
+    },
+    getPointStyle () {
+      return {
+        top: `${this.pointerTop}px`,
+        left: `${this.pointerLeft}px`
+      }
+    }
+  },
+  mounted () {
+    this.ctx = this.$refs.ctx.getContext('2d')
+    this.width = this.$refs.canvas.offsetWidth
+    this.height = this.$refs.canvas.offsetHeight
+    document.addEventListener('mousemove', this.dragging)
+    document.addEventListener('mouseup', this.dragend)
+    this.draw()
+  },
+  destroyed () {
+    document.removeEventListener('mousemove', this.dragging)
+    document.removeEventListener('mouseup', this.dragend)
+  },
+  methods: {
+    draw () {
+      const $img = new Image()
+      $img.addEventListener('load', () => {
+        this.ctx.drawImage($img, 0, 0, $img.width, $img.height, 0, 0, this.width, this.height)
+        // 异步执行
+        setTimeout(() => this.setPoint(), 100)
+      })
+      $img.src = colorpicker
+    },
+    setPoint () {
+      const { width, height } = this.$refs.canvas.getBoundingClientRect()
+      const radius = (width + height) / 4
+
+      // 位置偏差
+      const offset = 4
+      // 一列一列的遍历匹配颜色
+      for (let x = 0; x < this.width; x++) {
+        for (let y = 0; y < this.height; y++) {
+          const point = {
+            x: x - width / 2,
+            y: -(y - height / 2)
+          }
+          if (Math.sqrt(Math.pow(point.x, 2) + Math.pow(point.y, 2)) <= radius) {
+            const { data } = this.ctx.getImageData(x, y, 1, 1)
+            const [r, g, b] = data
+            if (r + offset > this.rgb.r &&
+              r - offset < this.rgb.r &&
+              g + offset > this.rgb.g &&
+              g - offset < this.rgb.g &&
+              b + offset > this.rgb.b &&
+              b - offset < this.rgb.b
+              ) {
+              this.pointerLeft = x
+              this.pointerTop = y
+              return
+            }
+          }
         }
       }
     },
-    hsv: {
-      get () {
-        return rgbToHsv(this.rgb)
-      },
-      set (val) {
-        this.rgb = hsvToRgb(val)
+    dragstart (e) {
+      if (this.disabled) {
+        return
+      }
+      this.is = true
+      this.update(e)
+    },
+    dragging (e) {
+      if (this.is) {
+        this.update(e)
       }
     },
-    h: {
-      get () {
-        return this.hsv.h
-      },
-      set (val) {
-        this.hsv = { ...this.hsv, h: val }
+    dragend (e) {
+      if (this.is) {
+        this.update(e)
       }
+      this.is = false
     },
-    bgcolor () {
-      const r = parseInt(this.rgb.r)
-      const g = parseInt(this.rgb.g)
-      const b = parseInt(this.rgb.b)
+    click (e) {
+      this.update(e)
+    },
+    update (e) {
+      if (this.disabled) {
+        return
+      }
+      const x = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
+      const y = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : e.clientY
+      const { left, top, width, height } = this.$refs.canvas.getBoundingClientRect()
 
-      return {
-        'background-color': `rgb(${r},${g},${b})`
+      // 以圆盘中心为坐标原点
+      const radius = (width + height) / 4
+      const point = {
+        x: x - left - width / 2,
+        y: -(y - top - height / 2)
       }
+      if (Math.sqrt(Math.pow(point.x, 2) + Math.pow(point.y, 2)) > radius) {
+        let rad = Math.atan(point.y / point.x) // 与x轴夹角弧度值
+        if (point.x < 0) { // 第二、三象限
+          rad += Math.PI
+        } else if (point.y < 0 && point.x > 0) { // 第四象限
+          rad += Math.PI * 2
+        }
+        point.x = Math.cos(rad) * radius
+        point.y = Math.sin(rad) * radius
+      }
+      this.pointerTop = -(point.y - radius)
+      this.pointerLeft = point.x + radius
+      // 节流一下
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        const [r, g, b] = this.ctx.getImageData(this.pointerLeft, this.pointerTop, 1, 1).data
+        this.$emit('input', { r, g, b })
+      }, this.delay)
     }
   }
 }
 </script>
 
 <style lang="stylus">
+$size = 10rem
+$padding = 0.35rem
+
 .hk-colorpicker
-  &-color
-    width 1rem
-    height 1rem
-    margin 0.5rem 0.4rem
+  text-align center
+  &-container
+    width $size + $padding * 2
+    height $size + $padding * 2
+    padding $padding
+    margin 0 auto
     border-radius 50%
-    box-shadow 0 0 0 1px #fff, inset 0 0 1px 1px rgba(0,0,0,.3), 0 0 1px 2px rgba(0,0,0,.4)
-  &-hue
-    margin -1.2rem 0.4rem 0.7rem 2rem
+    overflow hidden
+    &-canvas
+      width $size
+      height $size
+      border-radius 50%
+      position relative
+      &-point
+        width 0.7rem
+        height 0.7rem
+        border-radius 50%
+        position absolute
+        transform translate3d(-50%, -50%, 0)
+        background-color rgba(255,255,255,0.7)
+        box-shadow 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3), 0 0 1px 2px rgba(0,0,0,.4)
+        cursor pointer
+
 </style>
