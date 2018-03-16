@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import 'chart.js' // chart.js默认会导出全局变量window.Chart，所以可以不显示声明
 import cloneDeep from 'lodash/cloneDeep'
 const randomScalingFactor = () => {
   return Math.round(Math.random() * 1000)

@@ -32,14 +32,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     libraryExport: 'default',
     libraryTarget: 'umd'
   },
-  externals: {
-    'chart.js': {
-      commonjs: 'chart.js',
-      commonjs2: 'chart.js',
-      amd: 'chart.js',
-      root: 'Chart'
-    }
-  },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
