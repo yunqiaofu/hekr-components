@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import Chart from 'chart.js'
 import cloneDeep from 'lodash/cloneDeep'
 const types = ['line', 'bar', 'radar', 'polarArea', 'pie', 'doughnut', 'bubble']
 export default {
@@ -64,8 +63,8 @@ export default {
   methods: {
     draw () {
       // 为了兼容浏览器引用的时候能够在NPM中打包chart.js
-      if (typeof Chart === 'undefined' && typeof window.Chart === 'undefined') {
-        throw new Error('Chart is not defined, To install it, you can run: npm install --save chart.js')
+      if (typeof window.Chart === 'undefined') {
+        throw new Error('window.Chart is not defined, To install it, you can run: npm install --save chart.js')
       }
       this.ctx = this.$refs.canvas.getContext('2d')
       const config = cloneDeep({
@@ -92,7 +91,7 @@ export default {
           }
         })
       }
-      this.chart = new (Chart || window.Chart)(this.ctx, config)
+      this.chart = new window.Chart(this.ctx, config)
     }
   }
 }
