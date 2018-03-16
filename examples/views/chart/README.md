@@ -9,7 +9,7 @@
 | options | 配置项 | object | - | - |
 | gradients | 渐变颜色 | array | - | - |
 
-**注: 具体参数配置详见[chart.js](http://www.chartjs.org) type，data，options都是new Chart(ctx, config)方法的第二个参数config**
+**注: 在使用本插件之前请安装并引入chart.js, chart.js具体参数配置详见[chart.js](http://www.chartjs.org) type，data，options都是new Chart(ctx, config)方法的第二个参数config**
 
 ### gradients参数说明
 渐变的位置定义：0 -> 1 对应图形顶部到底部，即曲线到坐标轴的方向
