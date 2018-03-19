@@ -14,11 +14,11 @@
         :height="height"
       )
       .hk-colorpicker-container-canvas-point(:style="getPointStyle")
+    .hk-colorpicker-container-disabled(v-if="disabled")
+    .hk-colorpicker-container-image(ref="image")
 </template>
 
 <script>
-import colorpicker from './color.png'
-
 export default {
   name: 'hk-colorpicker',
   props: {
@@ -71,13 +71,17 @@ export default {
   },
   methods: {
     draw () {
-      const $img = new Image()
-      $img.addEventListener('load', () => {
-        this.ctx.drawImage($img, 0, 0, $img.width, $img.height, 0, 0, this.width, this.height)
-        // 异步执行
-        setTimeout(() => this.setPoint(), 100)
-      })
-      $img.src = colorpicker
+      const url = window.getComputedStyle(this.$refs.image).getPropertyValue('background-image')
+      const reg = /https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*/i
+      if (reg.exec(url)[0]) {
+        const $img = new Image()
+        $img.addEventListener('load', () => {
+          this.ctx.drawImage($img, 0, 0, $img.width, $img.height, 0, 0, this.width, this.height)
+          // 异步执行
+          setTimeout(() => this.setPoint(), 100)
+        })
+        $img.src = reg.exec(url)[0]
+      }
     },
     setPoint () {
       const { width, height } = this.$refs.canvas.getBoundingClientRect()
@@ -170,7 +174,7 @@ export default {
 
 <style lang="stylus">
 $size = 10rem
-$padding = 0.35rem
+$padding = 0.45rem
 
 .hk-colorpicker
   text-align center
@@ -181,6 +185,7 @@ $padding = 0.35rem
     margin 0 auto
     border-radius 50%
     overflow hidden
+    position relative
     &-canvas
       width $size
       height $size
@@ -195,5 +200,18 @@ $padding = 0.35rem
         background-color rgba(255,255,255,0.7)
         box-shadow 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3), 0 0 1px 2px rgba(0,0,0,.4)
         cursor pointer
+    &-image
+      background-image url("./color.png")
+      visibility hidden
+    &-disabled
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      left 0
+      z-index 10
+      background-color rgba(255,255,255,0.7)
+      cursor not-allowed
+      opacity 0.7
 
 </style>
