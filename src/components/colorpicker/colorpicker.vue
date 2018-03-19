@@ -24,9 +24,13 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => ({r: 255, g: 255, b: 255})
+      default: () => ({ r: 255, g: 255, b: 255 })
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    autopick: {
       type: Boolean,
       default: false
     }
@@ -69,10 +73,17 @@ export default {
     document.removeEventListener('mousemove', this.dragging)
     document.removeEventListener('mouseup', this.dragend)
   },
+  watch: {
+    rgb () {
+      this.$nextTick(() => this.setPoint())
+    }
+  },
   methods: {
     draw () {
       const url = window.getComputedStyle(this.$refs.image).getPropertyValue('background-image')
       const reg = /https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*/i
+      this.pointerLeft = this.width / 2
+      this.pointerTop = this.height / 2
       if (reg.exec(url)[0]) {
         const $img = new Image()
         $img.addEventListener('load', () => {
@@ -84,6 +95,7 @@ export default {
       }
     },
     setPoint () {
+      if (!this.autopick) return
       const { width, height } = this.$refs.canvas.getBoundingClientRect()
       const radius = (width + height) / 4
 
