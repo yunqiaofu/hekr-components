@@ -1,8 +1,11 @@
 <template lang="pug">
 .hk-colorpicker-demo
   hk-colorpicker(
+    v-model="color"
+  )
+  hk-colorpicker(
     v-model="color",
-    :disabled="false"
+    disabled
   )
 </template>
 
@@ -11,7 +14,6 @@ export default {
   name: 'hk-colorpicker-demo',
   data () {
     return {
-      show: false,
       color: {
         r: 230,
         g: 255,
