@@ -5,6 +5,10 @@
   )
   hk-colorpicker(
     v-model="color",
+    autopick
+  )
+  hk-colorpicker(
+    v-model="color",
     disabled
   )
 </template>
