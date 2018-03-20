@@ -12,6 +12,8 @@
   br
   div {{ $i('i18n.test') }}
   div 计算属性: {{ getTest }}
+  div 未定义的属性: {{ $i('i18n.test2') }}
+  div 属性为false: {{ $i('i18n.false') }}
 </template>
 
 <script>
