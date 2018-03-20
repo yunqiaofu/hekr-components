@@ -10,12 +10,14 @@ Vue.config.productionTip = false
 i18n.extend({
   'zh-CN': {
     i18n: {
-      test: '测试文本，中文'
+      test: '测试文本，中文',
+      false: false
     }
   },
   'en_US': {
     i18n: {
-      test: 'test text, English'
+      test: 'test text, English',
+      false: false
     }
   },
   fr: {
