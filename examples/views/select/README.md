@@ -10,10 +10,11 @@
 | multiple | 多选 | boolean | - | false |
 
 ### items结构
-```javascript
+```js
 {
   name: '左侧标题',
-  checkProps: // 右侧check组件选项，可参考check组件
+  icon?: '', // 左侧图标
+  checkProps?: // 右侧check组件选项，可参考check组件
 }
 ```
 

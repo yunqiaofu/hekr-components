@@ -28,7 +28,8 @@
         disabled: false,
         items: [
           {
-            name: '制冷模式'
+            name: '制冷模式',
+            icon: 'hk-icons-waring'
           },
           {
             name: '制热模式'

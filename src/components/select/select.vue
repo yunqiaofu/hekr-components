@@ -6,6 +6,7 @@
     :key="index",
     type="check",
     :leftText="item.name",
+    :leftIcon="item.icon",
     :value="getValue(index)",
     :checkProps="getCheckProps(item.checkProps)",
     border,
