@@ -23,17 +23,16 @@ export default class I18n {
     if (typeof key !== 'string') return
     const k = key.split('.')
     let val = this.i18n[k[0]]
-    if (!val) return val
+    if (typeof val !== 'object') return val
     for (let i = 1, length = k.length; i < length; i++) {
-      if (!val[k[i]]) return
       val = val[k[i]]
+      if (val === undefined) break
     }
     return val
   }
 
   use (lang) {
     const lan = lang.toLocaleLowerCase().replace(/_/g, '-')
-
     if (this.langs[lan]) {
       this.lang = lang
     } else {
