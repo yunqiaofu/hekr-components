@@ -10,7 +10,7 @@
           v-if="leftIcon",
           :class="leftIcon"
         )
-        span.hk-list-left-icon(
+        span.hk-list-left-text(
           v-if="leftText || leftText === 0"
         ) {{ leftText }}
 
@@ -129,11 +129,10 @@ export default {
 
 <style lang="stylus">
 @import "../../stylus/variables.styl"
-ellipsis() {
+ellipsis()
   white-space nowrap
   overflow hidden
   text-overflow ellipsis
-}
 
 .hk-list
   display flex
