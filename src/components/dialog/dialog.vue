@@ -200,8 +200,8 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
       &-input
         display block
         width 100%
-        padding 0.5rem 0.3rem
-        border none
+        padding 0.35rem 0.4rem
+        border 0.05rem solid #ccc
         outline none
         color #999
         font-size $font-size-4
