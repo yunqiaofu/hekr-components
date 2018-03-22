@@ -57,6 +57,16 @@
     text="hk-icons-offline",
     block
   )
+  hk-icon(
+    name="hk-icons-reduce",
+    text="hk-icons-reduce",
+    block
+  )
+  hk-icon(
+    name="hk-icons-increase",
+    text="hk-icons-increase",
+    block
+  )
 </template>
 
 <script>
