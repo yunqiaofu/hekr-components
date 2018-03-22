@@ -36,22 +36,22 @@
       v-if="type !== 'touch' && type !== 'none'",
       :style="{color: disabled ? '#a4a4a4' : '#000'}"
     )
-      .hk-dashboard-reduce(
-        ref="reduce"
-        @touchstart.prevent="onButton"
-        @touchend.prevent= "offButton"
-        @mousedown.stop = "onButton"
-        @mouseup.stop = "offButton"
-      )
-        i.hk-icons-reduce
-      .hk-dashboard-increase(
-        ref="increase"
-        @touchstart.prevent="onButton"
-        @touchend.prevent="offButton"
-        @mousedown.stop = "onButton"
-        @mouseup.stop = "offButton"
-      )
-        i.hk-icons-increase
+      .hk-dashboard-reduce
+        i.hk-icons-reduce(
+          ref="reduce"
+          @touchstart.prevent="onButton"
+          @touchend.prevent= "offButton"
+          @mousedown.stop = "onButton"
+          @mouseup.stop = "offButton"
+        )
+      .hk-dashboard-increase
+        i.hk-icons-increase(
+          ref="increase"
+          @touchstart.prevent="onButton"
+          @touchend.prevent="offButton"
+          @mousedown.stop = "onButton"
+          @mouseup.stop = "offButton"
+        )
 
   slot
 </template>
@@ -459,5 +459,8 @@ export default {
       i
         font-size 1.6rem
         font-weight normal
+        width 100%
+        height 100%
+        display inline-block
 
 </style>
