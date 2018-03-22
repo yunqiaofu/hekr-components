@@ -42,14 +42,16 @@
         @touchend.prevent= "offButton"
         @mousedown.stop = "onButton"
         @mouseup.stop = "offButton"
-      ) -
+      )
+        i.hk-icons-reduce
       .hk-dashboard-increase(
         ref="increase"
         @touchstart.prevent="onButton"
         @touchend.prevent="offButton"
         @mousedown.stop = "onButton"
         @mouseup.stop = "offButton"
-      ) +
+      )
+        i.hk-icons-increase
 
   slot
 </template>
@@ -378,6 +380,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import "../../stylus/variables.styl"
+
 .hk-dashboard-wrap
   position relative
   width 100%
@@ -449,8 +453,11 @@ export default {
       display inline-block
       width 30%
       height 2rem
-      font-size 1.6rem
+      // font-size 1.6rem
       line-height 2rem
       text-align center
+      i
+        font-size 1.6rem
+        font-weight normal
 
 </style>
