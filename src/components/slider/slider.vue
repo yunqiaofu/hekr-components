@@ -160,7 +160,7 @@ export default {
       }
       const x = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
       const { left } = this.$refs.bar.getBoundingClientRect()
-      let value = (x - left) / this.$refs.bar.clientWidth * (this.max - this.min)
+      let value = (x - left) / this.$refs.bar.clientWidth * (this.max - this.min) + this.min
       // 按步长求值
       value = Math.round(value / this.step) * this.step
       const step = this.step.toString().split('.')

@@ -4,8 +4,8 @@
   .hk-slider-demo-container
     hk-slider(
       v-model="value",
-      :min="0",
-      :max="100",
+      :min="20",
+      :max="50",
       title="标题",
       unit="%"
     )
