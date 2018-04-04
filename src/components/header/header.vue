@@ -116,14 +116,14 @@ $height-2 = 1.5rem
     text-align left
     &-icon
       float left
-      line-height $height-2 * 0.7
+      line-height $height-2 * 0.9
       font-size 1.05rem
       margin-right 0.3rem
 
     &-text
       float right
       height $height-2
-      line-height $height-2 * 1.1
+      line-height $height-2
 
   &-right
     right 0.6rem
@@ -131,12 +131,12 @@ $height-2 = 1.5rem
     &-icon
       float right
       height $height-2
-      line-height $height-2 * 0.7
+      line-height $height-2 * 0.9
       font-size 1.05rem
       margin-left 0.3rem
     &-text
       float left
       height $height-2
-      line-height $height-2 * 1.1
+      line-height $height-2
 
 </style>
