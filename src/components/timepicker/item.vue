@@ -71,19 +71,7 @@
     },
     mounted () {
       /* 初始化状态 */
-      let index = this.listData.indexOf(this.value)
-      if (index === -1) {
-        this.setListTransform()
-        this.getPickValue(0)
-      } else {
-        let move = index * 34
-        /* 因为往上滑动所以是负 */
-        this.setStyle(-move)
-        this.setListTransform(-move, -move)
-      }
-    },
-    activated () {
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.spin = {start: -9, end: 9, branch: 9}
         this.finger = {startY: 0, lastY: 0, startTime: 0, lastTime: 0, transformY: 0}
         this.selected = this.value
@@ -97,7 +85,7 @@
           this.setStyle(-move)
           this.setListTransform(-move, -move)
         }
-      }, 200)
+      })
     },
     methods: {
       /* 根据type 控制滚轮显示效果 */
