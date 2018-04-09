@@ -16,10 +16,19 @@
         v-model="date",
         :type="'hh:mm'"
       )
+
     .hk-time-demo-block(
       @click.stop="show2=!show2"
     ) 自定义{{t}}{{h}}时{{m}}分
-
+    div 单个示例
+    hk-time-item(
+      :listData="min",
+      :type="'cycle'",
+      v-model="m"
+    )
+      span.hk-time-demo-unit(
+        slot="unit"
+      ) 分
     hk-pop(
       v-model="show2"
     )
@@ -65,6 +74,9 @@
         date: {h: 2, m: 3, s: 2},
         time: ['上午', '下午']
       }
+    },
+    mounted () {
+      this.m = 5
     },
     computed: {
       month () {
@@ -117,7 +129,7 @@
     margin-top 60px
     text-align center
     font-size 17px
-  
+
     &-block
       margin 20px 0
     &-unit
