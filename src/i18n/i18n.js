@@ -36,8 +36,13 @@ export default class I18n {
     if (this.langs[lan]) {
       this.lang = lang
     } else {
-      this.lang = 'en-US'
-      console.warn(`没有找到语言包${lang}，使用默认语言包en-US`)
+      let l = lan.split('-')[0]
+      if (this.langs[l]) {
+        this.lang = l
+      } else {
+        this.lang = 'en-US'
+        console.warn(`没有找到语言包${lang}，使用默认语言包en-US`)
+      }
     }
     this.vms.forEach(vm => {
       vm.lang = this.i18n // 后续会废弃
