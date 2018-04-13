@@ -9,7 +9,9 @@ export default class I18n {
     this.lang = lang
     this.langs = {
       'zh-cn': zhCN,
-      'en-us': enUS
+      'en-us': enUS,
+      'zh': zhCN,
+      'en': enUS
     }
     this.vm = null
     this.vms = []
