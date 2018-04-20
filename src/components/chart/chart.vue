@@ -1,6 +1,13 @@
 <template lang="pug">
 .hk-chart
   canvas(ref="canvas")
+  .hk-chart-loading(v-if="loading")
+    .hk-chart-loading-spinner
+      .hk-chart-loading-spinner-dot
+        .hk-chart-loading-spinner-dot-1
+        .hk-chart-loading-spinner-dot-2
+        .hk-chart-loading-spinner-dot-3
+        .hk-chart-loading-spinner-dot-4
 </template>
 
 <script>
@@ -27,6 +34,10 @@ export default {
     gradients: {
       type: Array,
       default: () => []
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   mounted () {
@@ -98,6 +109,60 @@ export default {
 </script>
 
 <style lang="stylus">
+@import "../../stylus/variables.styl"
+
+$spinner-size=1rem
+
 .hk-chart
   position relative
+  &-loading
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background-color rgba(255,255,255,0.88)
+    z-index $zindex-lower
+    &-spinner
+      width $spinner-size
+      height $spinner-size
+      position absolute
+      top 50%
+      left 50%
+      transform translate3d(-50%, -50%, 0)
+      &-dot
+        width $spinner-size
+        height $spinner-size
+        position relative
+        animation hk-chart-spinner 1.1s infinite linear
+        &-1,
+        &-2,
+        &-3,
+        &-4
+          width 0.3rem
+          height 0.3rem
+          border-radius 50%
+          position absolute
+          background-color #06f
+        &-1
+          top 0.05rem
+          left 0.05rem
+        &-2
+          top 0.05rem
+          right 0.05rem
+          opacity 0.8
+        &-3
+          bottom 0.05rem
+          right 0.05rem
+          opacity 0.6
+        &-4
+          left 0.05rem
+          bottom 0.05rem
+          opacity 0.4
+
+@keyframes hk-chart-spinner
+  0%
+  	transform translate3d(-50%, -50%, 0) rotate(0deg)
+  100%
+  	transform translate3d(-50%, -50%, 0) rotate(360deg)
 </style>

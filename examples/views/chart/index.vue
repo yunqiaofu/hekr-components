@@ -16,6 +16,7 @@
   hk-chart(
     type="line",
     :data="charts2.data",
+    :loading="true"
     :options="charts2.options",
     :gradients="gradients2"
   )
