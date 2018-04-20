@@ -8,6 +8,7 @@
 | data | 图标显示数据 |	object | - | - |
 | options | 配置项 | object | - | - |
 | gradients | 渐变颜色 | array | - | - |
+| loading | 显示加载动画 | boolean | - | false |
 
 **注: 在使用本插件之前请安装并引入chart.js, chart.js具体参数配置详见[chart.js](http://www.chartjs.org) type，data，options都是new Chart(ctx, config)方法的第二个参数config**
 
