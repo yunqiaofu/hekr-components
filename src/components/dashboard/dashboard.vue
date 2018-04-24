@@ -1,6 +1,8 @@
 <template lang="pug">
 .hk-dashboard-wrap
-  .hk-dashboard(ref="dashboard")
+  .hk-dashboard(
+    :style="{ width: width / 20 + 'rem', height: height / 20 + 'rem'}"
+  )
     .hk-dashboard-cover(
       :style="{ width: width / 30 + 'rem', height: height / 30 + 'rem'}"
     )
@@ -17,8 +19,6 @@
 
     svg.hk-dashboard-svg(
       ref="svg",
-      :width="width/20 + 'rem'",
-      :height="height/20 + 'rem'",
       :viewBox="`0,0,${width},${height}`",
       @touchstart.prevent="handleTouchChange",
       @touchmove.prevent="handleTouchChange",
@@ -383,10 +383,9 @@ export default {
 @import "../../stylus/variables.styl"
 
 .hk-dashboard-wrap
-  position relative
-  width 100%
   .hk-dashboard
-    width 100%
+    position relative
+    margin 0 auto
     display flex
     flex-direction column
     justify-content center
