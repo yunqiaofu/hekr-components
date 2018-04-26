@@ -269,21 +269,28 @@ export default {
       &-buttons
         &-items
           text-align right
+          height 2.2rem
+          padding 0.35rem 0
+          white-space nowrap
           &-item
-            width 2.7rem
+            min-width 2.7rem
+            max-width 46%
             height 1.15rem
+            padding 0 0.2rem
             display inline-block
             line-height 1.05rem
             border 0.05rem solid #ccc
             border-radius 0.2rem
             text-align center
-            color rgba(0, 0, 0, 0.65)
+            color #555
             font-size 0.6rem
+            overflow hidden
+            text-overflow ellipsis
             cursor pointer
             &:not(:first-child)
               margin-left 0.5rem
             &-active
-              border 0.05rem solid #3aa4f7
+              border-color #3aa4f7
               color #3aa4f7
       &-slider
         padding 0.5rem 1rem

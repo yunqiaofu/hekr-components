@@ -35,10 +35,6 @@ export default {
     done: 'Done',
     overTask: 'Shedules reach the amount limit'
   },
-  'pop-colorpicker': {
-    confirm: 'comfirm',
-    cancel: 'cancel'
-  },
   offline: {
     text: 'The device is offline. Please try it later!'
   }
