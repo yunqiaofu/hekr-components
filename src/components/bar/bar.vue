@@ -3,6 +3,7 @@
   .hk-bar-item(
     v-for="(item, index) in items",
     :key="index",
+    :style="getItemStyle",
     v-show="!item.hide",
     @click="handleClick(item, index)"
   )
@@ -43,6 +44,12 @@ export default {
     getColorStyle () {
       return {
         'background-color': this.color.bgColor
+      }
+    },
+    getItemStyle () {
+      const width = 1 / (this.items.length || 1) * 100
+      return {
+        width: `${width.toFixed(2)}%`
       }
     },
     color () {
@@ -87,6 +94,16 @@ export default {
   width 100%
   height 4rem
   padding 0 .5rem
+  overflow hidden
   &-item
     text-align center
+  .hk-icon
+    width 100%
+    overflow hidden
+  .hk-icon-text
+    width 100%
+    display block
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
 </style>

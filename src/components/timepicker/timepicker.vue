@@ -12,7 +12,7 @@
         v-model="h",
         @onChange="change"
       )
-        span.hk-timepicker-unit(
+        span(
           slot="unit"
         ) {{ $i('timepicker.hour') }}
       hk-time-item.hk-timepicker-box-item(
@@ -23,7 +23,7 @@
         v-model="m",
         @onChange="change"
       )
-        span.hk-timepicker-unit(
+        span(
           slot="unit"
         ) {{ $i('timepicker.min') }}
       hk-time-item.hk-timepicker-box-item(
@@ -153,8 +153,6 @@
       margin-left 1rem
       color #383838
       text-align left
-    &-timepicker-unit
-      margin-left 2.5rem
 </style>
 
 
