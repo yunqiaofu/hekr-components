@@ -9,7 +9,9 @@
     @mouseleave.stop="itemTouchEnd"
   )
     .hk-select-line
-      slot(name="unit")
+      .hk-select-line-unit
+        span.hk-select-line-unit-placeholder {{ value }}
+        slot(name="unit")
     .hk-select-list(
       style="opacity: 0"
     )
@@ -18,18 +20,18 @@
         style="display: none"
       )
         .hk-select-list-item(
-          v-for="el,index in renderData",
-          :class="{'hidden':setHidden(el.index)}",
+          v-for="(item, index) in renderData",
+          :class="{'hidden':setHidden(item.index)}",
           :key="index"
-        ) {{el.value}}
+        ) {{ item.value }}
     .hk-select-wheel(ref="wheel")
       .hk-select-wheel-item(
-        v-for="el,index in renderData ",
-        :class="{'hidden':setHidden(el.index)}",
-        :style="setWheelItemDeg(el.index)",
-        :index="el.index",
+        v-for="(item, index) in renderData ",
+        :class="{'hidden':setHidden(item.index)}",
+        :style="setWheelItemDeg(item.index)",
+        :index="item.index",
         :key="index"
-      ) {{el.value}}
+      ) {{ item.value }}
 </template>
 <script>
   export default{
@@ -46,7 +48,9 @@
       unit: {
         type: String
       },
-      value: {}
+      value: {
+        type: [Number, String]
+      }
     },
     data () {
       return {
@@ -242,67 +246,85 @@
   }
 </script>
 <style lang="stylus">
-  $color-background = #fff
-  $color-checked = #2c97f1
-  $color-text-main = #333
-  $color-text-second = #a8a8a8
-  .hk
-    &-select
-      &-item
-        overflow hidden
-        width 100%
-        text-align center
-        height 8rem
-        background $color-background
-        position relative
-      &-ul
-        position relative
-      &-line, &-list, &-wheel
+$color-background = #fff
+$color-checked = #2c97f1
+$color-text-main = #333
+$color-text-second = #a8a8a8
+.hk
+  &-select
+    &-item
+      overflow hidden
+      width 100%
+      text-align center
+      height 8rem
+      background $color-background
+      position relative
+    &-ul
+      position relative
+    &-line, &-list, &-wheel
+      position absolute
+      left 0
+      right 0
+      top 3.15rem
+    &-line
+      z-index 3
+    &-list
+      z-index 2
+      background $color-background
+    &-wheel
+      z-index 1
+    &-line
+      border-top 0.05rem solid #dedede
+      border-bottom 0.05rem solid #dedede
+      line-height 1.6rem
+      color #333
+      position relative
+      &-unit
         position absolute
-        left 0
-        right 0
-        top 3.15rem
-      &-line
-        z-index 3
-      &-list
-        z-index 2
-        background $color-background
-      &-wheel
-        z-index 1
-      &-line
-        border-bottom solid 0.05rem #DEDEDE
-        border-top solid 0.05rem #DEDEDE
-        line-height 1.7rem
-        font-size 0.6rem
-        color #333333
-      &-line, &-list
-        height 1.7rem
-        transform translate3d(0rem, 0rem, 5.5rem)
-      &-list
+        top 0
+        bottom 0
+        left 50%
+        width 50%
         overflow hidden
-      &-list-item
-        text-shadow 0 0.05rem 0.05rem rgba(102, 102, 102, 0.6)
-      &-list-item-span
-        color #333333
-        font-size 0.65rem
-        margin-left 0.5rem
-      &-list-item, &-wheel-item
+        text-overflow ellipsis
         white-space nowrap
-        overflow hidden
-        /*text-overflow ellipsis*/
-        line-height 1.7rem
-        font-size 0.9rem
-        color $color-text-main
-        &.hidden
+        text-align left
+        > *
+          float left
+          font-size 0.9rem
+          margin 0
+        &-placeholder
+          transform translateX(-40%)
           visibility hidden
-          opacity 0
-      &-wheel
-        transform-style preserve-3d
-        height 1.7rem
-        &-item
-          backface-visibility hidden
-          position absolute
-          top 0
-          width 100%
-          color $color-text-second
+
+    &-line, &-list
+      height 1.7rem
+      transform translate3d(0rem, 0rem, 5.5rem)
+    &-list
+      overflow hidden
+    &-list-item
+      text-shadow 0 0.05rem 0.05rem rgba(102, 102, 102, 0.6)
+    &-list-item-span
+      color #333333
+      font-size 0.65rem
+      margin-left 0.5rem
+    &-list-item, &-wheel-item
+      white-space nowrap
+      overflow hidden
+      /*text-overflow ellipsis*/
+      line-height 1.7rem
+      font-size 0.9rem
+      color $color-text-main
+      &.hidden
+        visibility hidden
+        opacity 0
+    &-wheel
+      transform-style preserve-3d
+      height 1.7rem
+      &-item
+        backface-visibility hidden
+        position absolute
+        top 0
+        width 100%
+        color $color-text-second
 </style>

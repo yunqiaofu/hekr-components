@@ -120,8 +120,11 @@ export default {
         float left
         &-title
           font-size 0.7rem
-          color #666666
+          color #666
           margin 0.7rem 0
+          overflow hidden
+          white-space nowrap
+          text-overflow ellipsis
         &-check
           text-align center
           background-size cover
