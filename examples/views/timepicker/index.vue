@@ -132,8 +132,6 @@
 
     &-block
       margin 20px 0
-    &-unit
-      margin-left 2.5rem
     &-box
       display flex
 </style>

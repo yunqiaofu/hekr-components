@@ -64,6 +64,51 @@ export default {
 ## 内置语言
 内置了中文（`zh-CN`）和英文（`en-US`）两种语言
 
+扩展语言对应的结构为：
+```js
+{
+  confirm: {
+    title: '提示'
+  },
+  dialog: {
+    cancelText: '取消',
+    confirmText: '确定'
+  },
+  week: {
+    SUN: '周日',
+    MON: '周一',
+    TUE: '周二',
+    WED: '周三',
+    THU: '周四',
+    FRI: '周五',
+    SAT: '周六',
+    title: '重复'
+  },
+  timepicker: {
+    title: '倒计时时间',
+    hour: '时',
+    min: '分',
+    sec: '秒'
+  },
+  order: {
+    timing: '定时预约',
+    setting: '预约设置',
+    save: '保存',
+    edit: '编辑',
+    add: '添加预约',
+    taskName: '新预约',
+    placeholder: '最多12个字符',
+    label: '标签',
+    time: '时间',
+    done: '完成',
+    overTask: '预约条数已到上限'
+  },
+  offline: {
+    text: '设备已离线，请稍后操作！'
+  }
+}
+```
+
 ## 注意事项
 1. 语言包对应的键值必须和语言包中的语言键值形式一致，如`zh-CN`可写为`zh_CN`、`zh_cn`或者`zh-cn`
 2. 扩展语言时，可以不把语言包写全，例如扩展中文，则已经内置的一些可以不用再写一次，扩展时会采用合并的策略，写出来的会覆盖原有的方式进行
