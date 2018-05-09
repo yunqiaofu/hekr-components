@@ -154,9 +154,7 @@ export default {
   data () {
     return {
       onClicking: false,
-      changeValue: Number((this.value - this.min) / (this.max - this.min).toFixed(2)),
-      centerX: null,
-      centerY: null
+      changeValue: Number((this.value - this.min) / (this.max - this.min).toFixed(2))
     }
   },
   watch: {
@@ -252,17 +250,19 @@ export default {
         return
       }
       if (!this.disabled) {
-        this.handleChange((e.touches && e.touches[0]) || {clientX: e.clientX, clientY: e.clientY})
+        const pointer = e.changedTouches && e.changedTouches[0]
+          ? { clientX: e.changedTouches[0].clientX, clientY: e.changedTouches[0].clientY }
+          : { clientX: e.clientX, clientY: e.clientY }
+
+        this.handleChange(pointer)
       }
     },
     handleChange ({ clientX, clientY }) {
-      const offsetX = clientX - this.centerX
-      const offsetY = this.centerY - clientY
-
+      const { left, top, width, height } = this.$refs.svg.getBoundingClientRect()
+      const offsetX = clientX - (left + width / 2)
+      const offsetY = (top + height / 2) - clientY
       const offsetAngle = this.conRadiansToAngle(Math.atan(Math.abs(offsetY / offsetX)))
-
       let angle = 0
-
       if (offsetX >= 0 && offsetY >= 0) {
         angle = 225 - offsetAngle
       } else if (offsetX >= 0 && offsetY < 0) {
@@ -368,13 +368,6 @@ export default {
       intervalId = []
       this.onClicking = false
     }
-  },
-
-  mounted () {
-    this.svgEl = this.$refs.svg
-    const { left, top, width, height } = this.svgEl.getBoundingClientRect()
-    this.centerX = left + width / 2
-    this.centerY = top + height / 2
   }
 }
 </script>
