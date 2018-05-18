@@ -250,6 +250,7 @@ export default {
         return
       }
       if (!this.disabled) {
+        e.stopPropagation()
         const pointer = e.changedTouches && e.changedTouches[0]
           ? { clientX: e.changedTouches[0].clientX, clientY: e.changedTouches[0].clientY }
           : { clientX: e.clientX, clientY: e.clientY }
@@ -275,11 +276,12 @@ export default {
       const value = Math.round(angle) / 270
       this.move(value)
     },
-    handleTouchEnd () {
+    handleTouchEnd (e) {
       if (this.type === 'button') {
         return
       }
       if (!this.disabled) {
+        e.stopPropagation()
         this.$emit('change', this.value)
       }
     },
