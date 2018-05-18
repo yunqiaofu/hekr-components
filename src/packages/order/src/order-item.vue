@@ -148,6 +148,7 @@ export default {
   transition all 0.5s ease-in-out
   background-color #ffffff
   overflow hidden
+  display flex
   position relative
   &:not(:last-child)
     border-bottom 0.05rem solid #ccc
@@ -164,36 +165,46 @@ export default {
     &-delete
       transform translateX(-2.5rem)
   &-left-edit
-    transform translateX(2.5rem)
+    padding-left 2.5rem
   &-left
-    position absolute
-    left 1rem
     text-align left
     transition all 0.1s ease-in-out
+    width 50%
     &-time
       font-size 1rem
       line-height 1.25rem
-      color #333333
+      color #333
     &-day,
     &-name
       height 0.85rem
       line-height 0.85rem
       font-size 0.6rem
-      color #999999
+      color #999
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
   &-right
-    position absolute
-    right 1rem
     font-size 0.8rem
     color #a4a4a4
     line-height 3rem
+    width 50%
     transition all 0.1s ease-in-out
+    position relative
+    padding-right 1.3rem
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
     &-delete
-      transform translateX(-1.3rem)
+      padding-right 2.6rem
     &-icon
       font-size 1.2rem
       margin-left 0.5rem
       vertical-align middle
       color #0096fb
+      position absolute
+      right 0
+      top 50%
+      transform translateY(-50%)
       &-disable
         color #efefef
   &-delete
