@@ -81,7 +81,11 @@ export default {
       const config = cloneDeep({
         type: this.type,
         data: this.data,
-        options: this.options
+        options: {
+          ...this.options,
+          responsive: true,
+          maintainAspectRatio: false
+        }
       })
       if (this.gradients.length) {
         const $gradients = this.ctx.createLinearGradient(0, 0, 0, this.ctx.canvas.height)
