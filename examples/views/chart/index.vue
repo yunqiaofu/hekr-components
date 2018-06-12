@@ -3,7 +3,8 @@
   h3 曲线图
 
   hk-chart(
-    :type="charts1.type"
+    style="height: 300px",
+    :type="charts1.type",
     :data="charts1.data",
     :options="charts1.options",
     :gradients="gradients"
@@ -23,6 +24,7 @@
   h3 直方图
 
   hk-chart(
+    style="height: 300px",
     :type="charts2.type",
     :data="charts2.data",
     :options="charts2.options"
