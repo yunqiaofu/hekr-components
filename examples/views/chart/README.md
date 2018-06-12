@@ -22,7 +22,39 @@ gradients = [{
   color: rgba/rgb/hexadecimal // 颜色值
 }]
 ```
-1. gradients项目为数组时：
+2. gradients项目为数组时：
 ```javascript
 gradients = [/** 颜色值，颜色对应位置为颜色下标index/gradients.length */]
+```
+
+### options属性中设置坐标轴示例
+```js
+const options = {
+  scales: {
+    xAxes: [{
+      gridLines: { // 坐标网格
+        borderDash: [3], // 点划线长度
+        borderDashOffset: 2, // 点划线间隔
+        display: true, // 显示隐藏
+        drawBorder: false, // 坐标轴是否绘制
+        color: 'rgba(255,255,255,0.8)' // 网格颜色
+      },
+      ticks: {
+        fontColor: '#fff' // 坐标上文字颜色
+      }
+    }],
+    yAxes: [{
+      gridLines: {
+        borderDash: [3],
+        borderDashOffset: 2,
+        display: true,
+        drawBorder: false,
+        color: 'rgba(255,255,255,0.8)'
+      },
+      ticks: {
+        fontColor: '#fff'
+      }
+    }]
+  }
+}
 ```
