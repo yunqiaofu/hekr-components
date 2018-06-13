@@ -19,9 +19,9 @@ export default {
   data () {
     return {
       color: {
-        r: 230,
-        g: 255,
-        b: 12
+        r: 90,
+        g: 36,
+        b: 25
       }
     }
   }
