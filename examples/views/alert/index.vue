@@ -7,6 +7,7 @@
     hk-alert.hk-alert-demo-alert(
       :list="list2"
     )
+    hk-button(@click="click") 添加消息
 </template>
 
 <script>
@@ -45,6 +46,12 @@
       }
     },
     methods: {
+      click () {
+        this.list.push({
+          text: new Date(),
+          icon: 'hk-icons-check-checked'
+        })
+      }
     }
   }
 </script>

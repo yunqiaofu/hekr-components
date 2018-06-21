@@ -1,4 +1,4 @@
-import merge from './merge'
+import merge from 'lodash/merge'
 import zhCN from './lang/zh-CN'
 import enUS from './lang/en-US'
 
