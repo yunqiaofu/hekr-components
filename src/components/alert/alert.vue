@@ -40,7 +40,7 @@ export default {
       if (this.items.length <= 1) return
       const y = this.step / this.items.length * 100
       return {
-        transition: this.step === 0 ? 'none' : 'transform 0.2s linear',
+        transition: this.step === 0 ? 'none' : 'transform 0.3s linear',
         transform: `translateY(${-y}%)`
       }
     }
@@ -73,11 +73,11 @@ export default {
           this.step = 0
           this.delay = setTimeout(() => {
             this.step = 1
-          }, 200)
+          }, 300)
         } else {
           this.step++
         }
-      }, 2000)
+      }, 3000)
     }
   }
 }
