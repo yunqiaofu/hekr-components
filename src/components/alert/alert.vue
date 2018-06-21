@@ -1,21 +1,21 @@
 <template lang="pug">
 .hk-alert
-  .hk-alert-animate(
-    :style="setAnimate"
+  .hk-alert-container(
+    :style="getStyle"
   )
-    .hk-alert-container(
-      v-for="item,k in myList",
-      :key="k"
+    .hk-alert-container-item(
+      v-for="(item, index) in items",
+      :key="index"
     )
-      slot(
-        :item="item"
-      )
-        .hk-alert-icon
-          i(:class="item.icon||'hk-icons-waring'")
-        .hk-alert-text {{ item.text }}
+      slot(:item="item")
+        .hk-alert-container-item-icon
+          i(:class="item.icon || 'hk-icons-waring'")
+        .hk-alert-container-item-text {{ item.text }}
 </template>
 
 <script>
+import isEqual from 'lodash/isEqual'
+
 export default {
   name: 'hk-alert',
   props: {
@@ -26,37 +26,59 @@ export default {
   },
   data () {
     return {
-      running: false,
-      count: 0
+      step: 0,
+      timer: null,
+      delay: null
     }
   },
   computed: {
-    myList () {
-      return this.list.concat(this.list)
+    items () {
+      if (this.list.length <= 1) return this.list
+      return [...this.list, this.list[0]]
     },
-    setAnimate () {
-      let t = this.list.length
-      if (t > 1 && this.count <= t * 2 - 1) {
-        return {
-          animationDuration: t + 's',
-          animationPlayState: this.running ? 'running' : 'paused'
-        }
-      } else {
-        this.count = 0
-        return {
-          animation: 'none'
-        }
+    getStyle () {
+      if (this.items.length <= 1) return
+      const y = this.step / this.items.length * 100
+      return {
+        transition: this.step === 0 ? 'none' : 'transform 0.2s linear',
+        transform: `translateY(${-y}%)`
       }
     }
   },
   mounted () {
-    this.interval = setInterval(() => {
-      this.running = !this.running
-      this.count++
-    }, 1000)
+    this.play()
   },
   destoryed () {
-    this.interval && clearInterval(this.interval)
+    clearInterval(this.timer)
+    clearTimeout(this.delay)
+  },
+  watch: {
+    list (nVal, oVal) {
+      // 内存地址相同时isEqual比较没用
+      // 所以地址相同的时候直接就更新
+      if (nVal === oVal || !isEqual(nVal, oVal)) {
+        this.step = 0
+        this.play()
+      }
+    }
+  },
+  methods: {
+    play () {
+      clearInterval(this.timer)
+      clearTimeout(this.delay)
+      if (this.items.length <= 1) return
+      this.timer = setInterval(() => {
+        clearTimeout(this.delay)
+        if (this.step >= this.items.length - 1) {
+          this.step = 0
+          this.delay = setTimeout(() => {
+            this.step = 1
+          }, 200)
+        } else {
+          this.step++
+        }
+      }, 2000)
+    }
   }
 }
 </script>
@@ -67,29 +89,23 @@ export default {
   height 2rem
   background-color rgba(0, 0, 0, 0.5)
   overflow hidden
-  &-animate
-    animation: up 2s linear infinite
-  @keyframes up
-    from 
-      transform translateY(0)
-    to  
-      transform translateY(-50%)  
+  color #fff
   &-container
     font-size 0.6rem
-    color #fff
     text-align left
-  &-icon
-    width 2rem
-    height 2rem
-    line-height 2rem
-    text-align center
-    font-size 1rem
-  &-text
-    height 2rem
-    line-height 2rem
-    margin-top -2rem
-    margin-left 2rem
-    white-space nowrap
-    overflow hidden
-    text-overflow ellipsis
+    &-item
+      &-icon
+        width 2rem
+        height 2rem
+        line-height 2rem
+        text-align center
+        font-size 1rem
+      &-text
+        height 2rem
+        line-height 2rem
+        margin-top -2rem
+        margin-left 2rem
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
 </style>

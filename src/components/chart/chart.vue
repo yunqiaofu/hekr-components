@@ -12,7 +12,9 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
+
 const types = ['line', 'bar', 'radar', 'polarArea', 'pie', 'doughnut', 'bubble']
+
 export default {
   name: 'hk-chart',
   props: {
