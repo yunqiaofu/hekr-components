@@ -6,7 +6,7 @@
     - rm -rf /home/diao.cheng/fed-docs/hekr-component/*
     - cp -R docs/* /home/diao.cheng/fed-docs/hekr-component/
   tags:
-    - hz-pvos
+    - hz-test
   only:
     - master
   when: always
