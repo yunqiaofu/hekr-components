@@ -51,7 +51,7 @@ export default {
       this.source = ''
       if (this.route) {
         this.$http = axios.CancelToken.source()
-        axios.get(`/views/${this.route}/index.vue`, {
+        axios.get(`./views/${this.route}/index.vue`, {
           cancelToken: this.$http.token
         }).then(({ data }) => {
           this.source = data
