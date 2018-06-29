@@ -20,7 +20,7 @@ npm run build --report
 ## 组件使用
 
 ### 开发文档
-http://10.10.1.3:7777/hekr-components
+http://10.10.1.3:7777/hekr-components/index.html
 
 ### NPM安装使用
 1. 运行```npm install @hekr/hekr-components --save```
