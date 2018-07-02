@@ -11,9 +11,10 @@ Vue.use(hekrComponents, {
 ```
 * 扩展语言
 ```javascript
+// main.js
 import hekrComponents, { i18n } from '@hekr/hekr-components'
 // 使用自定义语言
-i18n.extend = {
+i18n.extend({
   'fr': {/** 语言配置 */},
   'zh-TW': { },
   'zh-CN': {
@@ -25,7 +26,7 @@ i18n.extend = {
       comfirmText: '确定',
       cancelText: '确定'
     }
-}
+})
 
 Vue.use(hekrComponents, {
   lang: 'fr'
