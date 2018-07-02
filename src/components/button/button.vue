@@ -2,7 +2,7 @@
 button.hk-button(
   :class="getClass",
   @touchend.prevent="click",
-  @click="click($event)"
+  @click="click"
 )
   .hk-button-loading(v-if="loading")
     .hk-button-loading-bar
@@ -56,9 +56,9 @@ export default {
     }
   },
   methods: {
-    click () {
+    click (e) {
       if (!this.disabled) {
-        this.$emit('click')
+        this.$emit('click', e)
       }
     }
   }
