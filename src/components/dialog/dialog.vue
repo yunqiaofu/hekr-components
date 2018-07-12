@@ -176,7 +176,7 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
     bottom 0
     left 0
     z-index $zindex-higher
-    background-color rgba(0, 0, 0, 0.5)
+    background-color rgba(0, 0, 0, 0.4)
   &-container
     width 13.5rem
     position fixed

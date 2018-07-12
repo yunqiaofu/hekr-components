@@ -47,7 +47,7 @@ export default {
 @import "../../stylus/variables.styl"
 .hk-pop
   &-mask
-    background-color rgba(0, 0, 0, 0.5)
+    background-color rgba(0, 0, 0, 0.4)
     position fixed
     top 0
     right 0
