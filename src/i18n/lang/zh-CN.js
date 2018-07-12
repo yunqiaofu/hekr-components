@@ -6,6 +6,9 @@ export default {
     cancelText: '取消',
     confirmText: '确定'
   },
+  pop: {
+    cancelText: '取消'
+  },
   week: {
     SUN: '周日',
     MON: '周一',

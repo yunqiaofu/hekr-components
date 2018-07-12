@@ -1,6 +1,7 @@
 <template lang="pug">
 .hk-loading
-  .hk-loading-mask(v-if="value")
+  transition(name="hk-fade-in")
+    .hk-loading-mask(v-if="value")
   transition(name="scale")
     .hk-loading-container(v-if="value")
       slot

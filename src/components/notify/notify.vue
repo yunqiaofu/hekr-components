@@ -1,11 +1,15 @@
 <template lang="pug">
-.hk-notify(v-if="value")
-  .hk-notify-container
-    .hk-notify-container-body(
-      :style="getStyle",
-      @click="close"
-    )
-      slot {{ message }}
+.hk-notify
+  transition(
+    name="hk-notify-scale"
+    appear
+  )
+    .hk-notify-container(v-if="value")
+      .hk-notify-container-body(
+        :style="getStyle",
+        @click="close"
+      )
+        slot {{ message }}
 </template>
 
 <script>
@@ -104,36 +108,47 @@ export default {
 @import "../../stylus/variables.styl"
 
 .hk-notify
-  position fixed
-  top 0
-  right 0
-  bottom 0
-  left 0
-  z-index $zindex-higher
   &-container
     max-width 13.5rem
-    position absolute
+    position fixed
     top 50%
     left 50%
-    z-index 1
+    z-index $zindex-higher
     transform translate3d(-50%, -50%, 0)
     margin 0 auto
     border-radius 0.2rem
-    background-color $color-white
-    border 0.05rem solid rgba(0, 0, 0, 0.1)
-    box-shadow 0 0.3rem 1rem rgba(0, 0, 0, 0.1)
-    animation fade-up 0.3s
+    background-color rgba(58, 58, 58, 0.9)
+    border 0.05rem solid rgba(58, 58, 58, 0.9)
+    box-shadow 0 0.3rem 1rem rgba(58, 58, 58, 0.3)
     &-body
       min-width 4rem
       padding 0.5rem 0.7rem
       font-size 0.7rem
-      color #999
+      color #fff
+  &-scale-enter-active
+    animation hkNotifyScaleIn 0.3s
+  &-scale-leave-active
+    animation hkNotifyScaleOut 0.2s
 
-@keyframes fade-up
-  from
+@keyframes hkNotifyScaleIn
+  0%
     opacity 0
-    transform translate3d(-50%, -70%, 0)
-  to
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
+  60%
+    opacity 0.4
+    transform translate3d(-50%, -50%, 0) scale(1.1, 1.1)
+  100%
     opacity 1
-    transform translate3d(-50%, -50%, 0)
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+
+@keyframes hkNotifyScaleOut
+  0%
+    opacity 1
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+  50%
+    opacity 0.6
+    transform translate3d(-50%, -50%, 0) scale(1.1, 1.1)
+  100%
+    opacity 0
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
 </style>

@@ -4,6 +4,7 @@
   hk-button(@click="showDialog") 打开窗口
   hk-dialog(
     v-model="visible",
+    v-back="visible",
     :title="title",
     :show-mask="mask",
     text="您确定要滤芯复位吗？滤芯复位后滤芯数据将被清零"

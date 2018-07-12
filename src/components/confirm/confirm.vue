@@ -2,7 +2,6 @@
 .hk-confirm
   hk-dialog(
     v-model="val",
-    v-back="val",
     :title="title || $i('confirm.title')",
     :text="text",
     :maskClickDisabled="true",
@@ -56,6 +55,13 @@ export default {
       },
       set (val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  watch: {
+    val (val) {
+      if (val) {
+        console.log(this.$back)
       }
     }
   },

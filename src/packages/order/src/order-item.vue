@@ -144,7 +144,7 @@ export default {
 .hk-order-item
   height 4rem
   padding 0.5rem 1rem
-  animation slideRight .5s
+  animation hkSlideRight .5s
   transition all 0.5s ease-in-out
   background-color #ffffff
   overflow hidden
@@ -226,7 +226,7 @@ export default {
       color #fff
       font-size 1.5rem
 
-@keyframes slideRight
+@keyframes hkSlideRight
   0%
     opacity 0
     transform translateX(-100%)

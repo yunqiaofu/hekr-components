@@ -26,17 +26,19 @@ export default Vue => {
     // 关闭方法
     $.close = () => vm.$emit('cancel')
 
+    const destroy = () => {
+      vm.value = false
+      setTimeout(() => {
+        vm.$destroy()
+        document.body.removeChild(vm.$el)
+      }, 230)
+    }
     /**
      * Promise结束之后执行
-     * finally方法在微信上会不存在，所以这里直接使用then和catch
      */
-    $.then(() => {
-      vm.$destroy()
-      document.body.removeChild(vm.$el)
-    }).catch(() => {
-      vm.$destroy()
-      document.body.removeChild(vm.$el)
-    })
+    $
+      .then(() => destroy())
+      .catch(() => destroy())
     return $
   }
 }

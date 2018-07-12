@@ -109,7 +109,7 @@ type(name)
     &-bar
       height 0.05rem
       background-color $color-white
-      animation button-loading 0.6s ease-in-out infinite
+      animation buttonLoading 0.6s ease-in-out infinite
 
   &-default
     color $color-black
@@ -123,7 +123,7 @@ type(name)
   type(warning)
   type(info)
 
-@keyframes button-loading
+@keyframes buttonLoading
   from
     width 0
     transform translate3d(-150%, 0, 0)

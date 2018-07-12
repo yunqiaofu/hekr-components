@@ -6,6 +6,9 @@ export default {
     cancelText: 'cancel',
     confirmText: 'confirm'
   },
+  pop: {
+    cancelText: 'cancel'
+  },
   week: {
     SUN: 'SUN',
     MON: 'MON',

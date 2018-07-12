@@ -70,6 +70,8 @@ const directive = {
       }
     })
   },
+  // binding.value()传一个参数去执行，为true就返回是否执行back更新操作，push、delete
+  // componentUpdated ($el, binding, vnode, oldVnode) { console.log(arguments) },
   unbind ($el, binding, vnode, oldVnode) {
     back.delete($el.__BACK__)
   }

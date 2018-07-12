@@ -1,14 +1,15 @@
 <template lang="pug">
 .hk-pop
-  .hk-pop-mask(
-    v-if="value && showMask",
-    @click="hide"
-  )
-  transition(
-    name="hk-pop-fade-up"
-  )
+  transition(name="hk-fade-in")
+    .hk-pop-mask(
+      v-if="value && showMask",
+      @click="hide"
+    )
+  transition(name="hk-pop-fade-up")
     .hk-pop-container(v-if="value")
       slot
+      .hk-pop-container-cancel(v-if="showCancel")
+        button.hk-pop-container-cancel-button(@click="hide") {{ $i('pop.cancelText') }}
 </template>
 
 <script>
@@ -26,6 +27,10 @@ export default {
     maskClickDisabled: {
       type: Boolean,
       default: false
+    },
+    showCancel: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
@@ -50,7 +55,7 @@ export default {
     left 0
     z-index $zindex-base
   &-container
-    background-color $color-white
+    background-color darken($color-white, 5%)
     position fixed
     right 0
     bottom 0
@@ -58,6 +63,20 @@ export default {
     width 100%
     box-shadow 0 0 0.05rem #ccc
     z-index $zindex-higher
+    &-cancel
+      padding-top 0.4rem
+      &-button
+        width 100%
+        display block
+        padding 0.75rem 0.6rem
+        background-color $color-white
+        font-size $font-size-3
+        color $color-black
+        border 0.05rem solid darken($color-white, 6%)
+        cursor pointer
+        &:active
+          background-color darken($color-white, 10%)
+          border-color darken($color-white, 10%)
   &-fade-up-enter-active
     transform translateY(100%)
     opacity 0
@@ -69,5 +88,4 @@ export default {
     opacity 1
   &-fade-up-leave-to
     transform translateY(50%)
-    opacity 0
 </style>

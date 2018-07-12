@@ -140,7 +140,7 @@ $spinner-size=1rem
         width $spinner-size
         height $spinner-size
         position relative
-        animation hk-chart-spinner 1.1s infinite linear
+        animation hkChartSpinner 1.1s infinite linear
         &-1,
         &-2,
         &-3,
@@ -166,7 +166,7 @@ $spinner-size=1rem
           bottom 0.05rem
           opacity 0.4
 
-@keyframes hk-chart-spinner
+@keyframes hkChartSpinner
   0%
   	transform translate3d(-50%, -50%, 0) rotate(0deg)
   100%
