@@ -4,7 +4,7 @@
   hk-button(@click="showDialog") 打开窗口
   hk-dialog(
     v-model="visible",
-    v-back="visible",
+    v-back="back",
     :title="title",
     :show-mask="mask",
     text="您确定要滤芯复位吗？滤芯复位后滤芯数据将被清零"
@@ -62,6 +62,19 @@ export default {
       visibleCoustom: false,
       visibleFooter: false
     }
+  },
+  computed: {
+    back () {
+      return {
+        action: this.visible ? 'PUSH' : 'DELETE',
+        callback: () => {
+          this.visible = false
+        }
+      }
+    }
+  },
+  mounted () {
+    console.log(this.$back)
   },
   methods: {
     showDialog () {

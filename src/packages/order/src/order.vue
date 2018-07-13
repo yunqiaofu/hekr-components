@@ -14,7 +14,7 @@
     @back="back",
   )
   hk-order-edit(
-    v-if="page==='add' || page==='edit'",
+    v-if="showEdit",
     v-back="vback",
     :type="page",
     :template="getTemplate",
@@ -79,6 +79,17 @@ export default {
         },
         ...this.template
       }
+    },
+    showEdit () {
+      return this.page === 'add' || this.page === 'edit'
+    },
+    vback () {
+      return {
+        action: this.showEdit,
+        callback: () => {
+          this.page = 'list'
+        }
+      }
     }
   },
   activated () {
@@ -99,9 +110,6 @@ export default {
     }
   },
   methods: {
-    vback () {
-      this.page = 'list'
-    },
     back () {
       this.$emit('back')
     },

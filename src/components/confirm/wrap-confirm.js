@@ -26,8 +26,14 @@ export default Vue => {
     // 关闭方法
     $.close = () => vm.$emit('cancel')
 
+    // 回退支持
+    let key = vm.$back.push(() => {
+      key = undefined
+      $.close()
+    })
     const destroy = () => {
       vm.value = false
+      vm.$back.delete(key)
       setTimeout(() => {
         vm.$destroy()
         document.body.removeChild(vm.$el)

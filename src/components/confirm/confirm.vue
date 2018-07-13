@@ -1,7 +1,7 @@
 <template lang="pug">
 .hk-confirm
   hk-dialog(
-    v-model="val",
+    :value="value",
     :title="title || $i('confirm.title')",
     :text="text",
     :maskClickDisabled="true",
@@ -48,29 +48,14 @@ export default {
       type: String
     }
   },
-  computed: {
-    val: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
-  },
-  watch: {
-    val (val) {
-      if (val) {
-        console.log(this.$back)
-      }
-    }
-  },
   methods: {
     cancel () {
       this.$emit('cancel')
+      this.$emit('input', false)
     },
     confirm () {
       this.$emit('confirm')
+      this.$emit('input', false)
     }
   }
 }
