@@ -1,30 +1,27 @@
-
 <template lang="pug">
-.hk-order-item(@click.stop="itemClick")
-  i.hk-icons-delete-simple.hk-order-item-left-icon(
+.hk-timing-list-item(@click.stop="itemClick")
+  i.hk-timing-list-item-left-icon(
     v-show="isEdit",
-    :class="{ 'hk-order-item-left-icon-delete': isDelete }",
+    :class="getLeftDeleteIcon",
     @click.stop="isDelete=true"
   )
-  .hk-order-item-left(
-    :class="{ 'hk-order-item-left-edit': isEdit && !isDelete }",
-  )
-    .hk-order-item-left-time {{ time }}
-    .hk-order-item-left-day {{ days }}
-    .hk-order-item-left-name {{ data.taskName }}
-  .hk-order-item-right(
-    :class="{ 'hk-order-item-right-delete': isDelete}",
+  .hk-timing-list-item-left(:class="getEditIcon")
+    .hk-timing-list-item-left-time {{ time }}
+    .hk-timing-list-item-left-day {{ days }}
+    .hk-timing-list-item-left-name {{ data.taskName }}
+  .hk-timing-list-item-right(
+    :class="getRightDeleteIcon",
     @click="check"
   )
     span(
       v-for="item in options",
       v-if="data.code[item.argument] !== undefined"
-    ) {{ getLabel(item, data.code[item.argument]) }}
-    i.hk-order-item-right-icon(
+    ) {{ getLabel(item) }}
+    i.hk-timing-list-item-right-icon(
       :class="getIcon"
     )
-  .hk-order-item-delete(
-    :class="{ 'hk-order-item-delete-active': isDelete && isEdit }",
+  .hk-timing-list-item-delete(
+    :class="getRemoveIcon",
     @click.stop="remove"
   )
     i.hk-icons-delete-device
@@ -32,8 +29,10 @@
 </template>
 
 <script>
+import find from 'lodash/find'
+
 export default {
-  name: 'hk-order-item',
+  name: 'hk-timing-list-item',
   props: {
     task: {
       type: Object,
@@ -57,9 +56,30 @@ export default {
   computed: {
     getIcon () {
       return {
-        'hk-order-item-right-icon-disable': !this.data.enable || this.data.expired,
+        'hk-timing-list-item-right-icon-disable': !this.data.enable || this.data.expired,
         'hk-icons-check-checked': !this.isEdit,
         'hk-icons-angel-right': this.isEdit
+      }
+    },
+    getLeftDeleteIcon () {
+      return {
+        'hk-icons-delete-simple': !this.isDelete,
+        'hk-timing-list-item-left-icon-delete': this.isDelete
+      }
+    },
+    getEditIcon () {
+      return {
+        'hk-timing-list-item-left-edit': this.isEdit && !this.isDelete
+      }
+    },
+    getRightDeleteIcon () {
+      return {
+        'hk-timing-list-item-right-delete': this.isDelete
+      }
+    },
+    getRemoveIcon () {
+      return {
+        'hk-timing-list-item-delete-active': this.isDelete && this.isEdit
       }
     },
     time () {
@@ -100,25 +120,20 @@ export default {
     this.isDelete = false
   },
   methods: {
-    getLabel (item, value) {
+    getLabel (item) {
+      const value = this.data.code[item.argument]
       if (item.maps) {
-        for (let i = 0; i < item.maps.length; i++) {
-          if (item.maps[i].value === value) {
-            return item.maps[i].name + '  '
-          }
-        }
+        return (find(item.maps, item => item.value === value) || {}).name
       } else {
         return item.label + value + item.unit
       }
     },
-    format (n, l) {
-      if (n || n === 0) {
-        n = n.toString()
-        while (n.length < l) {
-          n = '0' + n
-        }
+    format (val, length) {
+      val = val.toString()
+      while (val.length < length) {
+        val = `0${val}`
       }
-      return n
+      return val
     },
     itemClick () {
       if (!this.isDelete && this.isEdit) {
@@ -141,7 +156,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-order-item
+.hk-timing-list-item
   height 4rem
   padding 0.5rem 1rem
   animation hkSlideRight .5s

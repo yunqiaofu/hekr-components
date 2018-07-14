@@ -121,43 +121,32 @@ export default {
     }
   },
   methods: {
-    getX (e) {
-      return e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
-    },
     select (e) {
+      if (this.disabled) return
       this.update(e)
-      if (!this.disabled) {
-        this.$emit('select', this.val)
-      }
+      this.$emit('select', this.val)
     },
     dragstart (e) {
+      if (this.disabled) return
       this.is = true
       this.update(e)
-      if (!this.disabled) {
-        this.$emit('dragstart', this.val)
-      }
+      this.$emit('dragstart', this.val)
     },
     dragging (e) {
+      if (this.disabled) return
       if (this.is) {
         this.update(e)
-        if (!this.disabled) {
-          this.$emit('dragging', this.val)
-        }
+        this.$emit('dragging', this.val)
       }
     },
     dragend (e) {
-      if (this.is) {
+      if (this.is && !this.disabled) {
         this.update(e)
-        if (!this.disabled) {
-          this.$emit('dragend', this.val)
-        }
+        this.$emit('dragend', this.val)
       }
       this.is = false
     },
     update (e) {
-      if (this.disabled) {
-        return
-      }
       const x = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
       const { left } = this.$refs.bar.getBoundingClientRect()
       let value = (x - left) / this.$refs.bar.clientWidth * (this.max - this.min) + this.min

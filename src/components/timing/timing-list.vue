@@ -1,14 +1,13 @@
-
 <template lang="pug">
-.hk-order-list
+.hk-timing-list
   hk-header(
-    :title="title || $i('order.timing')",
+    :title="title || $i('timing.title')",
     @click-left="back",
     :rightText="rightText",
     @click-right="toEdit"
   )
-  .hk-order-list-container
-    hk-order-item(
+  .hk-timing-list-container
+    timing-list-item(
       v-for="(task, index) in list",
       :key="index",
       :task="task",
@@ -18,7 +17,7 @@
       @edit="edit(task, index)",
       @check="check(task, index)"
     )
-  .hk-order-list-footer
+  .hk-timing-list-footer
     hk-button(
       :type="'primary'",
       :disabled="list.length + 1 > maxlength",
@@ -28,11 +27,11 @@
 </template>
 
 <script>
-import hkOrderItem from './order-item.vue'
+import TimingListItem from './timing-list-item.vue'
 export default {
-  name: 'hk-order-list',
+  name: 'hk-timing-list',
   components: {
-    hkOrderItem
+    TimingListItem
   },
   props: {
     tasks: {
@@ -65,14 +64,14 @@ export default {
       return this.list.length === 0
         ? ''
         : this.isEdit
-          ? this.$i('order.done')
-          : this.$i('order.edit')
+          ? this.$i('timing.done')
+          : this.$i('timing.edit')
     },
     getAddTxt () {
       if (this.list.length >= this.maxlength) {
-        return this.$i('order.overTask')
+        return this.$i('timing.overTask')
       }
-      return this.$i('order.add')
+      return this.$i('timing.add')
     }
   },
   activated () {
@@ -114,7 +113,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-order-list
+.hk-timing-list
   position absolute
   top 0
   right 0

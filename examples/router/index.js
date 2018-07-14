@@ -90,9 +90,9 @@ export const routes = [
     component: () => import('../views/notify')
   },
   {
-    path: '/order',
-    name: 'order',
-    component: () => import('../views/order')
+    path: '/timing',
+    name: 'timing',
+    component: () => import('../views/timing')
   },
   {
     path: '/swipe',
@@ -128,6 +128,11 @@ export const routes = [
     path: '/offline',
     name: 'offline',
     component: () => import('../views/offline')
+  },
+  {
+    path: '/picker',
+    name: 'picker',
+    component: () => import('../views/picker')
   }
 ]
 

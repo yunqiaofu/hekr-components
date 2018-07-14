@@ -1,26 +1,26 @@
 <template lang="pug">
-  .hk-notify-demo
-    hk-order(
-      :lists="list",
-      :title="title",
-      :template="template",
-      :options="options",
-      :maxlength="maxlength",
-      @onRemove="onRemove",
-      @onEdit="onEdit",
-      @onAdd="onAdd",
-      @back="back"
-    )
+.hk-timing-demo
+  hk-timing(
+    :lists="list",
+    :title="title",
+    :template="template",
+    :options="options",
+    :maxlength="maxlength",
+    @onRemove="onRemove",
+    @onEdit="onEdit",
+    @onAdd="onAdd",
+    @back="back"
+  )
 </template>
 
 <script>
 export default {
-  name: 'hk-order-demo',
+  name: 'hk-timing-demo',
   data () {
     return {
       list: [],
       template: {
-        taskName: this.$i('order.taskName'),
+        taskName: this.$i('timing.taskName'),
         code: {
           cmdTag: 'setSw'
         }
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-notify-demo
+.hk-timing-demo
   text-align center
 </style>
 

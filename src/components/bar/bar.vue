@@ -79,7 +79,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "../../stylus/variables.styl"
 .hk-bar
   display flex
   display -webkit-flex

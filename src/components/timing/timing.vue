@@ -1,8 +1,7 @@
-
 <template lang="pug">
-.hk-order
-  hk-order-list(
-    v-if="page==='list'",
+.hk-timing
+  timing-list(
+    v-if="page === 'list'",
     :tasks="list",
     :options="options",
     :title="title",
@@ -13,7 +12,7 @@
     @edit="edit",
     @back="back",
   )
-  hk-order-edit(
+  timing-edit(
     v-if="showEdit",
     v-back="vback",
     :type="page",
@@ -27,13 +26,14 @@
 </template>
 
 <script>
-import HkOrderList from './order-list.vue'
-import HkOrderEdit from './order-edit.vue'
+import TimingList from './timing-list.vue'
+import TimingEdit from './timing-edit.vue'
+
 export default {
-  name: 'hk-order',
+  name: 'hk-timing',
   components: {
-    HkOrderList,
-    HkOrderEdit
+    TimingList,
+    TimingEdit
   },
   props: {
     lists: {
@@ -163,7 +163,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-order
+.hk-timing
   position fixed
   top 0
   right 0

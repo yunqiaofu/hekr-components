@@ -1,24 +1,23 @@
-
 <template lang="pug">
-.hk-order-edit
+.hk-timing-edit
   hk-header(
-    :title="$i('order.setting')",
+    :title="$i('timing.editTitle')",
     @click-left="go('list')",
-    :rightText="$i('order.save')",
+    :rightText="$i('timing.save')",
     @click-right="save"
   )
-  .hk-order-edit-container
+  .hk-timing-edit-container
 
-    .hk-order-edit-title
-      .hk-order-edit-title-label {{ $i('order.label') }}
-      input.hk-order-edit-title-input(
+    .hk-timing-edit-title
+      .hk-timing-edit-title-label {{ $i('timing.label') }}
+      input.hk-timing-edit-title-input(
         v-model="taskName",
-        :placeholder="$i('order.placeholder')",
+        :placeholder="$i('timing.placeholder')",
         maxlength="12"
       )
 
-    .hk-order-edit-timepicker
-      .hk-order-edit-timepicker-title {{ $i('order.time') }}
+    .hk-timing-edit-timepicker
+      .hk-timing-edit-timepicker-title {{ $i('timing.time') }}
       hk-timepicker(
         v-model="date",
         type="hh:mm",
@@ -27,25 +26,25 @@
 
     hk-week(v-model="week")
 
-    .hk-order-edit-components
-      .hk-order-edit-components-item(
+    .hk-timing-edit-components
+      .hk-timing-edit-components-item(
         v-for="item in options",
         :key="item.argument"
       )
-        .hk-order-edit-components-item-buttons(v-if="item.type==='button'")
+        .hk-timing-edit-components-item-buttons(v-if="item.type==='button'")
           hk-list(
             type="text",
             :leftText="item.label"
           )
-            .hk-order-edit-components-item-buttons-items(slot="right")
-              .hk-order-edit-components-item-buttons-items-item(
+            .hk-timing-edit-components-item-buttons-items(slot="right")
+              .hk-timing-edit-components-item-buttons-items-item(
                 v-for="(button, index) in item.maps",
                 :key="index",
-                :class="{ 'hk-order-edit-components-item-buttons-items-item-active': value[item.argument] === button.value }",
+                :class="{ 'hk-timing-edit-components-item-buttons-items-item-active': value[item.argument] === button.value }",
                 @click="click(item.argument, button.value)"
               ) {{ button.name }}
 
-        .hk-order-edit-components-item-slider(v-if="item.type === 'slider'")
+        .hk-timing-edit-components-item-slider(v-if="item.type === 'slider'")
           hk-slider(
             v-model="value[item.argument]",
             :min="item.min",
@@ -54,7 +53,7 @@
             :unit="item.unit"
           )
 
-        .hk-order-edit-components-item-select(v-if="item.type === 'select'")
+        .hk-timing-edit-components-item-select(v-if="item.type === 'select'")
           hk-list(
             type="text",
             :leftText="item.label",
@@ -74,7 +73,7 @@
 <script>
 const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 export default {
-  name: 'hk-order-edit',
+  name: 'hk-timing-edit',
   props: {
     selected: {
       type: Object,
@@ -203,7 +202,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-order-edit
+.hk-timing-edit
   position absolute
   top 0
   right 0
