@@ -3,7 +3,7 @@
   //- header
   .hk-slider-header
     .hk-slider-header-title {{ title }}
-    .hk-slider-header-value {{ `${val}${unit}` }}
+    .hk-slider-header-value {{ fiexd(value) }}{{ unit }}
 
   //- 滑动条
   .hk-slider-bar(
@@ -90,7 +90,6 @@ export default {
   },
   data () {
     return {
-      val: this.value,
       is: false
     }
   },
@@ -102,8 +101,11 @@ export default {
     },
     getRatio () {
       // 按步长求值
-      const value = Math.round(this.val / this.step) * this.step
-      let ratio = (value - this.min) / (this.max - this.min)
+      let ratio = (this.value - this.min) / (this.max - this.min)
+      if (!this.is) {
+        const value = Math.round(this.value / this.step) * this.step
+        ratio = (value - this.min) / (this.max - this.min)
+      }
       if (ratio < 0) {
         ratio = 0
       }
@@ -134,11 +136,6 @@ export default {
     document.removeEventListener('mousemove', this.dragging)
     document.removeEventListener('mouseup', this.dragend)
   },
-  watch: {
-    value (val) {
-      this.val = val
-    }
-  },
   methods: {
     getCircleStyle (index) {
       return {
@@ -153,47 +150,43 @@ export default {
     },
     select (e) {
       if (this.disabled) return
-      this.update(e)
-      this.$emit('select', this.val)
+      this.$emit('select', this.update(e, true))
     },
     dragstart (e) {
       if (this.disabled) return
       this.is = true
-      this.update(e)
-      this.$emit('dragstart', this.val)
+      this.$emit('dragstart', this.update(e, false))
     },
     dragging (e) {
       if (this.disabled) return
       if (this.is) {
-        this.update(e)
-        this.$emit('dragging', this.val)
+        this.$emit('dragging', this.update(e, false))
       }
     },
     dragend (e) {
       if (this.is && !this.disabled) {
-        this.update(e)
-        this.$emit('dragend', this.val)
+        this.$emit('dragend', this.update(e, true))
       }
       this.is = false
     },
-    update (e) {
+    update (e, dragend) {
       const x = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
       const { left } = this.$refs.bar.getBoundingClientRect()
       let value = (x - left) / this.$refs.bar.clientWidth * (this.max - this.min) + this.min
       // 按步长求值
+      if (dragend) value = this.fiexd(value)
+      if (value < this.min) value = this.min
+      if (value > this.max) value = this.max
+      this.$emit('input', value)
+      return value
+    },
+    fiexd (value) {
       value = Math.round(value / this.step) * this.step
       const step = this.step.toString().split('.')
       if (step[1]) {
         value = Number(value.toFixed(step[1].length))
       }
-      if (value < this.min) {
-        value = this.min
-      }
-      if (value > this.max) {
-        value = this.max
-      }
-      this.val = value
-      this.$emit('input', this.val)
+      return value
     }
   }
 }

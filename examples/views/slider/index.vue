@@ -63,6 +63,7 @@
       maxText="100%",
       :step="0.01",
       title="Step"
+      unit="$"
     )
   .hk-slider-demo-title 显示分割点
   .hk-slider-demo-container
