@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       show: false,
-      time: { hour: 2, min: 3, sec: 2 }
+      time: { hour: 2, minute: 3 }
     }
   },
   methods: {

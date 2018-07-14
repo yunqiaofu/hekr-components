@@ -9,8 +9,8 @@
     .hk-picker-container-items(:style="getStyle")
       .hk-picker-container-items-item(
         v-for="(item, index) in length"
-        :key="index"
-      ) {{ format(item - 1) }}
+        :key="item"
+      ) {{ format(index) }}
   .hk-picker-line
     .hk-picker-line-unit
       .hk-picker-line-unit-placeholder {{ format(value) }}
@@ -33,10 +33,14 @@ export default {
       type: Function,
       default: val => val
     },
-    unit: String
+    unit: {
+      type: String,
+      default: ''
+    }
   },
   data () {
     return {
+      isInit: false,
       is: false,
       y: 0,
       dy: 80
@@ -47,14 +51,11 @@ export default {
       const style = {
         transform: `translate3d(0, ${this.dy}px, 0)`
       }
-      if (this.is) {
+      if (this.is || !this.isInit) {
         style['transition-duration'] = '0s'
       }
       return style
     }
-  },
-  created () {
-    this.update()
   },
   mounted () {
     document.addEventListener('mousemove', this.dragging)
@@ -102,15 +103,15 @@ export default {
       this.is = false
     },
     update () {
-      let h = 20
-      if (this.$refs.container) {
-        h = this.$refs.container.offsetHeight / 5
-      }
+      let h = this.$refs.container.offsetHeight / 5
       let min = -h * (this.length - 3)
       let max = h * 2
       this.dy = -(this.value - 2) * h
       if (this.dy < min) this.dy = min
       if (this.dy > max) this.dy = max
+      this.$nextTick(() => {
+        this.isInit = true
+      })
     }
   }
 }

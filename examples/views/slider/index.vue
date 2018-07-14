@@ -64,6 +64,39 @@
       :step="0.01",
       title="Step"
     )
+  .hk-slider-demo-title 显示分割点
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="circle",
+      :min="0",
+      :max="5",
+      :step="1",
+      :circle="true"
+      title="Step"
+    )
+  .hk-slider-demo-title 显示分割点并自定义样式
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="circle",
+      :min="0",
+      :max="5",
+      :step="1",
+      :circle="true"
+      title="Step"
+    )
+      template(slot="circle", slot-scope="props")
+        .hk-slider-demo-circle {{ props.index }}
+
+  .hk-slider-demo-title 自定义handle样式
+  .hk-slider-demo-container
+    hk-slider(
+      v-model="circle",
+      :min="0",
+      :max="5",
+      :step="1",
+      title="Step"
+    )
+      .hk-slider-demo-handle(slot="handle") 😭
 </template>
 
 <script>
@@ -74,7 +107,8 @@ export default {
       value: 30,
       disabled: true,
       loading: true,
-      value2: 0
+      value2: 0,
+      circle: 0
     }
   },
   methods: {
@@ -97,4 +131,25 @@ export default {
     margin 0.5rem 0.75rem
   .hk-button
     margin 0.5rem auto
+  &-circle
+    width 1rem
+    height 1rem
+    line-height 1rem
+    background-color #08f
+    border-radius 50%
+    cursor pointer
+    color #fff
+    font-size 0.55rem
+    text-align center
+  &-handle
+    width 1.3rem
+    height 1.3rem
+    line-height 1.3rem
+    background-color #555
+    border-radius 50%
+    cursor pointer
+    color #fff
+    margin 0.15rem auto
+    font-size 0.55rem
+    text-align center
 </style>

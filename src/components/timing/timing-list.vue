@@ -22,7 +22,7 @@
       :type="'primary'",
       :disabled="list.length + 1 > maxlength",
       block,
-      @click="go('add')"
+      @click="add"
   )  {{ getAddTxt }}
 </template>
 
@@ -74,9 +74,6 @@ export default {
       return this.$i('timing.add')
     }
   },
-  activated () {
-    this.isEdit = false
-  },
   watch: {
     tasks: {
       deep: true,
@@ -92,8 +89,8 @@ export default {
     back () {
       this.$emit('back')
     },
-    go (route) {
-      this.$emit('go', route)
+    add () {
+      this.$emit('add')
     },
     edit (selected, index) {
       this.$emit('edit', selected, index)

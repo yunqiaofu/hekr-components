@@ -11,6 +11,18 @@
     @click="select"
   )
     .hk-slider-bar-strip(:style="getStripStyle")
+    .hk-slider-bar-circles(v-if="circle")
+      .hk-slider-bar-circles-item(
+        v-for="(item, index) in getCircles"
+        :key="index"
+        :style="getCircleStyle(index)"
+      )
+        slot(
+          name="circle"
+          :index="index"
+          :item="item"
+        )
+          .hk-slider-bar-circles-item-ball(:class="getBallClass(index)")
     .hk-slider-bar-handle(
       :style="getHandleStyle",
       @touchstart.prevent="dragstart",
@@ -18,9 +30,9 @@
       @touchend.prevent="dragend",
       @mousedown.stop="dragstart"
     )
-      .hk-slider-bar-handle-circle
-        .hk-slider-bar-handle-circle-loading(v-if="loading")
-
+      slot(name="handle")
+        .hk-slider-bar-handle-circle
+          .hk-slider-bar-handle-circle-loading(v-if="loading")
   //- footer
   .hk-slider-footer
     .hk-slider-footer-min {{ minText || `${min}${unit}` }}
@@ -70,6 +82,10 @@ export default {
     unit: {
       type: String,
       default: ''
+    },
+    circle: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -105,6 +121,9 @@ export default {
       return {
         left: `${this.getRatio * 100}%`
       }
+    },
+    getCircles () {
+      return Math.floor((this.max - this.min) / this.step) + 1
     }
   },
   mounted () {
@@ -121,6 +140,17 @@ export default {
     }
   },
   methods: {
+    getCircleStyle (index) {
+      return {
+        left: `${index / (this.getCircles - 1) * 100}%`
+      }
+    },
+    getBallClass (index) {
+      const isActive = this.value - this.min >= index * this.step
+      return {
+        'hk-slider-bar-circles-item-ball-active': isActive
+      }
+    },
     select (e) {
       if (this.disabled) return
       this.update(e)
@@ -213,8 +243,9 @@ $handle-size = 1.6rem
       width $handle-size
       height $handle-size
       position absolute
-      margin-left -($handle-size / 2)
-      top -0.7rem
+      top 50%
+      transform translate3d(-50%, -50%, 0)
+      z-index 10
       &-circle
         width $handle-size * 0.5
         height $handle-size * 0.5
@@ -232,6 +263,19 @@ $handle-size = 1.6rem
           background-size cover
           background-position center
           background-repeat no-repeat
+    &-circles
+      &-item
+        position absolute
+        top 50%
+        transform translate(-50%, -50%)
+        &-ball
+          width 0.8rem
+          height 0.8rem
+          background-color darken($color-white, 18%)
+          border-radius 50%
+          cursor pointer
+          &-active
+            background-color $color-primary
 
   &-footer
     margin-top 0.25rem

@@ -1,9 +1,9 @@
 <template lang="pug">
 .hk-timing-demo
   hk-timing(
-    :lists="list",
+    :items="list",
     :title="title",
-    :template="template",
+    :code="code",
     :options="options",
     :maxlength="maxlength",
     @onRemove="onRemove",
@@ -19,11 +19,8 @@ export default {
   data () {
     return {
       list: [],
-      template: {
-        taskName: this.$i('timing.taskName'),
-        code: {
-          cmdTag: 'setSw'
-        }
+      code: {
+        cmdTag: 'setSw'
       },
       options: [
         {
@@ -97,6 +94,7 @@ export default {
       console.log('onEditonEdit', data)
     },
     onAdd (data) {
+      data.taskId = Date.now()
       this.list.push(data)
       console.log('onAdd', data)
     },

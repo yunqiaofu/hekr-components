@@ -10,9 +10,9 @@
       )
     .hk-timepicker-container-item
       hk-picker(
-        v-model="min"
-        :format="minFormat"
-        :unit="$i('timepicker.min')"
+        v-model="minute"
+        :format="minuteFormat"
+        :unit="$i('timepicker.minute')"
       )
 </template>
 
@@ -24,14 +24,14 @@ export default {
       type: Object,
       default: () => {
         const time = new Date()
-        return { hour: time.getHours(), min: time.getMinutes() }
+        return { hour: time.getHours(), minute: time.getMinutes() }
       }
     },
     hourFormat: {
       type: Function,
       default: val => val < 10 ? `0${val}` : val
     },
-    minFormat: {
+    minuteFormat: {
       type: Function,
       default: val => val < 10 ? `0${val}` : val
     }
@@ -45,12 +45,12 @@ export default {
         this.input('hour', val)
       }
     },
-    min: {
+    minute: {
       get () {
-        return this.value.min
+        return this.value.minute
       },
       set (val) {
-        this.input('min', val)
+        this.input('minute', val)
       }
     }
   },
@@ -70,11 +70,15 @@ export default {
   background-color #fff
   padding 0.3rem
   &-container
-    display flex
-    flex-direction columns
+    &:before,
+    &:after
+      content ""
+      display table
+      float none
+      clear both
     &-item
-      min-width 50%
-      flex 1
+      width 50%
+      float left
 </style>
 
 
