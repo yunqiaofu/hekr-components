@@ -43,7 +43,11 @@ export default {
       isInit: false,
       is: false,
       y: 0,
-      dy: 80
+      dy: 80,
+      time: 0,
+      velocity: 0,
+      startY: 0,
+      prevY: 0
     }
   },
   computed: {
@@ -78,12 +82,19 @@ export default {
     dragstart (e) {
       if (this.disabled) return
       this.is = true
-      this.y = this.getY(e) - this.dy
+      this.startY = this.getY(e)
+      this.y = this.startY - this.dy
+      this.prevY = this.startY
+      this.velocity = 0
+      this.time = Date.now()
     },
     dragging (e) {
       if (this.disabled) return
       if (this.is) {
-        this.dy = this.getY(e) - this.y
+        let y = this.getY(e)
+        this.dy = y - this.y
+        this.velocity = (y - this.prevY) || y
+        this.prevY = y
       }
     },
     dragend (e) {
@@ -91,7 +102,14 @@ export default {
         let h = this.$refs.container.offsetHeight / 5
         let min = -h * (this.length - 3)
         let max = h * 2
-        let dy = this.getY(e) - this.y
+        let y = this.getY(e)
+        let dy = y - this.y
+        let duration = Date.now() - this.time
+        let distance = Math.abs(y - this.startY)
+
+        if (distance < h) this.velocity = 0
+        if (duration < 300) dy = dy + this.velocity * 5
+
         dy = Math.round(dy / h) * h
         if (dy < min) dy = min
         if (dy > max) dy = max
