@@ -7,132 +7,132 @@ export const routes = [
   {
     path: '/alert',
     name: 'alert',
-    component: () => import('../views/alert')
+    component: () => import('@/views/alert')
   },
   {
-    path: '/bar',
-    name: 'bar',
-    component: () => import('../views/bar')
+    path: '/tabbar',
+    name: 'tabbar',
+    component: () => import('@/views/tabbar')
   },
   {
     path: '/button',
     name: 'button',
-    component: () => import('../views/button')
+    component: () => import('@/views/button')
   },
   {
     path: '/header',
     name: 'header',
-    component: () => import('../views/header')
+    component: () => import('@/views/header')
   },
   {
     path: '/week',
     name: 'week',
-    component: () => import('../views/week')
+    component: () => import('@/views/week')
   },
   {
     path: '/slider',
     name: 'slider',
-    component: () => import('../views/slider')
+    component: () => import('@/views/slider')
   },
   {
     path: '/timepicker',
     name: 'timepicker',
-    component: () => import('../views/timepicker')
+    component: () => import('@/views/timepicker')
   },
   {
     path: '/pop',
     name: 'pop',
-    component: () => import('../views/pop')
+    component: () => import('@/views/pop')
   },
   {
     path: '/icon',
     name: 'icon',
-    component: () => import('../views/icon')
+    component: () => import('@/views/icon')
   },
   {
     path: '/list',
     name: 'list',
-    component: () => import('../views/list')
+    component: () => import('@/views/list')
   },
   {
     path: '/chart',
     name: 'chart',
-    component: () => import('../views/chart')
+    component: () => import('@/views/chart')
   },
   {
     path: '/dialog',
     name: 'dialog',
-    component: () => import('../views/dialog')
+    component: () => import('@/views/dialog')
   },
   {
     path: '/switch',
     name: 'switch',
-    component: () => import('../views/switch')
+    component: () => import('@/views/switch')
   },
   {
     path: '/check',
     name: 'check',
-    component: () => import('../views/check')
+    component: () => import('@/views/check')
   },
   {
     path: '/confirm',
     name: 'confirm',
-    component: () => import('../views/confirm')
+    component: () => import('@/views/confirm')
   },
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import('../views/dashboard')
+    component: () => import('@/views/dashboard')
   },
   {
     path: '/notify',
     name: 'notify',
-    component: () => import('../views/notify')
+    component: () => import('@/views/notify')
   },
   {
     path: '/timing',
     name: 'timing',
-    component: () => import('../views/timing')
+    component: () => import('@/views/timing')
   },
   {
     path: '/swipe',
     name: 'swipe',
-    component: () => import('../views/swipe')
+    component: () => import('@/views/swipe')
   },
   {
     path: '/v-back',
     name: 'v-back',
-    component: () => import('../views/v-back')
+    component: () => import('@/views/v-back')
   },
   {
     path: '/select',
     name: 'select',
-    component: () => import('../views/select')
+    component: () => import('@/views/select')
   },
   {
     path: '/loading',
     name: 'loading',
-    component: () => import('../views/loading')
+    component: () => import('@/views/loading')
   },
   {
     path: '/i18n',
     name: 'i18n',
-    component: () => import('../views/i18n')
+    component: () => import('@/views/i18n')
   },
   {
     path: '/colorpicker',
     name: 'colorpicker',
-    component: () => import('../views/colorpicker')
+    component: () => import('@/views/colorpicker')
   },
   {
     path: '/offline',
     name: 'offline',
-    component: () => import('../views/offline')
+    component: () => import('@/views/offline')
   },
   {
     path: '/picker',
     name: 'picker',
-    component: () => import('../views/picker')
+    component: () => import('@/views/picker')
   }
 ]
 
