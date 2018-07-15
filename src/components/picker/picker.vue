@@ -109,9 +109,9 @@ export default {
       this.dy = -(this.value - 2) * h
       if (this.dy < min) this.dy = min
       if (this.dy > max) this.dy = max
-      this.$nextTick(() => {
+      setTimeout(() => {
         this.isInit = true
-      })
+      }, 300)
     }
   }
 }
