@@ -229,8 +229,8 @@ $handle-size = 1.6rem
     background-color darken($color-white, 15%)
     border-radius ($height / 2)
     &-strip
-      background-color $color-primary
       height $height
+      background-color $color-primary
       border-radius ($height / 2)
     &-handle
       width $handle-size
