@@ -3,7 +3,7 @@
   //- header
   .hk-slider-header
     .hk-slider-header-title {{ title }}
-    .hk-slider-header-value {{ `${val}${unit}` }}
+    .hk-slider-header-value {{ fiexd(value) }}{{ unit }}
 
   //- 滑动条
   .hk-slider-bar(
@@ -11,6 +11,18 @@
     @click="select"
   )
     .hk-slider-bar-strip(:style="getStripStyle")
+    .hk-slider-bar-circles(v-if="circle")
+      .hk-slider-bar-circles-item(
+        v-for="(item, index) in getCircles"
+        :key="index"
+        :style="getCircleStyle(index)"
+      )
+        slot(
+          name="circle"
+          :index="index"
+          :item="item"
+        )
+          .hk-slider-bar-circles-item-ball(:class="getBallClass(index)")
     .hk-slider-bar-handle(
       :style="getHandleStyle",
       @touchstart.prevent="dragstart",
@@ -18,9 +30,9 @@
       @touchend.prevent="dragend",
       @mousedown.stop="dragstart"
     )
-      .hk-slider-bar-handle-circle
-        .hk-slider-bar-handle-circle-loading(v-if="loading")
-
+      slot(name="handle")
+        .hk-slider-bar-handle-circle
+          .hk-slider-bar-handle-circle-loading(v-if="loading")
   //- footer
   .hk-slider-footer
     .hk-slider-footer-min {{ minText || `${min}${unit}` }}
@@ -70,11 +82,14 @@ export default {
     unit: {
       type: String,
       default: ''
+    },
+    circle: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      val: this.value,
       is: false
     }
   },
@@ -86,8 +101,11 @@ export default {
     },
     getRatio () {
       // 按步长求值
-      const value = Math.round(this.val / this.step) * this.step
-      let ratio = (value - this.min) / (this.max - this.min)
+      let ratio = (this.value - this.min) / (this.max - this.min)
+      if (!this.is) {
+        const value = Math.round(this.value / this.step) * this.step
+        ratio = (value - this.min) / (this.max - this.min)
+      }
       if (ratio < 0) {
         ratio = 0
       }
@@ -105,6 +123,9 @@ export default {
       return {
         left: `${this.getRatio * 100}%`
       }
+    },
+    getCircles () {
+      return Math.floor((this.max - this.min) / this.step) + 1
     }
   },
   mounted () {
@@ -115,66 +136,57 @@ export default {
     document.removeEventListener('mousemove', this.dragging)
     document.removeEventListener('mouseup', this.dragend)
   },
-  watch: {
-    value (val) {
-      this.val = val
-    }
-  },
   methods: {
-    getX (e) {
-      return e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
+    getCircleStyle (index) {
+      return {
+        left: `${index / (this.getCircles - 1) * 100}%`
+      }
+    },
+    getBallClass (index) {
+      const isActive = this.value - this.min >= index * this.step
+      return {
+        'hk-slider-bar-circles-item-ball-active': isActive
+      }
     },
     select (e) {
-      this.update(e)
-      if (!this.disabled) {
-        this.$emit('select', this.val)
-      }
+      if (this.disabled) return
+      this.$emit('select', this.update(e, true))
     },
     dragstart (e) {
+      if (this.disabled) return
       this.is = true
-      this.update(e)
-      if (!this.disabled) {
-        this.$emit('dragstart', this.val)
-      }
+      this.$emit('dragstart', this.update(e, false))
     },
     dragging (e) {
+      if (this.disabled) return
       if (this.is) {
-        this.update(e)
-        if (!this.disabled) {
-          this.$emit('dragging', this.val)
-        }
+        this.$emit('dragging', this.update(e, false))
       }
     },
     dragend (e) {
-      if (this.is) {
-        this.update(e)
-        if (!this.disabled) {
-          this.$emit('dragend', this.val)
-        }
+      if (this.is && !this.disabled) {
+        this.$emit('dragend', this.update(e, true))
       }
       this.is = false
     },
-    update (e) {
-      if (this.disabled) {
-        return
-      }
+    update (e, dragend) {
       const x = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : e.clientX
       const { left } = this.$refs.bar.getBoundingClientRect()
       let value = (x - left) / this.$refs.bar.clientWidth * (this.max - this.min) + this.min
       // 按步长求值
+      if (dragend) value = this.fiexd(value)
+      if (value < this.min) value = this.min
+      if (value > this.max) value = this.max
+      this.$emit('input', value)
+      return value
+    },
+    fiexd (value) {
       value = Math.round(value / this.step) * this.step
       const step = this.step.toString().split('.')
       if (step[1]) {
         value = Number(value.toFixed(step[1].length))
       }
-      if (value < this.min) {
-        value = this.min
-      }
-      if (value > this.max) {
-        value = this.max
-      }
-      this.val = value
-      this.$emit('input', this.val)
+      return value
     }
   }
 }
@@ -217,15 +229,16 @@ $handle-size = 1.6rem
     background-color darken($color-white, 15%)
     border-radius ($height / 2)
     &-strip
-      background-color $color-primary
       height $height
+      background-color $color-primary
       border-radius ($height / 2)
     &-handle
       width $handle-size
       height $handle-size
       position absolute
-      margin-left -($handle-size / 2)
-      top -0.7rem
+      top 50%
+      transform translate3d(-50%, -50%, 0)
+      z-index 10
       &-circle
         width $handle-size * 0.5
         height $handle-size * 0.5
@@ -243,6 +256,19 @@ $handle-size = 1.6rem
           background-size cover
           background-position center
           background-repeat no-repeat
+    &-circles
+      &-item
+        position absolute
+        top 50%
+        transform translate(-50%, -50%)
+        &-ball
+          width 0.8rem
+          height 0.8rem
+          background-color darken($color-white, 18%)
+          border-radius 50%
+          cursor pointer
+          &-active
+            background-color $color-primary
 
   &-footer
     margin-top 0.25rem

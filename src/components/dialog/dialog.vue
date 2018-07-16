@@ -1,34 +1,42 @@
 <template lang="pug">
-.hk-dialog(v-if="value")
-  .hk-dialog-mask(
-    v-if="showMask",
-    @click="clickMask"
+.hk-dialog
+  transition(
+    name="hk-fade-in"
+    appear
   )
-  .hk-dialog-container
-    slot
-      .hk-dialog-container-header
-        slot(name="header") {{ title }}
-      .hk-dialog-container-body(:style="getBodyTextAlign")
-        slot(name="body")
-          input.hk-dialog-container-body-input(
-            v-if="type === 'input'",
-            v-bind="inputProps",
-            :type="getInputType",
-            v-model="inputValue"
-          )
-          .hk-dialog-container-body-text(v-else) {{ text }}
-      .hk-dialog-container-footer
-        slot(name="footer")
-          button.hk-dialog-container-footer-cancel(
-            v-if="showCancel",
-            :class="getCancelClass",
-            @click="cancel"
-          ) {{ cancelText || $i('dialog.cancelText') }}
-          button.hk-dialog-container-footer-confirm(
-            v-if="showConfirm",
-            :class="getConfirmClass",
-            @click="confirm"
-          ) {{ confirmText || $i('dialog.confirmText') }}
+    .hk-dialog-mask(
+      v-if="value && showMask",
+      @click="clickMask"
+    )
+  transition(
+    name="hk-dialog-scale"
+    appear
+  )
+    .hk-dialog-container(v-if="value")
+      slot
+        .hk-dialog-container-header
+          slot(name="header") {{ title }}
+        .hk-dialog-container-body(:style="getBodyTextAlign")
+          slot(name="body")
+            input.hk-dialog-container-body-input(
+              v-if="type === 'input'",
+              v-bind="inputProps",
+              :type="getInputType",
+              v-model="inputValue"
+            )
+            .hk-dialog-container-body-text(v-else) {{ text }}
+        .hk-dialog-container-footer
+          slot(name="footer")
+            button.hk-dialog-container-footer-cancel(
+              v-if="showCancel",
+              :class="getCancelClass",
+              @click="cancel"
+            ) {{ cancelText || $i('dialog.cancelText') }}
+            button.hk-dialog-container-footer-confirm(
+              v-if="showConfirm",
+              :class="getConfirmClass",
+              @click="confirm"
+            ) {{ confirmText || $i('dialog.confirmText') }}
 
 </template>
 
@@ -161,31 +169,25 @@ export default {
 $border = 0.05rem solid rgba(0, 0, 0, 0.3)
 
 .hk-dialog
-  position fixed
-  top 0
-  right 0
-  bottom 0
-  left 0
-  z-index $zindex-higher
   &-mask
-    position absolute
+    position fixed
     top 0
     right 0
     bottom 0
     left 0
-    background-color rgba(0, 0, 0, 0.5)
+    z-index $zindex-higher
+    background-color rgba(0, 0, 0, 0.4)
   &-container
     width 13.5rem
-    position absolute
+    position fixed
     top 50%
     left 50%
-    z-index 1
+    z-index $zindex-higher
     transform translate3d(-50%, -50%, 0)
     margin 0 auto
     border-radius 0.15rem
     background-color $color-white
     border 0.05rem solid rgba(0, 0, 0, 0.1)
-    animation fade-up 0.1s
     &-header
       padding 1rem 0.7rem 0.3rem 0.7rem
       font-size $font-size-3
@@ -231,12 +233,30 @@ $border = 0.05rem solid rgba(0, 0, 0, 0.3)
       &-confirm
         color #0096FB
         border-left $border
+  &-scale-enter-active
+    animation hkDialogScaleIn 0.3s
+  &-scale-leave-active
+    animation hkDialogScaleOut 0.2s
 
-@keyframes fade-up
-  from
+@keyframes hkDialogScaleIn
+  0%
     opacity 0
-    transform translate3d(-50%, -70%, 0)
-  to
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
+  50%
+    opacity 0.4
+    transform translate3d(-50%, -50%, 0) scale(1.2, 1.2)
+  100%
     opacity 1
-    transform translate3d(-50%, -50%, 0)
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+
+@keyframes hkDialogScaleOut
+  0%
+    opacity 1
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+  50%
+    opacity 0.6
+    transform translate3d(-50%, -50%, 0) scale(1.1, 1.1)
+  100%
+    opacity 0
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
 </style>

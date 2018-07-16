@@ -87,7 +87,7 @@ export default {
 .hk-alert
   padding 0 0.2rem
   height 2rem
-  background-color rgba(0, 0, 0, 0.5)
+  background-color rgba(0, 0, 0, 0.4)
   overflow hidden
   color #fff
   &-container

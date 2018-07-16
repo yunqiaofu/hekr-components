@@ -1,10 +1,10 @@
 <template lang="pug">
-.hk-bar-demo(:class="{'dark': modalTheme === 'dark'}")
+.hk-tabbar-demo(:class="{'dark': modalTheme === 'dark'}")
   .demo-button
     hk-button(@click="toggleBg") 切换背景
     hk-button(@click="toggleNum") 切换数量
     hk-button(@click="toggleColor") 切换颜色
-  hk-bar(:items="getItems", :theme="modalTheme", :activeColor="activeColor", @change="func")
+  hk-tabbar(:items="getItems", :theme="modalTheme", :activeColor="activeColor", @change="func")
 </template>
 
 <script>
@@ -97,7 +97,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-.hk-bar-demo
+.hk-tabbar-demo
   position relative
   height 100%
   display flex

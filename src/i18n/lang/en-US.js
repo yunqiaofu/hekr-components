@@ -6,6 +6,9 @@ export default {
     cancelText: 'cancel',
     confirmText: 'confirm'
   },
+  pop: {
+    cancelText: 'cancel'
+  },
   week: {
     SUN: 'SUN',
     MON: 'MON',
@@ -17,14 +20,13 @@ export default {
     title: 'repeat'
   },
   timepicker: {
-    title: 'Count Down',
     hour: 'H',
     min: 'M',
     sec: 'S'
   },
-  order: {
-    timing: 'Timing',
-    setting: 'Timing Setting',
+  timing: {
+    title: 'Timing',
+    editTitle: 'Timing Setting',
     save: 'Save',
     edit: 'Edit',
     add: 'Add',

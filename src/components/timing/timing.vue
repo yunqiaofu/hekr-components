@@ -1,48 +1,46 @@
-
 <template lang="pug">
-.hk-order
-  hk-order-list(
-    v-if="page==='list'",
+.hk-timing
+  timing-list(
+    v-if="!showEdit",
     :tasks="list",
     :options="options",
     :title="title",
     :maxlength="maxlength",
-    @go="go",
+    @add="add",
     @check="check",
     @remove="remove",
     @edit="edit",
-    @back="back",
+    @back="back"
   )
-  hk-order-edit(
-    v-if="page==='add' || page==='edit'",
+  timing-edit(
+    v-else
     v-back="vback",
-    :type="page",
     :template="getTemplate",
     :options="options",
-    :selected="selected",
-    @go="go",
+    @back="closeEdit",
     @onAdd="onAdd",
     @onEdit="onEdit"
   )
 </template>
 
 <script>
-import HkOrderList from './order-list.vue'
-import HkOrderEdit from './order-edit.vue'
+import TimingList from './timing-list.vue'
+import TimingEdit from './timing-edit.vue'
+
 export default {
-  name: 'hk-order',
+  name: 'hk-timing',
   components: {
-    HkOrderList,
-    HkOrderEdit
+    TimingList,
+    TimingEdit
   },
   props: {
-    lists: {
+    items: {
       type: Array,
       default: () => []
     },
-    template: {
+    code: {
       type: Object,
-      default: () => ({ taskName: '', code: { cmdTag: '' } })
+      default: () => ({ cmdTag: '' })
     },
     options: {
       type: Array,
@@ -58,8 +56,8 @@ export default {
   },
   data () {
     return {
-      page: 'list',
-      list: [...this.lists],
+      showEdit: false,
+      list: [...this.items],
       date: new Date(),
       index: null,
       selected: null
@@ -67,46 +65,52 @@ export default {
   },
   computed: {
     getTemplate () {
+      if (this.selected) {
+        return this.selected
+      }
       return {
-        taskName: this.$i('order.taskName'),
+        taskName: this.$i('timing.taskName'),
         code: {
-          cmdTag: ''
+          cmdTag: '',
+          ...this.code
         },
         date: {
           minute: this.date.getMinutes(),
           hour: this.date.getHours(),
           repeatList: []
-        },
-        ...this.template
+        }
+      }
+    },
+    vback () {
+      return {
+        action: this.showEdit,
+        callback: () => {
+          this.showEdit = false
+        }
       }
     }
   },
-  activated () {
-    this.page = 'list'
-  },
   watch: {
-    lists: {
+    items: {
       deep: true,
       handler (val) {
         this.list = [ ...val ]
       }
     },
-    page (val) {
+    showEdit (val) {
       this.date = new Date()
-      if (val === 'add' || val === 'list') {
-        this.selected = null
-      }
+      if (!val) this.selected = null
     }
   },
   methods: {
-    vback () {
-      this.page = 'list'
-    },
     back () {
       this.$emit('back')
     },
-    go (page) {
-      this.page = page
+    add () {
+      this.showEdit = true
+    },
+    closeEdit () {
+      this.showEdit = false
     },
     edit (item, index) {
       this.index = index
@@ -122,13 +126,13 @@ export default {
           repeatList: [...(date.repeatList || [])]
         }
       }
-      this.page = 'edit'
+      this.showEdit = true
     },
     check (item, index) {
       const tasks = [ ...this.list ]
       tasks[index] = item
       this.list = [ ...tasks ]
-      this.$emit('onEdit', item)
+      this.$emit('onEdit', item, index)
     },
     onAdd (data) {
       const tasks = [ ...this.list ]
@@ -155,7 +159,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.hk-order
+.hk-timing
   position fixed
   top 0
   right 0

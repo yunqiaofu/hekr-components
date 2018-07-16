@@ -22,9 +22,12 @@ export default Vue => {
     } else {
       vm = new NotifyConstructor().$mount()
       vm.$once('input', () => {
-        vm.$destroy()
+        vm.value = false
         $ = null
-        document.body.removeChild(vm.$el)
+        setTimeout(() => {
+          vm.$destroy()
+          document.body.removeChild(vm.$el)
+        }, 230)
       })
       document.body.appendChild(vm.$el)
     }
