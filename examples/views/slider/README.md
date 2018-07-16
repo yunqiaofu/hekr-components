@@ -14,6 +14,7 @@
 | loading | 是否加载中 | boolean | - | false |
 | title | 标题 | string | - | - |
 | unit | 数值单位 | string | - | - |
+| circle | 是否显示分割点| boolean | - | false |
 
 ## Events
 | 事件名称 | 说明 |	回调参数 |
@@ -22,3 +23,10 @@
 | dragstart | 拖动开始事件 | 当前的值 |
 | dragging | 拖动移动事件 | 当前的值 |
 | dragend | 拖动结束事件 | 改变后的值 |
+
+### Slot
+
+| name | 说明|
+| --- | --- |
+| handle | 拖动手柄 |
+| circle | 分割点 |

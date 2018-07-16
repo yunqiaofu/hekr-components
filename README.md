@@ -17,6 +17,7 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
 ## 组件使用
 
 ### 开发文档
@@ -114,7 +115,7 @@ props: {
 3. template指令都采用缩写的方式，如v-bind => :
 
 ## 注意事项
-1. 开发一个组件(component)或者一个包(package)之后，必须手动在components或packages文件夹下index.js中添加导出模块的代码
+1. 开发一个组件(component)或者一个包(package)之后，必须手动在components文件夹下index.js中添加导出模块的代码
 2. 编写的组件必须同时支持鼠标事件和触摸事件，且不能狗冲突或者同时发生
 3. 项目中所有使用到的单位都必须是rem，HTML根元素的font-szie为20px，所以我们定义一个大小为20px的时候使用1rem，注意：定义html为20xp是由于在chrome PC版上最小字体为12px，所以调试的时候会出现偏差
 4. 目录结构说明
@@ -144,9 +145,6 @@ src
 │          button.vue
 │          index.js // 编写install函数并导出
 │          README.md // 组件README文件
-│
-├─packages // 复合组件 开发时和components保持下相似目录结构
-│      index.js
 │
 └─stylus // 样式文件
         hekr-components.styl

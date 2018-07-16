@@ -1,11 +1,11 @@
 <template lang="pug">
-.hk-bar(:style="getColorStyle")
-  .hk-bar-item(
+.hk-tabbar(:style="getColorStyle")
+  .hk-tabbar-item(
     v-for="(item, index) in items",
     :key="index",
     :style="getItemStyle",
     v-show="!item.hide",
-    @click="handleClick(item, index)"
+    @click="click(item, index)"
   )
     hk-icon(
       :name = "item.icon",
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'hk-bar',
+  name: 'hk-tabbar',
   props: {
     items: {
       type: Array,
@@ -69,7 +69,7 @@ export default {
     }
   },
   methods: {
-    handleClick (val, index) {
+    click (val, index) {
       if (!val.disabled) {
         this.$emit('change', val, index)
       }
@@ -79,26 +79,30 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "../../stylus/variables.styl"
-.hk-bar
-  display flex
-  display -webkit-flex
-  justify-content space-around
-  -webkit-justify-content space-around
-  align-items center
-  -webkit-align-items center
+$height = 3.8rem
+.hk-tabbar
+  width 100%
+  height $height
   position fixed
+  right 0
   bottom 0
   left 0
-  right 0
-  width 100%
-  height 4rem
-  padding 0 .5rem
+  padding 0 0.5rem
   overflow hidden
+  &:before,
+  &:after
+    content ""
+    display table
+    float none
+    clear both
   &-item
+    height $height
+    float left
     text-align center
+    display flex
+    align-items center
   .hk-icon
-    width 100%
+    margin auto
     overflow hidden
   .hk-icon-text
     width 100%

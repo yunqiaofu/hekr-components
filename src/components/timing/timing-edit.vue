@@ -1,51 +1,46 @@
-
 <template lang="pug">
-.hk-order-edit
+.hk-timing-edit
   hk-header(
-    :title="$i('order.setting')",
-    @click-left="go('list')",
-    :rightText="$i('order.save')",
+    :title="$i('timing.editTitle')",
+    @click-left="back",
+    :rightText="$i('timing.save')",
     @click-right="save"
   )
-  .hk-order-edit-container
+  .hk-timing-edit-container
 
-    .hk-order-edit-title
-      .hk-order-edit-title-label {{ $i('order.label') }}
-      input.hk-order-edit-title-input(
+    .hk-timing-edit-title
+      .hk-timing-edit-title-label {{ $i('timing.label') }}
+      input.hk-timing-edit-title-input(
         v-model="taskName",
-        :placeholder="$i('order.placeholder')",
+        :placeholder="$i('timing.placeholder')",
         maxlength="12"
       )
 
-    .hk-order-edit-timepicker
-      .hk-order-edit-timepicker-title {{ $i('order.time') }}
-      hk-timepicker(
-        v-model="date",
-        type="hh:mm",
-        :needTitle="false"
-      )
+    .hk-timing-edit-timepicker
+      .hk-timing-edit-timepicker-title {{ $i('timing.time') }}
+      hk-timepicker(v-model="date")
 
     hk-week(v-model="week")
 
-    .hk-order-edit-components
-      .hk-order-edit-components-item(
+    .hk-timing-edit-components
+      .hk-timing-edit-components-item(
         v-for="item in options",
         :key="item.argument"
       )
-        .hk-order-edit-components-item-buttons(v-if="item.type==='button'")
+        .hk-timing-edit-components-item-buttons(v-if="item.type==='button'")
           hk-list(
             type="text",
             :leftText="item.label"
           )
-            .hk-order-edit-components-item-buttons-items(slot="right")
-              .hk-order-edit-components-item-buttons-items-item(
+            .hk-timing-edit-components-item-buttons-items(slot="right")
+              .hk-timing-edit-components-item-buttons-items-item(
                 v-for="(button, index) in item.maps",
                 :key="index",
-                :class="{ 'hk-order-edit-components-item-buttons-items-item-active': value[item.argument] === button.value }",
+                :class="{ 'hk-timing-edit-components-item-buttons-items-item-active': value[item.argument] === button.value }",
                 @click="click(item.argument, button.value)"
               ) {{ button.name }}
 
-        .hk-order-edit-components-item-slider(v-if="item.type === 'slider'")
+        .hk-timing-edit-components-item-slider(v-if="item.type === 'slider'")
           hk-slider(
             v-model="value[item.argument]",
             :min="item.min",
@@ -54,7 +49,7 @@
             :unit="item.unit"
           )
 
-        .hk-order-edit-components-item-select(v-if="item.type === 'select'")
+        .hk-timing-edit-components-item-select(v-if="item.type === 'select'")
           hk-list(
             type="text",
             :leftText="item.label",
@@ -73,20 +68,13 @@
 
 <script>
 const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+
 export default {
-  name: 'hk-order-edit',
+  name: 'hk-timing-edit',
   props: {
-    selected: {
-      type: Object,
-      default: () => {}
-    },
-    type: {
-      type: String,
-      default: 'edit'
-    },
     template: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     options: {
       type: Array,
@@ -94,92 +82,80 @@ export default {
     }
   },
   data () {
-    let myTemplate = { ...(this.selected || this.template) }
-    let now = new Date()
-    let value = {}
-    let selectes = {}
-    for (let i = 0; i < this.options.length; i++) {
-      const key = this.options[i].argument
-      const isUndef = myTemplate.code[key] === undefined
-      if (this.options[i].type === 'slider') {
-        value[key] = isUndef ? this.options[i].min : myTemplate.code[key]
-      } else if (this.options[i].type === 'select') {
-        value[key] = isUndef ? 0 : myTemplate.code[key]
-        selectes[key] = false
-      } else {
-        value[key] = isUndef ? this.options[i].maps[0].value : myTemplate.code[key]
-      }
-    }
     return {
-      myTemplate: myTemplate,
-      taskName: myTemplate.taskName,
-      enable: myTemplate.enable,
+      taskName: '',
+      code: '',
+      date: { },
+      enable: true,
+      selectes: {},
+      value: {},
       week: [],
-      date: {
-        h: myTemplate.date.hour || now.getHours(),
-        m: myTemplate.date.minute || now.getMinutes()
-      },
-      code: {},
-      selectes: selectes,
       selectValue: [],
-      value: value,
       selectList: [],
       selectType: ''
     }
   },
   computed: {
-    hour () {
-      let hour = []
-      for (let i = 0; i < 24; i++) {
-        hour.push(i)
-      }
-      return hour
-    },
-    min () {
-      let min = []
-      for (let i = 0; i < 60; i++) {
-        min.push(i)
-      }
-      return min
-    },
     repeatList () {
-      let l = []
-      for (let i = 0; i < this.week.length; i++) {
-        l.push(weeks[this.week[i]])
-      }
-      return l
+      return this.week.map(item => weeks[item])
     }
   },
+  created () {
+    this.init()
+  },
   mounted () {
-    const repeatList = this.myTemplate.date.repeatList || []
-    this.week = repeatList.map(week => weeks.indexOf(week))
-    this.taskName = this.myTemplate.taskName
-    this.code = { ...this.myTemplate.code }
+    this.init()
   },
   methods: {
+    init () {
+      const value = {}
+      const selectes = {}
+      const template = this.template
+      const options = this.options
+      options.forEach(item => {
+        const key = item.argument
+        const isUndef = template.code[key] === undefined
+        if (item.type === 'slider') {
+          value[key] = isUndef ? item.min : template.code[key]
+        } else if (item.type === 'select') {
+          value[key] = isUndef ? 0 : template.code[key]
+          selectes[key] = false
+        } else {
+          value[key] = isUndef ? item.maps[0].value : template.code[key]
+        }
+      })
+      const repeatList = this.template.date.repeatList || []
+      this.week = repeatList.map(week => weeks.indexOf(week))
+      this.taskName = this.template.taskName
+      this.code = this.template.code
+      this.date = this.template.date
+      this.enable = this.template.enable
+      this.selectes = selectes
+      this.value = value
+    },
     selectShow (item) {
       this.selectes[item.argument] = true
       this.selectType = item.argument
       this.selectList = item.maps
     },
     selectHide () {
-      Object.keys(this.selectes)
+      Object
+        .keys(this.selectes)
         .forEach(key => {
           this.selectes[key] = false
         })
     },
-    go (route) {
-      this.$emit('go', route)
+    back () {
+      this.$emit('back')
     },
     click (argument, value) {
       this.value[argument] = value
     },
     save () {
-      let ob = {
-        ...this.myTemplate,
+      let template = {
+        ...this.template,
         date: {
-          hour: this.date.h,
-          minute: this.date.m,
+          ...this.date,
           repeatList: this.repeatList
         },
         taskName: this.taskName,
@@ -189,21 +165,21 @@ export default {
         },
         schedulerType: this.repeatList.length === 0 ? 'ONCE' : 'LOOP'
       }
-      this.$emit('input', ob)
-      if (this.myTemplate.taskId || this.type === 'edit') {
-        this.$emit('onEdit', ob)
+      this.$emit('input', template)
+      if (this.template.taskId) {
+        this.$emit('onEdit', template)
       } else {
-        ob.enable = true // 新增默认可用
-        this.$emit('onAdd', ob)
+        template.enable = true // 新增默认可用
+        this.$emit('onAdd', template)
       }
-      this.go('list')
+      this.$emit('back')
     }
   }
 }
 </script>
 
 <style lang="stylus">
-.hk-order-edit
+.hk-timing-edit
   position absolute
   top 0
   right 0

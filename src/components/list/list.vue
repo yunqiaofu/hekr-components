@@ -139,9 +139,9 @@ ellipsis()
   justify-content center
   align-items center
   margin-left 1rem
-  height 2.2rem
-  line-height 2.2rem
-  padding .2rem 1rem .2rem 0
+  height 2.5rem
+  line-height 2.5rem
+  padding .35rem 1rem .35rem 0
   font-size $font-size-4
   ellipsis()
   &-border

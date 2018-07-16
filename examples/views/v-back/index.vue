@@ -3,14 +3,14 @@
   hk-button(@click="showDialog") 同时打开两个对话框
   hk-dialog(
     v-model="visible1",
-    v-back="closeMySelf",
+    v-back="back1",
     title="提示",
     text="滤芯寿命即将耗尽，请及时更换滤芯，这个是函数参数v-back='function'",
     @confirm="confirm"
   )
   hk-dialog(
     v-model="visible2",
-    v-back="visible2",
+    v-back="back2",
     title="上面一个",
     @confirm="confirm"
   )
@@ -24,6 +24,24 @@ export default {
     return {
       visible1: false,
       visible2: false
+    }
+  },
+  computed: {
+    back1 () {
+      return {
+        action: this.visible1 ? 'PUSH' : 'DELETE',
+        callback: () => {
+          this.visible1 = false
+        }
+      }
+    },
+    back2 () {
+      return {
+        action: this.visible2,
+        callback: () => {
+          this.visible2 = false
+        }
+      }
     }
   },
   methods: {
@@ -42,19 +60,13 @@ export default {
         }
       }, 3000)
     },
-    closeMySelf () {
-      this.visible1 = false
-    },
     showConfirm () {
-      const d = this.$confirm({
+      this.$confirm({
         text: '我是测试v-back的, 实际使用中这里已经集成了v-back，不用再写了，直接调用就好了, 要关闭我直接传递参数vback:false就行了'
-      })
-      console.dir(this.$back)
-      const key = this.$back.push(() => d.close())
-      d.finally(() => {
-        console.log('删除key前', this.$back.length)
-        this.$back.delete(key)
-        console.log('删除key后', this.$back.length)
+      }).finally(() => {
+        setTimeout(() => {
+          console.log('删除key后', this.$back.length)
+        })
       })
       console.log(this.$back.length)
     },

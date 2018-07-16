@@ -1,11 +1,11 @@
-# hk-order
+# hk-timing
 ## Props
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
-| lists | 预约列表 | array | - | - |
-| template.taskName | 预约名称 | string | - | - |
-| template.code.cmdTag | 预约命令 | string | - | - |
+| items | 预约列表 | array | - | [] |
+| code| 预约命令对象 | object | - | { cmdTag: '' } |
+| code.cmdTag | 预约命令 | string | - | - |
 | options | 命令中的每一个参数配置项 | array | - | -|
 | maxlength | 预约列表最多条数 | number | - | 10 |
 | title | 预约列表标题 | string | - | - |

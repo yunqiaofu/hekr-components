@@ -1,4 +1,4 @@
-# hk-bar
+# hk-tabbar
 
 ## Props
 
