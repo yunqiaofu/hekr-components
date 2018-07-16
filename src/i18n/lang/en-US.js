@@ -21,8 +21,7 @@ export default {
   },
   timepicker: {
     hour: 'H',
-    min: 'M',
-    sec: 'S'
+    minute: 'M'
   },
   timing: {
     title: 'Timing',

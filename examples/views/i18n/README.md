@@ -90,8 +90,7 @@ export default {
   },
   timepicker: {
     hour: '时',
-    min: '分',
-    sec: '秒'
+    minute: '分'
   },
   timing: {
     title: '定时预约',
