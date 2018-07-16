@@ -1,6 +1,6 @@
 {
   "name": "@hekr/hekr-components",
-  "version": "0.6.3",
+  "version": "1.0.0",
   "description": "A Vue.js UI Toolkit for Hekr",
   "author": "nashaofu <diaocheng@outlook.com>",
   "main": "dist/hekr-components.js",
