@@ -9,6 +9,7 @@
 | auto | 自动轮播时长，设置为0停止轮播 | number | - | 3000 |
 | speed | 过渡动画时长 | number | - | 300 |
 | indicator | 是否显示指示器 | boolean | - | true |
+| distance | 最小滑动到指定距离才切换页面 | number | - | 88 |
 
 ### Slot
 | name | 说明|
