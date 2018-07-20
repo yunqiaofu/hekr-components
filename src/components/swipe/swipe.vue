@@ -34,6 +34,10 @@ export default {
     indicator: {
       type: Boolean,
       default: true
+    },
+    distance: {
+      type: Number,
+      default: 88
     }
   },
   data () {
@@ -224,7 +228,8 @@ export default {
       if (this.$el.offsetWidth < Math.abs(offset)) {
         offset = Math.abs(offset) / offset * this.$el.offsetWidth
       }
-      if (Math.abs(offset) > this.$el.offsetWidth / 2) {
+      console.log(offset, this.$el.offsetWidth)
+      if (Math.abs(offset) >= this.distance) {
         let index = this.index - Math.abs(offset) / offset
         if (index > this.$children.length - 1) {
           index = 0
