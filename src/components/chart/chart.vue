@@ -130,8 +130,6 @@ $spinner-size=1rem
     background-color rgba(255,255,255,0.88)
     z-index $zindex-lower
     &-spinner
-      width $spinner-size
-      height $spinner-size
       position absolute
       top 50%
       left 50%
@@ -168,7 +166,7 @@ $spinner-size=1rem
 
 @keyframes hkChartSpinner
   0%
-  	transform translate3d(-50%, -50%, 0) rotate(0deg)
+  	transform translateZ(0) rotate(0deg)
   100%
-  	transform translate3d(-50%, -50%, 0) rotate(360deg)
+  	transform translateZ(0) rotate(360deg)
 </style>
