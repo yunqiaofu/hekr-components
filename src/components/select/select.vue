@@ -62,13 +62,15 @@ export default {
       }
     },
     getCheckProps (checkProps) {
+      const disabled = (checkProps || {}).disabled
       return {
         ...checkProps,
-        disabled: this.disabled
+        disabled: disabled === undefined ? this.disabled : disabled
       }
     },
     select (index, item) {
-      if (this.disabled) {
+      const { checkProps = {} } = item
+      if (checkProps.disabled || this.disabled) {
         return
       }
       if (this.multiple) {
