@@ -10,6 +10,7 @@
       .hk-picker-container-items-item(
         v-for="(item, index) in length"
         :key="item"
+        :class="getIsActive(index)"
       ) {{ format(index) }}
   .hk-picker-line
     .hk-picker-line-unit
@@ -76,6 +77,11 @@ export default {
     }
   },
   methods: {
+    getIsActive (index) {
+      return {
+        'hk-picker-container-items-item-active': index === this.value
+      }
+    },
     getY (e) {
       return e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : e.clientY
     },
@@ -138,6 +144,8 @@ export default {
 <style lang="stylus">
 .hk-picker
   position relative
+  text-align center
+  color #666
   &-container
     height 10rem
     overflow hidden
@@ -150,6 +158,8 @@ export default {
         height 2rem
         line-height 2rem
         font-size 0.8rem
+        &-active
+          color #000
   &-line
     width 100%
     height 2rem
