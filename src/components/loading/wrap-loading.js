@@ -8,7 +8,12 @@ export default Vue => {
   return options => {
     if (typeof options === 'boolean') {
       options = {
-        show: options
+        value: options
+      }
+    } else if (typeof options === 'string') {
+      options = {
+        value: true,
+        text: options
       }
     }
     if (typeof options !== 'object') {
@@ -19,9 +24,9 @@ export default Vue => {
       vm = new LoadingConstructor().$mount()
       document.body.appendChild(vm.$el)
     }
-    vm.value = options.show
-    if (options.icon) {
-      vm.icon = options.icon
+    vm.value = options.value
+    if (options.text) {
+      vm.text = options.text
     }
     // 保证当前只会出现一条提示
     $ = vm
