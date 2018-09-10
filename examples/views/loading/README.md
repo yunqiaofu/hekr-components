@@ -14,15 +14,19 @@ this.$loading(false) // 隐藏
 ```javascript
 this.$confirm({
   show: true,
-  icon: ''
+  text: '加载中...'
 })
+```
+3. 传入文字的方式调用
+```javascript
+this.$confirm('加载中...')
 ```
 ### 参数
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | show | 控制显示隐藏 | boolean | - | - |
-| icon | 加载的图标 | string | - | - |
+| text | 加载提示文字 | string | - | - |
 
 ## 组件调用方式
 ### Props
@@ -30,7 +34,7 @@ this.$confirm({
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |--- | --- | --- | --- | --- |
 | value | 绑定值，控制显示隐藏 | boolean | - | false |
-| icon | 加载的图标 | string | - | - |
+| text | 加载提示文字 | string | - | - |
 
 ### Slot
 
