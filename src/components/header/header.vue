@@ -40,7 +40,7 @@ export default {
     },
     leftIcon: {
       type: String,
-      default: 'hk-icons-angel-left'
+      default: 'hk-icons-angle-left'
     },
     leftText: {
       type: String
