@@ -45,7 +45,7 @@ export default {
     return {
       title: '标题',
       leftText: '',
-      rightIcon: 'hk-icons-angel-right'
+      rightIcon: 'hk-icons-angle-right'
     }
   },
   methods: {
@@ -53,7 +53,7 @@ export default {
       this.leftText = this.leftText ? '' : '返回'
     },
     toggleRightIcon () {
-      this.rightIcon = this.rightIcon ? '' : 'hk-icons-angel-right'
+      this.rightIcon = this.rightIcon ? '' : 'hk-icons-angle-right'
     },
     clickLeft () {
       console.log('点击了左边')
