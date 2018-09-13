@@ -8,13 +8,13 @@
   hk-icon(name="fa fa-home", text="激活" active)
   h2 内置图标
   hk-icon(
-    name="hk-icons-angel-right",
-    text="hk-icons-angel-right",
+    name="hk-icons-angle-right",
+    text="hk-icons-angle-right",
     block
   )
   hk-icon(
-    name="hk-icons-angel-left",
-    text="hk-icons-angel-left",
+    name="hk-icons-angle-left",
+    text="hk-icons-angle-left",
     block
   )
   hk-icon(

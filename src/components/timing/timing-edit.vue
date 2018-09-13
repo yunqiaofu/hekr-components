@@ -54,7 +54,7 @@
             type="text",
             :leftText="item.label",
             :rightText="item.maps[value[item.argument]].name",
-            rightIcon="hk-icons-angel-right",
+            rightIcon="hk-icons-angle-right",
             @right-click="selectShow(item)"
           )
           hk-pop(v-model="selectes[item.argument]")

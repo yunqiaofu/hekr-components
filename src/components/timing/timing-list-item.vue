@@ -58,7 +58,7 @@ export default {
       return {
         'hk-timing-list-item-right-icon-disable': !this.data.enable || this.data.expired,
         'hk-icons-check-checked': !this.isEdit,
-        'hk-icons-angel-right': this.isEdit
+        'hk-icons-angle-right': this.isEdit
       }
     },
     getLeftDeleteIcon () {
@@ -167,7 +167,7 @@ export default {
   position relative
   &:not(:last-child)
     border-bottom 0.05rem solid #ccc
-  .hk-icons-angel-right
+  .hk-icons-angle-right
     color #b2b2b2
   &-left-icon
     position absolute
